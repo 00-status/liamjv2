@@ -3,9 +3,18 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    filename: "bundle.js"
+  },
   mode: "development",
   module: {
     rules: [
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+        generator: { filename: "fonts/[hash][ext][query]" }
+      },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: [/(node_modules)/],
@@ -24,10 +33,5 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
-  output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js"
-  },
+  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] }
 };
