@@ -5,7 +5,7 @@ import { SkillCard, SkillLevel } from "./SkillCard";
 
 export const SkillGrid = (): ReactElement => {
     return <div className="skill-grid">
-        {skills.map((skill: Skill) => <SkillCard {...skill} />)}
+        {skills.map((skill: Skill) => <SkillCard key={skill.name} {...skill} />)}
     </div>;
 };
 
@@ -16,9 +16,12 @@ type Skill = {
 };
 
 const skills: Array<Skill> = [
-    { name: 'React', color: '#F3A712', skillLevel: SkillLevel.expert },
-    { name: 'TypeScript', color: '#F3A712', skillLevel: SkillLevel.expert },
-    { name: 'Flow', color: '#F3A712', skillLevel: SkillLevel.working },
-    { name: 'Vue', color: '#F3A712', skillLevel: SkillLevel.working },
-    { name: 'Webpack', color: '#F3A712', skillLevel: SkillLevel.working },
+    { name: 'React', color: '#a02e2f', skillLevel: SkillLevel.expert },
+    { name: 'TypeScript', color: '#a02e2f', skillLevel: SkillLevel.expert },
+    { name: 'Flow', color: '#a02e2f', skillLevel: SkillLevel.working },
+    { name: 'Vue', color: '#a02e2f', skillLevel: SkillLevel.working },
+    { name: 'Webpack', color: '#a02e2f', skillLevel: SkillLevel.working },
+    { name: 'PHP', color: '#708694', skillLevel: SkillLevel.working },
+    { name: 'SlimPHP', color: '#708694', skillLevel: SkillLevel.working },
+    { name: 'Test-driven Development', color: '#d6a840', skillLevel: SkillLevel.working },
 ];
