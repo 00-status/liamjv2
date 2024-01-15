@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { SkillGrid } from "./SkillGrid";
 
 export const AboutMe = (): ReactElement => {
     return <div>
@@ -11,6 +12,7 @@ export const AboutMe = (): ReactElement => {
         </div>
         <div>
             <h1>Cards</h1>
+            <SkillGrid />
         </div>
     </div>;
 };
