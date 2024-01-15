@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 
+import './skill-card.css';
 export enum SkillLevel { "working", "expert" };
 
 type Props = {
@@ -9,5 +10,7 @@ type Props = {
 };
 
 export const SkillCard = (props: Props): ReactElement => {
-    return <div>{props.name}</div>;
+    return <div style={ {backgroundColor: props.color} } className="skill-card">
+        {props.name}
+    </div>;
 };

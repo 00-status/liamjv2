@@ -1,8 +1,10 @@
 import { ReactElement } from "react";
+
+import './skill-grid.css';
 import { SkillCard, SkillLevel } from "./SkillCard";
 
 export const SkillGrid = (): ReactElement => {
-    return <div>
+    return <div className="skill-grid">
         {skills.map((skill: Skill) => <SkillCard {...skill} />)}
     </div>;
 };
