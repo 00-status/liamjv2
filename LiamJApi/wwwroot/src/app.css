@@ -63,7 +63,7 @@ body {
 }
 .page-title-cards {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 60px;
 
     align-self: center;
