@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 
-import "./app.css";
 import { Page } from "./SharedComponents/Page/Page";
 import { AboutMe } from "./AboutMe/AboutMe";
 

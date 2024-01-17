@@ -1,5 +1,7 @@
 import { ReactElement, ReactNode } from "react";
 
+import "./app.css";
+
 type Props = {
     title: string;
     children: ReactNode;
