@@ -1,0 +1,81 @@
+@font-face {
+    font-family: "Oldenburg-Regular";
+    src: url("../../assets/fonts/titles/Oldenburg-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Spectral-Regular";
+    src: url("../../assets/fonts/titles/Spectral-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Roboto Slab";
+    src: url("../../assets/fonts/body/RobotoSlab-VariableFont_wght.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../../assets/fonts/body/Ubuntu-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Source Sans 3";
+    src: url("../../assets/fonts/body/SourceSans3-VariableFont_wght.ttf") format('truetype');
+}
+
+/* Base styles */
+body {
+    margin: 0;
+
+    background-color: #252529;
+    color: #FCFEFF;
+    font-size: 16px;
+    font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header styling */
+
+/* Button Styling */
+
+/* Page styling */
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    padding-left: 60px;
+
+    height: 45vh;
+    background-color: #FCFEFF;
+    color: #1B1B1E;
+}
+.page-title {
+    align-self: flex-start;
+
+    font-size: 96px;
+    font-family: "Spectral-Regular";
+    color: #CC1818;
+}
+.page-title-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+
+    align-self: center;
+}
+
+.page-content-container {
+    display: flex;
+    align-self: center;
+
+    width: 50%;
+}
+
+/* Title Cotnainer styling */
+
+/* Card styling */
