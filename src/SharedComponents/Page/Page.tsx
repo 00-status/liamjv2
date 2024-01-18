@@ -1,4 +1,5 @@
 import { ReactElement, ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "./app.css";
 
@@ -8,14 +9,23 @@ type Props = {
 };
 
 export const Page = (props: Props): ReactElement => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const goToRoute = (newPath: string) => {
+        if (newPath !== location.pathname) {
+            navigate(newPath);
+        }
+    };
+
     return <div className="page">
         <div className="page-title-container">
             <div className="page-title">{props.title}</div>
-            <div className="page-title-cards">
-                <div>Card 1</div>
-                <div>Card 2</div>
-                <div>Card 3</div>
-            </div>
+            <nav className="nav-list" >
+                <a className="nav-item" onClick={() => goToRoute('/')}>About Me</a>
+                <a className="nav-item" onClick={() => goToRoute('/dice_roller')} >Dice Roller</a>
+                <a className="nav-item" onClick={() => goToRoute('/weapon_maker')} >Weapon Maker</a>
+            </nav>
         </div>
         <div className="page-content-container">
             {props.children}

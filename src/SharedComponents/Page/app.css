@@ -61,12 +61,25 @@ body {
     font-family: "Spectral-Regular";
     color: #CC1818;
 }
-.page-title-cards {
+
+.nav-list {
     display: flex;
     flex-direction: row;
-    gap: 60px;
-
     align-self: center;
+
+    gap: 20px;
+}
+.nav-item {
+    padding: 12px;
+
+    border: 1px solid #1B1B1E;
+    border-radius: 12px;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+.nav-item:hover {
+    background-color: #f2f4f5;
+    transform: scale(1.1);
 }
 
 .page-content-container {
