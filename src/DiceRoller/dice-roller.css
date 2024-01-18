@@ -1,0 +1,13 @@
+.dice-roller {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    gap: 20px;
+}
+
+.dice-roller--summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
