@@ -55,7 +55,7 @@ body {
     color: #1B1B1E;
 }
 .page-title {
-    align-self: flex-start;
+    align-self: center;
 
     font-size: 96px;
     font-family: "Spectral-Regular";
