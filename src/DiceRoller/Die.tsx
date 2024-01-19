@@ -1,4 +1,6 @@
 
+import './die.css';
+
 type Props = {
     diceType: number;
     callback: (generatedNumber: number) => void;
@@ -14,5 +16,5 @@ export const Die = (props: Props) => {
         props.callback(result);
     };
 
-    return <button onClick={generateNumber}>{props.diceType}</button>;
+    return <button className='die' onClick={generateNumber}>{props.diceType}</button>;
 };

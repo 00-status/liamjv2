@@ -8,6 +8,52 @@
 
 .dice-roller--summary {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
+    gap: 24px;
+}
+
+.dice_roller--result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+    min-height: 100px;
+    background-color: #3b3b40;
+    padding: 16px;
+    margin: 8px;
+
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px #1f2028;
+}
+
+.dice_roller--log-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.dice_roller--log {
+    flex-grow: 1;
+    margin: 8px;
+    resize: none;
+    overflow: scroll;
+    background-color: #3b3b40;
+    color: #FCFEFF;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px #1f2028;
+}
+
+.divider {
+    width: 90%;
+    border: 1px solid #FCFEFF;
+}
+
+.dice-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    
+    width: 100%;
+    gap: 20px;
 }

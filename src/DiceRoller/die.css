@@ -1,0 +1,14 @@
+.die {
+    width: 250px;
+    height: 175px;
+
+    background-color: #a02e2f;
+    color: #FCFEFF;
+    border: none;
+    transition: all .1s ease-in-out;
+}
+
+.die:hover {
+    background-color: #CC1818;
+    transform: scale(1.05);
+}

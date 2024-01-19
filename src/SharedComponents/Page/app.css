@@ -27,13 +27,16 @@
 body {
     margin: 0;
 
-    background-color: #252529;
+    background-color: #2a2b30;
     color: #FCFEFF;
     font-size: 16px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Header styling */
+h2 {
+    margin: 8px;
+}
 
 /* Button Styling */
 
@@ -52,7 +55,7 @@ body {
 
     height: 45vh;
     background-color: #FCFEFF;
-    color: #1B1B1E;
+    color: #2a2b30;
 }
 .page-title {
     align-self: center;
@@ -72,7 +75,7 @@ body {
 .nav-item {
     padding: 12px;
 
-    border: 1px solid #1B1B1E;
+    border: 1px solid #2a2b30;
     border-radius: 12px;
     transition: all .1s ease-in-out;
     cursor: pointer;

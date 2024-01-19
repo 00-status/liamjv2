@@ -9,24 +9,29 @@ export const DiceRoller = (): ReactElement => {
 
     return <Page title="Dice Roller">
         <div className="dice-roller">
-            <div className="dice-roller--summary">
-                <div>
-                    <h1>Overview</h1>
+            <div className="">
+                <h1>Overview</h1>
+                <div className="dice-roller--summary">
                     <div>
-                        <h2>Result</h2>
-                        <div>{generatedNumber}</div>
+                        <div className="dice_roller--result">
+                            <h1>{generatedNumber ? generatedNumber : "--"}</h1>
+                            <hr className="divider" />
+                            <div>Result</div>
+                        </div>
+                        <div className="dice_roller--result">
+                            <h1>Dice rolled value</h1>
+                            <hr className="divider" />
+                            <div>Dice Rolled</div>
+                        </div>
                     </div>
-                    <div>
-                        <h2>Dice Rolled</h2>
-                        <div>Dice Rolled Value</div>
+                    <div className="dice_roller--log-container">
+                        <h2>Log</h2>
+                        <textarea readOnly className="dice_roller--log"></textarea>
                     </div>
-                </div>
-                <div>
-                    <h2>Log</h2>
-                    <textarea></textarea>
                 </div>
             </div>
-            <div>
+            <hr className="divider" />
+            <div className="dice-container">
                 {dice.map((die: number) => <Die key={die} diceType={die} callback={setGeneratedNumber} />)}
             </div>
             <div>
