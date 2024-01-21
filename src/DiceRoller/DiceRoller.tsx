@@ -3,6 +3,7 @@ import { ReactElement, useState } from "react";
 import './dice-roller.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { Die } from "./Die";
+import { CustomDieRoller } from "./CustomDieRoller";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -47,6 +48,7 @@ export const DiceRoller = (): ReactElement => {
             </div>
             <div>
                 <h1>Custom Dice Rolls</h1>
+                <CustomDieRoller callback={onDieClick} />
             </div>
             <div>
                 <h1>Roll For Stats</h1>
