@@ -3,7 +3,7 @@ import './die.css';
 
 type Props = {
     diceType: number;
-    callback: (generatedNumber: number) => void;
+    callback: (generatedNumber: number, diceRolled: string) => void;
 };
 
 export const Die = (props: Props) => {
@@ -13,7 +13,7 @@ export const Die = (props: Props) => {
 
         const result = Math.floor(Math.random() * (max - min + 1)) + min;
 
-        props.callback(result);
+        props.callback(result, '1d' + props.diceType);
     };
 
     return <button className='die' onClick={generateNumber}>{props.diceType}</button>;

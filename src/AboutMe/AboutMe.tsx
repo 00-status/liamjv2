@@ -13,7 +13,7 @@ export const AboutMe = (): ReactElement => {
                 <p>Duis at risus consectetur, molestie nisl vitae, placerat dolor. Sed leo nulla, dapibus a tellus non, ultrices aliquet mauris. Phasellus quis tempor neque, et ultricies lacus. Nullam malesuada lorem eget odio hendrerit commodo. Phasellus finibus ex mi, id tincidunt ipsum facilisis quis. Vivamus eget erat tortor. Mauris vel semper nibh. Fusce facilisis ac justo nec fermentum. Cras sollicitudin facilisis lacus convallis ullamcorper. Fusce aliquam, lectus at ultrices viverra, lectus lectus posuere enim, in fringilla dolor massa sit amet est. Sed semper iaculis velit, non gravida risus feugiat eget. Maecenas dignissim augue facilisis, ornare arcu quis, pharetra ligula.</p>
             </div>
             <div>
-                <h1>Cards</h1>
+                <hr className="divider" />
                 <SkillGrid />
             </div>
         </div>

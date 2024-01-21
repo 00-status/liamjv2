@@ -34,11 +34,16 @@ body {
 }
 
 /* Header styling */
-h2 {
+h1, h2 {
     margin: 8px;
 }
 
 /* Button Styling */
+
+.divider {
+    width: 90%;
+    border-top: 1px solid #FCFEFF;
+}
 
 /* Page styling */
 .page {

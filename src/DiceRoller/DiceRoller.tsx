@@ -6,6 +6,17 @@ import { Die } from "./Die";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
+    const [diceRolled, setDiceRolled] = useState<string|null>(null);
+    const [diceLog, setDiceLog] = useState<Array<string>>([]);
+
+    const onDieClick = (diceResult: number, diceRolled: string) => {
+        setGeneratedNumber(diceResult);
+        setDiceRolled(diceRolled);
+
+        setDiceLog((state) => {
+            return [...state, diceRolled + '=' + diceResult];
+        });
+    };
 
     return <Page title="Dice Roller">
         <div className="dice-roller">
@@ -19,26 +30,26 @@ export const DiceRoller = (): ReactElement => {
                             <div>Result</div>
                         </div>
                         <div className="dice_roller--result">
-                            <h1>Dice rolled value</h1>
+                            <h1>{diceRolled ? diceRolled : "--"}</h1>
                             <hr className="divider" />
                             <div>Dice Rolled</div>
                         </div>
                     </div>
                     <div className="dice_roller--log-container">
                         <h2>Log</h2>
-                        <textarea readOnly className="dice_roller--log"></textarea>
+                        <textarea readOnly className="dice_roller--log" defaultValue={diceLog.join('\r\n')} />
                     </div>
                 </div>
             </div>
             <hr className="divider" />
             <div className="dice-container">
-                {dice.map((die: number) => <Die key={die} diceType={die} callback={setGeneratedNumber} />)}
+                {dice.map((die: number) => <Die key={die} diceType={die} callback={onDieClick} />)}
             </div>
             <div>
-                <h1>Custom Dice rolls</h1>
+                <h1>Custom Dice Rolls</h1>
             </div>
             <div>
-                <h1>Roll for stats</h1>
+                <h1>Roll For Stats</h1>
             </div>
         </div>
     </Page>;
