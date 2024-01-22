@@ -3,7 +3,7 @@ import { ReactElement, useState } from "react";
 import './dice-roller.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { Die } from "./Die";
-import { CustomDieRoller } from "./CustomDieRoller";
+import { CustomDiceRoller } from "./CustomDiceRoller";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -50,8 +50,8 @@ export const DiceRoller = (): ReactElement => {
                 {dice.map((die: number) => <Die key={die} diceType={die} callback={onDieClick} />)}
             </div>
             <div>
-                <h1>Custom Dice Rolls</h1>
-                <CustomDieRoller callback={onDieClick} />
+                <h1>Custom Dice Rolling</h1>
+                <CustomDiceRoller callback={onDieClick} />
             </div>
             <div>
                 <h1>Roll For Stats</h1>
@@ -66,6 +66,5 @@ const dice: Array<number> = [
     8,
     10,
     12,
-    20,
-    100
+    20
 ];

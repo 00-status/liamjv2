@@ -12,4 +12,5 @@
 .die:hover {
     background-color: #CC1818;
     transform: scale(1.05);
+    box-shadow: 1px 1px 4px #1f2028;
 }

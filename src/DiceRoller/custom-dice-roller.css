@@ -1,0 +1,42 @@
+.custom-dice-roller {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-dice-roller--form {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.custom-dice-roller--text {
+    margin: 4px 0;
+}
+
+.custom-dice-roller--input {
+    width: 48px;
+    height: 24px;
+    margin: 4px 16px;
+
+    background-color: #3b3b40;
+    color: #FCFEFF;
+    border: 1px solid #444449;
+    box-shadow: 1px 1px 4px #1f2028;
+}
+
+.custom-dice-roller--button {
+    width: 60px;
+    height: 32px;
+    margin: 4px 0 4px 40px;
+    padding: 4px;
+
+    border: none;
+    background-color: #a02e2f;
+    color: #FCFEFF;
+}
+
+.custom-dice-roller--button:hover {
+    background-color: #CC1818;
+}

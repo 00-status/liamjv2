@@ -30,6 +30,10 @@ body {
     background-color: #2a2b30;
     color: #FCFEFF;
     font-size: 16px;
+}
+
+body, input, button {
+    font-size: 16px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -38,11 +42,22 @@ h1, h2 {
     margin: 8px;
 }
 
-/* Button Styling */
+/* Button and forms Styling */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 
 .divider {
     width: 90%;
-    border-top: 1px solid #FCFEFF;
+    border: none;
+    border-top: 1px solid #89898b;
 }
 
 /* Page styling */
