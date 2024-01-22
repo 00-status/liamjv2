@@ -10,12 +10,15 @@ export const DiceRoller = (): ReactElement => {
     const [diceRolled, setDiceRolled] = useState<string|null>(null);
     const [diceLog, setDiceLog] = useState<Array<string>>([]);
 
-    const onDieClick = (diceResult: number, diceRolled: string) => {
+    const onDieClick = (diceResult: number, diceRolled: string, individualRolls: string[]) => {
         setGeneratedNumber(diceResult);
         setDiceRolled(diceRolled);
 
         setDiceLog((state) => {
-            return [...state, diceRolled + '=' + diceResult];
+            return [
+                ...individualRolls,
+                ...state
+            ];
         });
     };
 

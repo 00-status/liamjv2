@@ -1,12 +1,12 @@
 import { ReactElement, useState } from "react";
 
 type Props = {
-    callback: (diceResult: number, diceRolled: string) => void;
+    callback: (diceResult: number, diceRolled: string, diceLog: string[]) => void;
 };
 
 type DiceRollResults = {
     total: number,
-    diceRollResults: number[]
+    diceRollResults: string[]
 };
 
 export const CustomDieRoller = (props: Props): ReactElement => {
@@ -23,18 +23,24 @@ export const CustomDieRoller = (props: Props): ReactElement => {
     //          Disabled until a name, number of dice, and dice type are enterred. |
 
     const rollDice = () => {
-        const test = [...Array(diceCount)];
-
-        const results = [...Array(diceCount)].reduce<DiceRollResults>((acc) => {
+        const diceTotals = [...Array(diceCount)].reduce<DiceRollResults>((acc) => {
             const rollResult = rollDie(diceType);
 
             return {
                 total: acc.total + rollResult,
-                diceRollResults: [...acc.diceRollResults, rollResult]
+                diceRollResults: [...acc.diceRollResults, "1d" + diceType + "=" + rollResult]
             };
         }, { total: 0, diceRollResults: [] });
 
-        props.callback(results.total, diceCount + 'd' + diceType);
+        props.callback(
+            diceTotals.total,
+            diceCount + 'd' + diceType,
+            [
+                '-- ' + diceCount + 'd' + diceType + '=' + diceTotals.total + ' --',
+                ...diceTotals.diceRollResults,
+                ''
+            ]
+        );
     };
 
     return <div>
