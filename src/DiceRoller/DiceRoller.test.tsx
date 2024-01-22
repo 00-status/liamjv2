@@ -25,7 +25,7 @@ describe('DiceRoller.tsx', () => {
         getByText('12');
         getByText('20');
 
-        getByText('Custom Dice Rolls');
+        getByText('Custom Dice Rolling');
         getByText('Roll For Stats');
     });
 
