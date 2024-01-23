@@ -1,6 +1,7 @@
 import { ReactElement, useState } from "react";
 
 import './custom-dice-roller.css';
+import { rollDie } from "./util";
 
 type Props = {
     callback: (diceResult: number, diceRolled: string, diceLog: string[]) => void;
@@ -12,17 +13,8 @@ type DiceRollResults = {
 };
 
 export const CustomDiceRoller = (props: Props): ReactElement => {
-
     const [diceCount, setDiceCount] = useState<number|null>(2);
     const [diceType, setDiceType] = useState<number>(6);
-
-    // component to enter dice roller
-    //      Dice roll name |
-    //      Number of dice text box
-    //      Dice type text box
-    //      Roll dice button
-    //      Save dice roll |
-    //          Disabled until a name, number of dice, and dice type are enterred. |
 
     const rollDice = () => {
         const diceTotals = [...Array(diceCount)].reduce<DiceRollResults>((acc) => {
@@ -72,11 +64,3 @@ export const CustomDiceRoller = (props: Props): ReactElement => {
         </div>
     </div>;
 };
-
-function rollDie(diceType: number): number {
-    const min = Math.ceil(1);
-    const max = Math.floor(diceType);
-
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-

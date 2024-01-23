@@ -1,5 +1,6 @@
 
 import './die.css';
+import { rollDie } from './util';
 
 type Props = {
     diceType: number;
@@ -8,10 +9,7 @@ type Props = {
 
 export const Die = (props: Props) => {
     const generateNumber = () => {
-        const min = Math.ceil(1);
-        const max = Math.floor(props.diceType);
-
-        const result = Math.floor(Math.random() * (max - min + 1)) + min;
+        const result = rollDie(props.diceType);
 
         props.callback(result, '1d' + props.diceType, ['1d' + props.diceType + '=' + result]);
     };
