@@ -53,9 +53,6 @@ export const DiceRoller = (): ReactElement => {
                 <h1>Custom Dice Rolling</h1>
                 <CustomDiceRoller callback={onDieClick} />
             </div>
-            <div>
-                <h1>Roll For Stats</h1>
-            </div>
         </div>
     </Page>;
 };
