@@ -1,21 +1,23 @@
-import { DiceType, WeaponProperties } from "./domain";
+import { WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
 
-class Weapon {
-    private name: null | string = null;
-    private diceCount: null | string = null;
-    private diceType: null | DiceType = null;
-    private damageType: null | string = null;
-    private weaponProperties: null | WeaponProperties[] = null;
-    private effectiveRange: null | number = null;
-    private ineffectiveRange: null | number = null;
-    private actions: null | string[] = null;
+export class WeaponBuilder {
+    private name: string | null = null;
+    private baseDamage: WeaponDamage | null = null;
+    private additionalDamage: WeaponDamage | null = null;
+    private weaponProperties: WeaponProperties[] | null = null;
+    private weaponRange: WeaponRange | null = null;
+    private actions: string[] | null = null;
 
-    // addName
-    // addBaseProperties
+    // addBaseWeaponProperties
     //      Probably takes in a weapon type like "bow" or sword and adds WeaponProperties accordingly
-    // addDamageType
-    // addDiceType
-    // addDiceDamage
+    // addBaseDamage
+    // addAdditionalDamage
     // addActions
     // addName
+    // validate
+    //      Private method
+    //      Verifies that all required properties are set prior to instantiation.
+    // buildWeapon
+    //      Calls validate
+    //      Returns a weapon object.
 }

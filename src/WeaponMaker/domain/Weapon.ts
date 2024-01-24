@@ -1,32 +1,26 @@
-import { DiceType, WeaponProperties } from "./domain";
+import { DamageType, DiceType, WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
 
-class Weapon {
+export class Weapon {
     private name: string;
-    private diceCount: string;
-    private diceType: DiceType;
-    private damageType: string;
+    private baseDamage: WeaponDamage;
+    private additionalDamage: WeaponDamage;
     private weaponProperties: WeaponProperties[];
-    private effectiveRange: number;
-    private ineffectiveRange: number;
+    private weaponRange: WeaponRange | null;
     private actions: string[];
 
     constructor(
         name: string,
-        diceCount: string,
-        diceType: DiceType,
-        damageType: string,
+        baseDamage: WeaponDamage,
+        additionalDamage: WeaponDamage,
         weaponProperties: WeaponProperties[],
-        effectiveRange: number,
-        ineffectiveRange: number,
+        weaponRange: WeaponRange,
         actions: string[]
     ) {
         this.name = name;
-        this.diceCount = diceCount;
-        this.diceType = diceType;
-        this.damageType = damageType;
+        this.baseDamage = baseDamage;
+        this.additionalDamage = additionalDamage;
         this.weaponProperties = weaponProperties;
-        this.effectiveRange = effectiveRange;
-        this.ineffectiveRange = ineffectiveRange;
+        this.weaponRange = weaponRange;
         this.actions = actions;
     }
 }

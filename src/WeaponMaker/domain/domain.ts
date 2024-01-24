@@ -11,6 +11,17 @@ export enum WeaponProperties {
     Lance = 'Lance'
 }
 
+export type WeaponDamage = {
+    diceCount: number;
+    diceType: DiceType;
+    damageType: DamageType;
+};
+
+export type WeaponRange = {
+    effectiveRange: number;
+    ineffectiveRange: number;
+};
+
 export enum DiceType {
     four = 4,
     six = 6,
@@ -20,7 +31,7 @@ export enum DiceType {
     twenty = 20
 };
 
-export enum DiceType {
+export enum DamageType {
     Acid = 'Acid',
     Bludgeoning = 'Bludgeoning',
     Cold = 'Cold',
