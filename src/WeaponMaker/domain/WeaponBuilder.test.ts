@@ -4,7 +4,7 @@ describe('WeapobBuilder', () => {
     it('should return a weapon class', () => {
         const weaponBuilder = new WeaponBuilder();
 
-        weaponBuilder.addBaseProperties();
+        weaponBuilder.addBaseWeaponProperties('');
         weaponBuilder.addBaseDamage();
         weaponBuilder.addAdditionalDamage();
         weaponBuilder.addActions();

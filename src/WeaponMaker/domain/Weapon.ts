@@ -1,9 +1,9 @@
-import { DamageType, DiceType, WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
+import { WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
 
 export class Weapon {
     private name: string;
     private baseDamage: WeaponDamage;
-    private additionalDamage: WeaponDamage;
+    private additionalDamage: WeaponDamage | null;
     private weaponProperties: WeaponProperties[];
     private weaponRange: WeaponRange | null;
     private actions: string[];
@@ -11,7 +11,7 @@ export class Weapon {
     constructor(
         name: string,
         baseDamage: WeaponDamage,
-        additionalDamage: WeaponDamage,
+        additionalDamage: WeaponDamage | null,
         weaponProperties: WeaponProperties[],
         weaponRange: WeaponRange,
         actions: string[]
