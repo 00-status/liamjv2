@@ -47,7 +47,6 @@ export enum DamageType {
     Thunder = 'Thunder'
 };
 
-
 export const baseWeapons: { name: string, damage: WeaponDamage, properties: WeaponProperties[] }[] = [
     { name: 'Battleaxe', damage: { diceCount: 1, diceType: 8, damageType: DamageType.Slashing }, properties: [WeaponProperties.Versatile] },
     { name: 'Flail', damage: { diceCount: 1, diceType: 8, damageType: DamageType.Bludgeoning }, properties: [] },

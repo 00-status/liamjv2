@@ -13,7 +13,7 @@ export class Weapon {
         baseDamage: WeaponDamage,
         additionalDamage: WeaponDamage | null,
         weaponProperties: WeaponProperties[],
-        weaponRange: WeaponRange,
+        weaponRange: WeaponRange | null,
         actions: string[]
     ) {
         this.name = name;
@@ -22,5 +22,29 @@ export class Weapon {
         this.weaponProperties = weaponProperties;
         this.weaponRange = weaponRange;
         this.actions = actions;
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+
+    public getBaseDamage(): WeaponDamage {
+        return this.baseDamage;
+    }
+
+    public getAdditionalDamage(): WeaponDamage | null {
+        return this.additionalDamage;
+    }
+
+    public getWeaponProperties(): WeaponProperties[] {
+        return this.weaponProperties;
+    }
+
+    public getRange(): WeaponRange | null {
+        return this.weaponRange;
+    }
+
+    public getActions(): string[] {
+        return this.actions;
     }
 }

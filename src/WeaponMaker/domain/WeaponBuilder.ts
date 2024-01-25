@@ -1,4 +1,5 @@
-import { WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
+import { Weapon } from "./Weapon";
+import { WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./domain";
 
 export class WeaponBuilder {
     private name: string | null = null;
@@ -8,16 +9,60 @@ export class WeaponBuilder {
     private weaponRange: WeaponRange | null = null;
     private actions: string[] | null = null;
 
-    // addBaseWeaponProperties
-    //      Probably takes in a weapon type like "bow" or sword and adds WeaponProperties accordingly
-    // addBaseDamage
-    // addAdditionalDamage
-    // addActions
-    // addName
-    // validate
-    //      Private method
-    //      Verifies that all required properties are set prior to instantiation.
-    // buildWeapon
-    //      Calls validate
-    //      Returns a weapon object.
+    public addName(name: string): this {
+        this.name = name;
+        return this;
+    }
+
+    public addBaseWeaponProperties(weapon: string) {
+        const baseWeapon = baseWeapons.find((baseWeapon) => {
+            return baseWeapon.name === weapon;
+        });
+
+        if (!baseWeapon) {
+            throw new Error('Cannot find specified weapon!');
+        }
+
+        this.baseDamage = { ...baseWeapon.damage };
+        this.weaponProperties = [...baseWeapon.properties];
+
+        return this;
+    }
+
+    public addAdditionalDamage(additionalDamage: WeaponDamage): this {
+        this.additionalDamage = additionalDamage;
+        return this;
+    }
+
+    public addActions(actions: string[]): this {
+        this.actions = actions;
+        return this;
+    }
+
+    public buildWeapon(): Weapon {
+        if (!this.name) {
+            throw new TypeError('Name must be defined!');
+        }
+
+        if (!this.baseDamage) {
+            throw new TypeError('The base weapon damage must be defined!');
+        }
+
+        if (this.weaponProperties === null) {
+            throw new TypeError('Weapon properties cannot be null!');
+        }
+
+        if (this.actions === null) {
+            throw new TypeError('Actions cannot be null!');
+        }
+
+        return new Weapon(
+            this.name,
+            this.baseDamage,
+            this.additionalDamage,
+            this.weaponProperties,
+            this.weaponRange,
+            this.actions
+        );
+    }
 }
