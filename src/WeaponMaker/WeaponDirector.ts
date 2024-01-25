@@ -2,7 +2,11 @@ import { Weapon } from "./domain/Weapon";
 import { WeaponBuilder } from "./domain/WeaponBuilder";
 import { baseWeapons, damageTypes, diceTypes } from "./domain/domain";
 
-export const useWeaponMaker = (): Weapon => {
+// TODO
+// Randomly select a couple actions
+//      decide to pick 0-2 actions
+//      Select actions
+export const createWeapon = (): Weapon => {
     const baseWeapon = baseWeapons[Math.floor(Math.random() * baseWeapons.length)];
     const weaponBuilder = new WeaponBuilder();
 
@@ -24,8 +28,4 @@ export const useWeaponMaker = (): Weapon => {
     weaponBuilder.addActions([]);
 
     return weaponBuilder.buildWeapon();
-    // TODO
-    // Randomly select a couple actions
-    //      decide to pick 0-2 actions
-    //      Select actions
 };

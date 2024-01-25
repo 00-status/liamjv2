@@ -1,7 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { Page } from "../SharedComponents/Page/Page";
+import { createWeapon } from "./WeaponDirector";
 
-export const WeaponMaker = (): ReactElement => {
+export const WeaponMaker = (): ReactElement | null => {
     // Start with a pool of points that we can spend on various "stuff"
     // Randomly select a weapon type (bow, sword, dagger, etc).
     //      Add Weapon Properties according to the weapon type chosen.
@@ -23,12 +24,21 @@ export const WeaponMaker = (): ReactElement => {
     // This will probably be handled by a "Dealer" script or something of that nature,
     // which manages this score system as the weapon is generated.
 
+    const [weapon, setWeapon] = useState(createWeapon());
+
+    const baseDamage = weapon.getBaseDamage();
+    const additionalDamage = weapon.getAdditionalDamage();
 
     return <Page title="Weapon Maker">
         <div>
             <h1>Weapon Maker</h1>
-            <div>Weapon container Card</div>
-            <button>Generate weapon button</button>
+            <div>
+                <h2>{weapon.getName()}</h2>
+                <div>{baseDamage.diceCount}d{baseDamage.diceType} + {baseDamage.damageType}</div>
+                <div>{additionalDamage?.diceCount}d{additionalDamage?.diceType} + {additionalDamage?.damageType}</div>
+                <div>{weapon.getWeaponProperties().toString()}</div>
+            </div>
+            <button onClick={() => setWeapon(createWeapon())} >Generate weapon button</button>
         </div>
     </Page>;
 };

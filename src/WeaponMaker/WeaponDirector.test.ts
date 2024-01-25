@@ -1,14 +1,14 @@
 import { renderHook } from "@testing-library/react";
-import { useWeaponMaker } from "./useWeaponMaker";
-import { DamageType, baseWeapons, damageTypes, diceTypes } from "./domain/domain";
+import { createWeapon } from "./WeaponDirector";
+import { baseWeapons, damageTypes, diceTypes } from "./domain/domain";
 
-describe('useWeaponMaker', () => {
+describe('WeaponDirector', () => {
     beforeEach(() => {
         jest.spyOn(global.Math, 'random').mockReturnValue(0.00);
     });
 
     it('should generate a weapon completely randomly', () => {
-        const { result } = renderHook(useWeaponMaker);
+        const { result } = renderHook(createWeapon);
 
         expect(result.current.getName()).toEqual('Battleaxe');
         expect(result.current.getBaseDamage()).toEqual(baseWeapons[0].damage);
