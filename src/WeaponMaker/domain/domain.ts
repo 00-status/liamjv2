@@ -31,6 +31,15 @@ export enum DiceType {
     twenty = 20
 };
 
+export const diceTypes = [
+    DiceType.four,
+    DiceType.six,
+    DiceType.eight,
+    DiceType.ten,
+    DiceType.twelve,
+    DiceType.twenty
+];
+
 export enum DamageType {
     Acid = 'Acid',
     Bludgeoning = 'Bludgeoning',
@@ -46,6 +55,22 @@ export enum DamageType {
     Slashing = 'Slashing',
     Thunder = 'Thunder'
 };
+
+export const damageTypes: DamageType[] = [
+    DamageType.Acid,
+    DamageType.Bludgeoning,
+    DamageType.Cold,
+    DamageType.Fire,
+    DamageType.Force,
+    DamageType.Lightning,
+    DamageType.Necrotic,
+    DamageType.Piercing,
+    DamageType.Poison,
+    DamageType.Psychic,
+    DamageType.Radiant,
+    DamageType.Slashing,
+    DamageType.Thunder
+];
 
 export const baseWeapons: { name: string, damage: WeaponDamage, properties: WeaponProperties[] }[] = [
     { name: 'Battleaxe', damage: { diceCount: 1, diceType: 8, damageType: DamageType.Slashing }, properties: [WeaponProperties.Versatile] },
