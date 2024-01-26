@@ -1,6 +1,6 @@
 import { Weapon } from "./domain/Weapon";
 import { WeaponBuilder } from "./domain/WeaponBuilder";
-import { baseWeapons, damageTypes, diceTypes } from "./domain/domain";
+import { baseWeapons, damageTypes, diceTypes, weaponActions } from "./domain/domain";
 
 // TODO
 // Randomly select a couple actions
@@ -25,7 +25,9 @@ export const createWeapon = (): Weapon => {
         }
     );
 
-    weaponBuilder.addActions([]);
+    const action = weaponActions[Math.floor(Math.random() * weaponActions.length)];
+
+    weaponBuilder.addActions([action.effect]);
 
     return weaponBuilder.buildWeapon();
 };

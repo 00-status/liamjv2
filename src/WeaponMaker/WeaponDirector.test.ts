@@ -18,6 +18,6 @@ describe('WeaponDirector', () => {
             diceType: diceTypes[0],
             damageType: damageTypes[0]
         });
-        expect(result.current.getActions()).toEqual([]);
+        expect(result.current.getActions()).toEqual(['This weapon can be thrown up to 60ft. On impact, it explodes in a 20ft radius. Each Creature within range must make a DC 15 Dexterity Saving Throw or take 8d6 Fire Damage. The weapon is destroyed when used in this way']);
     });
 });

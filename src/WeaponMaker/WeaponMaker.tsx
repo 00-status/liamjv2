@@ -37,6 +37,7 @@ export const WeaponMaker = (): ReactElement | null => {
                 <div>{baseDamage.diceCount}d{baseDamage.diceType} + {baseDamage.damageType}</div>
                 <div>{additionalDamage?.diceCount}d{additionalDamage?.diceType} + {additionalDamage?.damageType}</div>
                 <div>{weapon.getWeaponProperties().toString()}</div>
+                <div>{weapon.getActions().map((action) => <div>{action}</div>)}</div>
             </div>
             <button onClick={() => setWeapon(createWeapon())} >Generate weapon button</button>
         </div>
