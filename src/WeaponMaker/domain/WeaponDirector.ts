@@ -1,6 +1,6 @@
-import { Weapon } from "./domain/Weapon";
-import { WeaponBuilder } from "./domain/WeaponBuilder";
-import { baseWeapons, damageTypes, diceTypes, weaponActions } from "./domain/domain";
+import { Weapon } from "./Weapon";
+import { WeaponBuilder } from "./WeaponBuilder";
+import { baseWeapons, damageTypes, diceTypes, weaponActions } from "./domain";
 
 // TODO
 // Randomly select a couple actions

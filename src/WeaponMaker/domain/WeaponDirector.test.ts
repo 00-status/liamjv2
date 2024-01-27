@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { createWeapon } from "./WeaponDirector";
-import { baseWeapons, damageTypes, diceTypes } from "./domain/domain";
+import { baseWeapons, damageTypes, diceTypes } from "./domain";
 
 describe('WeaponDirector', () => {
     beforeEach(() => {
