@@ -1,5 +1,5 @@
 import { Weapon } from "./Weapon";
-import { WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./domain";
+import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./domain";
 
 export class WeaponBuilder {
     private name: string | null = null;
@@ -58,6 +58,7 @@ export class WeaponBuilder {
 
         return new Weapon(
             this.name,
+            Rarity.Rare,
             this.baseDamage,
             this.additionalDamage,
             this.weaponProperties,

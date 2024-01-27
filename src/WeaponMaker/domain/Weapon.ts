@@ -1,7 +1,8 @@
-import { WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
+import { Rarity, WeaponDamage, WeaponProperties, WeaponRange } from "./domain";
 
 export class Weapon {
     private name: string;
+    private rarity: Rarity;
     private baseDamage: WeaponDamage;
     private additionalDamage: WeaponDamage | null;
     private weaponProperties: WeaponProperties[];
@@ -10,6 +11,7 @@ export class Weapon {
 
     constructor(
         name: string,
+        rarity: Rarity,
         baseDamage: WeaponDamage,
         additionalDamage: WeaponDamage | null,
         weaponProperties: WeaponProperties[],
@@ -17,6 +19,7 @@ export class Weapon {
         actions: string[]
     ) {
         this.name = name;
+        this.rarity = rarity;
         this.baseDamage = baseDamage;
         this.additionalDamage = additionalDamage;
         this.weaponProperties = weaponProperties;
@@ -26,6 +29,10 @@ export class Weapon {
 
     public getName(): string {
         return this.name;
+    }
+
+    public getRarity(): Rarity {
+        return this.rarity;
     }
 
     public getBaseDamage(): WeaponDamage {

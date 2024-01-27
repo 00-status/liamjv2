@@ -23,12 +23,13 @@ export const WeaponMaker = (): ReactElement | null => {
             </div>
             <div className="weapon-maker--weapon">
                 <h2>{weapon.getName()}</h2>
+                <div>{weapon.getRarity()}</div>
                 {formattedWeaponProperties && <div>Properties: {formattedWeaponProperties}</div>}
                 <div className="weapon-maker--damage">
                     Damage: {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
                 </div>
                 <hr className="divider" />
-                <div>{weapon.getActions().map((action) => <p>{action}</p>)}</div>
+                <div>{weapon.getActions().map((action) => <p key={action}>{action}</p>)}</div>
             </div>
         </div>
     </Page>;

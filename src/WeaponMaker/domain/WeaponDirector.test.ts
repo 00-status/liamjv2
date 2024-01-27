@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { createWeapon } from "./WeaponDirector";
-import { baseWeapons, damageTypes, diceTypes } from "./domain";
+import { DamageType, DiceType, baseWeapons, damageTypes, diceTypes } from "./domain";
 
 describe('WeaponDirector', () => {
     beforeEach(() => {
@@ -15,8 +15,8 @@ describe('WeaponDirector', () => {
         expect(result.current.getWeaponProperties()).toEqual(baseWeapons[0].properties);
         expect(result.current.getAdditionalDamage()).toEqual({
             diceCount: 1,
-            diceType: diceTypes[0],
-            damageType: damageTypes[0]
+            diceType: DiceType.four,
+            damageType: DamageType.Acid
         });
         expect(result.current.getActions()).toEqual(['This weapon can be thrown up to 60ft. On impact, it explodes in a 20ft radius. Each Creature within range must make a DC 15 Dexterity Saving Throw or take 8d6 Fire Damage. The weapon is destroyed when used in this way']);
     });

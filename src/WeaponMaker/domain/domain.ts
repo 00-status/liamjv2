@@ -1,3 +1,9 @@
+export enum Rarity {
+    Uncommon = 'Uncommon',
+    Rare = 'Rare',
+    VeryRare = 'VeryRare',
+    Legendary = 'Legendary'
+}
 
 export enum WeaponProperties {
     Finesse = 'Finesse',
@@ -5,7 +11,7 @@ export enum WeaponProperties {
     Light = 'Light',
     Reach = 'Reach',
     Thrown = 'Thrown',
-    Twohanded = 'Twohanded',
+    Twohanded = 'Two Handed',
     Versatile = 'Versatile',
     Silvered = 'Silvered',
     Lance = 'Lance'
@@ -32,10 +38,18 @@ export enum DiceType {
 };
 
 export const diceTypes = [
-    DiceType.four,
-    DiceType.six,
-    DiceType.eight,
-    DiceType.ten
+    { diceType: DiceType.four, rarity: Rarity.Uncommon },
+    { diceType: DiceType.six, rarity: Rarity.Uncommon },
+    { diceType: DiceType.eight, rarity: Rarity.Uncommon },
+    { diceType: DiceType.ten, rarity: Rarity.Rare },
+    { diceType: DiceType.twelve, rarity: Rarity.VeryRare }
+];
+
+export const diceCounts = [
+    { diceCount: 1, rarity: Rarity.Uncommon },
+    { diceCount: 2, rarity: Rarity.Rare },
+    { diceCount: 3, rarity: Rarity.VeryRare },
+    { diceCount: 4, rarity: Rarity.Legendary },
 ];
 
 export enum DamageType {
@@ -54,17 +68,17 @@ export enum DamageType {
     Thunder = 'Thunder'
 };
 
-export const damageTypes: DamageType[] = [
-    DamageType.Acid,
-    DamageType.Cold,
-    DamageType.Fire,
-    DamageType.Force,
-    DamageType.Lightning,
-    DamageType.Necrotic,
-    DamageType.Poison,
-    DamageType.Psychic,
-    DamageType.Radiant,
-    DamageType.Thunder
+export const damageTypes: { damageType: DamageType, rarity: Rarity }[] = [
+    { damageType: DamageType.Acid, rarity: Rarity.Rare },
+    { damageType: DamageType.Cold, rarity: Rarity.Rare },
+    { damageType: DamageType.Fire, rarity: Rarity.Rare },
+    { damageType: DamageType.Force, rarity: Rarity.Legendary },
+    { damageType: DamageType.Lightning, rarity: Rarity.Rare },
+    { damageType: DamageType.Necrotic, rarity: Rarity.Rare },
+    { damageType: DamageType.Poison, rarity: Rarity.Uncommon },
+    { damageType: DamageType.Psychic, rarity: Rarity.Legendary },
+    { damageType: DamageType.Radiant, rarity: Rarity.VeryRare },
+    { damageType: DamageType.Thunder, rarity: Rarity.Uncommon }
 ];
 
 export const baseWeapons: { name: string, damage: WeaponDamage, properties: WeaponProperties[] }[] = [
