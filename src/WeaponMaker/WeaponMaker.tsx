@@ -1,6 +1,9 @@
 import { ReactElement, useState } from "react";
+
+import './weapon-maker.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { createWeapon } from "./WeaponDirector";
+import { WeaponDamage } from "./domain/domain";
 
 export const WeaponMaker = (): ReactElement | null => {
     // Start with a pool of points that we can spend on various "stuff"
@@ -29,17 +32,35 @@ export const WeaponMaker = (): ReactElement | null => {
     const baseDamage = weapon.getBaseDamage();
     const additionalDamage = weapon.getAdditionalDamage();
 
-    return <Page title="Weapon Maker">
-        <div>
-            <h1>Weapon Maker</h1>
-            <div>
-                <h2>{weapon.getName()}</h2>
-                <div>{baseDamage.diceCount}d{baseDamage.diceType} + {baseDamage.damageType}</div>
-                <div>{additionalDamage?.diceCount}d{additionalDamage?.diceType} + {additionalDamage?.damageType}</div>
-                <div>{weapon.getWeaponProperties().toString()}</div>
-                <div>{weapon.getActions().map((action) => <div>{action}</div>)}</div>
+    return <Page title="Liam Johnson">
+        <div className="weapon-maker">
+            <div className="weapon-maker--title">
+                <h1>Weapon Maker</h1>
+                <button className="weapon-maker--button" onClick={() => setWeapon(createWeapon())}>
+                    Generate weapon
+                </button>
             </div>
-            <button onClick={() => setWeapon(createWeapon())} >Generate weapon button</button>
+            <div className="weapon-maker--weapon">
+                <h2>{weapon.getName()}</h2>
+                {
+                    weapon.getWeaponProperties().length > 0 ?
+                        <div>Properties: {weapon.getWeaponProperties().toString()}</div>
+                        : null
+                }
+                <div className="weapon-maker--damage">
+                    Damage: {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
+                </div>
+                <hr className="divider" />
+                <div>{weapon.getActions().map((action) => <p>{action}</p>)}</div>
+            </div>
         </div>
     </Page>;
+};
+
+const formatDamage = (damage: WeaponDamage | null): string => {
+    if (!damage) {
+        return '';
+    }
+
+    return damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
 };

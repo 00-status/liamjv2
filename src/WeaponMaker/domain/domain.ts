@@ -35,8 +35,7 @@ export const diceTypes = [
     DiceType.four,
     DiceType.six,
     DiceType.eight,
-    DiceType.ten,
-    DiceType.twelve
+    DiceType.ten
 ];
 
 export enum DamageType {
@@ -57,17 +56,14 @@ export enum DamageType {
 
 export const damageTypes: DamageType[] = [
     DamageType.Acid,
-    DamageType.Bludgeoning,
     DamageType.Cold,
     DamageType.Fire,
     DamageType.Force,
     DamageType.Lightning,
     DamageType.Necrotic,
-    DamageType.Piercing,
     DamageType.Poison,
     DamageType.Psychic,
     DamageType.Radiant,
-    DamageType.Slashing,
     DamageType.Thunder
 ];
 

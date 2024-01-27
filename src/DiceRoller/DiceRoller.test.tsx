@@ -13,7 +13,7 @@ describe('DiceRoller.tsx', () => {
     it('should render each component', () => {
         const { getByText } = render(<DiceRoller />);
 
-        getByText('Overview');
+        getByText('Dice Roller');
         getByText('Result');
         getByText('Dice Rolled');
         getByText('Log');

@@ -22,10 +22,10 @@ export const DiceRoller = (): ReactElement => {
         });
     };
 
-    return <Page title="Dice Roller">
+    return <Page title="Liam Johnson">
         <div className="dice-roller">
             <div className="">
-                <h1>Overview</h1>
+                <h1>Dice Roller</h1>
                 <div className="dice-roller--summary">
                     <div>
                         <div className="dice_roller--result">

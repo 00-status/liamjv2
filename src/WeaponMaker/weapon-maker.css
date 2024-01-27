@@ -1,0 +1,50 @@
+.weapon-maker {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+
+    gap: 12px;
+}
+
+.weapon-maker--title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weapon-maker--weapon {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    padding: 20px;
+    gap: 8px;
+
+    background-color: #3b3b40;
+    border-radius: 4px;
+    box-shadow: 1px 1px 4px #1f2028;
+}
+
+.weapon-maker--damage {
+    display: flex;
+    flex-direction: row;
+}
+
+.weapon-maker--button {
+    width: 200px;
+    height: 40px;
+    padding: 4px;
+
+    border-radius: 8px;
+    border: none;
+    background-color: #a02e2f;
+    color: #FCFEFF;
+    transition: all .1s ease-in-out;
+}
+
+.weapon-maker--button:hover {
+    background-color: #CC1818;
+    transform: scale(1.05);
+    box-shadow: 1px 1px 4px #1f2028;
+}

@@ -39,7 +39,7 @@ body, input, button {
 
 /* Header styling */
 h1, h2 {
-    margin: 8px;
+    margin: 8px 0;
 }
 
 /* Button and forms Styling */
@@ -109,7 +109,7 @@ input[type=number] {
     display: flex;
     align-self: center;
 
-    width: 50%;
+    width: 45%;
 }
 
 /* Title Cotnainer styling */
