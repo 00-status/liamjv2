@@ -71,7 +71,7 @@ export enum DamageType {
 export const damageTypes: { damageType: DamageType, rarity: Rarity }[] = [
     { damageType: DamageType.Acid, rarity: Rarity.Rare },
     { damageType: DamageType.Cold, rarity: Rarity.Rare },
-    { damageType: DamageType.Fire, rarity: Rarity.Rare },
+    { damageType: DamageType.Fire, rarity: Rarity.Uncommon },
     { damageType: DamageType.Force, rarity: Rarity.Legendary },
     { damageType: DamageType.Lightning, rarity: Rarity.Rare },
     { damageType: DamageType.Necrotic, rarity: Rarity.Rare },
