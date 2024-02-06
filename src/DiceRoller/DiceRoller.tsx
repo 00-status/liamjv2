@@ -52,6 +52,9 @@ export const DiceRoller = (): ReactElement => {
             <div>
                 <h1>Custom Dice Rolling</h1>
                 <CustomDiceRoller callback={onDieClick} />
+                <div className="dice-roller--attribution">
+                    UIcons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+                </div>
             </div>
         </div>
     </Page>;
