@@ -16,10 +16,6 @@ module.exports = {
         generator: { filename: "fonts/[hash][ext][query]" }
       },
       {
-        test: /\.svg/,
-        type: 'asset/inline'
-      },
-      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: [/(node_modules)/],
         loader: "babel-loader",
