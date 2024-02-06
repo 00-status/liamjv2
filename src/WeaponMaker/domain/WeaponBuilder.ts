@@ -3,6 +3,7 @@ import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from
 
 export class WeaponBuilder {
     private name: string | null = null;
+    private rarity: Rarity | null = null;
     private baseDamage: WeaponDamage | null = null;
     private additionalDamage: WeaponDamage | null = null;
     private weaponProperties: WeaponProperties[] | null = null;
@@ -11,6 +12,11 @@ export class WeaponBuilder {
 
     public addName(name: string): this {
         this.name = name;
+        return this;
+    }
+
+    public addRarity(rarity: Rarity): this {
+        this.rarity = rarity;
         return this;
     }
 
@@ -44,6 +50,10 @@ export class WeaponBuilder {
             throw new TypeError('Name must be defined!');
         }
 
+        if (!this.rarity) {
+            throw new TypeError('Rarity must be defined!');
+        }
+
         if (!this.baseDamage) {
             throw new TypeError('The base weapon damage must be defined!');
         }
@@ -58,7 +68,7 @@ export class WeaponBuilder {
 
         return new Weapon(
             this.name,
-            Rarity.Rare,
+            this.rarity,
             this.baseDamage,
             this.additionalDamage,
             this.weaponProperties,

@@ -4,10 +4,6 @@ import { DamageType, DiceType, Rarity, baseWeapons, damageTypes, diceCounts, dic
 import { getRarities } from "./domain";
 
 export const createWeapon = (selectedRarity: Rarity): Weapon => {
-    // TODO: Compose an array of rarities based on the overall rarity.
-    // For each Trait being picked.
-    //      Pop an item from the array.
-    //      Select a trait based off of the rarity.
     // TODO: Randomly select a couple actions based on rarity.
     //      Pick 0-2 actions based ono rarity
 
@@ -18,6 +14,7 @@ export const createWeapon = (selectedRarity: Rarity): Weapon => {
 
     weaponBuilder
         .addName(baseWeapon.name)
+        .addRarity(selectedRarity)
         .addBaseWeaponProperties(baseWeapon.name);
 
     const diceCount = getDiceCount(rarities);
