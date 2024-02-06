@@ -11,28 +11,28 @@ jest.mock('../SharedComponents/Page/Page', () => {
 
 describe('DiceRoller.tsx', () => {
     it('should render each component', () => {
-        const { getByText } = render(<DiceRoller />);
+        const { getByText, getByTitle } = render(<DiceRoller />);
 
         getByText('Dice Roller');
         getByText('Result');
         getByText('Dice Rolled');
         getByText('Log');
 
-        getByText('4');
-        getByText('6');
-        getByText('8');
-        getByText('10');
-        getByText('12');
-        getByText('20');
+        getByTitle('dice 4');
+        getByTitle('dice 6');
+        getByTitle('dice 8');
+        getByTitle('dice 10');
+        getByTitle('dice 12');
+        getByTitle('dice 20');
 
         getByText('Custom Dice Rolling');
     });
 
     it('should render each component', async () => {
-        const { queryByText, getByText } = render(<DiceRoller />);
+        const { queryByText, getByTitle, getByText } = render(<DiceRoller />);
 
         expect(queryByText('1d20')).toBeNull;
-        await userEvent.click(getByText('20'));
+        await userEvent.click(getByTitle('dice 20'));
         getByText('1d20');
     });
 });
