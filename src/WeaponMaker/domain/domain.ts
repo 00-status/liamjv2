@@ -1,8 +1,8 @@
 export enum Rarity {
-    Uncommon = 'Uncommon',
-    Rare = 'Rare',
-    VeryRare = 'VeryRare',
-    Legendary = 'Legendary'
+    Uncommon = 'uncommon',
+    Rare = 'rare',
+    VeryRare = 'very_rare',
+    Legendary = 'legendary'
 }
 
 export enum WeaponProperties {

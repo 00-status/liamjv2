@@ -1,11 +1,21 @@
 import { ReactElement, useState } from "react";
+import Select from "react-select";
 
 import './weapon-maker.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { createWeapon } from "./domain/WeaponDirector";
-import { WeaponDamage } from "./domain/domain";
+import { Rarity, WeaponDamage } from "./domain/domain";
 
-export const WeaponMaker = (): ReactElement | null => {
+const rarityOptions = [
+    { label: 'Uncommon', value: Rarity.Uncommon },
+    { label: 'Rare', value: Rarity.Rare },
+    { label: 'Very Rare', value: Rarity.VeryRare },
+    { label: 'Legendary', value: Rarity.Legendary },
+];
+
+export const WeaponMaker = (): ReactElement => {
+    const [selectedRarity, setSelectedRarity] = useState(rarityOptions[0]);
+
     const [weapon, setWeapon] = useState(createWeapon());
 
     const baseDamage = weapon.getBaseDamage();
@@ -15,8 +25,19 @@ export const WeaponMaker = (): ReactElement | null => {
 
     return <Page title="Liam Johnson">
         <div className="weapon-maker">
+            <h1>Weapon Maker</h1>
             <div className="weapon-maker--title">
-                <h1>Weapon Maker</h1>
+                <Select
+                    onChange={(value) => {
+                        if (!value) {
+                            return;
+                        }
+
+                        return setSelectedRarity(value);
+                    }}
+                    options={rarityOptions}
+                    value={selectedRarity}
+                />
                 <button className="weapon-maker--button" onClick={() => setWeapon(createWeapon())}>
                     Generate weapon
                 </button>
