@@ -1,5 +1,5 @@
 import { WeaponBuilder } from "./WeaponBuilder";
-import { DamageType, DiceType, WeaponProperties } from "./domain";
+import { DamageType, DiceType, WeaponProperties } from "./constants";
 
 describe('WeapobBuilder', () => {
     it('should return a weapon class', () => {

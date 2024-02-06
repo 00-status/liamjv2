@@ -1,8 +1,9 @@
 import { Weapon } from "./Weapon";
 import { WeaponBuilder } from "./WeaponBuilder";
-import { DamageType, DiceType, Rarity, baseWeapons, damageTypes, diceCounts, diceTypes, weaponActions } from "./domain";
+import { DamageType, DiceType, Rarity, baseWeapons, damageTypes, diceCounts, diceTypes, weaponActions } from "./constants";
+import { getRarities } from "./domain";
 
-export const createWeapon = (): Weapon => {
+export const createWeapon = (selectedRarity: Rarity): Weapon => {
     // TODO: Compose an array of rarities based on the overall rarity.
     // For each Trait being picked.
     //      Pop an item from the array.
@@ -10,13 +11,7 @@ export const createWeapon = (): Weapon => {
     // TODO: Randomly select a couple actions based on rarity.
     //      Pick 0-2 actions based ono rarity
 
-    let rarities: Rarity[] = [
-        Rarity.Uncommon,
-        Rarity.Uncommon,
-        Rarity.Rare,
-        Rarity.VeryRare,
-        Rarity.Legendary
-    ];
+    let rarities: Rarity[] = getRarities(selectedRarity);
 
     const baseWeapon = baseWeapons[Math.floor(Math.random() * baseWeapons.length)];
     const weaponBuilder = new WeaponBuilder();

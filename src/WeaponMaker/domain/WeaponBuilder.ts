@@ -1,5 +1,5 @@
 import { Weapon } from "./Weapon";
-import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./domain";
+import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./constants";
 
 export class WeaponBuilder {
     private name: string | null = null;
