@@ -3,12 +3,12 @@ import { SkillGrid } from "./SkillGrid";
 
 describe('SkillGrid', () => {
     it('should render a lilst of skills', () => {
-        const { getByText } = render(<SkillGrid />);
+        const { getByAltText } = render(<SkillGrid />);
 
-        getByText('React');
-        getByText('TypeScript');
-        getByText('Flow');
-        getByText('Vue');
-        getByText('Webpack');
+        getByAltText('React');
+        getByAltText('TypeScript');
+        getByAltText('Flow');
+        getByAltText('Vue');
+        getByAltText('Webpack');
     });
 });

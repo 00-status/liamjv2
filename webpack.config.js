@@ -16,6 +16,11 @@ module.exports = {
         generator: { filename: "fonts/[hash][ext][query]" }
       },
       {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        generator: { filename: "images/[hash][ext][query]" }
+      },
+      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: [/(node_modules)/],
         loader: "babel-loader",

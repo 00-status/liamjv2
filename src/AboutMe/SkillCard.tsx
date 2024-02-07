@@ -5,12 +5,12 @@ export enum SkillLevel { "working", "expert" };
 
 type Props = {
     name: string;
-    color: string;
+    src: string;
     skillLevel: SkillLevel;
 };
 
 export const SkillCard = (props: Props): ReactElement => {
-    return <div style={ {backgroundColor: props.color} } className="skill-card">
-        {props.name}
+    return <div className="skill-card">
+        <img className="skill-card--image" src={props.src} alt={props.name} />
     </div>;
 };
