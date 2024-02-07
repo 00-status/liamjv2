@@ -24,8 +24,6 @@ describe('DiceRoller.tsx', () => {
         getByTitle('dice 10');
         getByTitle('dice 12');
         getByTitle('dice 20');
-
-        getByText('Custom Dice Rolling');
     });
 
     it('should render each component', async () => {

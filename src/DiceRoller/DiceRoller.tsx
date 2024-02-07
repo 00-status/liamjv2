@@ -50,7 +50,6 @@ export const DiceRoller = (): ReactElement => {
                 {dice.map((die: number) => <Die key={die} diceType={die} callback={onDieClick} />)}
             </div>
             <div>
-                <h1>Custom Dice Rolling</h1>
                 <CustomDiceRoller callback={onDieClick} />
                 <div className="dice-roller--attribution">
                     UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>

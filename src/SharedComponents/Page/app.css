@@ -68,6 +68,10 @@ input[type=number] {
     border-top: 1px solid #89898b;
 }
 
+.dropdown {
+    min-width: 150px;
+}
+
 /* Page styling */
 .page {
     display: flex;
