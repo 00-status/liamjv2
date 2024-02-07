@@ -127,6 +127,12 @@ input[type=number] {
     width: 45%;
 }
 
-/* Title Cotnainer styling */
+.footer {
+    align-self: center;
+    width: 45%;
+    margin-bottom: 20px;
 
-/* Card styling */
+    color:#89898b;
+    font-size: 12px;
+    text-align: center;
+}

@@ -59,8 +59,5 @@ export const CustomDiceRoller = (props: Props): ReactElement => {
             />
             <button className="custom-dice-roller--button" onClick={rollDice}>Roll</button>
         </div>
-        <div>
-            <hr className="divider" />
-        </div>
     </div>;
 };

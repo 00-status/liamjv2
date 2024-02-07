@@ -22,7 +22,11 @@ export const DiceRoller = (): ReactElement => {
         });
     };
 
-    return <Page title="Liam Johnson">
+    const footer = <>
+        UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>
+    </>;
+
+    return <Page title="Liam Johnson" footer={footer}>
         <div className="dice-roller">
             <div className="">
                 <h1>Dice Roller</h1>
@@ -51,9 +55,6 @@ export const DiceRoller = (): ReactElement => {
             </div>
             <div>
                 <CustomDiceRoller callback={onDieClick} />
-                <div className="dice-roller--attribution">
-                    UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>
-                </div>
             </div>
         </div>
     </Page>;

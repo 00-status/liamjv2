@@ -6,6 +6,7 @@ import "./app.css";
 type Props = {
     title: string;
     children: ReactNode;
+    footer?: ReactElement;
 };
 
 export const Page = (props: Props): ReactElement => {
@@ -29,6 +30,10 @@ export const Page = (props: Props): ReactElement => {
         </div>
         <div className="page-content-container">
             {props.children}
+        </div>
+        <div className="footer">
+            <hr className="divider" />
+            {props.footer}
         </div>
     </div>;
 };

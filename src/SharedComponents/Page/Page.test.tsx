@@ -24,6 +24,13 @@ describe('Page', () => {
         getByText("This is a test title");
     });
 
+    it('should render the passed in footer', () => {
+        const footer = <>TEST FOOTER!</>
+        const {getByText} = render(<Page title="title" footer={footer}>Test</Page>);
+
+        getByText("TEST FOOTER!");
+    });
+
     it('should switch to new route when clicking nav item', async () => {
         const { getByText } = render(<Page title="This is a test title">Test</Page>);
 
