@@ -32,6 +32,13 @@ body {
     font-size: 16px;
 }
 
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body, input, button {
     font-size: 16px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -105,7 +112,7 @@ input[type=number] {
     gap: 20px;
 }
 .nav-item {
-    width: 100px;
+    width: 140px;
     padding: 12px;
     text-align: center;
 
