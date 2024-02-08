@@ -52,7 +52,7 @@ export const WeaponMaker = (): ReactElement => {
                                 ...theme.colors,
                                 primary: '#708694', // the selected option in the dropdown menu
                                 primary25: '#45454a', // The color when an option is hovered
-                                primary50: '#89898b', // The color when an option is picked
+                                primary50: '#65656c', // The color when an option is picked
                                 primary75: 'blue', // Unknown
                                 neutral0: '#3b3b40', // background colour and selected option text color
                                 neutral80: '#FCFEFF', // The text color of the input field. The colour of the dropdown icon when the component is in focus
