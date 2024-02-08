@@ -35,7 +35,7 @@
 
 .dice-roller--log {
     flex-grow: 1;
-    margin: 8px;
+    margin: 8px 0;
     resize: none;
     overflow: scroll;
     background-color: #3b3b40;
