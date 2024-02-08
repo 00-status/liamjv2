@@ -90,14 +90,12 @@ input[type=number] {
     flex-direction: column;
     justify-content: center;
     gap: 50px;
-    padding-left: 60px;
 
-    height: 45vh;
     background-color: #FCFEFF;
     color: #2a2b30;
 }
 .page-title {
-    align-self: center;
+    text-align: center;
 
     font-size: 96px;
     font-family: "Spectral-Regular";
@@ -106,10 +104,11 @@ input[type=number] {
 
 .nav-list {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     align-self: center;
 
     gap: 20px;
+    margin-bottom: 20px;
 }
 .nav-item {
     width: 140px;
@@ -142,4 +141,21 @@ input[type=number] {
     color:#89898b;
     font-size: 12px;
     text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-list {
+        justify-content: center;
+    }
+    .nav-item {
+        width: 90%;
+    }
+
+    .page-content-container {
+        width: 90%;
+    }
+
+    .footer {
+        width: 90%;
+    }
 }
