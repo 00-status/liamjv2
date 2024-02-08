@@ -49,3 +49,9 @@
     transform: scale(1.05);
     box-shadow: 1px 1px 4px #1f2028;
 }
+
+@media only screen and (max-width: 600px) {
+    .weapon-maker--card-title {
+        text-align: left;        
+    }
+}

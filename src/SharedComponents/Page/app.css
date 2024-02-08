@@ -144,6 +144,10 @@ input[type=number] {
 }
 
 @media only screen and (max-width: 600px) {
+    h1, h2 {
+        text-align: center;
+    }
+
     .nav-list {
         justify-content: center;
     }
