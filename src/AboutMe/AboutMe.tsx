@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
-import { SkillGrid } from "./SkillGrid";
 import { Page } from "../SharedComponents/Page/Page";
+import { Skill, skills } from "./domain";
+import { SkillCard } from "./SkillCard";
 
 export const AboutMe = (): ReactElement => {
     return <Page title="Liam Johnson">
@@ -15,7 +16,9 @@ export const AboutMe = (): ReactElement => {
             </div>
             <div>
                 <h2>Skills</h2>
-                <SkillGrid />
+                <div className="skill-grid">
+                    {skills.map((skill: Skill) => <SkillCard key={skill.name} {...skill} />)}
+                </div>
             </div>
         </div>
     </Page>;

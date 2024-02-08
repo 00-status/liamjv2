@@ -15,4 +15,14 @@ describe('AboutMe', () => {
         getAllByText('About Me');
         getByText('Hey, I\'m Liam Johnson. Welcome! Have a seat. Take a look around.');
     });
+
+    it('should render a lilst of skills', () => {
+        const { getByAltText } = render(<AboutMe />);
+
+        getByAltText('React');
+        getByAltText('TypeScript');
+        getByAltText('Flow');
+        getByAltText('Vue');
+        getByAltText('Webpack');
+    });
 });

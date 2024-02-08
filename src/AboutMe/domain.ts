@@ -1,21 +1,12 @@
-import { ReactElement } from "react";
+import { SkillLevel } from "./SkillCard";
 
-import './skill-grid.css';
-import { SkillCard, SkillLevel } from "./SkillCard";
-
-export const SkillGrid = (): ReactElement => {
-    return <div className="skill-grid">
-        {skills.map((skill: Skill) => <SkillCard key={skill.name} {...skill} />)}
-    </div>;
-};
-
-type Skill = {
+export type Skill = {
     name: string;
     src: string;
     skillLevel: SkillLevel;
 };
 
-const skills: Array<Skill> = [
+export const skills: Array<Skill> = [
     { name: 'React', src: require('../assets/imaages/react-icon.svg.png'), skillLevel: SkillLevel.expert },
     { name: 'TypeScript', src: '#a02e2f', skillLevel: SkillLevel.expert },
     { name: 'Flow', src: '#a02e2f', skillLevel: SkillLevel.working },

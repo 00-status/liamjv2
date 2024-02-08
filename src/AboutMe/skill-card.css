@@ -1,4 +1,10 @@
 
+.skill-grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
 .skill-card {
     display: flex;
     flex-direction: row;
