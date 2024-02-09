@@ -31,3 +31,12 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.skill-card--placeholder-circle {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+    background-color: #708694;
+    box-shadow: 1px 1px 4px #1f2028;
+}
