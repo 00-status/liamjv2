@@ -40,3 +40,9 @@
     background-color: #708694;
     box-shadow: 1px 1px 4px #1f2028;
 }
+
+@media only screen and (max-width: 600px) {
+    .skill-card {
+        width: 90%;;
+    }
+}
