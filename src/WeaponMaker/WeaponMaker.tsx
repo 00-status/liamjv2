@@ -73,7 +73,7 @@ export const WeaponMaker = (): ReactElement => {
                 </button>
             </div>
             <div className="weapon-maker--weapon">
-                <h2 className="weapon-maker--title">{weapon.getName()}</h2>
+                <h2 className="weapon-maker--card-title">{weapon.getName()}</h2>
                 <div>{weapon.getRarity()}</div>
                 {formattedWeaponProperties && <div>Properties: {formattedWeaponProperties}</div>}
                 <div className="weapon-maker--damage">
