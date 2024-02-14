@@ -1,14 +1,12 @@
 
 .die--icon {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     fill: #FCFEFF;
 }
 
 .die {
-    width: 250px;
-    height: 175px;
-    padding: 24px;
+    width: 95%;
 
     font-size: 24px;
     background-color: #a02e2f;
