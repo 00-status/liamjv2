@@ -49,10 +49,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
+    justify-items: center;
+
     column-gap: 10px;
     row-gap: 20px;
-    
-    width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -66,5 +66,9 @@
 
     .dice-roller--log {
         height: 100px;
+    }
+
+    .dice-container {
+        grid-template-columns: 1fr 1fr;
     }
 }
