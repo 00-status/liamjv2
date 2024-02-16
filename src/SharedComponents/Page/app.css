@@ -135,6 +135,10 @@ input[type=number] {
         text-align: center;
     }
 
+    .page-title {
+        font-size: 55px;
+    }
+
     .nav-list {
         justify-content: center;
     }
