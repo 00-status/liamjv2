@@ -1,8 +1,10 @@
 
 .skill-grid {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+
+    justify-items: center;
 }
 
 .skill-card {
@@ -42,6 +44,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
     .skill-card {
         width: 90%;
     }
