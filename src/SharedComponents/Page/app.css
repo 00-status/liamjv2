@@ -83,6 +83,7 @@ input[type=number] {
 }
 .page-title {
     text-align: center;
+    margin-top: 20px;
 
     font-size: 96px;
     font-family: "Spectral-Regular";
