@@ -1,8 +1,10 @@
 
 .skill-grid {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+
+    justify-items: center;
 }
 
 .skill-card {
@@ -41,7 +43,28 @@
     box-shadow: 1px 1px 4px #1f2028;
 }
 
+@media only screen and (max-width: 1280px) {
+    .skill-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 @media only screen and (max-width: 600px) {
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+
     .skill-card {
         width: 90%;
     }

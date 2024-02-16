@@ -3,6 +3,7 @@
     flex-direction: column;
     align-self: center;
     width: 100%;
+    min-height: 600px;
 
     gap: 12px;
 }
@@ -19,6 +20,7 @@
     flex-direction: column;
     align-self: flex-start;
     width: 100%;
+    min-height: 320px;
     padding: 20px;
     gap: 8px;
 
@@ -51,6 +53,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .weapon-maker--weapon {
+        min-height: 400px;
+    }
+
     .weapon-maker--card-title {
         text-align: left;        
     }
