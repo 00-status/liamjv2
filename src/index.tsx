@@ -1,8 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import { AboutMe } from './AboutMe/AboutMe';
 import { DiceRoller } from './DiceRoller/DiceRoller';
 import { WeaponMaker } from './WeaponMaker/WeaponMaker';
+import { DndShop } from './DnDShop/DnDShop';
 
 const rootDomNode = document.getElementById('app');
 
@@ -22,6 +24,10 @@ const router = createBrowserRouter([
     {
         element: <WeaponMaker />,
         path: "/weapon_maker",
+    },
+    {
+        element: <DndShop />,
+        path: "/the_shop",
     },
 ]);
 
