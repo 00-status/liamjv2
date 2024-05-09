@@ -1,5 +1,8 @@
+import { DndContext } from "@dnd-kit/core";
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
+import { ShopItem } from "./ShopItem";
+import { Inventory } from "./Inventory";
 
 export const DndShop = () => {
     // ToDo
@@ -26,21 +29,28 @@ export const DndShop = () => {
     // Tracking the Player's leftover Change
     //      Create A PlayerChangeComponent
 
+    const onDragEnd = () => {
+        // Move the item from the inventory list to the cart.
+    };
+
     return <Page title="The Shop">
         <div>
-        <div>
-            <h1>The Cart</h1>
             <div>
-                The Cart
+                <DndContext>
+                    <Inventory />
+                    <div>
+                    {items.map((item) => {
+                        return <ShopItem name={item.name} cost={item.cost} currency={item.currency} />
+                    })}
             </div>
-        </div>
-        <div>
-            {items.map((item) => {
-                return <div>
-                    {item.name} | {item.cost} | {item.currency}
-                </div>;
-            })}
-        </div>
+                </DndContext>
+            </div>
+            <div>
+                <h1>The Cart</h1>
+                <div>
+                    The Cart
+                </div>
+            </div>
         </div>
     </Page>;
 };
