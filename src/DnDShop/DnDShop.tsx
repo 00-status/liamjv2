@@ -1,10 +1,18 @@
 import { DndContext } from "@dnd-kit/core";
+
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
 import { ShopItem } from "./ShopItem";
 import { Inventory } from "./Inventory";
+import { useState } from "react";
 
 export const DndShop = () => {
+    const [itemList, setItemList] = useState(items);
+    const [cartSlots, setCartSlots] = useState([
+        { droppableID: 'droppable|1', item: null },
+        { droppableID: 'droppable|2', item: null },
+    ]);
+    
     // ToDo
     // Tracking Player Currency:
     //      In the DnDShop Component,
@@ -29,18 +37,48 @@ export const DndShop = () => {
     // Tracking the Player's leftover Change
     //      Create A PlayerChangeComponent
 
-    const onDragEnd = () => {
-        // Move the item from the inventory list to the cart.
+    const onDragEnd = (event) => {
+        // A list representing the inventory
+        // Example [ { droppableID: string, item: null|Item } ]
+        // If the item is null, then it is an empty cart slot.
+        // If the item is not null, then it is a full cart slot.
+        // When an item is dropped on a cart slot
+        //      replace the item property on the itemList with the dropped item
+        //      splice out the item from the items itemList
+
+        const {over, active} = event;
+
+        const cartSlotsCopy = [...cartSlots];
+        const droppedSlotIndex = cartSlotsCopy.findIndex((slot) => {
+            return slot.droppableID === over.id;
+        });
+
+        const droppedItem = items.find((item) => {
+            return item.name === active.id;
+        });
+
+        if (!droppedItem) {
+            return;
+        }
+
+        cartSlotsCopy[droppedSlotIndex] = {
+            droppableID: over,
+            item: droppedItem
+        };
+
+        setCartSlots(cartSlotsCopy);
     };
 
     return <Page title="The Shop">
         <div>
             <div>
-                <DndContext>
-                    <Inventory />
+                <DndContext onDragEnd={onDragEnd}>
+                    {cartSlots.map((slot) => {
+                        return <Inventory id={slot.droppableID} item={slot.item} />;
+                    })}
                     <div>
                     {items.map((item) => {
-                        return <ShopItem name={item.name} cost={item.cost} currency={item.currency} />
+                        return <ShopItem name={item.name} cost={item.cost} currency={item.currency} />;
                     })}
             </div>
                 </DndContext>

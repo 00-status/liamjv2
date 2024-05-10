@@ -8,13 +8,13 @@ type Props = {
 
 export const ShopItem = (props: Props) => {
     const {attributes, listeners, setNodeRef, transform} = useDraggable({
-        id: 'draggable' + props.name
-      });
-      const style = transform ? {
+        id: props.name
+    });
+    const style = transform ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      } : undefined;
+    } : undefined;
 
     return <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-        {props.name}
+    	{props.name}
     </button>;
 };
