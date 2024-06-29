@@ -1,16 +1,19 @@
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { useState } from "react";
 
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
 import { ShopItem } from "./ShopItem";
 import { Inventory } from "./Inventory";
-import { useState } from "react";
+import { Item } from "./types";
+
+type Thing = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
     const [itemList, setItemList] = useState(items);
-    const [cartSlots, setCartSlots] = useState([
+    const [cartSlots, setCartSlots] = useState<Thing[]>([
         { droppableID: 'droppable|1', item: null },
-        { droppableID: 'droppable|2', item: null },
+        { droppableID: 'droppable|2', item: null }
     ]);
     
     // ToDo
@@ -37,7 +40,7 @@ export const DndShop = () => {
     // Tracking the Player's leftover Change
     //      Create A PlayerChangeComponent
 
-    const onDragEnd = (event) => {
+    const onDragEnd = (event: DragEndEvent) => {
         // A list representing the inventory
         // Example [ { droppableID: string, item: null|Item } ]
         // If the item is null, then it is an empty cart slot.
@@ -48,12 +51,16 @@ export const DndShop = () => {
 
         const {over, active} = event;
 
+        if (!over || !active) {
+            return;
+        }
+
         const cartSlotsCopy = [...cartSlots];
         const droppedSlotIndex = cartSlotsCopy.findIndex((slot) => {
             return slot.droppableID === over.id;
         });
 
-        const droppedItem = items.find((item) => {
+        const droppedItem: Item | undefined = items.find((item) => {
             return item.name === active.id;
         });
 
@@ -62,7 +69,7 @@ export const DndShop = () => {
         }
 
         cartSlotsCopy[droppedSlotIndex] = {
-            droppableID: over,
+            droppableID: String(over.id),
             item: droppedItem
         };
 

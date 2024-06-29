@@ -18,3 +18,5 @@ export const ShopItem = (props: Props) => {
     	{props.name}
     </button>;
 };
+
+

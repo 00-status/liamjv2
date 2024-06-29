@@ -141,7 +141,7 @@
        "name":"Steel Mirror",
        "cost":5,
        "currency":"gold",
-       "weight":"1/2"
+       "weight":0.5
     },
     {
        "name":"Oil (flask)",
@@ -177,7 +177,7 @@
        "name":"Piton",
        "cost":5,
        "currency":"copper",
-       "weight":"1/4"
+       "weight":0.25
     },
     {
        "name":"Basic Poison (vial)",
@@ -201,7 +201,7 @@
        "name":"Potion of healing",
        "cost":50,
        "currency":"gold",
-       "weight":"1/2"
+       "weight":0.5
     },
     {
        "name":"Pouch",
@@ -249,7 +249,7 @@
        "name":"Sack",
        "cost":1,
        "currency":"copper",
-       "weight":"1/2"
+       "weight":0.5
     },
     {
        "name":"Merchant’s Scale",
@@ -591,13 +591,13 @@
        "name":"Crossbow bolts (20)",
        "cost":1,
        "currency":"gold",
-       "weight":"1½"
+       "weight":1.5
     },
     {
        "name":"Sling bullets (20)",
        "cost":4,
        "currency":"copper",
-       "weight":"1½"
+       "weight":1.5
     },
     {
        "name":"Antitoxin (vial)",
