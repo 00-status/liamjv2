@@ -2,6 +2,7 @@ import { ReactElement, ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./app.css";
+import { ImageButton } from "../ImageButton/ImageButton";
 
 type Props = {
     title: string;
@@ -22,8 +23,11 @@ export const Page = (props: Props): ReactElement => {
     return <div className="page">
         <div className="page-title-container">
             <div className="page-title">{props.title}</div>
-            <div>
-                
+            <div className="icon-list">
+                <ImageButton url={require('../../assets/images/github_cat_icon.svg')} />
+                <a href="https://linkedin.com/in/liam-johnson-36791915a" target="_blank" rel="noopener noreferrer">
+                    <ImageButton url={require('../../assets/images/linkedin_icon.png')} />
+                </a>
             </div>
             <nav className="nav-list" >
                 <a className="nav-item" onClick={() => goToRoute('/')}>About Me</a>
