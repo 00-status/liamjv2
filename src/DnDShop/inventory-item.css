@@ -1,4 +1,7 @@
 .inventory-item {
-    background-color: red;
-    border-radius: 5px;
+    height: 100px;
+    
+    background-color: #3b3b40;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px #1f2028;
 }

@@ -1,6 +1,7 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { useState } from "react";
 
+import './dnd-shop.css';
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
 import { ShopItem } from "./ShopItem";
@@ -42,23 +43,16 @@ export const DndShop = () => {
     };
 
     return <Page title="The Shop">
-        <div>
-            <div>
-                <DndContext onDragEnd={onDragEnd}>
-                    <Inventory cartSlots={cartSlots} />
-                    <div>
+        <div className="dnd-shop">
+            <h1>The Cart</h1>
+            <DndContext onDragEnd={onDragEnd}>
+                <Inventory cartSlots={cartSlots} />
+                <div>
                     {itemList.map((item) => {
                         return <ShopItem name={item.name} cost={item.cost} currency={item.currency} />;
                     })}
-                    </div>
-                </DndContext>
-            </div>
-            <div>
-                <h1>The Cart</h1>
-                <div>
-                    The Cart
                 </div>
-            </div>
+            </DndContext>
         </div>
     </Page>;
 };

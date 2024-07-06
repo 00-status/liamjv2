@@ -13,7 +13,11 @@ export const InventoryItem = (props: Props) => {
     const {isOver, setNodeRef} = useDroppable({id: id});
 
     return <div className="inventory-item" ref={setNodeRef}>
-        Droppable | {isOver ? 'OVER' : 'NOT OVER'}
-        {item?.name} | {item?.cost}
+        <div>
+            {isOver ? 'OVER' : 'NOT OVER'}
+        </div>
+        <div>
+            {item?.name} | {item?.cost}
+        </div>
     </div>;
 };
