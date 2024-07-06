@@ -4,14 +4,17 @@ import { useState } from "react";
 import './dnd-shop.css';
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
-import { ShopItem } from "./ShopItem";
+import { ShopItem } from "./InventoryItem";
 import { Item } from "./types";
 import { Cart } from "./cart";
+import { Inventory } from "./Inventory";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
+// ToDo:
+// Make Drop Areas: brighter, dashed border, darken when holding item
+
 export const DndShop = () => {
-    const [itemList, setItemList] = useState(items);
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateInitialCartSlots());
     
     const onDragEnd = (event: DragEndEvent) => {
@@ -47,11 +50,7 @@ export const DndShop = () => {
             <h1>The Cart</h1>
             <DndContext onDragEnd={onDragEnd}>
                 <Cart cartSlots={cartSlots} />
-                <div>
-                    {itemList.map((item) => {
-                        return <ShopItem key={item.name} name={item.name} cost={item.cost} currency={item.currency} />;
-                    })}
-                </div>
+                <Inventory items={items} />
             </DndContext>
         </div>
     </Page>;

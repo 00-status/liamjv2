@@ -1,3 +1,5 @@
+
+import './inventory-item.css';
 import { useDraggable } from "@dnd-kit/core";
 
 type Props = {
@@ -14,9 +16,17 @@ export const ShopItem = (props: Props) => {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
     } : undefined;
 
-    return <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-    	{props.name}
-    </button>;
+    return <div className='inventory-item' ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    	<div>
+            {props.name}
+        </div>
+        <div className='inventory-item__cost-container'>
+            <div className='inventory-item__cost'>
+                {props.cost}
+            </div>
+            {props.currency}
+        </div>
+    </div>;
 };
 
 
