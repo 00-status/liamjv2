@@ -1,17 +1,16 @@
-import { useDroppable } from "@dnd-kit/core";
 
-import { Item } from "./types";
+import './inventory.css';
+import { CartSlot } from "./DnDShop";
+import { InventoryItem } from "./InventoryItem";
 
 type Props = {
-    id: string;
-    item: Item | null
+    cartSlots: CartSlot[];
 };
 
 export const Inventory = (props: Props) => {
-    const {isOver, setNodeRef} = useDroppable({id: props.id});
-
-    return <div style={{backgroundColor: 'red', height: '100px'}} ref={setNodeRef}>
-        Droppable | {isOver ? 'OVER' : 'NOT OVER'}
-        {props.item?.name} | {props.item?.cost}
+    return <div className="inventory">
+        {props.cartSlots.map((slot) => {
+            return <InventoryItem id={slot.droppableID} item={slot.item} />;
+        })}
     </div>;
 };
