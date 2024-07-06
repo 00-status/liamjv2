@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 
-import './inventory-item.css';
+import './cart-item.css';
 import { Item } from "./types";
 
 type Props = {
@@ -8,11 +8,11 @@ type Props = {
     item: Item | null;
 };
 
-export const InventoryItem = (props: Props) => {
+export const CartItem = (props: Props) => {
     const { id, item } = props;
     const {isOver, setNodeRef} = useDroppable({id: id});
 
-    return <div className="inventory-item" ref={setNodeRef}>
+    return <div className="cart-item" ref={setNodeRef}>
         <div>
             {isOver ? 'OVER' : 'NOT OVER'}
         </div>

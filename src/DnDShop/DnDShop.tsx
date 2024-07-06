@@ -5,8 +5,8 @@ import './dnd-shop.css';
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
 import { ShopItem } from "./ShopItem";
-import { Inventory } from "./Inventory";
 import { Item } from "./types";
+import { Cart } from "./cart";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
@@ -46,10 +46,10 @@ export const DndShop = () => {
         <div className="dnd-shop">
             <h1>The Cart</h1>
             <DndContext onDragEnd={onDragEnd}>
-                <Inventory cartSlots={cartSlots} />
+                <Cart cartSlots={cartSlots} />
                 <div>
                     {itemList.map((item) => {
-                        return <ShopItem name={item.name} cost={item.cost} currency={item.currency} />;
+                        return <ShopItem key={item.name} name={item.name} cost={item.cost} currency={item.currency} />;
                     })}
                 </div>
             </DndContext>
