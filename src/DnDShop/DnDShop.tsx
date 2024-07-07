@@ -4,10 +4,9 @@ import { useState } from "react";
 import './dnd-shop.css';
 import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
-import { ShopItem } from "./InventoryItem";
 import { Item } from "./types";
-import { Cart } from "./cart";
 import { Inventory } from "./Inventory";
+import { Cart } from "./Cart";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 

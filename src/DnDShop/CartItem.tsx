@@ -13,11 +13,12 @@ export const CartItem = (props: Props) => {
     const {isOver, setNodeRef} = useDroppable({id: id});
 
     return <div className="cart-item" ref={setNodeRef}>
-        <div>
-            {isOver ? 'OVER' : 'NOT OVER'}
+        <div className="cart-item__cost-container">
+            <div className="cart-item__cost">
+                {item?.cost}
+            </div>
+            {item?.currency}
         </div>
-        <div>
-            {item?.name} | {item?.cost}
-        </div>
+        {item?.name}
     </div>;
 };
