@@ -8,9 +8,10 @@ type Props = {
     currency: string
 };
 
-export const ShopItem = (props: Props) => {
+export const InventoryItem = (props: Props) => {
     const {attributes, listeners, setNodeRef, transform} = useDraggable({
-        id: props.name
+        id: props.name,
+        data: { name: props.name, cost: props.cost, currency: props.currency }
     });
     // const style = transform ? {
     //     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,

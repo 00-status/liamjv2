@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent, DragOverlay } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core";
 import { useState } from "react";
 
 import './dnd-shop.css';
@@ -8,6 +8,7 @@ import { Item } from "./types";
 import { Inventory } from "./Inventory";
 import { Cart } from "./Cart";
 import { SubTotal } from "./SubTotal";
+import { InventoryItem } from "./InventoryItem";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
@@ -16,9 +17,24 @@ export type CartSlot = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateInitialCartSlots());
+    const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
+    const onDragStart = (event: DragStartEvent) => {
+        const data = event.active.data;
+
+        if (data && data?.current) {
+            setCurrentItem({
+                name: data.current.name,
+                cost: data.current.cost,
+                currency: data.current.currency
+            });
+        }
+    };
+
     const onDragEnd = (event: DragEndEvent) => {
         const {over, active} = event;
+
+        setCurrentItem(null);
 
         if (!over || !active) {
             return;
@@ -48,7 +64,7 @@ export const DndShop = () => {
     return <Page title="Liam Johnson">
         <div className="dnd-shop">
             <h1>The Shop</h1>
-            <DndContext onDragEnd={onDragEnd}>
+            <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
                     <div>
                         <Cart cartSlots={cartSlots} />
@@ -58,7 +74,15 @@ export const DndShop = () => {
                         <Inventory items={items} />
                     </div>
                 </div>
-                <DragOverlay>BANANA</DragOverlay>
+                <DragOverlay>
+                    {currentItem &&
+                        <InventoryItem
+                            name={currentItem.name}
+                            cost={currentItem.cost}
+                            currency={currentItem.currency}
+                        />
+                    }
+                </DragOverlay>
             </DndContext>
         </div>
     </Page>;

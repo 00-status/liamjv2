@@ -1,5 +1,5 @@
 import './inventory.css';
-import { ShopItem } from "./InventoryItem";
+import { InventoryItem } from "./InventoryItem";
 import { Item } from "./types";
 
 type Props = {
@@ -11,7 +11,7 @@ export const Inventory = (props: Props) => {
 
     return <div className="inventory">
         {items.map((item) => {
-            return <ShopItem key={item.name} name={item.name} cost={item.cost} currency={item.currency} />;
+            return <InventoryItem key={item.name} name={item.name} cost={item.cost} currency={item.currency} />;
         })}
     </div>;
 };
