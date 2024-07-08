@@ -1,5 +1,14 @@
 .dnd-shop {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.dnd-shop__container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 24px;
 }

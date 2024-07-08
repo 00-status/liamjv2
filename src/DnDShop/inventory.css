@@ -1,5 +1,8 @@
 .inventory {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     gap: 8px;
 }

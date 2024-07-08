@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragOverlay } from "@dnd-kit/core";
 import { useState } from "react";
 
 import './dnd-shop.css';
@@ -49,9 +49,16 @@ export const DndShop = () => {
         <div className="dnd-shop">
             <h1>The Shop</h1>
             <DndContext onDragEnd={onDragEnd}>
-                <Cart cartSlots={cartSlots} />
-                <SubTotal cartItems={cartSlots} />
-                <Inventory items={items} />
+                <div className="dnd-shop__container">
+                    <div>
+                        <Cart cartSlots={cartSlots} />
+                        <SubTotal cartItems={cartSlots} />
+                    </div>
+                    <div>
+                        <Inventory items={items} />
+                    </div>
+                </div>
+                <DragOverlay>BANANA</DragOverlay>
             </DndContext>
         </div>
     </Page>;
