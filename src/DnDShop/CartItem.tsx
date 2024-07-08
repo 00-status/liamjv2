@@ -10,7 +10,7 @@ type Props = {
 
 export const CartItem = (props: Props) => {
     const { id, item } = props;
-    const {isOver, setNodeRef} = useDroppable({id: id});
+    const {setNodeRef} = useDroppable({id: id});
 
     return <div className="cart-item" ref={setNodeRef}>
         <div className="cart-item__cost-container">

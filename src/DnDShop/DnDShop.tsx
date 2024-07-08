@@ -100,15 +100,7 @@ const generateInitialCartSlots = (): CartSlot[] => {
 };
 
     // ToDo
-    // Tracking Player Currency:
-    //      In the DnDShop Component,
-    //          Create a local state object that will track the amount of Platinum, Gold,
-    //          silver, and copper coins that the player has.
-    //      Create a PlayerCurrency Component that will receive the Currency object as props and display the money.    
-    // Tracking Total Cost and Weight
-    //      Create a new TotalCost component that takes in the list of ShoppingCartItems
-    //          Total up the cost of all of the items
-    //          Display the least amount of coins needed to make the transaction.
-    //          That is, if we have 12 total copper, then we should convert that to 1 silver and 2 copper
-    // Tracking the Player's leftover balance
-    //      Create A PlayerChangeComponent
+    // Track Player Currency
+    //      Create a BalanceRemaining component
+    //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
+    // Display Total cart Weight

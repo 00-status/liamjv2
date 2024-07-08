@@ -13,9 +13,6 @@ export const InventoryItem = (props: Props) => {
         id: props.name,
         data: { name: props.name, cost: props.cost, currency: props.currency }
     });
-    // const style = transform ? {
-    //     transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-    // } : undefined;
 
     return <div className='inventory-item' ref={setNodeRef} {...listeners} {...attributes}>
     	<div>
