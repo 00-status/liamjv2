@@ -47,9 +47,18 @@ export const SubTotal = (props: Props) => {
 
     const normalizedTotalsByCurrency = normalizeTotals(itemTotalsByCurrency);
 
+    const totalWeight = filteredCartItems.reduce((carry, item) => {
+        return carry += item.weight ? item.weight : 0;
+    }, 0);
+
     return <div>
         <h2>Subtotal</h2>
-        Gold: {normalizedTotalsByCurrency.gold} | Silver: {normalizedTotalsByCurrency.silver} | Copper: {normalizedTotalsByCurrency.copper}
+        <div>
+            Total Weight: {totalWeight}
+        </div>
+        <div>
+            Gold: {normalizedTotalsByCurrency.gold} | Silver: {normalizedTotalsByCurrency.silver} | Copper: {normalizedTotalsByCurrency.copper}
+        </div>
     </div>;
 };
 
