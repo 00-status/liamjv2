@@ -9,14 +9,12 @@ import { Inventory } from "./Inventory";
 import { Cart } from "./Cart";
 import { SubTotal } from "./SubTotal";
 import { InventoryItem } from "./InventoryItem";
+import { generateEmptyCartSlots } from "./domain/util";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
-// ToDo:
-// Make Drop Areas: brighter, dashed border, darken when holding item
-
 export const DndShop = () => {
-    const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateInitialCartSlots());
+    const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 9));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
     const onDragStart = (event: DragStartEvent) => {
@@ -67,7 +65,7 @@ export const DndShop = () => {
             <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
                     <div>
-                        <Cart cartSlots={cartSlots} />
+                        <Cart cartSlots={cartSlots} setCartSlots={setCartSlots} />
                         <SubTotal cartItems={cartSlots} />
                     </div>
                     <div>
@@ -88,19 +86,10 @@ export const DndShop = () => {
     </Page>;
 };
 
-const generateInitialCartSlots = (): CartSlot[] => {
-    const emptyCartSlots = [];
-
-    for (let count = 0; count < 9; count++) {
-        const emptyCartSlot = { droppableID: 'droppable|' + count, item: null };
-        emptyCartSlots.push(emptyCartSlot);
-    }
-
-    return emptyCartSlots;
-};
-
     // ToDo
     // Track Player Currency
     //      Create a BalanceRemaining component
     //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
     // Display Total cart Weight
+    // Set inventory overflow to hidden when dragging somehow.
+    // Add a drag icon to inventory items.
