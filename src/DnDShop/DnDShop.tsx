@@ -2,14 +2,15 @@ import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/
 import { useState } from "react";
 
 import './dnd-shop.css';
-import { Page } from "../SharedComponents/Page/Page";
 import items from '../assets/items.json';
+import { Page } from "../SharedComponents/Page/Page";
 import { Item } from "./types";
 import { Inventory } from "./Inventory";
 import { Cart } from "./Cart";
 import { SubTotal } from "./SubTotal";
 import { InventoryItem } from "./InventoryItem";
 import { generateEmptyCartSlots } from "./domain/util";
+import { PlayerCurrency } from "./PlayerCurrency";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
@@ -62,6 +63,7 @@ export const DndShop = () => {
     return <Page title="Liam Johnson">
         <div className="dnd-shop">
             <h1>The Shop</h1>
+            <PlayerCurrency />
             <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
                     <div>
