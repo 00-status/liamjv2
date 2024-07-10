@@ -1,14 +1,8 @@
 import { CartSlot } from "./DnDShop";
-import { Item } from "./types";
+import { Currency, Item } from "./types";
 
 type Props = {
     cartItems: CartSlot[];
-};
-
-type Currency = {
-    gold: number;
-    silver: number;
-    copper: number;
 };
 
 export const SubTotal = (props: Props) => {

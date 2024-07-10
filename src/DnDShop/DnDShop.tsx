@@ -4,7 +4,7 @@ import { useState } from "react";
 import './dnd-shop.css';
 import items from '../assets/items.json';
 import { Page } from "../SharedComponents/Page/Page";
-import { Item } from "./types";
+import { Item, PlayerCurrency as PlayerCurrencyType } from "./types";
 import { Inventory } from "./Inventory";
 import { Cart } from "./Cart";
 import { SubTotal } from "./SubTotal";
@@ -15,6 +15,7 @@ import { PlayerCurrency } from "./PlayerCurrency";
 export type CartSlot = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
+    const [playerCurrency, setPlayerCurrency] = useState<PlayerCurrencyType>({ gold: 0, silver: 1, copper: 9 });
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 9));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
@@ -63,7 +64,7 @@ export const DndShop = () => {
     return <Page title="Liam Johnson">
         <div className="dnd-shop">
             <h1>The Shop</h1>
-            <PlayerCurrency />
+            <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
             <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
                     <div>
