@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const InventoryItem = (props: Props) => {
-    const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    const {attributes, listeners, setNodeRef} = useDraggable({
         id: props.name,
         data: { name: props.name, cost: props.cost, currency: props.currency }
     });

@@ -15,7 +15,7 @@ import { PlayerCurrency } from "./PlayerCurrency";
 export type CartSlot = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
-    const [playerCurrency, setPlayerCurrency] = useState<PlayerCurrencyType>({ gold: 0, silver: 1, copper: 9 });
+    const [playerCurrency, setPlayerCurrency] = useState<PlayerCurrencyType>({ gold: 0, silver: 0, copper: 0 });
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 9));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
