@@ -9,7 +9,7 @@ import { DndShop } from './DnDShop/DnDShop';
 // TODO: Dice roller
 //      Replace "Result" and "Dice rolled" cards with new Card component
 //      Reduce dice button size on desktop
-// TODO: Weapon <aker
+// TODO: Weapon Maker
 //      Replace card with Card component
 //      Add an icon for the Generate weapon button
 //      Update Generate weapon button to use Button Component

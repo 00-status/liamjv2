@@ -5,6 +5,8 @@ import './weapon-maker.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { createWeapon } from "./domain/WeaponDirector";
 import { Rarity, WeaponDamage } from "./domain/constants";
+import { Card } from "../SharedComponents/Card/Card";
+import { Button } from "../SharedComponents/Button/Button";
 
 
 type SelectOption<T> = {
@@ -68,20 +70,23 @@ export const WeaponMaker = (): ReactElement => {
                         };
                     }}
                 />
-                <button className="weapon-maker--button" onClick={() => setWeapon(createWeapon(selectedRarity.value))}>
+                <Button onClick={() => setWeapon(createWeapon(selectedRarity.value))} >
                     Generate weapon
-                </button>
+                </Button>
             </div>
-            <div className="weapon-maker--weapon">
-                <h2 className="weapon-maker--card-title">{weapon.getName()}</h2>
-                <div>{weapon.getRarity()}</div>
-                {formattedWeaponProperties && <div>Properties: {formattedWeaponProperties}</div>}
-                <div className="weapon-maker--damage">
-                    Damage: {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
+            <Card title={weapon.getName()}>
+                <div>
+                    {weapon.getRarity()}
+                    {formattedWeaponProperties && <div>Properties: {formattedWeaponProperties}</div>}
+                    <div className="weapon-maker--damage">
+                        Damage: {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
+                    </div>
                 </div>
                 <hr className="divider" />
-                <div>{weapon.getActions().map((action) => <p key={action}>{action}</p>)}</div>
-            </div>
+                <div>
+                    {weapon.getActions().map((action) => <p key={action}>{action}</p>)}
+                </div>
+            </Card>
         </div>
     </Page>;
 };
