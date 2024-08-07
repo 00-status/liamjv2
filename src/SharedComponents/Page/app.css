@@ -16,6 +16,7 @@ body {
     background-color: #2a2b30;
     color: #FCFEFF;
     font-size: 16px;
+    font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html {
@@ -25,13 +26,22 @@ html {
     box-sizing: inherit;
 }
 
-body, input, button {
-    font-size: 16px;
+input, textarea, button, select, option {
+    font-size: 17px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+input, textarea {
+    padding: 4px 4px;
+
+    background-color: #3b3b40;
+    color: #FCFEFF;
+    border: 1px solid #444449;
+    box-shadow: 1px 1px 4px #1f2028;
+}
+
 /* Header styling */
-h1, h2 {
+h1, h2, h3 {
     font-family: "Merriweather", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 8px 0;
 }
@@ -54,6 +64,13 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield; /* Firefox */
     appearance: textfield;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 4px;
+    fill: #FCFEFF;
 }
 
 .divider {
