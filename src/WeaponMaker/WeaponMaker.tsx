@@ -1,5 +1,4 @@
 import { ReactElement, useState } from "react";
-import Select, { StylesConfig } from "react-select";
 
 import './weapon-maker.css';
 import { Page } from "../SharedComponents/Page/Page";
@@ -7,6 +6,7 @@ import { createWeapon } from "./domain/WeaponDirector";
 import { Rarity, WeaponDamage } from "./domain/constants";
 import { Card } from "../SharedComponents/Card/Card";
 import { Button } from "../SharedComponents/Button/Button";
+import { Dropdown } from "../SharedComponents/Dropdown/Dropdown";
 
 
 type SelectOption<T> = {
@@ -22,9 +22,9 @@ const rarityOptions: SelectOption<Rarity>[] = [
 ];
 
 export const WeaponMaker = (): ReactElement => {
-    const [selectedRarity, setSelectedRarity] = useState(rarityOptions[0]);
+    const [selectedRarity, setSelectedRarity] = useState<Rarity>(rarityOptions[0].value);
 
-    const [weapon, setWeapon] = useState(createWeapon(selectedRarity.value));
+    const [weapon, setWeapon] = useState(createWeapon(selectedRarity));
 
     const baseDamage = weapon.getBaseDamage();
     const additionalDamage = weapon.getAdditionalDamage();
@@ -35,42 +35,17 @@ export const WeaponMaker = (): ReactElement => {
         <div className="weapon-maker">
             <h1>Weapon Maker</h1>
             <div className="weapon-maker--title">
-                <Select
-                    className="dropdown"
-                    onChange={(value) => {
-                        if (!value) {
-                            return;
-                        }
-
-                        return setSelectedRarity(value);
-                    }}
+                <Dropdown
+                    defaultValue={selectedRarity}
                     options={rarityOptions}
-                    value={selectedRarity}
-                    theme={(theme) => {
-                        return {
-                            ...theme,
-                            borderRadius: 4,
-                            colors: {
-                                ...theme.colors,
-                                primary: '#708694', // the selected option in the dropdown menu
-                                primary25: '#45454a', // The color when an option is hovered
-                                primary50: '#65656c', // The color when an option is picked
-                                primary75: 'blue', // Unknown
-                                neutral0: '#3b3b40', // background colour and selected option text color
-                                neutral80: '#FCFEFF', // The text color of the input field. The colour of the dropdown icon when the component is in focus
-                                neutral05: 'blue', // unknown
-                                neutral10: 'blue', // Unknown
-                                neutral20: '#89898b', // border colours
-                                neutral30: '#89898b', // Border colour when hovered
-                                neutral40: '#89898b', // Hover colour of the dropdown icon when it is not in focus.
-                                neutral50: 'blue', // Unknown
-                                neutral60: '#89898b', // The colour of the icon when the component is in focus, but the cursor isn't directly over top.
-                                neutral70: 'blue', // Unknown
-                            }
-                        };
+                    onOptionSelect={(value) => {
+                        if (Object.values(Rarity).includes(value as Rarity)) {
+                            const typeCheckedRarity = value as Rarity;
+                            setSelectedRarity(typeCheckedRarity);
+                        }
                     }}
                 />
-                <Button onClick={() => setWeapon(createWeapon(selectedRarity.value))} >
+                <Button onClick={() => setWeapon(createWeapon(selectedRarity))} >
                     Generate weapon
                 </Button>
             </div>
