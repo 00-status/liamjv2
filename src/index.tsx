@@ -6,11 +6,6 @@ import { DiceRoller } from './DiceRoller/DiceRoller';
 import { WeaponMaker } from './WeaponMaker/WeaponMaker';
 import { DndShop } from './DnDShop/DnDShop';
 
-// TODO: Dice roller
-//      Replace "Result" and "Dice rolled" cards with new Card component
-//      Reduce dice button size on desktop
-// TODO: Weapon Maker
-//      Add an icon for the Generate weapon button
 // TODO: Navigation
 //      Create routes for each project.
 //          That is, /rpg_tools/dialogue_tree or /dnd_tools/dice_roller

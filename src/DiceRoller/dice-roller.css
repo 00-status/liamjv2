@@ -47,7 +47,7 @@
 
 .dice-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     justify-items: center;
 
@@ -60,7 +60,7 @@
         justify-content: center;
     }
 
-    .dice-roller--results-cntainer {
+    .dice-roller--results-container {
         width: 90%;
     }
 

@@ -31,7 +31,7 @@ export const DiceRoller = (): ReactElement => {
             <div className="">
                 <h1>Dice Roller</h1>
                 <div className="dice-roller--summary">
-                    <div className="dice-roller--results-cntainer">
+                    <div className="dice-roller--results-container">
                         <div className="dice-roller--result">
                             <h1>{generatedNumber ? generatedNumber : "--"}</h1>
                             <hr className="divider" />
@@ -40,7 +40,7 @@ export const DiceRoller = (): ReactElement => {
                         <div className="dice-roller--result">
                             <h1>{diceRolled ? diceRolled : "--"}</h1>
                             <hr className="divider" />
-                            <div>Dice Rolled</div>
+                            <div>Dice rolled</div>
                         </div>
                     </div>
                     <div className="dice-roller--log-container">

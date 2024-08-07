@@ -15,7 +15,7 @@ describe('DiceRoller.tsx', () => {
 
         getByText('Dice Roller');
         getByText('Result');
-        getByText('Dice Rolled');
+        getByText('Dice rolled');
         getByText('Log');
 
         getByTitle('dice 4');
