@@ -7,6 +7,7 @@ import { Rarity, WeaponDamage } from "./domain/constants";
 import { Card } from "../SharedComponents/Card/Card";
 import { Button } from "../SharedComponents/Button/Button";
 import { Dropdown } from "../SharedComponents/Dropdown/Dropdown";
+import { GearsIcon } from "../SharedComponents/Icons/GearsIcon";
 
 
 type SelectOption<T> = {
@@ -36,6 +37,7 @@ export const WeaponMaker = (): ReactElement => {
             <h1>Weapon Maker</h1>
             <div className="weapon-maker--title">
                 <Dropdown
+                    label="Rarity"
                     defaultValue={selectedRarity}
                     options={rarityOptions}
                     onOptionSelect={(value) => {
@@ -46,15 +48,18 @@ export const WeaponMaker = (): ReactElement => {
                     }}
                 />
                 <Button onClick={() => setWeapon(createWeapon(selectedRarity))} >
+                    <GearsIcon />
                     Generate weapon
                 </Button>
             </div>
             <Card title={weapon.getName()}>
                 <div>
                     {weapon.getRarity()}
-                    {formattedWeaponProperties && <div>Properties: {formattedWeaponProperties}</div>}
+                    {formattedWeaponProperties && <div>
+                        <b>Properties: </b> {formattedWeaponProperties}
+                    </div>}
                     <div className="weapon-maker--damage">
-                        Damage: {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
+                        <b>Damage: </b> {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
                     </div>
                 </div>
                 <hr className="divider" />

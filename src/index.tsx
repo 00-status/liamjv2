@@ -10,13 +10,7 @@ import { DndShop } from './DnDShop/DnDShop';
 //      Replace "Result" and "Dice rolled" cards with new Card component
 //      Reduce dice button size on desktop
 // TODO: Weapon Maker
-//      Replace card with Card component
 //      Add an icon for the Generate weapon button
-//      Update Generate weapon button to use Button Component
-//      Update button colour to be blue.
-//      Add a label to the dropdown.
-//      Replace Dropdown library with Dropdown Component
-//      Update "Properties" and "Damage" inline titles to be bold.
 // TODO: Navigation
 //      Create routes for each project.
 //          That is, /rpg_tools/dialogue_tree or /dnd_tools/dice_roller

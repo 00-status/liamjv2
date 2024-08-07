@@ -29,11 +29,6 @@
     box-shadow: 1px 1px 4px #1f2028;
 }
 
-.weapon-maker--damage {
-    display: flex;
-    flex-direction: row;
-}
-
 @media only screen and (max-width: 600px) {
     .weapon-maker--weapon {
         min-height: 400px;
