@@ -41,7 +41,9 @@ export const Page = (props: Props): ReactElement => {
             </div>
             <nav className="nav-list" >
                 {props.routes.map((route) => {
-                    return <a className="nav-item" onClick={() => goToRoute(route.route)}>{route.label}</a>;
+                    return <a key={route.route} className="nav-item" onClick={() => goToRoute(route.route)}>
+                        {route.label}
+                    </a>;
                 })}
             </nav>
         </div>
