@@ -6,6 +6,7 @@ import { DiceRoller } from './DiceRoller/DiceRoller';
 import { WeaponMaker } from './WeaponMaker/WeaponMaker';
 import { DndShop } from './DnDShop/DnDShop';
 
+// TODO: Make the mobile view of the Weapon Maker look nicer.
 // TODO: Navigation
 //      Create routes for each project.
 //          That is, /rpg_tools/dialogue_tree or /dnd_tools/dice_roller
