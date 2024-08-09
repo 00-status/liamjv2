@@ -4,8 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
 
+type Link = {
+    label: string;
+    route: string;
+};
+
 type Props = {
     title: string;
+    routes: Array<Link>;
     children: ReactNode;
     footer?: ReactElement;
 };
@@ -34,10 +40,9 @@ export const Page = (props: Props): ReactElement => {
                 />
             </div>
             <nav className="nav-list" >
-                <a className="nav-item" onClick={() => goToRoute('/')}>About Me</a>
-                <a className="nav-item" onClick={() => goToRoute('/dice_roller')} >Dice Roller</a>
-                <a className="nav-item" onClick={() => goToRoute('/weapon_maker')} >Weapon Maker</a>
-                {/* <a className="nav-item" onClick={() => goToRoute('/the_shop')} >D&D Shop</a> */}
+                {props.routes.map((route) => {
+                    return <a className="nav-item" onClick={() => goToRoute(route.route)}>{route.label}</a>;
+                })}
             </nav>
         </div>
         <div className="page-content-container">

@@ -4,7 +4,12 @@ import { Skill, skills } from "./domain";
 import { SkillCard } from "./SkillCard";
 
 export const AboutMe = (): ReactElement => {
-    return <Page title="Liam Johnson">
+    const routes = [
+        { label: 'About', route: '/' },
+        { label: 'Dice Roller', route: '/dice_roller' },
+        { label: 'Weapon Maker', route: '/weapon_maker' },
+    ];
+    return <Page title="Liam Johnson" routes={routes}>
         <div>
             <div>
                 <h1>About Me</h1>

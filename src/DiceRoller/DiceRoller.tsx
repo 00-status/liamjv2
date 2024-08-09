@@ -26,7 +26,13 @@ export const DiceRoller = (): ReactElement => {
         UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>
     </>;
 
-    return <Page title="Liam Johnson" footer={footer}>
+    const routes = [
+        { label: 'About', route: '/' },
+        { label: 'Dice Roller', route: '/dice_roller' },
+        { label: 'Weapon Maker', route: '/weapon_maker' },
+    ];
+
+    return <Page title="Liam Johnson" routes={routes} footer={footer}>
         <div className="dice-roller">
             <div className="">
                 <h1>Dice Roller</h1>
