@@ -4,6 +4,7 @@ import './dice-roller.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { Die } from "./Die";
 import { CustomDiceRoller } from "./CustomDiceRoller";
+import { dndRoutes } from "../domain";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -26,13 +27,7 @@ export const DiceRoller = (): ReactElement => {
         UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>
     </>;
 
-    const routes = [
-        { label: 'About', route: '/' },
-        { label: 'Dice Roller', route: '/dice_roller' },
-        { label: 'Weapon Maker', route: '/weapon_maker' },
-    ];
-
-    return <Page title="Liam Johnson" routes={routes} footer={footer}>
+    return <Page title="Liam Johnson" routes={dndRoutes} footer={footer}>
         <div className="dice-roller">
             <div className="">
                 <h1>Dice Roller</h1>

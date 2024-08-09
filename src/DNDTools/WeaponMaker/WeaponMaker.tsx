@@ -8,6 +8,7 @@ import { Button } from "../../SharedComponents/Button/Button";
 import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { GearsIcon } from "../../SharedComponents/Icons/GearsIcon";
 import { Page } from "../../SharedComponents/Page/Page";
+import { dndRoutes } from "../domain";
 
 
 type SelectOption<T> = {
@@ -32,12 +33,7 @@ export const WeaponMaker = (): ReactElement => {
 
     const formattedWeaponProperties = formatWeaponProperties(weapon.getWeaponProperties());
 
-    const routes = [
-        { label: 'About', route: '/' },
-        { label: 'Dice Roller', route: '/dice_roller' },
-        { label: 'Weapon Maker', route: '/weapon_maker' },
-    ];
-    return <Page title="Liam Johnson" routes={routes}>
+    return <Page title="Liam Johnson" routes={dndRoutes}>
         <div className="weapon-maker">
             <h1>Weapon Maker</h1>
             <div className="weapon-maker--title">

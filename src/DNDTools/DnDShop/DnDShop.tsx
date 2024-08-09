@@ -11,6 +11,7 @@ import { PlayerCurrency } from "./PlayerCurrency";
 import { Inventory } from "./Inventory/Inventory";
 import { InventoryItem } from "./Inventory/InventoryItem";
 import { Cart } from "./Cart/Cart";
+import { dndRoutes } from "../domain";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
@@ -61,12 +62,7 @@ export const DndShop = () => {
         setCartSlots(cartSlotsCopy);
     };
 
-    const routes = [
-        { label: 'About', route: '/' },
-        { label: 'Dice Roller', route: '/dice_roller' },
-        { label: 'Weapon Maker', route: '/weapon_maker' },
-    ];
-    return <Page title="Liam Johnson" routes={routes}>
+    return <Page title="Liam Johnson" routes={dndRoutes}>
         <div className="dnd-shop">
             <h1>The Shop</h1>
             <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
