@@ -2,11 +2,12 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { AboutMe } from './AboutMe/AboutMe';
-import { DiceRoller } from './DiceRoller/DiceRoller';
-import { WeaponMaker } from './WeaponMaker/WeaponMaker';
-import { DndShop } from './DnDShop/DnDShop';
+import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';
+import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
+import { DndShop } from './DNDTools/DnDShop/DnDShop';
 
 // TODO: Make the mobile view of the Weapon Maker look nicer.
+// TODO: Update node packages
 // TODO: Navigation
 //      Create routes for each project.
 //          That is, /rpg_tools/dialogue_tree or /dnd_tools/dice_roller

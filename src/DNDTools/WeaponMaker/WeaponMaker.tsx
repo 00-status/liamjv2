@@ -1,13 +1,13 @@
 import { ReactElement, useState } from "react";
 
 import './weapon-maker.css';
-import { Page } from "../SharedComponents/Page/Page";
 import { createWeapon } from "./domain/WeaponDirector";
 import { Rarity, WeaponDamage } from "./domain/constants";
-import { Card } from "../SharedComponents/Card/Card";
-import { Button } from "../SharedComponents/Button/Button";
-import { Dropdown } from "../SharedComponents/Dropdown/Dropdown";
-import { GearsIcon } from "../SharedComponents/Icons/GearsIcon";
+import { Card } from "../../SharedComponents/Card/Card";
+import { Button } from "../../SharedComponents/Button/Button";
+import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
+import { GearsIcon } from "../../SharedComponents/Icons/GearsIcon";
+import { Page } from "../../SharedComponents/Page/Page";
 
 
 type SelectOption<T> = {

@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
 
 import './dice-roller.css';
-import { Page } from "../SharedComponents/Page/Page";
+import { Page } from "../../SharedComponents/Page/Page";
 import { Die } from "./Die";
 import { CustomDiceRoller } from "./CustomDiceRoller";
 

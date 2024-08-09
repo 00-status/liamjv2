@@ -1,7 +1,7 @@
 import { useDndContext, useDraggable } from '@dnd-kit/core';
 import './inventory.css';
 import { InventoryItem } from "./InventoryItem";
-import { Item } from "./types";
+import { Item } from "./domain/types";
 
 type Props = {
     items: Item[];

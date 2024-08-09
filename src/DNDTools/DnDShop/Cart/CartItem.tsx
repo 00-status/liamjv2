@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
 
 import './cart-item.css';
-import { Item } from "./types";
+import { Item } from "../domain/types";
 
 type Props = {
     id: string;

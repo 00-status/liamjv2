@@ -1,9 +1,9 @@
 
 import './cart.css';
-import { CartSlot } from "./DnDShop";
 import { CartItem } from "./CartItem";
 import { useEffect } from 'react';
-import { generateEmptyCartSlots } from './domain/util';
+import { generateEmptyCartSlots } from '../domain/util';
+import { CartSlot } from '../DnDShop';
 
 type Props = {
     cartSlots: CartSlot[];

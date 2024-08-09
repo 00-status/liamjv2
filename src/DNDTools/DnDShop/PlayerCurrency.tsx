@@ -1,6 +1,6 @@
 
 import './player-currency.css';
-import { CurrencyEnum, PlayerCurrency as PlayerCurrencyType } from './types';
+import { CurrencyEnum, PlayerCurrency as PlayerCurrencyType } from './domain/types';
 
 type Props = {
     playerCurrency: PlayerCurrencyType;

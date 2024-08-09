@@ -1,5 +1,5 @@
 import { CartSlot } from "./DnDShop";
-import { Currency, Item } from "./types";
+import { Currency, Item } from "./domain/types";
 
 type Props = {
     cartItems: CartSlot[];

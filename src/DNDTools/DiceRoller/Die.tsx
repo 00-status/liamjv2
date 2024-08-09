@@ -2,13 +2,13 @@
 import { ReactElement } from 'react';
 
 import './die.css';
-import { Dice4 } from '../SharedComponents/Icons/Dice4';
+import { Dice4 } from '../../SharedComponents/Icons/Dice4';
 import { rollDie } from './util';
-import { Dice6 } from '../SharedComponents/Icons/Dice6';
-import { Dice8 } from '../SharedComponents/Icons/Dice8';
-import { Dice10 } from '../SharedComponents/Icons/Dice10';
-import { Dice12 } from '../SharedComponents/Icons/Dice12';
-import { Dice20 } from '../SharedComponents/Icons/Dice20';
+import { Dice6 } from '../../SharedComponents/Icons/Dice6';
+import { Dice8 } from '../../SharedComponents/Icons/Dice8';
+import { Dice10 } from '../../SharedComponents/Icons/Dice10';
+import { Dice12 } from '../../SharedComponents/Icons/Dice12';
+import { Dice20 } from '../../SharedComponents/Icons/Dice20';
 
 type Props = {
     diceType: number;

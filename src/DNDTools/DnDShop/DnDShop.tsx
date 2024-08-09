@@ -2,15 +2,15 @@ import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/
 import { useState } from "react";
 
 import './dnd-shop.css';
-import items from '../assets/items.json';
-import { Page } from "../SharedComponents/Page/Page";
-import { Item, PlayerCurrency as PlayerCurrencyType } from "./types";
-import { Inventory } from "./Inventory";
-import { Cart } from "./Cart";
+import items from '../../assets/items.json';
+import { Page } from "../../SharedComponents/Page/Page";
+import { Item, PlayerCurrency as PlayerCurrencyType } from "./domain/types";
 import { SubTotal } from "./SubTotal";
-import { InventoryItem } from "./InventoryItem";
 import { generateEmptyCartSlots } from "./domain/util";
 import { PlayerCurrency } from "./PlayerCurrency";
+import { Inventory } from "./Inventory/Inventory";
+import { InventoryItem } from "./Inventory/InventoryItem";
+import { Cart } from "./Cart/Cart";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
@@ -61,7 +61,12 @@ export const DndShop = () => {
         setCartSlots(cartSlotsCopy);
     };
 
-    return <Page title="Liam Johnson">
+    const routes = [
+        { label: 'About', route: '/' },
+        { label: 'Dice Roller', route: '/dice_roller' },
+        { label: 'Weapon Maker', route: '/weapon_maker' },
+    ];
+    return <Page title="Liam Johnson" routes={routes}>
         <div className="dnd-shop">
             <h1>The Shop</h1>
             <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
