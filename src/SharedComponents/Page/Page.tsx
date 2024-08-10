@@ -3,10 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
+import { HomeIcon } from "../Icons/HomeIcon";
 
 type Link = {
     label: string;
     route: string;
+    isHomeLink?: boolean;
 };
 
 type Props = {
@@ -42,6 +44,7 @@ export const Page = (props: Props): ReactElement => {
             <nav className="nav-list" >
                 {props.routes.map((route) => {
                     return <a key={route.route} className="nav-item" onClick={() => goToRoute(route.route)}>
+                        { route.isHomeLink && <HomeIcon /> }
                         {route.label}
                     </a>;
                 })}

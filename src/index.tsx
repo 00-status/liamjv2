@@ -23,18 +23,10 @@ if (!rootDomNode) {
 }
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <AboutMe />,
-    },
-    {
-        path: "/dnd_tools/",
-        children: [
-            { path: "dice_roller", element: <DiceRoller /> },
-            { path: "weapon_maker", element: <WeaponMaker /> },
-            { path: "the_shop", element: <DndShop /> },
-        ]
-    }
+    { path: "/", element: <AboutMe /> },
+    { path: "/dnd_tools/dice_roller", element: <DiceRoller /> },
+    { path: "/dnd_tools/weapon_maker", element: <WeaponMaker /> },
+    { path: "/dnd_tools/the_shop", element: <DndShop /> }
 ]);
 
 const root = createRoot(rootDomNode);

@@ -46,6 +46,15 @@ describe('Page', () => {
         expect(mockNavigate).toHaveBeenCalledWith('/test_path_2');
     });
 
+    it('should render home icon when home flag is true', async () => {
+        const routes = [
+            { label: 'Test Route', route: '/test_path', isHomeLink: true }
+        ];
+        const { getByTitle } = render(<Page title="" routes={routes}>Test</Page>);
+        
+        getByTitle('Home');
+    });
+
     it('should NOT navigate when clicking the current nav item', async () => {
         const routes = [
             { label: 'Test Route Root', route: '/' },

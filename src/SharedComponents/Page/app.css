@@ -73,6 +73,13 @@ input[type=number] {
     fill: #FCFEFF;
 }
 
+.icon-dark {
+    width: 24px;
+    height: 24px;
+    margin: 0 4px;
+    fill: #2a2b30;
+}
+
 .divider {
     width: 90%;
     border: none;
@@ -121,9 +128,13 @@ input[type=number] {
     margin-bottom: 20px;
 }
 .nav-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     width: 140px;
     padding: 12px;
-    text-align: center;
 
     color: #2a2b30;
     border: 1px solid #2a2b30;
