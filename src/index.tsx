@@ -8,15 +8,8 @@ import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { DndShop } from './DNDTools/DnDShop/DnDShop';
 import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
 import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
+import { NotFoundPage } from './NotFoundPage';
 
-// TODO: Make the mobile view of the Weapon Maker look nicer.
-// TODO: Update node packages
-// TODO: Navigation
-//      Create routes for each project.
-//          That is, /rpg_tools/dialogue_tree or /dnd_tools/dice_roller
-//      Convert the main navigation to route to each project.
-//          So, the main nav would be "RPG Tools" and "D&D Tools"
-//      Add a back button to each project's navigation.
 //      Create a 404 page.
 
 const rootDomNode = document.getElementById('app');
@@ -30,6 +23,7 @@ const router = createBrowserRouter([
     {
         path: "/dnd_tools/",
         children: [
+            { path: "", element: <DiceRoller /> },
             { path: "dice_roller", element: <DiceRoller /> },
             { path: "weapon_maker", element: <WeaponMaker /> },
             { path: "the_shop", element: <DndShop /> }
@@ -38,10 +32,12 @@ const router = createBrowserRouter([
     {
         path: "/rpg_tools/",
         children: [
+            { path: "", element: <DialogueTreeMaker /> },
             { path: "dialogue_tree", element: <DialogueTreeMaker /> },
-            { path: "characters", element: <CharacterMaker /> },
+            { path: "characters", element: <CharacterMaker /> }
         ]
     },
+    { path: '*', element: <NotFoundPage /> }
 ]);
 
 const root = createRoot(rootDomNode);
