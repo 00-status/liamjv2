@@ -147,6 +147,10 @@ input[type=number] {
     transform: scale(1.1);
 }
 
+.nav-item__current {
+    background-color: #f2f4f5;
+}
+
 .page-content-container {
     display: flex;
     align-self: center;

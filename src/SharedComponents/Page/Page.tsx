@@ -43,7 +43,11 @@ export const Page = (props: Props): ReactElement => {
             </div>
             <nav className="nav-list" >
                 {props.routes.map((route) => {
-                    return <a key={route.route} className="nav-item" onClick={() => goToRoute(route.route)}>
+                    const isCurrentRoute = location.pathname === route.route;
+
+                    const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
+
+                    return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
                         { route.isHomeLink && <HomeIcon /> }
                         {route.label}
                     </a>;
