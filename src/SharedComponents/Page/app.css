@@ -190,6 +190,7 @@ input[type=number] {
     }
 
     .nav-list {
+        width: 100%;
         justify-content: center;
     }
     .nav-item {
