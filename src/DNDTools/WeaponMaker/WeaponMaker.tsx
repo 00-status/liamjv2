@@ -33,7 +33,7 @@ export const WeaponMaker = (): ReactElement => {
 
     const formattedWeaponProperties = formatWeaponProperties(weapon.getWeaponProperties());
 
-    return <Page title="Liam Johnson" routes={dndRoutes}>
+    return <Page title="D&D Tools" routes={dndRoutes}>
         <div className="weapon-maker">
             <h1>Weapon Maker</h1>
             <div className="weapon-maker--title">

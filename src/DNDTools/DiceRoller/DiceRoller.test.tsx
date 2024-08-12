@@ -3,7 +3,7 @@ import { Children } from "react";
 import { DiceRoller } from "./DiceRoller";
 import userEvent from "@testing-library/user-event";
 
-jest.mock('../SharedComponents/Page/Page', () => {
+jest.mock('../../SharedComponents/Page/Page', () => {
     return {
         Page: ({ children }: {children: typeof Children}) => <>{children}</>
     };

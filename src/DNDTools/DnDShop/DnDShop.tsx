@@ -62,7 +62,7 @@ export const DndShop = () => {
         setCartSlots(cartSlotsCopy);
     };
 
-    return <Page title="Liam Johnson" routes={dndRoutes}>
+    return <Page title="D&D Tools" routes={dndRoutes}>
         <div className="dnd-shop">
             <h1>The Shop</h1>
             <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
