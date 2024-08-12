@@ -4,6 +4,14 @@ import { Choice } from "../../domain/types";
 import userEvent from "@testing-library/user-event";
 
 describe('PathsList', () => {
+    beforeAll(() => {
+        Object.defineProperty(globalThis, 'crypto', {
+            value: {
+                randomUUID: jest.fn()
+            }
+          });
+    });
+
     it('should display a list of choices', () => {
         const choices: Array<Choice> = [
             {
