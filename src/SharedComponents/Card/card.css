@@ -14,5 +14,13 @@
 .card__title {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .card__title {
+        justify-content: center;
+        align-items: center;
+    }
 }

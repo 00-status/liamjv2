@@ -43,3 +43,9 @@ button:hover {
 .dark-button:hover {
     background-color: #3b3b40;
 }
+
+@media only screen and (max-width: 600px) {
+    button {
+        width: 100%;
+    }
+}
