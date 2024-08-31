@@ -38,6 +38,7 @@
 
     resize: none;
     overflow: scroll;
+    scrollbar-width: none; /* FireFox */
 
     background-color: #3b3b40;
     color: #FCFEFF;
@@ -47,6 +48,9 @@
 
     padding: 4px 4px;
     margin: 8px 0;
+}
+.dice-roller--log::-webkit-scrollbar {
+    display: none;
 }
 
 .dice-container {
