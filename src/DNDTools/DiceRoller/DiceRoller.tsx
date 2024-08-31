@@ -5,6 +5,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { Die } from "./Die";
 import { CustomDiceRoller } from "./CustomDiceRoller";
 import { dndRoutes } from "../domain";
+import { Anchor } from "../../SharedComponents/Link/Anchor";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -24,7 +25,7 @@ export const DiceRoller = (): ReactElement => {
     };
 
     const footer = <>
-        UIcons by <a target="_blank" rel="noopener noreferrer" href="https://www.flaticon.com/uicons">Flaticon</a>
+        UIcons by <Anchor link="https://www.flaticon.com/uicons" displayText="Flaticon" />
     </>;
 
     return <Page title="D&D Tools" routes={dndRoutes} footer={footer}>

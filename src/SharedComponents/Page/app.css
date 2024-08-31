@@ -43,13 +43,6 @@ h1, h2, h3 {
     margin: 8px 0;
 }
 
-a {
-    color: #9bc1de;
-}
-a:visited {
-    color: #7d9db5;
-}
-
 /* Button and forms Styling */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
