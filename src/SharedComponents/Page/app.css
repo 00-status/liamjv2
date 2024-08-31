@@ -9,6 +9,10 @@
     src: url("../../assets/fonts/body/SourceSans3-VariableFont_wght.ttf") format('truetype');
 }
 
+html, body, #app {
+    height: 100%;
+}
+
 /* Base styles */
 body {
     margin: 0;
