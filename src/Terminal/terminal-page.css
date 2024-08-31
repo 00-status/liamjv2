@@ -55,7 +55,7 @@
     align-items: center;
     width: 100%;
 
-    padding-bottom: 64px;
+    padding-bottom: 12px;
 
     border-bottom: 1px solid #67e016;
 }
@@ -68,6 +68,8 @@
     font-style: normal;
 
     color: #67e016;
+
+    padding-bottom: 64px;
 }
 
 .terminal-page__nav {
@@ -93,4 +95,8 @@
 .terminal-page__link:hover {
     background-color: #141613;
     transform: scale(1.1);
+}
+
+.terminal-page__link--active {
+    background-color: #141613;
 }

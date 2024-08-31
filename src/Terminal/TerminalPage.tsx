@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './terminal-page.css';
 import { Terminal } from "./Terminal";
 import { CodeBlockGenerator } from './CodeBlockGenerator';
+import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
 
 export const TerminalPage = () => {
     const navigate = useNavigate();
@@ -14,7 +15,12 @@ export const TerminalPage = () => {
                 Terminal
             </h1>
             <div className="terminal-page__nav">
-                <a className='terminal-page__link' onClick={() => navigate("#")}>Landing</a>
+                <a className='terminal-page__link' onClick={() => navigate("/")}>
+                    <HomeIcon theme={HomeThemes.GREEN} /> Landing
+                </a>
+                <a className='terminal-page__link terminal-page__link--active' onClick={() => navigate("#")}>
+                    Terminal
+                </a>
             </div>
         </div>
         <div className='terminal-page__content'>
