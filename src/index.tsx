@@ -9,8 +9,7 @@ import { DndShop } from './DNDTools/DnDShop/DnDShop';
 import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
 import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
 import { NotFoundPage } from './NotFoundPage';
-
-//      Create a 404 page.
+import { TerminalPage } from './Terminal/TerminalPage';
 
 const rootDomNode = document.getElementById('app');
 
@@ -37,6 +36,7 @@ const router = createBrowserRouter([
             { path: "characters", element: <CharacterMaker /> }
         ]
     },
+    { path: "/terminal", element: <TerminalPage /> },
     { path: '*', element: <NotFoundPage /> }
 ]);
 
