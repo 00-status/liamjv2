@@ -32,12 +32,9 @@ input, textarea, button, select, option {
 }
 
 input, textarea {
-    padding: 4px 4px;
-
     background-color: #3b3b40;
     color: #FCFEFF;
     border: 1px solid #444449;
-    box-shadow: 1px 1px 4px #1f2028;
 }
 
 /* Header styling */

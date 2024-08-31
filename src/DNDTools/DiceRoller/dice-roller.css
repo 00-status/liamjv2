@@ -35,14 +35,18 @@
 
 .dice-roller--log {
     flex-grow: 1;
-    margin: 8px 0;
+
     resize: none;
     overflow: scroll;
+
     background-color: #3b3b40;
     color: #FCFEFF;
     line-height: 24px;
     border-radius: 4px;
     box-shadow: 1px 1px 4px #1f2028;
+
+    padding: 4px 4px;
+    margin: 8px 0;
 }
 
 .dice-container {

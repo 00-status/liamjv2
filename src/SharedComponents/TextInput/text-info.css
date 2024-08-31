@@ -6,6 +6,9 @@
 
 .text-input__input {
     height: 100%;
+
+    padding: 4px 4px;
+    box-shadow: 1px 1px 4px #1f2028;
 }
 
 
