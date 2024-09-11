@@ -30,16 +30,18 @@ export const Page = (props: Props): ReactElement => {
 
     return <div className="page">
         <div className="page-title-container">
-            <div className="page-title">{props.title}</div>
-            <div className="icon-list">
-                <ImageButton
-                    locationUrl={"https://github.com/00-status"}
-                    imageUrl={require('../../assets/images/github_cat_icon.svg')}
-                />
-                <ImageButton
-                    locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
-                    imageUrl={require('../../assets/images/linkedin_icon.png')}
-                />
+            <div className="page-title">
+                {props.title}
+                <div className="icon-list">
+                    <ImageButton
+                        locationUrl={"https://github.com/00-status"}
+                        imageUrl={require('../../assets/images/github_cat_icon.svg')}
+                    />
+                    <ImageButton
+                        locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
+                        imageUrl={require('../../assets/images/linkedin_icon.png')}
+                    />
+                </div>
             </div>
             <nav className="nav-list" >
                 {props.routes.map((route) => {

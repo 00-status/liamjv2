@@ -1,9 +1,16 @@
+.image-button {
+    display: flex;
+
+    height: 40px;
+    width: 40px;
+}
+
 .image-button__image {
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
     padding: 8px;
 
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .image-button__image:hover {

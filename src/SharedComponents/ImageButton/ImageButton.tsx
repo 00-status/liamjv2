@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const ImageButton = (props: Props) => {
-    return <a href={props.locationUrl} target="_blank" rel="noopener noreferrer">
+    return <a className='image-button' href={props.locationUrl} target="_blank" rel="noopener noreferrer">
         <img className="image-button__image"src={props.imageUrl} />
     </a>;
 };
