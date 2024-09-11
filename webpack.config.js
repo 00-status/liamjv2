@@ -2,7 +2,10 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = (env) => {
-  const buildPath = path.resolve(__dirname, "dist/");
+  const buildPath = env.buildForProd
+    ? path.resolve(__dirname, "../server/wwwroot/")
+    : path.resolve(__dirname, "dist/");
+
     
   return {
     entry: "./src/index.tsx",

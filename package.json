@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack build --mode production",
     "start": "webpack build --watch --mode development",
+    "buildProd": "webpack build --mode production --env buildForProd=true",
     "test": "jest"
   },
   "author": "00-status",
