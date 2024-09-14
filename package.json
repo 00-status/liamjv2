@@ -5,7 +5,7 @@
   "main": "index.tsx",
   "scripts": {
     "build": "webpack build --mode production",
-    "start": "webpack build --watch --mode development",
+    "start": "webpack build --watch --mode development --env buildForProd=true",
     "buildProd": "webpack build --mode production --env buildForProd=true",
     "test": "jest"
   },
