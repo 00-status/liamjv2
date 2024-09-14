@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
+import { Modal } from "../../SharedComponents/Modal/Modal";
+import { Button } from "../../SharedComponents/Button/Button";
 
 type WeaponEffect = {
     name: string;
@@ -13,6 +15,9 @@ type WeaponEffect = {
 export const WeaponEffectForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+
+    const [currentTag, setCurrentTag] = useState("");
+    const [tagList, setTagList] = useState<Array<string>>([]);
     // Modal for tags
     // Modal for rarities
 
@@ -38,7 +43,24 @@ export const WeaponEffectForm = () => {
                 rarities
             </div>
             <div>
-                tags
+                <div>
+                    <TextInput placeholder="Tag" value={currentTag}
+                        onChange={(newValue) => {
+                            setCurrentTag(newValue ?? "");
+                        }}
+                    />
+                    <Button onClick={() => {
+                        if (currentTag) {
+                            setTagList((state) => [...state, currentTag]);
+                            setCurrentTag("");
+                        }
+                    }}>
+                        Add tag
+                    </Button>
+                </div>
+                <div>
+                    {tagList.map((tag) => <div key={tag}>{tag}</div>)}
+                </div>
             </div>
         </div>
     </Page>;
