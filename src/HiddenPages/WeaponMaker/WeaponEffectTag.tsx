@@ -1,4 +1,4 @@
-import { Button } from "../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const WeaponEffectTag = (props: Props) => {
     return <div>
         {props.tag}
-        <Button onClick={() => props.onDeleteTag(props.tag)}>
+        <Button buttonTheme={ButtonTheme.Delete} onClick={() => props.onDeleteTag(props.tag)}>
             <TrashIcon />
         </Button>
     </div>;
