@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
-import { Modal } from "../../SharedComponents/Modal/Modal";
 import { Button } from "../../SharedComponents/Button/Button";
+import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 
 type WeaponEffect = {
     name: string;
@@ -18,8 +18,16 @@ export const WeaponEffectForm = () => {
 
     const [currentTag, setCurrentTag] = useState("");
     const [tagList, setTagList] = useState<Array<string>>([]);
-    // Modal for tags
-    // Modal for rarities
+    
+    const [rarityList, setRarityList] = useState<Array<string>>([]);
+
+    const rarityOptions = [
+        { value: "", label: "" },
+        { value: "Uncommon", label: "Uncommon" },
+        { value: "Rare", label: "Rare" },
+        { value: "Very Rare", label: "Very Rare" },
+        { value: "Legendary", label: "Legendary" }
+    ];
 
     return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
         <div>
@@ -40,7 +48,16 @@ export const WeaponEffectForm = () => {
                 </div>
             </div>
             <div>
-                rarities
+                <Dropdown defaultValue="" options={rarityOptions}
+                    onOptionSelect={(optionValue) => {
+                        if (optionValue && !rarityList.includes(optionValue)) {
+                            setRarityList((state) => [...state, optionValue])
+                        }
+                    }}
+                />
+                <div>
+                    {rarityList.map(rarity => <div key={rarity}>{rarity}</div>)}
+                </div>
             </div>
             <div>
                 <div>
