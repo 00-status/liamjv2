@@ -4,6 +4,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
 import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
+import { WeaponEffectTag } from "./WeaponEffectTag";
 
 type WeaponEffect = {
     name: string;
@@ -28,6 +29,24 @@ export const WeaponEffectForm = () => {
         { value: "Very Rare", label: "Very Rare" },
         { value: "Legendary", label: "Legendary" }
     ];
+
+    const onDeleteRarity = (tag: string) => {
+        const rarityListCopy = [...rarityList];
+
+        const rarityToDeleteIndex = rarityListCopy.indexOf(tag);
+        rarityListCopy.splice(rarityToDeleteIndex, 1);
+
+        setRarityList(rarityListCopy);
+    };
+
+    const onDeleteTag = (tag: string) => {
+        const tagListCopy = [...tagList];
+
+        const tagToDeleteIndex = tagListCopy.indexOf(tag);
+        tagListCopy.splice(tagToDeleteIndex, 1);
+
+        setTagList(tagListCopy);
+    };
 
     return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
         <div>
@@ -56,7 +75,7 @@ export const WeaponEffectForm = () => {
                     }}
                 />
                 <div>
-                    {rarityList.map(rarity => <div key={rarity}>{rarity}</div>)}
+                    {rarityList.map(rarity => <WeaponEffectTag key={rarity} tag={rarity} onDeleteTag={onDeleteRarity} />)}
                 </div>
             </div>
             <div>
@@ -67,7 +86,7 @@ export const WeaponEffectForm = () => {
                         }}
                     />
                     <Button onClick={() => {
-                        if (currentTag) {
+                        if (currentTag && !tagList.includes(currentTag)) {
                             setTagList((state) => [...state, currentTag]);
                             setCurrentTag("");
                         }
@@ -76,7 +95,7 @@ export const WeaponEffectForm = () => {
                     </Button>
                 </div>
                 <div>
-                    {tagList.map((tag) => <div key={tag}>{tag}</div>)}
+                    {tagList.map((tag) => <WeaponEffectTag key={tag} tag={tag} onDeleteTag={onDeleteTag} />)}
                 </div>
             </div>
         </div>
