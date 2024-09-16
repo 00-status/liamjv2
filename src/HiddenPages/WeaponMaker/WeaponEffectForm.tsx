@@ -6,6 +6,7 @@ import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
 import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { WeaponEffectTag } from "./WeaponEffectTag";
+import { Card } from "../../SharedComponents/Card/Card";
 
 type WeaponEffect = {
     name: string;
@@ -52,56 +53,60 @@ export const WeaponEffectForm = () => {
     return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
         <div className="weapon-effect-form">
             <h1>Weapon Effects</h1>
-            <div>
-                <TextInput id="weapon-effect-name" value={name} label="Effect Name"
-                    onChange={(newValue) => {
-                        setName(newValue ?? "");
-                    }}
-                />
-                <div className="weapon-effect-form__description">
-                    <label htmlFor="weapon-effect-description">Description</label>
-                    <textarea
-                        className="weapon-effect-form__text-area"
-                        id="weapon-effect-description"
-                        value={description}
-                        onChange={(event) => {
-                            setDescription(event.target.value ?? "");
-                        }}
-                    />
-                </div>
-            </div>
-            <div>
-                <Dropdown defaultValue="" options={rarityOptions}
-                    onOptionSelect={(optionValue) => {
-                        if (optionValue && !rarityList.includes(optionValue)) {
-                            setRarityList((state) => [...state, optionValue])
-                        }
-                    }}
-                />
+            <Card title="Form" buttonName="Submit effect" buttonAction={() => {}}>
                 <div>
-                    {rarityList.map(rarity => <WeaponEffectTag key={rarity} tag={rarity} onDeleteTag={onDeleteRarity} />)}
-                </div>
-            </div>
-            <div>
-                <div className="weapon-effect-form__tag-form">
-                    <TextInput placeholder="Tag name" value={currentTag}
+                    <TextInput id="weapon-effect-name" value={name} label="Name"
                         onChange={(newValue) => {
-                            setCurrentTag(newValue ?? "");
+                            setName(newValue ?? "");
                         }}
                     />
-                    <Button onClick={() => {
-                        if (currentTag && !tagList.includes(currentTag)) {
-                            setTagList((state) => [...state, currentTag]);
-                            setCurrentTag("");
-                        }
-                    }}>
-                        Add tag
-                    </Button>
+                    <div className="weapon-effect-form__description">
+                        <label htmlFor="weapon-effect-description">Description</label>
+                        <textarea
+                            className="weapon-effect-form__text-area"
+                            id="weapon-effect-description"
+                            value={description}
+                            onChange={(event) => {
+                                setDescription(event.target.value ?? "");
+                            }}
+                        />
+                    </div>
                 </div>
                 <div>
-                    {tagList.map((tag) => <WeaponEffectTag key={tag} tag={tag} onDeleteTag={onDeleteTag} />)}
+                    <div className="weapon-effect-form__dropdown">
+                        <Dropdown defaultValue="" options={rarityOptions}
+                            onOptionSelect={(optionValue) => {
+                                if (optionValue && !rarityList.includes(optionValue)) {
+                                    setRarityList((state) => [...state, optionValue])
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="weapon-effect-form__tag-list">
+                        {rarityList.map(rarity => <WeaponEffectTag key={rarity} tag={rarity} onDeleteTag={onDeleteRarity} />)}
+                    </div>
                 </div>
-            </div>
+                <div>
+                    <div className="weapon-effect-form__tag-form">
+                        <TextInput placeholder="Tag name" value={currentTag}
+                            onChange={(newValue) => {
+                                setCurrentTag(newValue ?? "");
+                            }}
+                        />
+                        <Button onClick={() => {
+                            if (currentTag && !tagList.includes(currentTag)) {
+                                setTagList((state) => [...state, currentTag]);
+                                setCurrentTag("");
+                            }
+                        }}>
+                            Add tag
+                        </Button>
+                    </div>
+                    <div className="weapon-effect-form__tag-list">
+                        {tagList.map((tag) => <WeaponEffectTag key={tag} tag={tag} onDeleteTag={onDeleteTag} />)}
+                    </div>
+                </div>
+            </Card>
         </div>
     </Page>;
 };
