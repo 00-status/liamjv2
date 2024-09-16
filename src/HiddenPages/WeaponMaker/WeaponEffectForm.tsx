@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import './weapon-effect-form.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
@@ -49,7 +50,7 @@ export const WeaponEffectForm = () => {
     };
 
     return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
-        <div>
+        <div className="weapon-effect-form">
             <h1>Weapon Effects</h1>
             <div>
                 <TextInput id="weapon-effect-name" value={name} label="Effect Name"
@@ -57,9 +58,12 @@ export const WeaponEffectForm = () => {
                         setName(newValue ?? "");
                     }}
                 />
-                <div>
+                <div className="weapon-effect-form__description">
                     <label htmlFor="weapon-effect-description">Description</label>
-                    <textarea id="weapon-effect-description" value={description}
+                    <textarea
+                        className="weapon-effect-form__text-area"
+                        id="weapon-effect-description"
+                        value={description}
                         onChange={(event) => {
                             setDescription(event.target.value ?? "");
                         }}
@@ -79,8 +83,8 @@ export const WeaponEffectForm = () => {
                 </div>
             </div>
             <div>
-                <div>
-                    <TextInput placeholder="Tag" value={currentTag}
+                <div className="weapon-effect-form__tag-form">
+                    <TextInput placeholder="Tag name" value={currentTag}
                         onChange={(newValue) => {
                             setCurrentTag(newValue ?? "");
                         }}
