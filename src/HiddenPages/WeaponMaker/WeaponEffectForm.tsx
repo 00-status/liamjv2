@@ -7,8 +7,9 @@ import { Button } from "../../SharedComponents/Button/Button";
 import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { WeaponEffectTag } from "./WeaponEffectTag";
 import { Card } from "../../SharedComponents/Card/Card";
+import { useSaveWeaponEffect } from "./useSaveWeaponEffect";
 
-type WeaponEffect = {
+export type WeaponEffect = {
     name: string;
     description: string;
     rarities: Array<string>;
@@ -16,6 +17,8 @@ type WeaponEffect = {
 };
 
 export const WeaponEffectForm = () => {
+    const { saveWeaponEffect } = useSaveWeaponEffect();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
 
@@ -50,10 +53,26 @@ export const WeaponEffectForm = () => {
         setTagList(tagListCopy);
     };
 
+    const onSubmitWeaponEffect = () => {
+        const weaponEffect = {
+            name: name,
+            description: description,
+            rarities: rarityList,
+            tags: tagList,
+        };
+
+        saveWeaponEffect(weaponEffect);
+
+        setName("");
+        setDescription("");
+        setRarityList([]);
+        setTagList([]);
+    };
+
     return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
         <div className="weapon-effect-form">
             <h1>Weapon Effects</h1>
-            <Card title="Form" buttonName="Submit effect" buttonAction={() => {}}>
+            <Card title="Form" buttonName="Submit effect" buttonAction={onSubmitWeaponEffect}>
                 <div>
                     <TextInput id="weapon-effect-name" value={name} label="Name"
                         onChange={(newValue) => {
