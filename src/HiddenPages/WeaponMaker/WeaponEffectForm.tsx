@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import './weapon-effect-form.css';
 import { Page } from "../../SharedComponents/Page/Page";
@@ -18,6 +18,7 @@ export type WeaponEffect = {
 
 export const WeaponEffectForm = () => {
     const { saveWeaponEffect } = useSaveWeaponEffect();
+    const inputReference = useRef<HTMLInputElement>(null);
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -107,15 +108,21 @@ export const WeaponEffectForm = () => {
                 </div>
                 <div>
                     <div className="weapon-effect-form__tag-form">
-                        <TextInput placeholder="Tag name" value={currentTag}
+                        <TextInput ref={inputReference} placeholder="Tag name" value={currentTag}
                             onChange={(newValue) => {
                                 setCurrentTag(newValue ?? "");
                             }}
                         />
                         <Button onClick={() => {
-                            if (currentTag && !tagList.includes(currentTag)) {
-                                setTagList((state) => [...state, currentTag]);
-                                setCurrentTag("");
+                            if (!currentTag || tagList.includes(currentTag)) {
+                                return;
+                            }
+
+                            setTagList((state) => [...state, currentTag]);
+                            setCurrentTag("");
+                            
+                            if (inputReference.current) {
+                                inputReference.current.focus();
                             }
                         }}>
                             Add tag
