@@ -17,6 +17,12 @@
     gap: 8px;
 }
 
+.weapon-maker__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .weapon-maker--weapon {
     display: flex;
     flex-direction: column;

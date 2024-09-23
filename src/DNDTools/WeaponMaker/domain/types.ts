@@ -4,20 +4,14 @@ export type Weapon = {
     name: string | null;
     rarity: string;
     properties: string[];
-    baseDamage: BaseDamage;
-    extraDamage: ExtraDamage;
+    baseDamage: WeaponDamage;
+    extraDamage: WeaponDamage;
     weaponEffect: WeaponEffect;
     effectiveRange: number;
     ineffectiveRange: number;
 }
 
-export type BaseDamage = {
-    diceCount: number;
-    diceType: number;
-    damageType: string;
-}
-
-export type ExtraDamage = {
+export type WeaponDamage = {
     diceCount: number;
     diceType: number;
     damageType: string;
