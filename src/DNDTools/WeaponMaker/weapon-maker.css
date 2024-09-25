@@ -16,6 +16,15 @@
 
     gap: 8px;
 }
+.weapon-maker__filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.weapon-maker__dropdown {
+    width: 20%;
+}
 
 .weapon-maker__button {
     display: flex;
