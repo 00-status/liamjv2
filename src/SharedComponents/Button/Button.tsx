@@ -4,6 +4,7 @@ import './button.css';
 
 type Props = {
     buttonTheme?: ButtonTheme;
+    hasSheen?: boolean;
     children: ReactNode;
     onClick?: () => void;
     disabled?: boolean;
@@ -16,8 +17,10 @@ export enum ButtonTheme {
 };
 
 export const Button = (props: Props) => {
+    const buttonTheme = props.buttonTheme ?? ButtonTheme.Default;
+
     return <button
-        className={props.buttonTheme ? props.buttonTheme : ButtonTheme.Default}
+        className={buttonTheme + (props.hasSheen ? " button-sheen" : "")}
         disabled={props?.disabled}
         onClick={props.onClick}
     >

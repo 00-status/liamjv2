@@ -13,10 +13,39 @@ button {
     color: #FCFEFF;
     border: none;
 }
-
 button:hover {
     transform: scale(1.05);
     box-shadow: 1px 1px 4px #1f2028;
+    /* box-shadow: 1px 1px 12px #4a87acF0; */
+    /* box-shadow: 1px 1px 12px #4a87acD0; */
+    /* box-shadow: 1px 1px 12px #FCFEFF40; */
+}
+
+.button-sheen {
+    position: relative;
+    overflow: hidden;
+}
+.button-sheen:before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        #ededed40,
+        transparent
+    );
+    transition: all 650ms;
+}
+
+.button-sheen:hover:before {
+    left: 100%;
 }
 
 .default-button {
