@@ -4,22 +4,13 @@ import "@react-sigma/core/lib/react-sigma.min.css";
 
 import { AboutMe } from './AboutMe/AboutMe';
 import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';
-import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { DndShop } from './DNDTools/DnDShop/DnDShop';
 import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
 import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
 import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponEffectForm } from './HiddenPages/WeaponMaker/WeaponEffectForm';
-import { WeaponMakerV2 } from './DNDTools/WeaponMaker/WeaponMakerV2';
-
-// TODO: WeaponGenerator
-//      Create a WeaponGeneratorV2 Component
-//      If the user presses a "Generate Weapon" button
-//          We should call the endpoint.
-//          A slick animation should play to indicate loading is happening.
-//          After the weapon loads, the "Generate Weapon" button should slide down to make room for the weapon card.
-//      There should be a dropdown so the user can pick the rarity level of their weapon.
+import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 
 const rootDomNode = document.getElementById('app');
 
@@ -34,7 +25,7 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <DiceRoller /> },
             { path: "dice_roller", element: <DiceRoller /> },
-            { path: "weapon_maker", element: <WeaponMakerV2 /> },
+            { path: "weapon_maker", element: <WeaponMaker /> },
             { path: "the_shop", element: <DndShop /> }
         ]
     },
