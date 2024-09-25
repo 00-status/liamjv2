@@ -20,7 +20,8 @@ export const Button = (props: Props) => {
     const buttonTheme = props.buttonTheme ?? ButtonTheme.Default;
 
     return <button
-        className={buttonTheme + (props.hasSheen ? " button-sheen" : "")}
+        data-theme={buttonTheme}
+        className={"custom-button " + (props.hasSheen ? " button-sheen" : "")}
         disabled={props?.disabled}
         onClick={props.onClick}
     >

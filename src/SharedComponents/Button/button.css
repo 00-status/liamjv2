@@ -1,3 +1,21 @@
+[data-theme="default-button"] {
+    --button-color-main: #708694;
+    --button-color-hover: #4a87ac;
+    --button-color-shadow: 1px 1px 12px #4a87acB0;
+}
+
+[data-theme="delete-button"] {
+    --button-color-main: #a02e2f;
+    --button-color-hover: #CC1818;
+    --button-color-shadow: 1px 1px 12px #CC1818B0;
+}
+
+[data-theme="subtle-button"] {
+    --button-color-main: transparent;
+    --button-color-hover: transparent;
+    --button-color-shadow: 1px 1px 4px #1f2028;
+}
+
 button {
     display: flex;
     flex-direction: row;
@@ -15,15 +33,23 @@ button {
 }
 button:hover {
     transform: scale(1.05);
+}
+
+.custom-button {
+    background-color: var(--button-color-main);
+}
+.custom-button:hover {
+    background-color: var(--button-color-hover);
     box-shadow: 1px 1px 4px #1f2028;
-    /* box-shadow: 1px 1px 12px #4a87acF0; */
-    /* box-shadow: 1px 1px 12px #4a87acD0; */
-    /* box-shadow: 1px 1px 12px #FCFEFF40; */
 }
 
 .button-sheen {
     position: relative;
     overflow: hidden;
+}
+.button-sheen:hover {
+    font-style: italic;
+    box-shadow: var(--button-color-shadow);
 }
 .button-sheen:before {
     content: "";
@@ -43,34 +69,8 @@ button:hover {
     );
     transition: all 650ms;
 }
-
 .button-sheen:hover:before {
     left: 100%;
-}
-
-.default-button {
-    background-color: #708694;
-}
-.default-button:hover {
-    background-color: #4a87ac;
-}
-
-.delete-button {
-    background-color: #a02e2f;
-}
-.delete-button:hover {
-    background-color: #CC1818;
-}
-
-.subtle-button {
-    background-color: transparent;
-}
-
-.dark-button {
-    background-color: #313137;
-}
-.dark-button:hover {
-    background-color: #3b3b40;
 }
 
 @media only screen and (max-width: 600px) {

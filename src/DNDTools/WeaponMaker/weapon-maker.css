@@ -24,9 +24,6 @@
     width: 300px;
     align-self: center;
 }
-/* .weapon-maker__button:hover {
-    box-shadow: 1px 1px 12px #4a87acF0;
-} */
 
 .weapon-maker--weapon {
     display: flex;
