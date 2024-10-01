@@ -17,14 +17,13 @@ import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 //              Add a dropdown, so the user can pick the weapon type of their weapon.
 //          After the weapon loads, the "Generate Weapon" button should slide up to make room for the weapon card.
 //          Add rising sparkles when a user hovers their cursor over the button. ✅
-//          Consider adding a fancy, filigre border to the generate weapon button. 
-//          Disable the "generate weapon" button while the API request is happening (and perhaps for some time after).
+//          Disable the "generate weapon" button while the API request is happening (and perhaps for some time after). ✅
 //      Weapon Card
 //          Add more interesting colours to the Weapon Card component.
 //          Consider adding icons to represent weapon rarities.
 //          Have a slick animation play to indicate loading is happening.
 //      Content
-//          Display weapon range on the card.
+//          Display weapon range on the card. ✅
 //      General
 //          Make a more friendly name for the weapon generator.
 //          Add AI disclaimer to the footer.
@@ -33,7 +32,7 @@ import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 export const WeaponMakerV2 = () => {
     const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
 
-    const {weapon, generateWeapon} = useGenerateWeapon();
+    const {weapon, generateWeapon, isLoading} = useGenerateWeapon();
 
     const rarities = [
         {value: "Uncommon", label: "Uncommon"},
@@ -58,7 +57,7 @@ export const WeaponMakerV2 = () => {
                     />
                 </div>
                 <div className="weapon-maker__button">
-                    <Button hasSheen onClick={() => generateWeapon(selectedRarity)}>
+                    <Button disabled={isLoading} hasSheen onClick={() => generateWeapon(selectedRarity)}>
                         <GearsIcon /> Generate weapon
                     </Button>
                 </div>

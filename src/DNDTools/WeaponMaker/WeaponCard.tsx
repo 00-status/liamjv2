@@ -11,8 +11,6 @@ export const WeaponCard = (props: Props) => {
     const hasRange = !!weapon.effectiveRange && !!weapon.ineffectiveRange;
     const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
 
-    console.log(hasRange);
-
     return <Card title={weapon.name || weapon.defaultName}>
         <div>
             <div>
