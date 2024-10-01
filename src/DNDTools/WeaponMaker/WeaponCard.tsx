@@ -8,7 +8,10 @@ type Props = {
 export const WeaponCard = (props: Props) => {
     const { weapon } = props;
 
+    const hasRange = !!weapon.effectiveRange && !!weapon.ineffectiveRange;
     const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
+
+    console.log(hasRange);
 
     return <Card title={weapon.name || weapon.defaultName}>
         <div>
@@ -22,9 +25,12 @@ export const WeaponCard = (props: Props) => {
                 {formattedWeaponProperties && <div>
                     <b>Properties: </b> {formattedWeaponProperties}
                 </div>}
-                <div className="weapon-maker--damage">
+                <div>
                     <b>Damage: </b> {formatDamage(weapon.baseDamage, weapon.extraDamage)}
                 </div>
+                {hasRange && <div>
+                    <b>Range (feet): </b> {weapon.effectiveRange + "/" + weapon.ineffectiveRange}
+                </div>}
             </div>
             <hr className="divider" />
             <div>

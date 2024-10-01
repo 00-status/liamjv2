@@ -13,8 +13,6 @@ export const useGenerateWeapon = (): UseGenerateWeapon => {
         fetch("/api/1/generate_weapon?rarity=" + rarity)
             .then((response: Response) => response.json())
             .then(json => {
-                console.log(json);
-
                 setWeapon(json)
             });
     }, [setWeapon]);
