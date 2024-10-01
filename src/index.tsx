@@ -10,7 +10,7 @@ import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
 import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponEffectForm } from './HiddenPages/WeaponMaker/WeaponEffectForm';
-import { WeaponMakerV2 } from './DNDTools/WeaponMaker/WeaponMakerV2';
+import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 
 const rootDomNode = document.getElementById('app');
 
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <DiceRoller /> },
             { path: "dice_roller", element: <DiceRoller /> },
-            { path: "weapon_maker", element: <WeaponMakerV2 /> },
+            { path: "weapon_maker", element: <WeaponMaker /> },
             { path: "the_shop", element: <DndShop /> }
         ]
     },

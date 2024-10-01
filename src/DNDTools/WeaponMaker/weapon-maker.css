@@ -8,14 +8,6 @@
     gap: 12px;
 }
 
-.weapon-maker--title {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 8px;
-}
 .weapon-maker__filters {
     display: flex;
     flex-direction: column;
@@ -32,24 +24,4 @@
     justify-content: center;
     width: 300px;
     align-self: center;
-}
-
-.weapon-maker--weapon {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    width: 100%;
-    min-height: 320px;
-    padding: 20px;
-    gap: 8px;
-
-    background-color: #3b3b40;
-    border-radius: 4px;
-    box-shadow: 1px 1px 4px #1f2028;
-}
-
-@media only screen and (max-width: 600px) {
-    .weapon-maker--weapon {
-        min-height: 400px;
-    }
 }

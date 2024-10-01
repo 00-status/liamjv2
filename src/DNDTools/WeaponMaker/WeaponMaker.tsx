@@ -1,89 +1,72 @@
-import { ReactElement, useState } from "react";
+import { useState } from 'react';
 
 import './weapon-maker.css';
-import { createWeapon } from "./domain/WeaponDirector";
-import { Rarity, WeaponDamage } from "./domain/constants";
-import { Card } from "../../SharedComponents/Card/Card";
 import { Button } from "../../SharedComponents/Button/Button";
-import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { GearsIcon } from "../../SharedComponents/Icons/GearsIcon";
 import { Page } from "../../SharedComponents/Page/Page";
 import { dndRoutes } from "../domain";
+import { useGenerateWeapon } from "./useGenerateWeapon";
+import { WeaponCard } from './WeaponCard';
+import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 
 
-type SelectOption<T> = {
-    label: string,
-    value: T
-};
+// ToDo:
+//      Generate Form
+//          Add filters above the generate weapon button.
+//              Add a dropdown, so the user can pick the rarity level of their weapon. ✅
+//              Add a dropdown, so the user can pick the weapon type of their weapon.
+//          After the weapon loads, the "Generate Weapon" button should slide up to make room for the weapon card.
+//          Add rising sparkles when a user hovers their cursor over the button. ✅
+//          Disable the "generate weapon" button while the API request is happening (and perhaps for some time after). ✅
+//      Weapon Card
+//          Add more interesting colours to the Weapon Card component.
+//          Consider adding icons to represent weapon rarities.
+//          Have a slick animation play to indicate loading is happening.
+//          Add a "copy" button so the user can copy the weapon to their clipboard.
+//          Add the mastery ability to the weapon's Action section instead of being in the properties line.
+//      Content
+//          Display weapon range on the card. ✅
+//      General
+//          Make a more friendly name for the weapon generator.
+//          Add AI disclaimer to the footer.
+//          Fix API error: Candidate was missing "content" property.
 
-const rarityOptions: SelectOption<Rarity>[] = [
-    { label: 'Uncommon', value: Rarity.Uncommon },
-    { label: 'Rare', value: Rarity.Rare },
-    { label: 'Very Rare', value: Rarity.VeryRare },
-    { label: 'Legendary', value: Rarity.Legendary },
-];
+export const WeaponMaker = () => {
+    const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
 
-export const WeaponMaker = (): ReactElement => {
-    const [selectedRarity, setSelectedRarity] = useState<Rarity>(rarityOptions[0].value);
+    const {weapon, generateWeapon, isLoading} = useGenerateWeapon();
 
-    const [weapon, setWeapon] = useState(createWeapon(selectedRarity));
+    const rarities = [
+        {value: "Uncommon", label: "Uncommon"},
+        {value: "Rare", label: "Rare"},
+        {value: "Very Rare", label: "Very Rare"},
+        {value: "Legendary", label: "Legendary"},
+    ];
 
-    const baseDamage = weapon.getBaseDamage();
-    const additionalDamage = weapon.getAdditionalDamage();
-
-    const formattedWeaponProperties = formatWeaponProperties(weapon.getWeaponProperties());
-
-    return <Page title="D&D Tools" routes={dndRoutes}>
-        <div className="weapon-maker">
-            <h1>Weapon Maker</h1>
-            <div className="weapon-maker--title">
-                <Dropdown
-                    label="Rarity"
-                    defaultValue={selectedRarity}
-                    options={rarityOptions}
-                    onOptionSelect={(value) => {
-                        if (Object.values(Rarity).includes(value as Rarity)) {
-                            const typeCheckedRarity = value as Rarity;
-                            setSelectedRarity(typeCheckedRarity);
-                        }
-                    }}
-                />
-                <Button onClick={() => setWeapon(createWeapon(selectedRarity))} >
-                    <GearsIcon />
-                    Generate weapon
-                </Button>
+    return <Page routes={dndRoutes} title="D&D Tools">
+        <div className='weapon-maker'>
+            <div>
+                <h1>Weapon Maker</h1>
             </div>
-            <Card title={weapon.getName()}>
-                <div>
-                    {weapon.getRarity()}
-                    {formattedWeaponProperties && <div>
-                        <b>Properties: </b> {formattedWeaponProperties}
-                    </div>}
-                    <div className="weapon-maker--damage">
-                        <b>Damage: </b> {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
-                    </div>
+            <div className='weapon-maker__filters'>
+                <div className='weapon-maker__dropdown'>
+                    <Dropdown defaultValue="Uncommon" options={rarities}
+                        onOptionSelect={(option) => {
+                            if (option) {
+                                setSelectedRarity(option);
+                            }
+                        }}
+                    />
                 </div>
-                <hr className="divider" />
-                <div>
-                    {weapon.getActions().map((action) => <p key={action}>{action}</p>)}
+                <div className="weapon-maker__button">
+                    <Button disabled={isLoading} hasSheen onClick={() => generateWeapon(selectedRarity)}>
+                        <GearsIcon /> Generate weapon
+                    </Button>
                 </div>
-            </Card>
+            </div>
+            <div>
+                {weapon && <WeaponCard weapon={weapon} />}
+            </div>
         </div>
     </Page>;
-};
-
-const formatWeaponProperties = (weaponProperties: string[]): string => {
-    if (weaponProperties.length <= 0) {
-        return '';
-    }
-
-    return weaponProperties.join(', ');
-};
-
-const formatDamage = (damage: WeaponDamage | null): string => {
-    if (!damage) {
-        return '';
-    }
-
-    return damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
 };
