@@ -8,6 +8,7 @@ import { dndRoutes } from "../domain";
 import { useGenerateWeapon } from "./useGenerateWeapon";
 import { WeaponCard } from './WeaponCard';
 import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
+import { Loader } from '../../SharedComponents/Loader/Loader';
 
 
 // ToDo:
@@ -21,7 +22,7 @@ import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 //      Weapon Card
 //          Add more interesting colours to the Weapon Card component.
 //          Consider adding icons to represent weapon rarities.
-//          Have a slick animation play to indicate loading is happening.
+//          Have a slick animation play to indicate loading is happening. ✅
 //          Add a "copy" button so the user can copy the weapon to their clipboard.
 //          Add the mastery ability to the weapon's Action section instead of being in the properties line.
 //      Content
@@ -65,7 +66,8 @@ export const WeaponMaker = () => {
                 </div>
             </div>
             <div>
-                {weapon && <WeaponCard weapon={weapon} />}
+                {isLoading && <Loader />}
+                {!isLoading && weapon && <WeaponCard weapon={weapon} />}
             </div>
         </div>
     </Page>;
