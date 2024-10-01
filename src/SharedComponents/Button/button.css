@@ -35,6 +35,11 @@ button:hover {
     transform: scale(1.05);
 }
 
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
 .custom-button {
     background-color: var(--button-color-main);
 }

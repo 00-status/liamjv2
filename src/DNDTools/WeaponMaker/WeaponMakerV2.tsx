@@ -22,6 +22,8 @@ import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 //          Add more interesting colours to the Weapon Card component.
 //          Consider adding icons to represent weapon rarities.
 //          Have a slick animation play to indicate loading is happening.
+//          Add a "copy" button so the user can copy the weapon to their clipboard.
+//          Add the mastery ability to the weapon's Action section instead of being in the properties line.
 //      Content
 //          Display weapon range on the card. ✅
 //      General
