@@ -23,7 +23,7 @@ export const WeaponCard = (props: Props) => {
                     <b>Properties: </b> {formattedWeaponProperties}
                 </div>}
                 <div className="weapon-maker--damage">
-                    <b>Damage: </b> {formatDamage(weapon.baseDamage)} + {formatDamage(weapon.extraDamage)}
+                    <b>Damage: </b> {formatDamage(weapon.baseDamage, weapon.extraDamage)}
                 </div>
             </div>
             <hr className="divider" />
@@ -42,10 +42,15 @@ const formatWeaponProperties = (weaponProperties: string[]): string => {
     return weaponProperties.join(', ');
 };
 
-const formatDamage = (damage: WeaponDamage | null): string => {
-    if (!damage) {
-        return '';
+const formatDamage = (damage: WeaponDamage, extraDamage: WeaponDamage): string => {
+    if (damage.damageType === extraDamage.damageType && damage.diceType === extraDamage.diceType) {
+        const totalDiceCount = damage.diceCount + extraDamage.diceCount;
+
+        return totalDiceCount + 'd' + damage.diceType + ' ' + damage.damageType;
     }
 
-    return damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
+    const regularDamageString = damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
+    const extraDamageString = extraDamage.diceCount + 'd' + extraDamage.diceType + ' ' + extraDamage.damageType;
+
+    return regularDamageString + " + " + extraDamageString;
 };

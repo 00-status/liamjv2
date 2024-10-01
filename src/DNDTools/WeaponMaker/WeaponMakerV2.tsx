@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import './weapon-maker.css';
 import { Button } from "../../SharedComponents/Button/Button";
@@ -7,13 +8,13 @@ import { dndRoutes } from "../domain";
 import { useGenerateWeapon } from "./useGenerateWeapon";
 import { WeaponCard } from './WeaponCard';
 import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
-import { useState } from 'react';
+
 
 // ToDo:
 //      Generate Form
 //          Add filters above the generate weapon button.
-//          Add a dropdown, so the user can pick the rarity level of their weapon.
-//          Add a dropdown, so the user can pick the weapon type of their weapon.
+//              Add a dropdown, so the user can pick the rarity level of their weapon. ✅
+//              Add a dropdown, so the user can pick the weapon type of their weapon.
 //          After the weapon loads, the "Generate Weapon" button should slide up to make room for the weapon card.
 //          Add rising sparkles when a user hovers their cursor over the button. ✅
 //          Consider adding a fancy, filigre border to the generate weapon button. 
@@ -22,11 +23,12 @@ import { useState } from 'react';
 //          Add more interesting colours to the Weapon Card component.
 //          Consider adding icons to represent weapon rarities.
 //          Have a slick animation play to indicate loading is happening.
+//      Content
+//          Display weapon range on the card.
 //      General
 //          Make a more friendly name for the weapon generator.
 //          Add AI disclaimer to the footer.
 //          Fix API error: Candidate was missing "content" property.
-//          When a weapon's base damage is the same as its extra damage, add the number of dice together instead of displaying both.
 
 export const WeaponMakerV2 = () => {
     const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
