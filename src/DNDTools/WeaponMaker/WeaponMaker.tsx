@@ -21,15 +21,14 @@ import { Loader } from '../../SharedComponents/Loader/Loader';
 //          Disable the "generate weapon" button while the API request is happening (and perhaps for some time after). ✅
 //      Weapon Card
 //          Add more interesting colours to the Weapon Card component.
-//          Consider adding icons to represent weapon rarities.
 //          Have a slick animation play to indicate loading is happening. ✅
-//          Add a "copy" button so the user can copy the weapon to their clipboard.
+//          Add a "copy" button so the user can copy the weapon to their clipboard. 😤
 //          Add the mastery ability to the weapon's Action section instead of being in the properties line.
 //      Content
 //          Display weapon range on the card. ✅
 //      General
-//          Make a more friendly name for the weapon generator.
-//          Add AI disclaimer to the footer.
+//          Make a more friendly name for the weapon generator. 😤
+//          Add AI disclaimer to the footer. 😤
 //          Fix API error: Candidate was missing "content" property.
 
 export const WeaponMaker = () => {
@@ -67,7 +66,7 @@ export const WeaponMaker = () => {
             </div>
             <div>
                 {isLoading && <Loader />}
-                {!isLoading && weapon && <WeaponCard weapon={weapon} />}
+                {!isLoading && weapon && <div className='weapon-maker__card'><WeaponCard weapon={weapon} /></div>}
             </div>
         </div>
     </Page>;

@@ -25,3 +25,16 @@
     width: 300px;
     align-self: center;
 }
+
+.weapon-maker__card {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fading-in 0.25s ease-in;
+}
+
+@keyframes fading-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+}
