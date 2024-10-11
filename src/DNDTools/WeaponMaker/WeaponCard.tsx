@@ -1,4 +1,6 @@
+import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { Card } from "../../SharedComponents/Card/Card";
+import { CopyIcon } from "../../SharedComponents/Icons/CopyIcon";
 import { Weapon, WeaponDamage } from "./domain/types";
 
 type Props = {
@@ -11,7 +13,7 @@ export const WeaponCard = (props: Props) => {
     const hasRange = !!weapon.effectiveRange && !!weapon.ineffectiveRange;
     const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
 
-    return <Card title={weapon.name || weapon.defaultName}>
+    return <Card title={weapon.name || weapon.defaultName} button={<Button buttonTheme={ButtonTheme.Subtle} onClick={() => {console.log("Thigns")}}><CopyIcon /></Button>}>
         <div>
             <div>
                 <div>

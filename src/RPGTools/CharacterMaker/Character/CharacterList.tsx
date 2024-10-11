@@ -4,6 +4,7 @@ import { Card } from "../../../SharedComponents/Card/Card";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Character } from "../domain/types";
 import { TrashIcon } from '../../../SharedComponents/Icons/TrashIcon';
+import { Button } from '../../../SharedComponents/Button/Button';
 
 type Props = {
     characters: Array<Character>;
@@ -35,7 +36,7 @@ export const CharacterList = (props: Props) => {
         setCharacters(charactersCopy);
     };
 
-    return <Card title="Characters" buttonName="Add character" buttonAction={addNewCharacter}>
+    return <Card title="Characters" button={<Button onClick={addNewCharacter}>Add character</Button>}>
         <div className='character-list'>
             {characters.map((character: Character, index: number) => {
                 return <div key={character.id} className="character-list__item">
