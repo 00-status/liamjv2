@@ -13,7 +13,11 @@ export const WeaponCard = (props: Props) => {
     const hasRange = !!weapon.effectiveRange && !!weapon.ineffectiveRange;
     const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
 
-    return <Card title={weapon.name || weapon.defaultName} button={<Button buttonTheme={ButtonTheme.Subtle} onClick={() => {console.log("Thigns")}}><CopyIcon /></Button>}>
+    const copyButton = <Button buttonTheme={ButtonTheme.Subtle} onClick={() => navigator.clipboard.writeText(formatWeaponForCopy(weapon))}>
+        <CopyIcon />
+    </Button>;
+
+    return <Card title={weapon.name || weapon.defaultName} button={copyButton}>
         <div>
             <div>
                 <div>
@@ -59,4 +63,25 @@ const formatDamage = (damage: WeaponDamage, extraDamage: WeaponDamage): string =
     const extraDamageString = extraDamage.diceCount + 'd' + extraDamage.diceType + ' ' + extraDamage.damageType;
 
     return regularDamageString + " + " + extraDamageString;
+};
+
+const formatWeaponForCopy = (weapon: Weapon) => {
+    const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
+    const formattedDamage = formatDamage(weapon.baseDamage, weapon.extraDamage);
+
+    let weaponCopy = `
+Name: ${weapon.name}
+Type: ${weapon.defaultName}
+Rarity: ${weapon.rarity}
+Properties: ${formattedWeaponProperties}
+Damage: ${formattedDamage}
+`;
+
+    if (!!weapon.effectiveRange || !!weapon.ineffectiveRange) {
+        weaponCopy += `Range (feet): ${weapon.effectiveRange}/${weapon.ineffectiveRange}
+---
+`;
+    }
+
+    return weaponCopy += `${weapon.weaponEffect.name}: ${weapon.weaponEffect.description}`;
 };
