@@ -70,10 +70,10 @@ export const WeaponEffectForm = () => {
         setTagList([]);
     };
 
-    return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effect Form">
+    return <Page routes={[{ route: "/", isHomeLink: true, label: "Landing" }]} title="Weapon Effects">
         <div className="weapon-effect-form">
             <h1>Weapon Effects</h1>
-            <Card title="Form" buttonName="Submit effect" buttonAction={onSubmitWeaponEffect}>
+            <Card title="Form" button={<Button onClick={onSubmitWeaponEffect}>Submit effect</Button>}>
                 <div>
                     <TextInput id="weapon-effect-name" value={name} label="Name"
                         onChange={(newValue) => {

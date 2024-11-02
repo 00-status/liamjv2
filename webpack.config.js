@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = (env) => {
   const buildPath = env.buildForProd
-    ? path.resolve(__dirname, "../server/wwwroot/")
+    ? path.resolve(__dirname, "../server_php/public/")
     : path.resolve(__dirname, "dist/");
 
     

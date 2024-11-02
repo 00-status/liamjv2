@@ -11,6 +11,7 @@ import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponEffectForm } from './HiddenPages/WeaponMaker/WeaponEffectForm';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
+import { WeaponEffectList } from './HiddenPages/WeaponEffectList/WeaponEffectList';
 
 const rootDomNode = document.getElementById('app');
 
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
     },
     { path: "/terminal", element: <TerminalPage /> },
     { path: "/unlisted/weapon_effect", element: <WeaponEffectForm /> },
+    { path: "/unlisted/weapon_effects", element: <WeaponEffectList /> },
     { path: '*', element: <NotFoundPage /> }
 ]);
 
