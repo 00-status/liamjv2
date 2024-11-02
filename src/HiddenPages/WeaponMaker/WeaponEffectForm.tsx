@@ -10,6 +10,7 @@ import { Card } from "../../SharedComponents/Card/Card";
 import { useSaveWeaponEffect } from "./useSaveWeaponEffect";
 
 export type WeaponEffect = {
+    id?: number;
     name: string;
     description: string;
     rarities: Array<string>;
