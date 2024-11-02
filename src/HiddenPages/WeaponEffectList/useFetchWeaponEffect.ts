@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { WeaponEffect } from "../WeaponMaker/WeaponEffectForm";
+import { WeaponEffect } from "../WeaponEffectEditor/WeaponEffectForm";
 
 export const useFetchWeaponEffect = (): Array<WeaponEffect> => {
     const [weaponEffects, setWeaponEffects] = useState([]);
