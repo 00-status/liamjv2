@@ -7,6 +7,7 @@ import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { WeaponEffectTag } from "./WeaponEffectTag";
 import { Card } from "../../SharedComponents/Card/Card";
 import { useSaveWeaponEffect } from "./useSaveWeaponEffect";
+import { useUpdateWeaponEffect } from "./useUpdateWeaponEffect";
 
 export type WeaponEffect = {
     id?: number;
@@ -24,6 +25,8 @@ export const WeaponEffectForm = (props: Props) => {
     const { weaponEffect } = props;
 
     const { saveWeaponEffect } = useSaveWeaponEffect();
+    const { updateWeaponEffect } = useUpdateWeaponEffect();
+
     const inputReference = useRef<HTMLInputElement>(null);
 
     const [name, setName] = useState("");
@@ -69,16 +72,20 @@ export const WeaponEffectForm = (props: Props) => {
     };
 
     const onSubmitWeaponEffect = () => {
-        const weaponEffect = {
+        const weaponEffectToSubmit = {
             name: name,
             description: description,
             rarities: rarityList,
             tags: tagList,
         };
 
-        saveWeaponEffect(weaponEffect);
+        if (!!weaponEffect && weaponEffect.id) {
+            updateWeaponEffect(weaponEffectToSubmit, weaponEffect.id);
+        } else {
+            saveWeaponEffect(weaponEffectToSubmit);
+        }
 
-        setName("");
+        setName("Weapon effect");
         setDescription("");
         setRarityList([]);
         setTagList([]);
