@@ -10,7 +10,6 @@ import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
 import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
-import { WeaponEffectEditor } from './HiddenPages/WeaponEffectEditor/WeaponEffectEditor';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
 
 const rootDomNode = document.getElementById('app');

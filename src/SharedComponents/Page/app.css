@@ -18,6 +18,8 @@ body {
     margin: 0;
 
     background-color: #2a2b30;
+    background-image: url("../../assets/images/egg-shell.png");
+    /* background-image: url("https://www.transparenttextures.com/patterns/egg-shell.png"); */
     color: #FCFEFF;
     font-size: 16px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
