@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import './weapon-effect-form.css';
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
@@ -26,13 +26,21 @@ export const WeaponEffectForm = (props: Props) => {
     const { saveWeaponEffect } = useSaveWeaponEffect();
     const inputReference = useRef<HTMLInputElement>(null);
 
-    const [name, setName] = useState(weaponEffect?.name ?? "");
-    const [description, setDescription] = useState(weaponEffect?.description ?? "");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
 
     const [currentTag, setCurrentTag] = useState("");
-    const [tagList, setTagList] = useState<Array<string>>(weaponEffect?.tags ?? []);
+    const [tagList, setTagList] = useState<Array<string>>([]);
     
-    const [rarityList, setRarityList] = useState<Array<string>>(weaponEffect?.rarities ?? []);
+    const [rarityList, setRarityList] = useState<Array<string>>([]);
+
+    useEffect(() => {
+        setName(weaponEffect?.name ?? "");
+        setDescription(weaponEffect?.description ?? "");
+        setTagList(weaponEffect?.tags ?? []);
+        setRarityList(weaponEffect?.rarities ?? []);
+
+    }, [weaponEffect, setName, setDescription, setTagList, setRarityList]);
 
     const rarityOptions = [
         { value: "", label: "" },
@@ -77,8 +85,7 @@ export const WeaponEffectForm = (props: Props) => {
     };
 
     return <div className="weapon-effect-form">
-        <h2>Weapon Effects</h2>
-        <Card title="Form" button={<Button onClick={onSubmitWeaponEffect}>Submit effect</Button>}>
+        <Card title={weaponEffect?.name ?? ""} button={<Button onClick={onSubmitWeaponEffect}>Submit effect</Button>}>
             <div>
                 <TextInput id="weapon-effect-name" value={name} label="Name"
                     onChange={(newValue) => {

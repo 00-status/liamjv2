@@ -1,8 +1,8 @@
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import { Page } from "../../SharedComponents/Page/Page";
-import { useFetchWeaponEffect } from "../WeaponEffectList/useFetchWeaponEffect";
 import { WeaponEffectForm } from "./WeaponEffectForm";
+import { useFetchWeaponEffect } from "./useFetchWeaponEffect";
 
 export const WeaponEffectEditor = () => {
     const [searchParams] = useSearchParams();

@@ -10,8 +10,8 @@ import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
 import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
-import { WeaponEffectList } from './HiddenPages/WeaponEffectList/WeaponEffectList';
 import { WeaponEffectEditor } from './HiddenPages/WeaponEffectEditor/WeaponEffectEditor';
+import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
 
 const rootDomNode = document.getElementById('app');
 
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
         ]
     },
     { path: "/terminal", element: <TerminalPage /> },
-    { path: "/unlisted/weapon_effect", element: <WeaponEffectEditor /> },
     { path: "/unlisted/weapon_effects", element: <WeaponEffectList /> },
     { path: '*', element: <NotFoundPage /> }
 ]);

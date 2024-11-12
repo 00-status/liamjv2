@@ -6,10 +6,15 @@
     width: 100%;
 }
 
+.weapon-effect-list__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .weapon-effect-list__item {
     padding: 4px 8px;
 }
-
 .weapon-effect-list__item:hover {
     color: #2a2b30;
     background-color: #f2f4f5;
