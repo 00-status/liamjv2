@@ -24,6 +24,14 @@
 
 .weapon-effect-list__list {
     flex: 1;
+    max-height: 500px;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.weapon-effect-list__list::-webkit-scrollbar {
+    display: none;
 }
 
 .weapon-effect-list__form {
