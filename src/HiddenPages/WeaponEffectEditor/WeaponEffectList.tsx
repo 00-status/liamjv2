@@ -2,12 +2,16 @@ import './weapon-effect-list.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useFetchWeaponEffect } from "./useFetchWeaponEffect";
 import { WeaponEffect, WeaponEffectForm } from "../WeaponEffectEditor/WeaponEffectForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const WeaponEffectList = () => {
-    const weaponEffects = useFetchWeaponEffect();
+    const { weaponEffects, fetchWeaponEffects} = useFetchWeaponEffect();
 
     const [currentWeaponEffect, setCurrentWeaponEffect] = useState<WeaponEffect|null>(null);
+
+    useEffect(() => {
+        fetchWeaponEffects();
+    }, []);
 
     return <Page title="Weapon Effects" routes={[{label: "Landing", route: "/", isHomeLink: true}]}>
         <div className="weapon-effect-list">
@@ -24,7 +28,10 @@ export const WeaponEffectList = () => {
                     )}
                 </div>
                 <div className='weapon-effect-list__form'>
-                    <WeaponEffectForm weaponEffect={currentWeaponEffect ? currentWeaponEffect : undefined} />
+                    <WeaponEffectForm
+                        weaponEffect={currentWeaponEffect ? currentWeaponEffect : undefined}
+                        fetchWeaponEffects={fetchWeaponEffects}
+                    />
                 </div>
             </div>
         </div>

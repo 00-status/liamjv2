@@ -19,10 +19,11 @@ export type WeaponEffect = {
 
 type Props = {
     weaponEffect?: WeaponEffect;
+    fetchWeaponEffects: () => void;
 };
 
 export const WeaponEffectForm = (props: Props) => {
-    const { weaponEffect } = props;
+    const { weaponEffect, fetchWeaponEffects } = props;
 
     const { saveWeaponEffect } = useSaveWeaponEffect();
     const { updateWeaponEffect } = useUpdateWeaponEffect();
@@ -85,6 +86,7 @@ export const WeaponEffectForm = (props: Props) => {
             saveWeaponEffect(weaponEffectToSubmit);
         }
 
+        fetchWeaponEffects();
         setName("Weapon effect");
         setDescription("");
         setRarityList([]);

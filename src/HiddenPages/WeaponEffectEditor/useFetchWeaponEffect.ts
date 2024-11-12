@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { WeaponEffect } from "../WeaponEffectEditor/WeaponEffectForm";
 
-export const useFetchWeaponEffect = (): Array<WeaponEffect> => {
+type UseFetchWeaponEffect = {
+    weaponEffects: Array<WeaponEffect>;
+    fetchWeaponEffects: () => void;
+};
+
+export const useFetchWeaponEffect = (): UseFetchWeaponEffect => {
     const [weaponEffects, setWeaponEffects] = useState([]);
 
-    useEffect(() => {
+    const fetchWeaponEffects = useCallback(() => {
         fetch("/api/1/weapon_effects")
             .then(response => response.json())
             .then(json => setWeaponEffects(json));
-    }, []);
+    }, [setWeaponEffects]);
     
-    return weaponEffects;
+    return { weaponEffects, fetchWeaponEffects };
 };
