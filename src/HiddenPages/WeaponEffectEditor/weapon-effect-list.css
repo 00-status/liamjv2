@@ -10,6 +10,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    gap: 20px;
 }
 
 .weapon-effect-list__item {
@@ -18,4 +20,12 @@
 .weapon-effect-list__item:hover {
     color: #2a2b30;
     background-color: #f2f4f5;
+}
+
+.weapon-effect-list__list {
+    flex: 1;
+}
+
+.weapon-effect-list__form {
+    flex: 2;
 }

@@ -35,7 +35,7 @@ export const WeaponEffectForm = (props: Props) => {
     const [rarityList, setRarityList] = useState<Array<string>>([]);
 
     useEffect(() => {
-        setName(weaponEffect?.name ?? "");
+        setName(weaponEffect?.name ?? "Weapon effect");
         setDescription(weaponEffect?.description ?? "");
         setTagList(weaponEffect?.tags ?? []);
         setRarityList(weaponEffect?.rarities ?? []);
@@ -85,7 +85,7 @@ export const WeaponEffectForm = (props: Props) => {
     };
 
     return <div className="weapon-effect-form">
-        <Card title={weaponEffect?.name ?? ""} button={<Button onClick={onSubmitWeaponEffect}>Submit effect</Button>}>
+        <Card title={name} button={<Button onClick={onSubmitWeaponEffect}>Submit effect</Button>}>
             <div>
                 <TextInput id="weapon-effect-name" value={name} label="Name"
                     onChange={(newValue) => {

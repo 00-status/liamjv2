@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import './weapon-effect-list.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useFetchWeaponEffect } from "./useFetchWeaponEffect";
@@ -15,7 +13,7 @@ export const WeaponEffectList = () => {
         <div className="weapon-effect-list">
             <h1>Weapon Effect List</h1>
             <div className="weapon-effect-list__container">
-                <div>
+                <div className="weapon-effect-list__list">
                     {weaponEffects.map((weaponEffect) => <div
                             className="weapon-effect-list__item"
                             onClick={() => setCurrentWeaponEffect(weaponEffect)}
@@ -25,7 +23,7 @@ export const WeaponEffectList = () => {
                         </div>
                     )}
                 </div>
-                <div>
+                <div className='weapon-effect-list__form'>
                     <WeaponEffectForm weaponEffect={currentWeaponEffect ? currentWeaponEffect : undefined} />
                 </div>
             </div>
