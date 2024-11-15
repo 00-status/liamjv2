@@ -4,9 +4,8 @@
   "description": "portfolio website",
   "main": "index.tsx",
   "scripts": {
-    "build": "webpack build --mode production",
+    "build": "webpack build --mode production --env buildForProd=true",
     "start": "webpack build --watch --mode development --env buildForProd=true",
-    "buildProd": "webpack build --mode production --env buildForProd=true",
     "test": "jest"
   },
   "author": "00-status",
