@@ -35,11 +35,11 @@ export const Page = (props: Props): ReactElement => {
                 <div className="icon-list">
                     <ImageButton
                         locationUrl={"https://github.com/00-status"}
-                        imageUrl={require('../../assets/images/github_cat_icon.svg')}
+                        imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
                     />
                     <ImageButton
                         locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
-                        imageUrl={require('../../assets/images/linkedin_icon.png')}
+                        imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
                     />
                 </div>
             </div>
