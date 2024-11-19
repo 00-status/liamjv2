@@ -91,8 +91,7 @@ export const DialogueMaker = (props: Props): ReactElement => {
             <div className="dialogue-maker__content">
                 <Card
                     title="Description"
-                    buttonName="Add hidden info"
-                    buttonAction={() => setIsAddHiddenInfoModalOpen(true)}
+                    button={<Button onClick={() => setIsAddHiddenInfoModalOpen(true)}>Add hidden info</Button>}
                 >
                     <div className="dialogue-maker__description">
                         <label htmlFor="dialogue-description">Dialogue description</label>

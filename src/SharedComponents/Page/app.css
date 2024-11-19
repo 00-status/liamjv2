@@ -1,12 +1,12 @@
 @font-face {
     /* Header Font */
     font-family: "Spectral-Regular";
-    src: url("../../assets/fonts/titles/Spectral-Regular.ttf") format('truetype');
+    src: url("https://liamj.b-cdn.net/assets/fonts/titles/Spectral-Regular.ttf") format('truetype');
 }
 @font-face {
     /* Body Font */
     font-family: "Source Sans 3";
-    src: url("../../assets/fonts/body/SourceSans3-VariableFont_wght.ttf") format('truetype');
+    src: url("https://liamj.b-cdn.net/assets/fonts/body/SourceSans3-VariableFont_wght.ttf") format('truetype');
 }
 
 html, body, #app {
@@ -18,6 +18,7 @@ body {
     margin: 0;
 
     background-color: #2a2b30;
+    background-image: url("https://liamj.b-cdn.net/assets/images/egg-shell.png");
     color: #FCFEFF;
     font-size: 16px;
     font-family: "Source Sans 3", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

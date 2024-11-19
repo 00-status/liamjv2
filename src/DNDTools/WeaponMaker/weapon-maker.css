@@ -8,37 +8,33 @@
     gap: 12px;
 }
 
-.weapon-maker--title {
+.weapon-maker__filters {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 8px;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.weapon-maker__dropdown {
+    width: 20%;
 }
 
 .weapon-maker__button {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 300px;
+    align-self: center;
 }
 
-.weapon-maker--weapon {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    width: 100%;
-    min-height: 320px;
-    padding: 20px;
-    gap: 8px;
-
-    background-color: #3b3b40;
-    border-radius: 4px;
-    box-shadow: 1px 1px 4px #1f2028;
+.weapon-maker__card {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fading-in 0.25s ease-in;
 }
 
-@media only screen and (max-width: 600px) {
-    .weapon-maker--weapon {
-        min-height: 400px;
+@keyframes fading-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
     }
 }

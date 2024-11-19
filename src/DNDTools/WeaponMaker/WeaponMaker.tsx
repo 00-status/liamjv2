@@ -1,89 +1,52 @@
-import { ReactElement, useState } from "react";
+import { useState } from 'react';
 
 import './weapon-maker.css';
-import { createWeapon } from "./domain/WeaponDirector";
-import { Rarity, WeaponDamage } from "./domain/constants";
-import { Card } from "../../SharedComponents/Card/Card";
 import { Button } from "../../SharedComponents/Button/Button";
-import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { GearsIcon } from "../../SharedComponents/Icons/GearsIcon";
 import { Page } from "../../SharedComponents/Page/Page";
 import { dndRoutes } from "../domain";
+import { useGenerateWeapon } from "./useGenerateWeapon";
+import { WeaponCard } from './WeaponCard';
+import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
+import { Loader } from '../../SharedComponents/Loader/Loader';
 
+export const WeaponMaker = () => {
+    const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
 
-type SelectOption<T> = {
-    label: string,
-    value: T
-};
+    const {weapon, generateWeapon, isLoading} = useGenerateWeapon();
 
-const rarityOptions: SelectOption<Rarity>[] = [
-    { label: 'Uncommon', value: Rarity.Uncommon },
-    { label: 'Rare', value: Rarity.Rare },
-    { label: 'Very Rare', value: Rarity.VeryRare },
-    { label: 'Legendary', value: Rarity.Legendary },
-];
+    const rarities = [
+        {value: "Uncommon", label: "Uncommon"},
+        {value: "Rare", label: "Rare"},
+        {value: "Very Rare", label: "Very Rare"},
+        {value: "Legendary", label: "Legendary"},
+    ];
 
-export const WeaponMaker = (): ReactElement => {
-    const [selectedRarity, setSelectedRarity] = useState<Rarity>(rarityOptions[0].value);
-
-    const [weapon, setWeapon] = useState(createWeapon(selectedRarity));
-
-    const baseDamage = weapon.getBaseDamage();
-    const additionalDamage = weapon.getAdditionalDamage();
-
-    const formattedWeaponProperties = formatWeaponProperties(weapon.getWeaponProperties());
-
-    return <Page title="D&D Tools" routes={dndRoutes}>
-        <div className="weapon-maker">
-            <h1>Weapon Maker</h1>
-            <div className="weapon-maker--title">
-                <Dropdown
-                    label="Rarity"
-                    defaultValue={selectedRarity}
-                    options={rarityOptions}
-                    onOptionSelect={(value) => {
-                        if (Object.values(Rarity).includes(value as Rarity)) {
-                            const typeCheckedRarity = value as Rarity;
-                            setSelectedRarity(typeCheckedRarity);
-                        }
-                    }}
-                />
-                <Button onClick={() => setWeapon(createWeapon(selectedRarity))} >
-                    <GearsIcon />
-                    Generate weapon
-                </Button>
+    return <Page routes={dndRoutes} title="D&D Tools" footer={<div>The weapon's name is generated using Google Gemeni (AI).</div>}>
+        <div className='weapon-maker'>
+            <div>
+                <h1>Weapon Maker</h1>
             </div>
-            <Card title={weapon.getName()}>
-                <div>
-                    {weapon.getRarity()}
-                    {formattedWeaponProperties && <div>
-                        <b>Properties: </b> {formattedWeaponProperties}
-                    </div>}
-                    <div className="weapon-maker--damage">
-                        <b>Damage: </b> {formatDamage(baseDamage)} + {formatDamage(additionalDamage)}
-                    </div>
+            <div className='weapon-maker__filters'>
+                <div className='weapon-maker__dropdown'>
+                    <Dropdown defaultValue="Uncommon" options={rarities}
+                        onOptionSelect={(option) => {
+                            if (option) {
+                                setSelectedRarity(option);
+                            }
+                        }}
+                    />
                 </div>
-                <hr className="divider" />
-                <div>
-                    {weapon.getActions().map((action) => <p key={action}>{action}</p>)}
+                <div className="weapon-maker__button">
+                    <Button disabled={isLoading} hasSheen onClick={() => generateWeapon(selectedRarity)}>
+                        <GearsIcon /> Make weapon
+                    </Button>
                 </div>
-            </Card>
+            </div>
+            <div>
+                {isLoading && <Loader />}
+                {!isLoading && weapon && <div className='weapon-maker__card'><WeaponCard weapon={weapon} /></div>}
+            </div>
         </div>
     </Page>;
-};
-
-const formatWeaponProperties = (weaponProperties: string[]): string => {
-    if (weaponProperties.length <= 0) {
-        return '';
-    }
-
-    return weaponProperties.join(', ');
-};
-
-const formatDamage = (damage: WeaponDamage | null): string => {
-    if (!damage) {
-        return '';
-    }
-
-    return damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
 };

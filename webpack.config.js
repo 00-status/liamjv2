@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = (env) => {
   const buildPath = env.buildForProd
-    ? path.resolve(__dirname, "../server/wwwroot/")
+    ? path.resolve(__dirname, "../server_php/public/")
     : path.resolve(__dirname, "dist/");
 
     
@@ -40,7 +40,17 @@ module.exports = (env) => {
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options:
+              {
+                importLoaders: 1,
+                modules: false // Set to true if you are using CSS modules
+              }
+            }
+          ]
         }
       ]
     },
