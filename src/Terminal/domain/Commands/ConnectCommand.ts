@@ -21,13 +21,15 @@ export const ConnectCommand: ICommand = {
         const serverName = splitCommand[1];
 
         const newServers = servers[serverName];
+        const newRootDirectory = newServers?.get("/");
 
-        if (!newServers) {
+        if (!newServers || !newRootDirectory) {
             return "Cannot Connect to server!";
         }
 
-        // Set the new server.
-        // Set the new current directories.
+        // TODO: Set the new server name.
+        setDirectories(newServers);
+        setCurrentDirectory(newRootDirectory);
         return "Connecting to " + serverName + "...";
     }
 }
