@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import './terminal.css';
 import { Command, ICommand, TerminalDirectory, validCommands } from "./domain/types";
-import { startingDirectory } from "./domain/directories";
+import { directories, startingDirectory } from "./domain/directories";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 
 type Output = {
@@ -23,7 +23,10 @@ export const Terminal = () => {
     //          use setCurrentDirectories to switch to the new directory hierarchy.
     // Have the directory-focused commands pull from the currentDirectories Map.
 
+    const [server, setServer] = useState<string>("local");
+    const [currentDirectories, setCurrentDirectories] = useState<Map<string, TerminalDirectory>>(directories);
     const [currentDirectory, setCurrentDirectory] = useState<TerminalDirectory>(startingDirectory);
+
     const [commandHistory, setCommandHistory] = useState<Array<Command>>([]);
 
     const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(currentDirectory.name));
@@ -73,6 +76,7 @@ export const Terminal = () => {
                         const result = executeCommand(
                             commandHistory,
                             currentCommand,
+                            currentDirectories,
                             currentDirectory,
                             setCurrentDirectory
                         );
@@ -107,6 +111,7 @@ const createNewCommand = (directoryName: string): Command => {
 const executeCommand = (
     commandHistory: Array<Command>,
     currentCommand: Command,
+    currentDirectories: Map<string, TerminalDirectory>,
     currentDirectory: TerminalDirectory,
     setCurrentDirectory: (directory: TerminalDirectory) => void
 ): string => {
@@ -116,6 +121,7 @@ const executeCommand = (
         return command.execute(
             currentCommand,
             commandHistory,
+            currentDirectories,
             currentDirectory,
             setCurrentDirectory,
             []

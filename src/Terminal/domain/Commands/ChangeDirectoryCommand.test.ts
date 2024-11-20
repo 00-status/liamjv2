@@ -14,6 +14,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory,
             setCurrentDirectory,
             []
@@ -36,6 +37,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -57,6 +59,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory,
             setCurrentDirectory,
             []
@@ -79,6 +82,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -101,6 +105,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -123,6 +128,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -145,6 +151,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -167,6 +174,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            directories,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
