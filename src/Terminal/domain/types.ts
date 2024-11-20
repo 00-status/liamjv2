@@ -48,4 +48,4 @@ export const validCommands = new Map<string, ICommand>([
     ['clear', ClearCommand],
     ['clera', ClearCommand],
     ['pwd', WorkingDirectoryCommand],
-])
+]);

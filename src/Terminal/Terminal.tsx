@@ -11,6 +11,18 @@ type Output = {
 };
 
 export const Terminal = () => {
+    // create a currentDirectories, setCurrentDirectories local state
+    // Add a currentServer property to the "Command" type.
+    //      Use currentServer in the outputs
+    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface.s
+    // the connect ICommand will
+    //      Accept a server name as an argument.
+    //      If the does NOT exist
+    //          return an error message.
+    //      else
+    //          use setCurrentDirectories to switch to the new directory hierarchy.
+    // Have the directory-focused commands pull from the currentDirectories Map.
+
     const [currentDirectory, setCurrentDirectory] = useState<TerminalDirectory>(startingDirectory);
     const [commandHistory, setCommandHistory] = useState<Array<Command>>([]);
 
