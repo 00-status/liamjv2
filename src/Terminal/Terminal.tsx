@@ -76,6 +76,7 @@ export const Terminal = () => {
                         const result = executeCommand(
                             commandHistory,
                             currentCommand,
+                            setServer,
                             currentDirectories,
                             setCurrentDirectories,
                             currentDirectory,
@@ -117,6 +118,7 @@ const createNewCommand = (directoryName: string): Command => {
 const executeCommand = (
     commandHistory: Array<Command>,
     currentCommand: Command,
+    setServerName: (serverName: string) => void,
     currentDirectories: Map<string, TerminalDirectory>,
     setDirectories: (directories: Map<string, TerminalDirectory>) => void,
     currentDirectory: TerminalDirectory,
@@ -128,6 +130,7 @@ const executeCommand = (
         return command.execute(
             currentCommand,
             commandHistory,
+            setServerName,
             currentDirectories,
             setDirectories,
             currentDirectory,

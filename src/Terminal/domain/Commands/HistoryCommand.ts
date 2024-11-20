@@ -4,6 +4,7 @@ export const HistoryCommand: ICommand = {
     execute(
         command: Command,
         commandHistory: Array<Command>,
+        setServerName: (serverName: string) => void,
         directories: Map<string, TerminalDirectory>,
         setDirectories: (directories: Map<string, TerminalDirectory>) => void,
         currentDirectory: TerminalDirectory,

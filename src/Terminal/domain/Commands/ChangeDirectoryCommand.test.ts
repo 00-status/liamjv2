@@ -3,6 +3,7 @@ import { Command, TerminalDirectory } from "../types";
 import { ChangeDirectoryCommand } from "./ChangeDirectoryCommand";
 
 describe('ChangeDirectoryCommand', () => {
+    const setServerName = jest.fn();
     const setDirectories = jest.fn();
     const setCurrentDirectory = jest.fn();
 
@@ -16,6 +17,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setDirectories,
             startingDirectory,
@@ -39,6 +41,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
@@ -61,6 +64,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory,
@@ -84,6 +88,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
@@ -107,6 +112,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
@@ -130,6 +136,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
@@ -153,6 +160,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
@@ -176,6 +184,7 @@ describe('ChangeDirectoryCommand', () => {
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
+            setServerName,
             directories,
             setCurrentDirectory,
             startingDirectory as TerminalDirectory,
