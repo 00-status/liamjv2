@@ -5,6 +5,9 @@ export const OpenCommand: ICommand = {
     execute(
         command: Command,
         commandHistory: Array<Command>,
+        setServerName: (serverName: string) => void,
+        directories: Map<string, TerminalDirectory>,
+        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
         currentDirectory: TerminalDirectory,
         setCurrentDirectory: (directory: TerminalDirectory) => void,
         args: Array<string>
@@ -16,7 +19,7 @@ export const OpenCommand: ICommand = {
         var file: TerminalFile | null = null;
         if (filePathGroups.length > 1) {
             const fileName = filePathGroups.pop();
-            const directory = navigateDirectories(filePathGroups, currentDirectory);
+            const directory = navigateDirectories(filePathGroups, directories, currentDirectory);
 
             file = directory.files.get(fileName ?? '') ?? null;
         } else {

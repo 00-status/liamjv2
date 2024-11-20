@@ -1,9 +1,10 @@
-import { directories, startingDirectory } from "./directories";
+import { startingDirectory } from "./directories";
 import { TerminalDirectory } from "./types";
 
 // TODO: Surface errors related to unknown directories
 export const navigateDirectories = (
     directoryGroups: Array<string>,
+    directories: Map<string, TerminalDirectory>,
     currentDirectory: TerminalDirectory
 ): TerminalDirectory => {
     var carry: TerminalDirectory = currentDirectory;
@@ -13,7 +14,7 @@ export const navigateDirectories = (
                 // Current directory, no change
                 break;
             case '..':
-                const newDirectory = moveUpDirectory(carry);
+                const newDirectory = moveUpDirectory(directories, carry);
                 if (newDirectory) {
                     carry = newDirectory;
                 }
@@ -24,7 +25,7 @@ export const navigateDirectories = (
                 }
                 break;
             default:
-                const newSubDirectory = moveDownDirectory(carry, group);
+                const newSubDirectory = moveDownDirectory(directories, carry, group);
                 if (newSubDirectory) {
                     carry = newSubDirectory;
                 }
@@ -35,12 +36,12 @@ export const navigateDirectories = (
     return carry;
 };
 
-const moveUpDirectory = (currentDirectory: TerminalDirectory): TerminalDirectory | null => {
+const moveUpDirectory = (directories: Map<string, TerminalDirectory>, currentDirectory: TerminalDirectory): TerminalDirectory | null => {
     const parentDirectory = directories.get(currentDirectory.parent ?? '');
     return parentDirectory ?? null;
 };
 
-const moveDownDirectory = (currentDirectory: TerminalDirectory, desiredDirectory: string): TerminalDirectory | null => {
+const moveDownDirectory = (directories: Map<string, TerminalDirectory>, currentDirectory: TerminalDirectory, desiredDirectory: string): TerminalDirectory | null => {
     const formattedDirectory = (currentDirectory.parent ?? '') + currentDirectory.name + '/' + desiredDirectory;
     const newDirectory = directories.get(formattedDirectory);
 

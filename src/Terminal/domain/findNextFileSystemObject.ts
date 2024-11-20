@@ -4,6 +4,7 @@ import { Command, TerminalDirectory } from "./types";
 export const findNextFileSystemObject = (
     command: Command,
     setCommand: (command: Command) => void,
+    directories: Map<string, TerminalDirectory>,
     currentDirectory: TerminalDirectory
 ): void => {
     const commandStringGroups = command.text.trim().split(" ");
@@ -13,17 +14,21 @@ export const findNextFileSystemObject = (
     }
 
     const filePathGroups = commandStringGroups[1].split("/");
-    const newFilePath = findFileName(filePathGroups, currentDirectory);
+    const newFilePath = findFileName(filePathGroups, directories, currentDirectory);
 
     if (newFilePath) {
         setCommand({ ...command, text: commandStringGroups[0] + " " + newFilePath });
     }
 };
 
-const findFileName = (filePathGroups: Array<string>, currentDirectory: TerminalDirectory): string | null => {
+const findFileName = (
+    filePathGroups: Array<string>,
+    directories: Map<string, TerminalDirectory>,
+    currentDirectory: TerminalDirectory
+): string | null => {
     if (filePathGroups.length > 1) {
         const fileName = filePathGroups.pop();
-        const directory = navigateDirectories(filePathGroups, currentDirectory);
+        const directory = navigateDirectories(filePathGroups, directories, currentDirectory);
 
         const potentialFiles = [...directory.files.keys(), ...directory.subDirectories];
         const filteredFiles = potentialFiles.filter((file: string) => fileName ? file.startsWith(fileName) : false);

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import './terminal.css';
 import { Command, ICommand, TerminalDirectory, validCommands } from "./domain/types";
-import { startingDirectory } from "./domain/directories";
+import { directories, startingDirectory } from "./domain/directories";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 
 type Output = {
@@ -11,7 +11,10 @@ type Output = {
 };
 
 export const Terminal = () => {
+    const [serverName, setServerName] = useState<string>("local");
+    const [currentDirectories, setCurrentDirectories] = useState<Map<string, TerminalDirectory>>(directories);
     const [currentDirectory, setCurrentDirectory] = useState<TerminalDirectory>(startingDirectory);
+
     const [commandHistory, setCommandHistory] = useState<Array<Command>>([]);
 
     const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(currentDirectory.name));
@@ -44,7 +47,7 @@ export const Terminal = () => {
         </div>
         <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
             <div>
-                {'terminal@' + currentCommand.workingDirectory + '% '}
+                {serverName + '@' + currentCommand.workingDirectory + '% '}
             </div>
             <input
                 ref={inputRef}
@@ -61,13 +64,16 @@ export const Terminal = () => {
                         const result = executeCommand(
                             commandHistory,
                             currentCommand,
+                            setServerName,
+                            currentDirectories,
+                            setCurrentDirectories,
                             currentDirectory,
                             setCurrentDirectory
                         );
 
                         setOutputs([
                             ...outputs,
-                            { id: crypto.randomUUID(), output: 'terminal@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
+                            { id: crypto.randomUUID(), output: serverName + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
                             { id: crypto.randomUUID(), output: result }
                         ]);
                         setCommandHistory([...commandHistory, currentCommand]);
@@ -75,7 +81,12 @@ export const Terminal = () => {
                     }
 
                     if (event.key === 'Tab' && currentCommand.text) {
-                        findNextFileSystemObject(currentCommand, setCurrentCommand, currentDirectory);
+                        findNextFileSystemObject(
+                            currentCommand,
+                            setCurrentCommand,
+                            currentDirectories,
+                            currentDirectory
+                        );
                     }
                 }}
                 onKeyDown={(event) => {
@@ -95,6 +106,9 @@ const createNewCommand = (directoryName: string): Command => {
 const executeCommand = (
     commandHistory: Array<Command>,
     currentCommand: Command,
+    setServerName: (serverName: string) => void,
+    currentDirectories: Map<string, TerminalDirectory>,
+    setDirectories: (directories: Map<string, TerminalDirectory>) => void,
     currentDirectory: TerminalDirectory,
     setCurrentDirectory: (directory: TerminalDirectory) => void
 ): string => {
@@ -104,6 +118,9 @@ const executeCommand = (
         return command.execute(
             currentCommand,
             commandHistory,
+            setServerName,
+            currentDirectories,
+            setDirectories,
             currentDirectory,
             setCurrentDirectory,
             []

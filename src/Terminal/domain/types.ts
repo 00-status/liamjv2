@@ -1,5 +1,6 @@
 import { ChangeDirectoryCommand } from "./Commands/ChangeDirectoryCommand";
 import { ClearCommand } from "./Commands/ClearCommand";
+import { ConnectCommand } from "./Commands/ConnectCommand";
 import { HelpCommand } from "./Commands/HelpCommand";
 import { HistoryCommand } from "./Commands/HistoryCommand";
 import { ListCommand } from "./Commands/ListCommand";
@@ -32,6 +33,9 @@ export interface ICommand {
     execute(
         command: Command,
         commandHistory: Array<Command>,
+        setServerName: (serverName: string) => void,
+        directories: Map<string, TerminalDirectory>,
+        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
         currentDirectory: TerminalDirectory,
         setCurrentDirectory: (directory: TerminalDirectory) => void,
         args: Array<string>
@@ -45,7 +49,8 @@ export const validCommands = new Map<string, ICommand>([
     ['list', ListCommand],
     ['ls', ListCommand],
     ['open', OpenCommand],
+    ['connect', ConnectCommand],
     ['clear', ClearCommand],
     ['clera', ClearCommand],
     ['pwd', WorkingDirectoryCommand],
-])
+]);
