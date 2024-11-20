@@ -17,7 +17,7 @@ export const OpenCommand: ICommand = {
         var file: TerminalFile | null = null;
         if (filePathGroups.length > 1) {
             const fileName = filePathGroups.pop();
-            const directory = navigateDirectories(filePathGroups, currentDirectory);
+            const directory = navigateDirectories(filePathGroups, directories, currentDirectory);
 
             file = directory.files.get(fileName ?? '') ?? null;
         } else {

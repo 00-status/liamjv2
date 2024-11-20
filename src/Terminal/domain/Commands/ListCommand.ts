@@ -13,7 +13,7 @@ export const ListCommand: ICommand = {
         const commandChunks: string[] = command.text.trim().split(' ');
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
-        const newDirectory = navigateDirectories(directoryToMoveTo.split("/"), currentDirectory);
+        const newDirectory = navigateDirectories(directoryToMoveTo.split("/"), directories, currentDirectory);
 
         const subDirectories = [...newDirectory.subDirectories].map(directory => '{dir}\t' + directory);
         const files = [...newDirectory.files.keys()].map(file => '{file}\t' + file);

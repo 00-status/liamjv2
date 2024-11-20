@@ -11,10 +11,10 @@ type Output = {
 };
 
 export const Terminal = () => {
-    // create a currentDirectories, setCurrentDirectories local state
-    // Add a currentServer property to the "Command" type.
+    // create a currentDirectories, setCurrentDirectories local state ✅
+    // Add a currentServer property to the "Command" type. ✅
     //      Use currentServer in the outputs
-    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface.s
+    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface.
     // the connect ICommand will
     //      Accept a server name as an argument.
     //      If the does NOT exist
@@ -91,7 +91,12 @@ export const Terminal = () => {
                     }
 
                     if (event.key === 'Tab' && currentCommand.text) {
-                        findNextFileSystemObject(currentCommand, setCurrentCommand, currentDirectory);
+                        findNextFileSystemObject(
+                            currentCommand,
+                            setCurrentCommand,
+                            currentDirectories,
+                            currentDirectory
+                        );
                     }
                 }}
                 onKeyDown={(event) => {
