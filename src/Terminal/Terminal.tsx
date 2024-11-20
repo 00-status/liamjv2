@@ -11,19 +11,7 @@ type Output = {
 };
 
 export const Terminal = () => {
-    // create a currentDirectories, setCurrentDirectories local state ✅
-    // Add a currentServer property to the "Command" type. ✅
-    //      Use currentServer in the outputs
-    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface. ✅
-    // the connect ICommand will
-    //      Accept a server name as an argument.
-    //      If the does NOT exist
-    //          return an error message.
-    //      else
-    //          use setCurrentDirectories to switch to the new directory hierarchy.
-    // Have the directory-focused commands pull from the currentDirectories Map. ✅
-
-    const [server, setServer] = useState<string>("local");
+    const [serverName, setServerName] = useState<string>("local");
     const [currentDirectories, setCurrentDirectories] = useState<Map<string, TerminalDirectory>>(directories);
     const [currentDirectory, setCurrentDirectory] = useState<TerminalDirectory>(startingDirectory);
 
@@ -59,7 +47,7 @@ export const Terminal = () => {
         </div>
         <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
             <div>
-                {server + '@' + currentCommand.workingDirectory + '% '}
+                {serverName + '@' + currentCommand.workingDirectory + '% '}
             </div>
             <input
                 ref={inputRef}
@@ -76,7 +64,7 @@ export const Terminal = () => {
                         const result = executeCommand(
                             commandHistory,
                             currentCommand,
-                            setServer,
+                            setServerName,
                             currentDirectories,
                             setCurrentDirectories,
                             currentDirectory,
@@ -85,7 +73,7 @@ export const Terminal = () => {
 
                         setOutputs([
                             ...outputs,
-                            { id: crypto.randomUUID(), output: server + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
+                            { id: crypto.randomUUID(), output: serverName + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
                             { id: crypto.randomUUID(), output: result }
                         ]);
                         setCommandHistory([...commandHistory, currentCommand]);
