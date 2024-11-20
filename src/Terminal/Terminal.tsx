@@ -14,14 +14,14 @@ export const Terminal = () => {
     // create a currentDirectories, setCurrentDirectories local state ✅
     // Add a currentServer property to the "Command" type. ✅
     //      Use currentServer in the outputs
-    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface.
+    // Pass currentDirectories and setCurrentDirectories into the "ICommand" interface. ✅
     // the connect ICommand will
     //      Accept a server name as an argument.
     //      If the does NOT exist
     //          return an error message.
     //      else
     //          use setCurrentDirectories to switch to the new directory hierarchy.
-    // Have the directory-focused commands pull from the currentDirectories Map.
+    // Have the directory-focused commands pull from the currentDirectories Map. ✅
 
     const [server, setServer] = useState<string>("local");
     const [currentDirectories, setCurrentDirectories] = useState<Map<string, TerminalDirectory>>(directories);
@@ -77,6 +77,7 @@ export const Terminal = () => {
                             commandHistory,
                             currentCommand,
                             currentDirectories,
+                            setCurrentDirectories,
                             currentDirectory,
                             setCurrentDirectory
                         );
@@ -117,6 +118,7 @@ const executeCommand = (
     commandHistory: Array<Command>,
     currentCommand: Command,
     currentDirectories: Map<string, TerminalDirectory>,
+    setDirectories: (directories: Map<string, TerminalDirectory>) => void,
     currentDirectory: TerminalDirectory,
     setCurrentDirectory: (directory: TerminalDirectory) => void
 ): string => {
@@ -127,6 +129,7 @@ const executeCommand = (
             currentCommand,
             commandHistory,
             currentDirectories,
+            setDirectories,
             currentDirectory,
             setCurrentDirectory,
             []

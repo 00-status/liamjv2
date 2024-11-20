@@ -3,18 +3,21 @@ import { Command, TerminalDirectory } from "../types";
 import { ChangeDirectoryCommand } from "./ChangeDirectoryCommand";
 
 describe('ChangeDirectoryCommand', () => {
+    const setDirectories = jest.fn();
+    const setCurrentDirectory = jest.fn();
+
     it('should enter a subdirectory', () => {
         const executedCommand: Command = {
             id: 'test-1',
             text: 'cd ./documents',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setDirectories,
             startingDirectory,
             setCurrentDirectory,
             []
@@ -31,13 +34,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd /documents',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails/john');
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -54,12 +57,12 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd ./emails/john',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory,
             setCurrentDirectory,
             []
@@ -76,13 +79,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd ../',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -99,13 +102,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd ../../',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails/john');
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -122,13 +125,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd ../../documents',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -145,13 +148,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd ./john/../../documents',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails')
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []
@@ -168,13 +171,13 @@ describe('ChangeDirectoryCommand', () => {
             text: 'cd /',
             workingDirectory: '/'
         };
-        const setCurrentDirectory = jest.fn();
 
         const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryCommand.execute(
             executedCommand,
             [],
             directories,
+            setCurrentDirectory,
             startingDirectory as TerminalDirectory,
             setCurrentDirectory,
             []

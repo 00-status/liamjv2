@@ -7,6 +7,7 @@ export const ConnectCommand: ICommand = {
         command: Command,
         commandHistory: Array<Command>,
         directories: Map<string, TerminalDirectory>,
+        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
         currentDirectory: TerminalDirectory,
         setCurrentDirectory: (directory: TerminalDirectory) => void,
         args: Array<string>
