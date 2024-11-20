@@ -59,7 +59,7 @@ export const Terminal = () => {
         </div>
         <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
             <div>
-                {'terminal@' + currentCommand.workingDirectory + '% '}
+                {server + '@' + currentCommand.workingDirectory + '% '}
             </div>
             <input
                 ref={inputRef}
@@ -85,7 +85,7 @@ export const Terminal = () => {
 
                         setOutputs([
                             ...outputs,
-                            { id: crypto.randomUUID(), output: 'terminal@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
+                            { id: crypto.randomUUID(), output: server + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
                             { id: crypto.randomUUID(), output: result }
                         ]);
                         setCommandHistory([...commandHistory, currentCommand]);

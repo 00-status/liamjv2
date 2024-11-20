@@ -29,6 +29,7 @@ export const ConnectCommand: ICommand = {
         }
 
         // TODO: Set the new server name.
+        setServerName(serverName);
         setDirectories(newServers);
         setCurrentDirectory(newRootDirectory);
         return "Connecting to " + serverName + "...";
