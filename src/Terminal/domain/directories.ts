@@ -188,3 +188,21 @@ export const directories: Map<string, TerminalDirectory> = new Map([
         }
     ],
 ]);
+
+export const emailDirectories: Map<string, TerminalDirectory> = new Map([
+    [
+        '/',
+        {
+            name: '',
+            dateCreated: '2237-01-01 00:00:00',
+            parent: null,
+            subDirectories: ['emails', 'important_emails'],
+            files: new Map<string, TerminalFile>()
+        }
+    ],
+]);
+
+export const servers: {[name: string]: Map<string, TerminalDirectory>} = {
+    local: directories,
+    email: emailDirectories
+};
