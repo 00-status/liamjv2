@@ -1,7 +1,12 @@
-.about-me__skill-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
+.about-me {
+    width: 100%;
+}
 
-    justify-items: center;
+.about-me__skills {
+    width: 100%;
+}
+
+.about-me__skill-grid {
+    display: flex;
+    flex-direction: row;
 }

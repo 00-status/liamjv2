@@ -6,8 +6,8 @@
     align-items: center;
     gap: 4px;
 
-    width: 150px;
-    margin-bottom: 8px;
+    min-width: 150px;
+    margin: 0 8px;
 
     background-color: #3b3b40;
     border-radius: 8px;
