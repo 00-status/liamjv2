@@ -12,12 +12,12 @@ type Props = {
 
 export const SkillCard = (props: Props): ReactElement => {
     return <div className="skill-card">
-        {props.src
-            ? <img className="skill-card--image" src={props.src} alt={props.name} />
-            : <div className="skill-card--placeholder-circle" />
-        }
-        <div className="skill-card--container">
-            <b>{props.name}</b>
+        <div className="skill-card__gradient">
+            <div className="skill-card__title">
+                {props.name}
+            </div>
+        </div>
+        <div className="skill-card__container">
             <div>{props.type}</div>
         </div>
     </div>;
