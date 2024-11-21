@@ -1,12 +1,4 @@
 
-.skill-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-
-    justify-items: center;
-}
-
 .skill-card {
     display: flex;
     flex-direction: column;
@@ -44,15 +36,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.skill-card--placeholder-circle {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-
-    background-color: #708694;
-    box-shadow: 1px 1px 4px #1f2028;
 }
 
 @media only screen and (max-width: 1280px) {

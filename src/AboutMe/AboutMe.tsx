@@ -1,4 +1,6 @@
 import { ReactElement } from "react";
+
+import './about-me.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { Skill, skills } from "./domain";
 import { SkillCard } from "./SkillCard";
@@ -32,7 +34,7 @@ export const AboutMe = (): ReactElement => {
             </div>
             <div>
                 <h2>Skills</h2>
-                <div className="skill-grid">
+                <div className="about-me__skill-grid">
                     {skills.map((skill: Skill) => <SkillCard key={skill.name} {...skill} />)}
                 </div>
             </div>
