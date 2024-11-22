@@ -6,7 +6,6 @@ export enum SkillLevel { "working", "expert" };
 type Props = {
     name: string;
     type: string;
-    src: string | null;
     skillLevel: SkillLevel;
 };
 

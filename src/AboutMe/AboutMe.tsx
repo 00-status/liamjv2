@@ -7,14 +7,6 @@ import { SkillCard } from "./SkillCard";
 import { Anchor } from "../SharedComponents/Link/Anchor";
 
 export const AboutMe = (): ReactElement => {
-    // ToDo:
-    // A rotating carousel of skill cards.
-    // Each card should
-    //      Have a colourful gradient filling out the top.
-    //      Should have a bold-fonted title at the centre of the gradient.
-    //      Should list the skill type in the section below the gradieent.
-    // Increase the shadow slightly on the cards.
-
     const routes = [
         { label: 'Landing', route: '/', isHomeLink: true },
         { label: 'D&D Tools', route: '/dnd_tools/dice_roller' },

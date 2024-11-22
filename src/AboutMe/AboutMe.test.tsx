@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
-import { AboutMe } from "./AboutMe";
 import { Children } from "react";
+
+import { AboutMe } from "./AboutMe";
 
 jest.mock('../SharedComponents/Page/Page', () => {
     return {
@@ -17,12 +18,12 @@ describe('AboutMe', () => {
     });
 
     it('should render a lilst of skills', () => {
-        const { getByAltText } = render(<AboutMe />);
+        const { getByText } = render(<AboutMe />);
 
-        getByAltText('React');
-        getByAltText('TypeScript');
-        getByAltText('Flow');
-        getByAltText('Vue');
-        getByAltText('Webpack');
+        getByText('React');
+        getByText('TypeScript');
+        getByText('Flow');
+        getByText('Vue');
+        getByText('Webpack');
     });
 });
