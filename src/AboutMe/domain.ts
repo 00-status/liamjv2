@@ -12,7 +12,7 @@ export const skills: Array<Skill> = [
     { type: 'Back-end', name: 'PHP', skillLevel: SkillLevel.working },
     { type: 'Front-end', name: 'Webpack', skillLevel: SkillLevel.working },
     { type: 'Tool', name: 'Jira', skillLevel: SkillLevel.working },
-    { type: 'Process', name: 'TDD', skillLevel: SkillLevel.working },
+    { type: 'Process', name: 'Test-driven Development', skillLevel: SkillLevel.working },
     { type: 'Tool', name: 'Git', skillLevel: SkillLevel.working },
     { type: 'Back-end', name: 'SlimPHP', skillLevel: SkillLevel.working },
     { type: 'Process', name: 'Command/Handler', skillLevel: SkillLevel.working },

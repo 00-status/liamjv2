@@ -24,7 +24,7 @@
 
     background-color: #3b3b40;
     border-radius: 8px;
-    box-shadow: 1px 1px 4px #1f2028;
+    box-shadow: 1px 1px 16px #1f2028;
 }
 
 .skill-card__gradient {
@@ -44,6 +44,7 @@
 .skill-card__title {
     font-size: 16px;
     font-weight: 700;
+    text-align: center;
 }
 
 .skill-card__container {
