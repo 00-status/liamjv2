@@ -11,8 +11,10 @@ type Props = {
 };
 
 export const SkillCard = (props: Props): ReactElement => {
+    const cardTheme = getCardTheme(props.type);
+
     return <div className="skill-card">
-        <div className="skill-card__gradient">
+        <div data-theme={cardTheme} className="skill-card__gradient">
             <div className="skill-card__title">
                 {props.name}
             </div>
@@ -22,3 +24,14 @@ export const SkillCard = (props: Props): ReactElement => {
         </div>
     </div>;
 };
+
+const getCardTheme = (type: string) => {
+    switch (type) {
+        case "Front-end":
+            return "red-card"
+        case "Back-end":
+            return "blue-card";
+        default:
+            return "default-card";
+    }
+}
