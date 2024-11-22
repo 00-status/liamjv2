@@ -1,16 +1,16 @@
 [data-theme="default-card"] {
     --card-gradient-color: radial-gradient(circle at top right, #1f2028, #3b3b40);
-    --card-gradient-image: url("https://transparenttextures.com/patterns/soft-wallpaper.png");
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/soft-wallpaper.png");
 }
 
 [data-theme="red-card"] {
     --card-gradient-color: radial-gradient(circle at top right, #a02e2f, #CC1818);
-    --card-gradient-image: url("https://transparenttextures.com/patterns/french-stucco.png");
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/french-stucco.png");
 }
 
 [data-theme="blue-card"] {
     --card-gradient-color: radial-gradient(circle at top right, #708694, #4a87ac);;
-    --card-gradient-image: url("https://transparenttextures.com/patterns/french-stucco.png");
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/french-stucco.png");
 }
 
 .skill-card {
@@ -39,9 +39,6 @@
     border-radius: 8px 8px 0 0;
 
     background-image: var(--card-gradient-image), var(--card-gradient-color);
-
-
-    /* background-image: url("https://transparenttextures.com/patterns/black-paper.png"), radial-gradient(circle at top right, #1f2028, #3b3b40); */
 }
 
 .skill-card__title {
