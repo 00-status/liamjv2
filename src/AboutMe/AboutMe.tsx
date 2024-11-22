@@ -1,4 +1,6 @@
 import { ReactElement } from "react";
+
+import './about-me.css';
 import { Page } from "../SharedComponents/Page/Page";
 import { Skill, skills } from "./domain";
 import { SkillCard } from "./SkillCard";
@@ -11,8 +13,9 @@ export const AboutMe = (): ReactElement => {
         { label: 'RPG Tools', route: '/rpg_tools/dialogue_tree' },
         { label: 'Terminal', route: '/terminal' }
     ];
+
     return <Page title="Liam Johnson" routes={routes}>
-        <div>
+        <div className="about-me">
             <div>
                 <h1>About Me</h1>
                 <p>Hey, I'm Liam Johnson. Welcome! Have a seat. Take a look around.</p>
@@ -21,9 +24,9 @@ export const AboutMe = (): ReactElement => {
                 <p>Outside of software development, I have a great interest both in creating stories and experiencing them; Movies, books, tv-shows, table-top games, writing, and video games all have a special place in my - deeply nerdy - heart.</p>
                 <p>If you're interested in getting in touch with me, feel free to shoot me a message on <Anchor link={"https://www.linkedin.com/in/liam-johnson-36791915a/"} displayText={"LinkedIn"} />.</p>
             </div>
-            <div>
+            <div className="about-me__skills">
                 <h2>Skills</h2>
-                <div className="skill-grid">
+                <div className="about-me__skill-grid">
                     {skills.map((skill: Skill) => <SkillCard key={skill.name} {...skill} />)}
                 </div>
             </div>

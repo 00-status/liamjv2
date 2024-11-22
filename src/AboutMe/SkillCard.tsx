@@ -6,19 +6,31 @@ export enum SkillLevel { "working", "expert" };
 type Props = {
     name: string;
     type: string;
-    src: string | null;
     skillLevel: SkillLevel;
 };
 
 export const SkillCard = (props: Props): ReactElement => {
+    const cardTheme = getCardTheme(props.type);
+
     return <div className="skill-card">
-        {props.src
-            ? <img className="skill-card--image" src={props.src} alt={props.name} />
-            : <div className="skill-card--placeholder-circle" />
-        }
-        <div className="skill-card--container">
-            <b>{props.name}</b>
+        <div data-theme={cardTheme} className="skill-card__gradient">
+            <div className="skill-card__title">
+                {props.name}
+            </div>
+        </div>
+        <div className="skill-card__container">
             <div>{props.type}</div>
         </div>
     </div>;
 };
+
+const getCardTheme = (type: string) => {
+    switch (type) {
+        case "Front-end":
+            return "red-card"
+        case "Back-end":
+            return "blue-card";
+        default:
+            return "default-card";
+    }
+}

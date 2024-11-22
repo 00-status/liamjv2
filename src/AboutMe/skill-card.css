@@ -1,46 +1,56 @@
+[data-theme="default-card"] {
+    --card-gradient-color: radial-gradient(circle at top right, #1f2028, #3b3b40);
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/soft-wallpaper.png");
+}
 
-.skill-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
+[data-theme="red-card"] {
+    --card-gradient-color: radial-gradient(circle at top right, #a02e2f, #CC1818);
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/french-stucco.png");
+}
 
-    justify-items: center;
+[data-theme="blue-card"] {
+    --card-gradient-color: radial-gradient(circle at top right, #708694, #4a87ac);;
+    --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/french-stucco.png");
 }
 
 .skill-card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 4px;
 
-    min-width: 200px;
-    height: 60px;
-    margin: 8px;
-    padding: 8px;
+    min-width: 150px;
 
     background-color: #3b3b40;
     border-radius: 8px;
-    box-shadow: 1px 1px 4px #1f2028;
+    box-shadow: 1px 1px 16px #1f2028;
 }
 
-.skill-card--image {
-    height: 100%;
+.skill-card__gradient {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 150px;
+    width: 100%;
+
+    border-radius: 8px 8px 0 0;
+
+    background-image: var(--card-gradient-image), var(--card-gradient-color);
 }
 
-.skill-card--container {
+.skill-card__title {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.skill-card__container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.skill-card--placeholder-circle {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-
-    background-color: #708694;
-    box-shadow: 1px 1px 4px #1f2028;
 }
 
 @media only screen and (max-width: 1280px) {
