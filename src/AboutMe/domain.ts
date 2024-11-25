@@ -11,6 +11,7 @@ export const skills: Array<Skill> = [
     { type: 'Front-end', name: 'TypeScript', skillLevel: SkillLevel.expert },
     { type: 'Back-end', name: 'PHP', skillLevel: SkillLevel.working },
     { type: 'Front-end', name: 'Webpack', skillLevel: SkillLevel.working },
+    { type: 'Database', name: 'PostgreSQL', skillLevel: SkillLevel.working },
     { type: 'Tool', name: 'Jira', skillLevel: SkillLevel.working },
     { type: 'Process', name: 'Test-driven Development', skillLevel: SkillLevel.working },
     { type: 'Tool', name: 'Git', skillLevel: SkillLevel.working },

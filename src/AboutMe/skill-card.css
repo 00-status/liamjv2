@@ -9,8 +9,13 @@
 }
 
 [data-theme="blue-card"] {
-    --card-gradient-color: radial-gradient(circle at top right, #708694, #4a87ac);;
+    --card-gradient-color: radial-gradient(circle at top right, #708694, #4a87ac);
     --card-gradient-image: url("https://liamj.b-cdn.net/assets/images/french-stucco.png");
+}
+
+[data-theme="green-card"] {
+    --card-gradient-color: radial-gradient(circle at top right, #2f3f1c, #475F29);
+    --card-gradient-image: url("https://transparenttextures.com/patterns/black-orchid.png");
 }
 
 .skill-card {

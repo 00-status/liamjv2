@@ -30,6 +30,8 @@ const getCardTheme = (type: string) => {
             return "red-card"
         case "Back-end":
             return "blue-card";
+        case "Database":
+            return "green-card";
         default:
             return "default-card";
     }
