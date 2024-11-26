@@ -4,7 +4,7 @@ import { Card } from "../../../SharedComponents/Card/Card";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Character } from "../domain/types";
 import { TrashIcon } from '../../../SharedComponents/Icons/TrashIcon';
-import { Button } from '../../../SharedComponents/Button/Button';
+import { Button, ButtonTheme } from '../../../SharedComponents/Button/Button';
 
 type Props = {
     characters: Array<Character>;
@@ -70,7 +70,9 @@ export const CharacterList = (props: Props) => {
                             onCharacterChange(newCharacter, index);
                         }}
                     />
-                    <button className='delete-button' onClick={() => deleteCharacter(index)}><TrashIcon /></button>
+                    <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteCharacter(index)}>
+                        <TrashIcon />
+                    </Button>
                 </div>;
             })}
         </div>
