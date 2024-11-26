@@ -16,6 +16,7 @@
 }
 .weapon-maker__dropdown {
     width: 20%;
+    margin-bottom: 20px;
 }
 
 .weapon-maker__button {
@@ -36,5 +37,11 @@
     0% {
         opacity: 0;
         transform: translateY(50px);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .weapon-maker__dropdown {
+        width: 100%;
     }
 }
