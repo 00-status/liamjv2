@@ -9,12 +9,16 @@
     height: 40px;
     width: 40px;
     padding: 8px;
-
-    /* border-radius: 50%; */
 }
-
 .image-button__image:hover {
     background-color: #f2f4f5;
 
     box-shadow: 1px 1px 5px #f2f4f5;
+}
+
+@media only screen and (max-width: 600px) {
+    .image-button__image, .image-button {
+        height: 60px;
+        width: 60px;
+    }
 }
