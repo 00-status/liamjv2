@@ -1,9 +1,11 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
 import { HomeIcon } from "../Icons/HomeIcon";
+import { ToastMessageContext } from "../Toast/ToastMessageContext";
+import { Toast } from "../Toast/Toast";
 
 type Link = {
     label: string;
@@ -19,6 +21,8 @@ type Props = {
 };
 
 export const Page = (props: Props): ReactElement => {
+    const [message, setMessage] = useState<string>("");
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -28,40 +32,44 @@ export const Page = (props: Props): ReactElement => {
         }
     };
 
-    return <div className="page">
-        <div className="page-title-container">
-            <div className="page-title">
-                {props.title}
-                <div className="icon-list">
-                    <ImageButton
-                        locationUrl={"https://github.com/00-status"}
-                        imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
-                    />
-                    <ImageButton
-                        locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
-                        imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
-                    />
+    return <ToastMessageContext.Provider value={{ message, setMessage }}>
+        <div className="page">
+            <button onClick={() => setMessage("Banana!")}>Click ME!</button>
+            <div className="page-title-container">
+                <div className="page-title">
+                    {props.title}
+                    <div className="icon-list">
+                        <ImageButton
+                            locationUrl={"https://github.com/00-status"}
+                            imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
+                        />
+                        <ImageButton
+                            locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
+                            imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
+                        />
+                    </div>
                 </div>
+                <nav className="nav-list" >
+                    {props.routes.map((route) => {
+                        const isCurrentRoute = location.pathname === route.route;
+
+                        const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
+
+                        return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
+                            { route.isHomeLink && <HomeIcon /> }
+                            {route.label}
+                        </a>;
+                    })}
+                </nav>
             </div>
-            <nav className="nav-list" >
-                {props.routes.map((route) => {
-                    const isCurrentRoute = location.pathname === route.route;
-
-                    const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
-
-                    return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                        { route.isHomeLink && <HomeIcon /> }
-                        {route.label}
-                    </a>;
-                })}
-            </nav>
-        </div>
-        <div className="page-content-container">
-            {props.children}
-        </div>
-        <div className="footer">
-            <hr className="divider" />
-            {props.footer}
-        </div>
-    </div>;
+            <div className="page-content-container">
+                {props.children}
+            </div>
+            <div className="footer">
+                <hr className="divider" />
+                {props.footer}
+            </div>
+            <Toast />
+        </div>;
+    </ToastMessageContext.Provider>;
 };
