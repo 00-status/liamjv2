@@ -1,7 +1,10 @@
+import { useContext } from "react";
+
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { Card } from "../../SharedComponents/Card/Card";
 import { CopyIcon } from "../../SharedComponents/Icons/CopyIcon";
 import { Weapon, WeaponDamage } from "./domain/types";
+import { ToastMessage, ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
 
 type Props = {
     weapon: Weapon;
@@ -10,10 +13,18 @@ type Props = {
 export const WeaponCard = (props: Props) => {
     const { weapon } = props;
 
+    const messageContext = useContext(ToastMessageContext);
+
     const hasRange = !!weapon.effectiveRange && !!weapon.ineffectiveRange;
     const formattedWeaponProperties = formatWeaponProperties(weapon.properties);
 
-    const copyButton = <Button buttonTheme={ButtonTheme.Subtle} onClick={() => navigator.clipboard.writeText(formatWeaponForCopy(weapon))}>
+    const copyText = () => {
+        navigator.clipboard.writeText(formatWeaponForCopy(weapon));
+
+        messageContext.setMessageList((state: Array<ToastMessage>) => [...state, { message: "Copied to clipboard!" } ]);
+    };
+
+    const copyButton = <Button buttonTheme={ButtonTheme.Subtle} onClick={copyText}>
         <CopyIcon />
     </Button>;
 

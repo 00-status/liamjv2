@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./app.css";
@@ -34,7 +34,6 @@ export const Page = (props: Props): ReactElement => {
 
     return <ToastMessageContext.Provider value={{ messageList, setMessageList }}>
         <div className="page">
-            <button onClick={() => setMessageList((state) => [...state, { message: "Banana!" }])}>Click ME!</button>
             <div className="page-title-container">
                 <div className="page-title">
                     {props.title}
@@ -70,6 +69,6 @@ export const Page = (props: Props): ReactElement => {
                 {props.footer}
             </div>
             <Toast />
-        </div>;
+        </div>
     </ToastMessageContext.Provider>;
 };

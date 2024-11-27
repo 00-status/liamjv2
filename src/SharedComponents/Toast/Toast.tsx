@@ -1,25 +1,45 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import "./toast.css";
-import { ToastMessageContext } from "./ToastMessageContext";
+import { ToastMessage, ToastMessageContext } from "./ToastMessageContext";
 
 export const Toast = () => {
     const { messageList, setMessageList } = useContext(ToastMessageContext);
+    const [currentMessage, setCurrentMessage] = useState<ToastMessage | null>(null);
 
     useEffect(() => {
+        if (currentMessage != null) {
+            return;
+        }
+
+        if (messageList.length === 0) {
+            return;
+        }
+
+        setCurrentMessage(messageList[0]);
+
         const messageListCopy = [...messageList];
         messageListCopy.shift();
+        
+        setMessageList(messageListCopy);
+    }, [currentMessage, messageList, setMessageList]);
 
-        const timeoutID = setTimeout(() => setMessageList(messageListCopy), 2000);
+    useEffect(() => {
+        const timeoutID = setTimeout(() => {
+            if (currentMessage != null) {
+                console.log("Cleared!");
+                setCurrentMessage(null);
+            }
+        }, 2000);
 
         return () => clearTimeout(timeoutID);
-    }, [messageList]);
+    }, [currentMessage]);
 
-    if (!messageList[0]) {
+    if (!currentMessage) {
         return null;
     }
 
-    return <div className={"toast " + (messageList[0] ? "toast__visible" : "")}>
-        {messageList[0].message}
+    return <div className={"toast " + (currentMessage ? "toast__visible" : "")}>
+        {currentMessage?.message}
     </div>;
 };
