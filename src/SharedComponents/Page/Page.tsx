@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
 import { HomeIcon } from "../Icons/HomeIcon";
-import { ToastMessageContext } from "../Toast/ToastMessageContext";
+import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
 
 type Link = {
@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const Page = (props: Props): ReactElement => {
-    const [message, setMessage] = useState<string>("");
+    const [messageList, setMessageList] = useState<Array<ToastMessage>>([]);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -32,9 +32,9 @@ export const Page = (props: Props): ReactElement => {
         }
     };
 
-    return <ToastMessageContext.Provider value={{ message, setMessage }}>
+    return <ToastMessageContext.Provider value={{ messageList, setMessageList }}>
         <div className="page">
-            <button onClick={() => setMessage("Banana!")}>Click ME!</button>
+            <button onClick={() => setMessageList((state) => [...state, { message: "Banana!" }])}>Click ME!</button>
             <div className="page-title-container">
                 <div className="page-title">
                     {props.title}

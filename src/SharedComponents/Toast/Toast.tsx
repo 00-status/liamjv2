@@ -1,22 +1,25 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+
 import "./toast.css";
 import { ToastMessageContext } from "./ToastMessageContext";
 
 export const Toast = () => {
-    const messsage = useContext(ToastMessageContext);
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const { messageList, setMessageList } = useContext(ToastMessageContext);
 
     useEffect(() => {
-        if (messsage?.message) {
-            setIsVisible(true);
-        }
+        const messageListCopy = [...messageList];
+        messageListCopy.shift();
 
-        const timeoutID = setTimeout(() => setIsVisible(false), 2000);
+        const timeoutID = setTimeout(() => setMessageList(messageListCopy), 2000);
 
         return () => clearTimeout(timeoutID);
-    }, [messsage?.message]);
+    }, [messageList]);
 
-    return <div className={"toast " + (isVisible ? "toast__visible" : "")}>
-        {messsage?.message}
+    if (!messageList[0]) {
+        return null;
+    }
+
+    return <div className={"toast " + (messageList[0] ? "toast__visible" : "")}>
+        {messageList[0].message}
     </div>;
 };

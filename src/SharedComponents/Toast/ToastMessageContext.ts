@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
+export type ToastMessage = { message: string };
+
 type MessageContext = {
-    message: string;
-    setMessage: (newMessage: string) => void;
+    messageList: Array<ToastMessage>;
+    setMessageList: (newMessageList: Array<ToastMessage>) => void;
 };
 
-export const ToastMessageContext = createContext<MessageContext | null>({
-    message: "",
-    setMessage: (newMessage: String) => {}
+export const ToastMessageContext = createContext<MessageContext>({
+    messageList: [],
+    setMessageList: (newMessageList: Array<ToastMessage>) => {}
 });

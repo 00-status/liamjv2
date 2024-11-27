@@ -22,8 +22,8 @@
     transform: translateY(0);
     opacity: 1;
 
-    -webkit-animation: toast-fade-in 2s;
-    animation: toast-fade-in 2s;
+    -webkit-animation: toast-fade-in 2s infinite;
+    animation: toast-fade-in 2s infinite;
 }
 
 @keyframes toast-fade-in {
