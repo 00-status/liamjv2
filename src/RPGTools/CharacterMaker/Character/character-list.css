@@ -3,6 +3,10 @@
 
     overflow-y: scroll;
     overflow-x: hidden;
+    scrollbar-width: none; /* FireFox */
+}
+.choices-list__container::-webkit-scrollbar {
+    display: none;
 }
 
 .character-list__item {
