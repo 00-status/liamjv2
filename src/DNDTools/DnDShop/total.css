@@ -2,6 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: end;
+
+    margin-top: 20px;
+}
+
+.total__list--fixed {
+    display: block;
+
+    min-width: 300px;
+    max-height: 125px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.total__list--fixed::-webkit-scrollbar {
+    display: none;
 }
 
 .total__list {

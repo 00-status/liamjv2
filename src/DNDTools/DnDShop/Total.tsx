@@ -8,9 +8,6 @@ type Props = {
 };
 
 export const Total = (props: Props) => {
-    // Calculate a total
-    // Calculate change remaining
-
     const { cartItems } = props;
 
     const filteredCartItems: Item[] = cartItems
@@ -28,7 +25,7 @@ export const Total = (props: Props) => {
     }, 0);
 
     return <div className="total">
-        <div className="total__list">
+        <div className="total__list--fixed">
             {filteredCartItems.map((item) => <div className="total__list-item"><div>{item.name}</div> <div>{item.cost} {item.currency}</div></div>)}
         </div>
         <h2>Total</h2>

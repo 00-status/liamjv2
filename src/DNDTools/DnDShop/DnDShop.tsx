@@ -94,6 +94,6 @@ export const DndShop = () => {
     // Track Player Currency
     //      Create a BalanceRemaining component
     //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
-    // Display Total cart Weight
-    // Set inventory overflow to hidden when dragging somehow.
     // Add a drag icon to inventory items.
+    // Calculate change remaining.
+    // Add a way to remove items from the cart.
