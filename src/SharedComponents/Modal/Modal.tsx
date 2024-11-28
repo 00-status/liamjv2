@@ -13,6 +13,8 @@ type Props = {
     onClose: () => void;
 };
 
+ReactModal.setAppElement("#app");
+
 export const Modal = (props: Props) => {
     return <ReactModal className="modal" overlayClassName="modal-overlay" isOpen={props.isOpen}>
         <div className="modal__contents">
