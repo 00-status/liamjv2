@@ -2,7 +2,7 @@
 export type Item = {
     name: string,
     cost: number,
-    currency: string,
+    currency: CurrencyEnum,
     weight: number | null
 };
 

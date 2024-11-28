@@ -2,10 +2,10 @@ import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/
 import { useState } from "react";
 
 import './dnd-shop.css';
-import items from '../../assets/items.json';
+import { items } from "./domain/itemUtil";
 import { Page } from "../../SharedComponents/Page/Page";
 import { Item, PlayerCurrency as PlayerCurrencyType } from "./domain/types";
-import { SubTotal } from "./SubTotal";
+import { Total } from "./Total";
 import { generateEmptyCartSlots } from "./domain/util";
 import { PlayerCurrency } from "./PlayerCurrency";
 import { Inventory } from "./Inventory/Inventory";
@@ -70,7 +70,7 @@ export const DndShop = () => {
                 <div className="dnd-shop__container">
                     <div>
                         <Cart cartSlots={cartSlots} setCartSlots={setCartSlots} />
-                        <SubTotal cartItems={cartSlots} />
+                        <Total cartItems={cartSlots} />
                     </div>
                     <div>
                         <Inventory items={items} />

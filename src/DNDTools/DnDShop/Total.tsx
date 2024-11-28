@@ -5,7 +5,11 @@ type Props = {
     cartItems: CartSlot[];
 };
 
-export const SubTotal = (props: Props) => {
+export const Total = (props: Props) => {
+    // List all items and their price / weight
+    // Calculate a total
+    // Calculate change remaining
+
     const { cartItems } = props;
 
     const filteredCartItems: Item[] = cartItems
@@ -15,25 +19,7 @@ export const SubTotal = (props: Props) => {
         }
     );
 
-    const itemTotalsByCurrency: Currency = filteredCartItems.reduce((carry, item) => {
-        switch (item.currency) {
-            case 'gold':
-                carry.gold += item.cost;
-                break;
-            case 'silver':
-                carry.silver += item.cost;
-                break;
-            case 'copper':
-                carry.copper += item.cost;
-                break;
-            default:
-                break;
-
-        }
-
-        return carry;
-    }, { gold: 0, silver: 0, copper: 0 });
-
+    const itemTotalsByCurrency: Currency = getItemTotalsByCurrency(filteredCartItems);
     const normalizedTotalsByCurrency = normalizeTotals(itemTotalsByCurrency);
 
     const totalWeight = filteredCartItems.reduce((carry, item) => {
@@ -49,6 +35,14 @@ export const SubTotal = (props: Props) => {
             Gold: {normalizedTotalsByCurrency.gold} | Silver: {normalizedTotalsByCurrency.silver} | Copper: {normalizedTotalsByCurrency.copper}
         </div>
     </div>;
+};
+
+const getItemTotalsByCurrency = (items: Item[]): Currency => {
+    return items.reduce((carry: Currency, item) => {
+        carry[item.currency] += item.cost;
+
+        return carry;
+    }, { gold: 0, silver: 0, copper: 0 });
 };
 
 const normalizeTotals = (itemTotalsByCurrency: Currency): Currency => {
