@@ -1,0 +1,22 @@
+.total {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.total__list {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    min-width: 300px;
+}
+
+.total__list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+    gap: 16px;
+}

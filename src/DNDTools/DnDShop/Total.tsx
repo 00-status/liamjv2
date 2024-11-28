@@ -1,12 +1,13 @@
+
+import "./total.css";
 import { CartSlot } from "./DnDShop";
-import { Currency, Item } from "./domain/types";
+import { Currency, CurrencyEnum, Item } from "./domain/types";
 
 type Props = {
     cartItems: CartSlot[];
 };
 
 export const Total = (props: Props) => {
-    // List all items and their price / weight
     // Calculate a total
     // Calculate change remaining
 
@@ -26,14 +27,31 @@ export const Total = (props: Props) => {
         return carry += item.weight ? item.weight : 0;
     }, 0);
 
-    return <div>
-        <h2>Subtotal</h2>
-        <div>
-            Total Weight: {totalWeight}lbs
+    return <div className="total">
+        <div className="total__list">
+            {filteredCartItems.map((item) => <div className="total__list-item"><div>{item.name}</div> <div>{item.cost} {item.currency}</div></div>)}
         </div>
-        <div>
-            Gold: {normalizedTotalsByCurrency.gold} | Silver: {normalizedTotalsByCurrency.silver} | Copper: {normalizedTotalsByCurrency.copper}
-        </div>
+        <h2>Total</h2>
+        <div className="total__list">
+            <div className="total__list-item">
+                <div>
+                    Weight (lbs):
+                </div>
+                <div>
+                    {totalWeight}
+                </div>
+            </div>
+            {Object.entries(CurrencyEnum).map(([key, value]) => {
+                return <div className="total__list-item">
+                    <div>
+                        {key}:
+                    </div>
+                    <div>
+                        {normalizedTotalsByCurrency[value]}
+                    </div>
+                </div>;
+            })}
+            </div>
     </div>;
 };
 
