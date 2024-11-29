@@ -1,23 +1,19 @@
 .cart-item {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    display: flex;
+    flex-direction: column;
+    
     height: 120px;
-    width: 200px;
+    width: 225px;
     padding: 12px;
-    gap: 20px;
     
     background-color: #3b3b40;
     border-radius: 8px;
     box-shadow: 1px 1px 4px #1f2028;
 }
 
-.cart-item__cost-container {
+.cart-item__header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.cart-item__cost {
-    font-size: 32px;
-    font-weight: 700;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
