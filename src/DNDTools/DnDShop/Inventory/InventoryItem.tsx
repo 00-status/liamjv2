@@ -1,4 +1,5 @@
 
+import { DragIcon } from '../../../SharedComponents/Icons/DragIcon';
 import './inventory-item.css';
 import { useDraggable } from "@dnd-kit/core";
 
@@ -14,15 +15,17 @@ export const InventoryItem = (props: Props) => {
         data: { name: props.name, cost: props.cost, currency: props.currency }
     });
 
-    return <div className='inventory-item' ref={setNodeRef} {...listeners} {...attributes}>
-    	<div>
-            {props.name}
+    return <div className='inventory-item' ref={setNodeRef}>
+        <div {...listeners} {...attributes}>
+            <DragIcon />
         </div>
-        <div className='inventory-item__cost-container'>
-            <div className='inventory-item__cost'>
-                {props.cost}
+        <div className='inventory-item__body'>
+            <div>
+                {props.name}
             </div>
-            {props.currency}
+            <div className='inventory-item__cost'>
+                {props.cost} {props.currency}
+            </div>
         </div>
     </div>;
 };
