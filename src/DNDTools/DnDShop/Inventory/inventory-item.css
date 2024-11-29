@@ -17,6 +17,7 @@
 
 .inventory-item__icon {
     cursor: grab;
+    touch-action: none;
 }
 
 .inventory-item__body {
