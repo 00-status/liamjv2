@@ -15,14 +15,14 @@ export const Cart = (props: Props) => {
     const {cartSlots, setCartSlots} = props;
 
     useEffect(() => {
-        const lastThreeItems = cartSlots.slice(-3);
+        const lastItem = cartSlots.slice(-1);
 
-        const hasAnItemInLastRow = lastThreeItems.find((cartSlot: CartSlot) => {
+        const hasAnItemInLastSlot = lastItem.find((cartSlot: CartSlot) => {
             return !!cartSlot.item;
         });
 
-        if (!!hasAnItemInLastRow) {
-            const emptyCartSlots = generateEmptyCartSlots(cartSlots.length, 3);
+        if (!!hasAnItemInLastSlot) {
+            const emptyCartSlots = generateEmptyCartSlots(cartSlots.length, 1);
             setCartSlots([...cartSlots, ...emptyCartSlots]);
         }
     }, [cartSlots, setCartSlots]);
