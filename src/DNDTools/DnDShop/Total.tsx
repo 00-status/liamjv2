@@ -3,6 +3,8 @@ import "./total.css";
 import { CartSlot } from "./DnDShop";
 import { Currency, CurrencyEnum, Item } from "./domain/types";
 
+type ItemWithID = Item & { id: string };
+
 type Props = {
     cartItems: CartSlot[];
 };
@@ -10,8 +12,14 @@ type Props = {
 export const Total = (props: Props) => {
     const { cartItems } = props;
 
-    const filteredCartItems: Item[] = cartItems
-        .map((item) => item.item)
+    const filteredCartItems: ItemWithID[] = cartItems
+        .map((item) => {
+            if (!item.item) {
+                return null;
+            }
+
+            return {...item.item, id: item.droppableID};
+        })
         .filter((item) => {
             return item !== null;
         }
@@ -26,7 +34,7 @@ export const Total = (props: Props) => {
 
     return <div className="total">
         <div className="total__list--fixed">
-            {filteredCartItems.map((item) => <div className="total__list-item"><div>{item.name}</div> <div>{item.cost} {item.currency}</div></div>)}
+            {filteredCartItems.map((item) => <div key={item.id} className="total__list-item"><div>{item.name}</div> <div>{item.cost} {item.currency}</div></div>)}
         </div>
         <h2>Total</h2>
         <div className="total__list">
@@ -39,7 +47,7 @@ export const Total = (props: Props) => {
                 </div>
             </div>
             {Object.entries(CurrencyEnum).map(([key, value]) => {
-                return <div className="total__list-item">
+                return <div key={key} className="total__list-item">
                     <div>
                         {key}:
                     </div>
