@@ -1,6 +1,7 @@
 .player-currency {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
@@ -15,4 +16,10 @@
     color: #FCFEFF;
     border: 1px solid #444449;
     box-shadow: 1px 1px 4px #1f2028;
+}
+
+@media only screen and (max-width: 600px) {
+    .player-currency__input-container {
+        width: 100%;
+    }
 }

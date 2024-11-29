@@ -12,3 +12,10 @@
 .inventory::-webkit-scrollbar {
     display: none;
 }
+
+@media only screen and (max-width: 600px) {
+    .inventory {
+        height: 225px;
+        width: 90%;
+    }
+}

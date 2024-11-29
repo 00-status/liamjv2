@@ -68,12 +68,12 @@ export const DndShop = () => {
             <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
             <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
-                    <div>
+                    <div className="dnd-shop__top">
                         <Cart cartSlots={cartSlots} setCartSlots={setCartSlots} />
-                        <Total cartItems={cartSlots} />
+                        <Inventory items={items} />
                     </div>
                     <div>
-                        <Inventory items={items} />
+                        <Total cartItems={cartSlots} />
                     </div>
                 </div>
                 <DragOverlay>
@@ -95,4 +95,3 @@ export const DndShop = () => {
     //      Create a BalanceRemaining component
     //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
     // Calculate change remaining.
-    // Add a way to remove items from the cart.

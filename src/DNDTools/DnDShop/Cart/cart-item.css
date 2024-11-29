@@ -17,3 +17,10 @@
     justify-content: space-between;
     align-items: center;
 }
+
+@media only screen and (max-width: 600px) {
+    .cart-item {
+        height: 100px;
+        width: 100%;
+    }
+}
