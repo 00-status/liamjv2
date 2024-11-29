@@ -8,10 +8,11 @@ import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 type Props = {
     id: string;
     item: Item | null;
+    deleteCartItem: (itemID: string) => void;
 };
 
 export const CartItem = (props: Props) => {
-    const { id, item } = props;
+    const { id, item, deleteCartItem } = props;
     const {setNodeRef} = useDroppable({id: id});
 
     if (!item) {
@@ -24,7 +25,7 @@ export const CartItem = (props: Props) => {
                 {item?.name}
             </h3>
             <div>
-                <Button buttonTheme={ButtonTheme.Subtle} onClick={() => {}} >
+                <Button buttonTheme={ButtonTheme.Subtle} onClick={() => deleteCartItem(id)} >
                     <TrashIcon />
                 </Button>
             </div>

@@ -16,7 +16,7 @@ export const InventoryItem = (props: Props) => {
     });
 
     return <div className='inventory-item' ref={setNodeRef}>
-        <div {...listeners} {...attributes}>
+        <div className='inventory-item__icon' {...listeners} {...attributes}>
             <DragIcon />
         </div>
         <div className='inventory-item__body'>

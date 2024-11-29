@@ -4,6 +4,7 @@ import { CartItem } from "./CartItem";
 import { useEffect } from 'react';
 import { generateEmptyCartSlots } from '../domain/util';
 import { CartSlot } from '../DnDShop';
+import { Item } from '../domain/types';
 
 type Props = {
     cartSlots: CartSlot[];
@@ -26,9 +27,29 @@ export const Cart = (props: Props) => {
         }
     }, [cartSlots, setCartSlots]);
 
+    const deleteCartItem = (itemId: String) => {
+        const indexToDelete = cartSlots.findIndex((cartSlot) => {
+            return cartSlot.droppableID === itemId;
+        });
+
+        if (indexToDelete === -1) {
+            return;
+        }
+
+        const cartSlotsCopy = [...cartSlots];
+        cartSlotsCopy[indexToDelete].item = null;
+
+        setCartSlots(cartSlotsCopy);
+    };
+
     return <div className="cart">
         {props.cartSlots.map((slot) => {
-            return <CartItem key={slot.droppableID} id={slot.droppableID} item={slot.item} />;
+            return <CartItem
+                key={slot.droppableID}
+                deleteCartItem={deleteCartItem}
+                id={slot.droppableID}
+                item={slot.item}
+            />;
         })}
     </div>;
 };
