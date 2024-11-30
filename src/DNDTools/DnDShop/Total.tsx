@@ -118,7 +118,7 @@ const getPlayerCurrencyRemaining = (playerCurrency: Currency, itemTotalsByCurren
     }
 
     if (playerCurrencyRemaining.gold < 0) {
-        playerCurrencyRemaining.gold += Math.trunc(playerCurrencyRemaining.copper / 20);
+        playerCurrencyRemaining.gold += Math.trunc(playerCurrencyRemaining.copper / 100);
     }
 
     return playerCurrencyRemaining;
