@@ -2,10 +2,10 @@ import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/
 import { useState } from "react";
 
 import './dnd-shop.css';
-import items from '../../assets/items.json';
+import { items } from "./domain/itemUtil";
 import { Page } from "../../SharedComponents/Page/Page";
-import { Item, PlayerCurrency as PlayerCurrencyType } from "./domain/types";
-import { SubTotal } from "./SubTotal";
+import { Currency, Item } from "./domain/types";
+import { Total } from "./Total";
 import { generateEmptyCartSlots } from "./domain/util";
 import { PlayerCurrency } from "./PlayerCurrency";
 import { Inventory } from "./Inventory/Inventory";
@@ -16,8 +16,8 @@ import { dndRoutes } from "../domain";
 export type CartSlot = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
-    const [playerCurrency, setPlayerCurrency] = useState<PlayerCurrencyType>({ gold: 0, silver: 0, copper: 0 });
-    const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 9));
+    const [playerCurrency, setPlayerCurrency] = useState<Currency>({ gold: 0, silver: 0, copper: 0 });
+    const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 3));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
     const onDragStart = (event: DragStartEvent) => {
@@ -68,12 +68,12 @@ export const DndShop = () => {
             <PlayerCurrency playerCurrency={playerCurrency} setPlayerCurrency={setPlayerCurrency} />
             <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                 <div className="dnd-shop__container">
-                    <div>
+                    <div className="dnd-shop__top">
                         <Cart cartSlots={cartSlots} setCartSlots={setCartSlots} />
-                        <SubTotal cartItems={cartSlots} />
+                        <Inventory items={items} />
                     </div>
                     <div>
-                        <Inventory items={items} />
+                        <Total playerCurrency={playerCurrency} cartItems={cartSlots} />
                     </div>
                 </div>
                 <DragOverlay>
@@ -90,10 +90,8 @@ export const DndShop = () => {
     </Page>;
 };
 
-    // ToDo
-    // Track Player Currency
-    //      Create a BalanceRemaining component
-    //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
-    // Display Total cart Weight
-    // Set inventory overflow to hidden when dragging somehow.
-    // Add a drag icon to inventory items.
+// ToDo
+// Track Player Currency
+//      Create a BalanceRemaining component
+//      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
+// Calculate change remaining.
