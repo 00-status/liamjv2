@@ -101,39 +101,25 @@ const getPlayerCurrencyRemaining = (playerCurrency: Currency, itemTotalsByCurren
         silver: playerCurrency.silver,
         copper: playerCurrency.copper
     };
-
-    playerCurrencyRemaining.gold -= itemTotalsByCurrency.gold;
-
-    if (playerCurrencyRemaining.gold < 0) {
-        playerCurrencyRemaining.gold += Math.trunc(playerCurrency.silver / 10);
-        playerCurrencyRemaining.silver = playerCurrency.silver % 10;
-    }
-
-    if (playerCurrencyRemaining.gold < 0) {
-        playerCurrencyRemaining.gold += Math.trunc(playerCurrency.copper / 20);
-    }
+    playerCurrencyRemaining.copper -= itemTotalsByCurrency.copper;
 
     playerCurrencyRemaining.silver -= itemTotalsByCurrency.silver;
 
     if (playerCurrencyRemaining.silver < 0) {
-        playerCurrencyRemaining.silver += Math.trunc(playerCurrency.copper / 10);
-        playerCurrencyRemaining.copper = playerCurrency.copper % 10;
+        playerCurrencyRemaining.silver += Math.trunc(playerCurrencyRemaining.copper / 10);
+        playerCurrencyRemaining.copper = playerCurrencyRemaining.copper % 10;
     }
 
-    playerCurrencyRemaining.copper -= itemTotalsByCurrency.copper;
+    playerCurrencyRemaining.gold -= itemTotalsByCurrency.gold;
+
+    if (playerCurrencyRemaining.gold < 0) {
+        playerCurrencyRemaining.gold += Math.trunc(playerCurrencyRemaining.silver / 10);
+        playerCurrencyRemaining.silver = playerCurrencyRemaining.silver % 10;
+    }
+
+    if (playerCurrencyRemaining.gold < 0) {
+        playerCurrencyRemaining.gold += Math.trunc(playerCurrencyRemaining.copper / 20);
+    }
 
     return playerCurrencyRemaining;
 };
-
-// Subtract player gold from gold total
-// If the value is a negative number
-//      convert player silver to gold.
-//      Subtract that gold from the gold total.
-//      if the value is still a negative number.
-//          convert copper to gold.
-//          subtract the gold from the gold total.
-//          Display the value (whether it is negative or not).
-//      else
-//          Display value
-// else
-//      Display the value.
