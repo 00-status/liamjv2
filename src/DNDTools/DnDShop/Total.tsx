@@ -61,7 +61,7 @@ export const Total = (props: Props) => {
             })}
         </div>
         <h2>Coins Remaining</h2>
-        <div>
+        <div className="total__list">
             {Object.entries(CurrencyEnum).map(([key, value]) => {
                 return <div key={"Total|" + key} className="total__list-item">
                     <div>
