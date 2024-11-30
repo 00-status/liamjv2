@@ -12,12 +12,6 @@ export type Currency = {
     copper: number;
 };
 
-export type PlayerCurrency = {
-    gold: number | string;
-    silver: number | string;
-    copper: number | string;
-};
-
 export enum CurrencyEnum {
     Gold = "gold",
     Silver = "silver",

@@ -6,12 +6,12 @@ import { Currency, CurrencyEnum, Item } from "./domain/types";
 type ItemWithID = Item & { id: string };
 
 type Props = {
-    
+    playerCurrency: Currency;
     cartItems: CartSlot[];
 };
 
 export const Total = (props: Props) => {
-    const { cartItems } = props;
+    const { cartItems, playerCurrency } = props;
 
     const filteredCartItems: ItemWithID[] = cartItems
         .map((item) => {
@@ -32,6 +32,8 @@ export const Total = (props: Props) => {
     const totalWeight = filteredCartItems.reduce((carry, item) => {
         return carry += item.weight ? item.weight : 0;
     }, 0);
+
+    const playerCurrencyRemaining = getPlayerCurrencyRemaining(playerCurrency, itemTotalsByCurrency);
 
     return <div className="total">
         <div className="total__list--fixed">
@@ -57,7 +59,20 @@ export const Total = (props: Props) => {
                     </div>
                 </div>;
             })}
-            </div>
+        </div>
+        <h2>Coins Remaining</h2>
+        <div>
+            {Object.entries(CurrencyEnum).map(([key, value]) => {
+                return <div key={"Total|" + key} className="total__list-item">
+                    <div>
+                        {key}:
+                    </div>
+                    <div>
+                        {playerCurrencyRemaining[value]}
+                    </div>
+                </div>;
+            })} 
+        </div>
     </div>;
 };
 
@@ -80,9 +95,39 @@ const normalizeTotals = (itemTotalsByCurrency: Currency): Currency => {
     return { gold: itemTotalsByCurrency.gold + newGold, silver: remainingSilver, copper: remainingCopper };
 };
 
+const getPlayerCurrencyRemaining = (playerCurrency: Currency, itemTotalsByCurrency: Currency): Currency => {
+    const playerCurrencyRemaining: Currency = {
+        gold: playerCurrency.gold,
+        silver: playerCurrency.silver,
+        copper: playerCurrency.copper
+    };
+
+    playerCurrencyRemaining.gold -= itemTotalsByCurrency.gold;
+
+    if (playerCurrencyRemaining.gold < 0) {
+        playerCurrencyRemaining.gold += Math.trunc(playerCurrency.silver / 10);
+        playerCurrencyRemaining.silver = playerCurrency.silver % 10;
+    }
+
+    if (playerCurrencyRemaining.gold < 0) {
+        playerCurrencyRemaining.gold += Math.trunc(playerCurrency.copper / 20);
+    }
+
+    playerCurrencyRemaining.silver -= itemTotalsByCurrency.silver;
+
+    if (playerCurrencyRemaining.silver < 0) {
+        playerCurrencyRemaining.silver += Math.trunc(playerCurrency.copper / 10);
+        playerCurrencyRemaining.copper = playerCurrency.copper % 10;
+    }
+
+    playerCurrencyRemaining.copper -= itemTotalsByCurrency.copper;
+
+    return playerCurrencyRemaining;
+};
+
 // Subtract player gold from gold total
 // If the value is a negative number
-//      convert silver to gold.
+//      convert player silver to gold.
 //      Subtract that gold from the gold total.
 //      if the value is still a negative number.
 //          convert copper to gold.

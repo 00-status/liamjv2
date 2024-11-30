@@ -73,7 +73,7 @@ export const DndShop = () => {
                         <Inventory items={items} />
                     </div>
                     <div>
-                        <Total cartItems={cartSlots} />
+                        <Total playerCurrency={playerCurrency} cartItems={cartSlots} />
                     </div>
                 </div>
                 <DragOverlay>
