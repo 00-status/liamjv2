@@ -1,10 +1,10 @@
 
 import './player-currency.css';
-import { CurrencyEnum, PlayerCurrency as PlayerCurrencyType } from './domain/types';
+import { Currency, CurrencyEnum } from './domain/types';
 
 type Props = {
-    playerCurrency: PlayerCurrencyType;
-    setPlayerCurrency: (currency: PlayerCurrencyType) => void;
+    playerCurrency: Currency;
+    setPlayerCurrency: (currency: Currency) => void;
 };
 
 export const PlayerCurrency = (props: Props) => {
@@ -12,7 +12,7 @@ export const PlayerCurrency = (props: Props) => {
 
     const onChangeCurrency = (type: CurrencyEnum, newValue?: string): void => {
         const playerCurrencyCopy = { ...playerCurrency };
-        playerCurrencyCopy[type] = newValue ? Number(newValue) : "";
+        playerCurrencyCopy[type] = newValue ? Number(newValue) : 0;
 
         setPlayerCurrency(playerCurrencyCopy);
     };
@@ -22,7 +22,8 @@ export const PlayerCurrency = (props: Props) => {
             <label>Gold</label>
             <input
                 className='player-currency__input'
-                value={props.playerCurrency.gold}
+                placeholder='Gold'
+                value={playerCurrency.gold !== 0 ? playerCurrency.gold : ""}
                 type="number"
                 onChange={(event) => onChangeCurrency(CurrencyEnum.Gold, event.target.value)}
             />
@@ -31,7 +32,8 @@ export const PlayerCurrency = (props: Props) => {
             <label>Silver</label>
             <input
                 className='player-currency__input'
-                value={props.playerCurrency.silver}
+                placeholder='Silver'
+                value={playerCurrency.silver !== 0 ? playerCurrency.silver : ""}
                 type="number"
                 onChange={(event) => onChangeCurrency(CurrencyEnum.Silver, event.target.value)}
             />
@@ -40,7 +42,8 @@ export const PlayerCurrency = (props: Props) => {
             <label>Copper</label>
             <input
                 className='player-currency__input'
-                value={props.playerCurrency.copper}
+                placeholder='Copper'
+                value={playerCurrency.copper !== 0 ? playerCurrency.copper : ""}
                 type="number"
                 onChange={(event) => onChangeCurrency(CurrencyEnum.Copper, event.target.value)}
             />

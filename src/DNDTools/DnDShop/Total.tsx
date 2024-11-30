@@ -6,6 +6,7 @@ import { Currency, CurrencyEnum, Item } from "./domain/types";
 type ItemWithID = Item & { id: string };
 
 type Props = {
+    
     cartItems: CartSlot[];
 };
 
@@ -78,3 +79,16 @@ const normalizeTotals = (itemTotalsByCurrency: Currency): Currency => {
 
     return { gold: itemTotalsByCurrency.gold + newGold, silver: remainingSilver, copper: remainingCopper };
 };
+
+// Subtract player gold from gold total
+// If the value is a negative number
+//      convert silver to gold.
+//      Subtract that gold from the gold total.
+//      if the value is still a negative number.
+//          convert copper to gold.
+//          subtract the gold from the gold total.
+//          Display the value (whether it is negative or not).
+//      else
+//          Display value
+// else
+//      Display the value.

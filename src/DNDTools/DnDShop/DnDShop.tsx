@@ -4,7 +4,7 @@ import { useState } from "react";
 import './dnd-shop.css';
 import { items } from "./domain/itemUtil";
 import { Page } from "../../SharedComponents/Page/Page";
-import { Item, PlayerCurrency as PlayerCurrencyType } from "./domain/types";
+import { Currency, Item } from "./domain/types";
 import { Total } from "./Total";
 import { generateEmptyCartSlots } from "./domain/util";
 import { PlayerCurrency } from "./PlayerCurrency";
@@ -16,7 +16,7 @@ import { dndRoutes } from "../domain";
 export type CartSlot = { droppableID: string, item: null | Item };
 
 export const DndShop = () => {
-    const [playerCurrency, setPlayerCurrency] = useState<PlayerCurrencyType>({ gold: 0, silver: 0, copper: 0 });
+    const [playerCurrency, setPlayerCurrency] = useState<Currency>({ gold: 0, silver: 0, copper: 0 });
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 3));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
     
@@ -90,8 +90,8 @@ export const DndShop = () => {
     </Page>;
 };
 
-    // ToDo
-    // Track Player Currency
-    //      Create a BalanceRemaining component
-    //      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
-    // Calculate change remaining.
+// ToDo
+// Track Player Currency
+//      Create a BalanceRemaining component
+//      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
+// Calculate change remaining.
