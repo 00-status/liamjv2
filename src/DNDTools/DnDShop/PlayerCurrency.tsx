@@ -11,6 +11,10 @@ export const PlayerCurrency = (props: Props) => {
     const { playerCurrency, setPlayerCurrency } = props;
 
     const onChangeCurrency = (type: CurrencyEnum, newValue?: string): void => {
+        if (Number(newValue) < 0) {
+            return;
+        }
+
         const playerCurrencyCopy = { ...playerCurrency };
         playerCurrencyCopy[type] = newValue ? Number(newValue) : 0;
 
