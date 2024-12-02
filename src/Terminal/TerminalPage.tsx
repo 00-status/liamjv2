@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { gtag } from 'ga-gtag';
 
 import './terminal-page.css';
 import { Terminal } from "./Terminal";
 import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
-import { gtag } from 'ga-gtag';
+
 
 export const TerminalPage = () => {
     const navigate = useNavigate();
