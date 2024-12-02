@@ -1,5 +1,6 @@
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { gtag } from "ga-gtag";
 
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
@@ -21,6 +22,8 @@ type Props = {
 };
 
 export const Page = (props: Props): ReactElement => {
+    const { title, routes, children, footer } = props;
+
     const [messageList, setMessageList] = useState<Array<ToastMessage>>([]);
 
     const navigate = useNavigate();
@@ -32,11 +35,22 @@ export const Page = (props: Props): ReactElement => {
         }
     };
 
+    useEffect(() => {
+        const currentRoute = routes.find((route) => route.route === location.pathname);
+
+        if (currentRoute) {
+            gtag("event", "page_view", {
+                "page_location": currentRoute.route,
+                "page_title": currentRoute.label
+            });
+        }
+    }, [routes, location]);
+
     return <ToastMessageContext.Provider value={{ messageList, setMessageList }}>
         <div className="page">
             <div className="page-title-container">
                 <div className="page-title">
-                    {props.title}
+                    {title}
                     <div className="icon-list">
                         <ImageButton
                             locationUrl={"https://github.com/00-status"}
@@ -49,7 +63,7 @@ export const Page = (props: Props): ReactElement => {
                     </div>
                 </div>
                 <nav className="nav-list" >
-                    {props.routes.map((route) => {
+                    {routes.map((route) => {
                         const isCurrentRoute = location.pathname === route.route;
 
                         const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
@@ -62,11 +76,11 @@ export const Page = (props: Props): ReactElement => {
                 </nav>
             </div>
             <div className="page-content-container">
-                {props.children}
+                {children}
             </div>
             <div className="footer">
                 <hr className="divider" />
-                {props.footer}
+                {footer}
             </div>
             <Toast />
         </div>
