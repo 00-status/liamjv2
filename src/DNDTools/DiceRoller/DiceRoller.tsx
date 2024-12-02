@@ -6,6 +6,7 @@ import { Die } from "./Die";
 import { CustomDiceRoller } from "./CustomDiceRoller";
 import { dndRoutes } from "../domain";
 import { Anchor } from "../../SharedComponents/Link/Anchor";
+import { gtag } from "ga-gtag";
 
 export const DiceRoller = (): ReactElement => {
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -13,6 +14,11 @@ export const DiceRoller = (): ReactElement => {
     const [diceLog, setDiceLog] = useState<Array<string>>([]);
 
     const onDieClick = (diceResult: number, diceRolled: string, individualRolls: string[]) => {
+        console.log(diceRolled);
+        if (diceRolled === "1d20") {
+            gtag("event", "button_click_die_twenty");
+        }
+
         setGeneratedNumber(diceResult);
         setDiceRolled(diceRolled);
 
