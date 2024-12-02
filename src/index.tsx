@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { gtag, initDataLayer, install } from 'ga-gtag';
 import "@react-sigma/core/lib/react-sigma.min.css";
 
 import { AboutMe } from './AboutMe/AboutMe';
@@ -11,6 +12,15 @@ import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
+
+initDataLayer();
+gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+});
+install('G-G0XWWY99FC', { 'anonymize_ip': true, 'send_page_view': false });
 
 const rootDomNode = document.getElementById('app');
 

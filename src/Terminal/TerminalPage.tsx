@@ -1,14 +1,25 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { gtag } from 'ga-gtag';
 
 import './terminal-page.css';
 import { Terminal } from "./Terminal";
 import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
 
+
 export const TerminalPage = () => {
     const navigate = useNavigate();
 
     document.title = "Terminal";
+
+    useEffect(() => {
+        gtag("event", "page_view", {
+            "page_location": "/terminal",
+            "page_title": "Terminal"
+        });
+    }, [gtag]);
+
     return <div className="terminal-page">
         <div className="terminal-page__header">
             <h1 className="terminal-page__title">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { gtag } from 'ga-gtag';
 
 import './weapon-maker.css';
 import { Button } from "../../SharedComponents/Button/Button";
@@ -22,6 +23,12 @@ export const WeaponMaker = () => {
         {value: "Legendary", label: "Legendary"},
     ];
 
+    const onGenerateWeaponclick = () => {
+        console.log("EVENT");
+        gtag("event", "button_click_weapon_maker");
+        generateWeapon(selectedRarity);
+    };
+
     return <Page routes={dndRoutes} title="D&D Tools" footer={<div>The weapon's name is generated using Google Gemeni (AI).</div>}>
         <div className='weapon-maker'>
             <div>
@@ -38,7 +45,7 @@ export const WeaponMaker = () => {
                     />
                 </div>
                 <div className="weapon-maker__button">
-                    <Button disabled={isLoading} hasSheen onClick={() => generateWeapon(selectedRarity)}>
+                    <Button disabled={isLoading} hasSheen onClick={onGenerateWeaponclick}>
                         <GearsIcon /> Make weapon
                     </Button>
                 </div>

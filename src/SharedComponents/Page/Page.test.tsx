@@ -1,6 +1,9 @@
 import { render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
+import * as GTAG from "ga-gtag";
+
 import { Page } from "./Page";
+
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => {
@@ -12,10 +15,22 @@ jest.mock('react-router-dom', () => {
 });
 
 describe('Page', () => {
-    it('should render the contents', () => {
-        const {getByText} = render(<Page title="Test" routes={[]}>Banana</Page>);
+    const mockGtag = jest.fn();
+    beforeEach(() => {
+        jest.clearAllMocks();
+        jest.spyOn(GTAG, "gtag").mockImplementation(mockGtag);
+    });
+
+    it('should render the contents', () => {        
+        const {getByText} = render(<Page title="Test" routes={[{route: "/", label: "banana_page"}]}>Banana</Page>);
 
         getByText("Banana");
+        expect(mockGtag).toHaveBeenCalledTimes(1);
+        expect(mockGtag).toHaveBeenCalledWith(
+            "event",
+            "page_view",
+            { "page_location": "/", "page_title": "banana_page" }
+        );
     });
 
     it('should render the passed in title', () => {
