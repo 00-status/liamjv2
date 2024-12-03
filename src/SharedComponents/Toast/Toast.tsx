@@ -27,7 +27,6 @@ export const Toast = () => {
     useEffect(() => {
         const timeoutID = setTimeout(() => {
             if (currentMessage != null) {
-                console.log("Cleared!");
                 setCurrentMessage(null);
             }
         }, 2000);

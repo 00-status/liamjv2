@@ -15,7 +15,6 @@
     border: none;
     transition: all .1s ease-in-out;
 }
-
 .die:hover {
     background-color: #CC1818;
     transform: scale(1.05);

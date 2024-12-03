@@ -24,7 +24,6 @@ export const WeaponMaker = () => {
     ];
 
     const onGenerateWeaponclick = () => {
-        console.log("EVENT");
         gtag("event", "button_click_weapon_maker");
         generateWeapon(selectedRarity);
     };
