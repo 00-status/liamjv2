@@ -27,6 +27,18 @@
     box-shadow: 1px 1px 4px #1f2028;
 }
 
+.dice-roller__result--value {
+    opacity: 1;
+    transform: translateY(0);
+    animation: dice-roller-fade-in 0.25s ease-in;
+}
+@keyframes dice-roller-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+}
+
 .dice-roller--log-container {
     display: flex;
     flex-direction: column;

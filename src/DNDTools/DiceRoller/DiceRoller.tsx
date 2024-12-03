@@ -1,4 +1,5 @@
 import { ReactElement, useState } from "react";
+import { gtag } from "ga-gtag";
 
 import './dice-roller.css';
 import { Page } from "../../SharedComponents/Page/Page";
@@ -6,18 +7,20 @@ import { Die } from "./Die";
 import { CustomDiceRoller } from "./CustomDiceRoller";
 import { dndRoutes } from "../domain";
 import { Anchor } from "../../SharedComponents/Link/Anchor";
-import { gtag } from "ga-gtag";
 
 export const DiceRoller = (): ReactElement => {
+    const [animationKey, setAnimationKey] = useState<number>(0);
+
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
     const [diceRolled, setDiceRolled] = useState<string|null>(null);
     const [diceLog, setDiceLog] = useState<Array<string>>([]);
 
     const onDieClick = (diceResult: number, diceRolled: string, individualRolls: string[]) => {
-        console.log(diceRolled);
         if (diceRolled === "1d20") {
             gtag("event", "button_click_die_twenty");
         }
+
+        setAnimationKey(animationKey + 1);
 
         setGeneratedNumber(diceResult);
         setDiceRolled(diceRolled);
@@ -41,12 +44,16 @@ export const DiceRoller = (): ReactElement => {
                 <div className="dice-roller--summary">
                     <div className="dice-roller--results-container">
                         <div className="dice-roller--result">
-                            <h1>{generatedNumber ? generatedNumber : "--"}</h1>
+                            <h1 key={animationKey} className="dice-roller__result--value">
+                                {generatedNumber ? generatedNumber : "--"}
+                            </h1>
                             <hr className="divider" />
                             <div>Result</div>
                         </div>
                         <div className="dice-roller--result">
-                            <h1>{diceRolled ? diceRolled : "--"}</h1>
+                            <h1>
+                                {diceRolled ? diceRolled : "--"}
+                            </h1>
                             <hr className="divider" />
                             <div>Dice rolled</div>
                         </div>
