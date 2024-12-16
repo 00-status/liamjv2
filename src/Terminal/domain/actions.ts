@@ -1,9 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
 
+type argument = string;
+
 export const displayHelp = createAction("terminal/displayHelp");
 export const displayHistory = createAction("terminal/displayHistory");
 export const changeDirectory = createAction("terminal/changeDirectory");
-export const listDirectories = createAction("terminal/listDirectories");
+export const listFileSystemObjects = createAction<argument>("terminal/listFileSystemObjects");
 export const openFile = createAction("terminal/openFile");
 export const changeServer = createAction("terminal/changeServer");
 export const clearOutput = createAction("terminal/clearOutput");
