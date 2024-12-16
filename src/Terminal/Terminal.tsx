@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { gtag } from "ga-gtag";
 
 import './terminal.css';
 import { Command, ICommand, TerminalDirectory, validCommands } from "./domain/types";
 import { directories, startingDirectory } from "./domain/directories";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
-import { gtag } from "ga-gtag";
 
 type Output = {
     id: string;

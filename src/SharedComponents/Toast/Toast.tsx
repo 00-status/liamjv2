@@ -32,7 +32,7 @@ export const Toast = () => {
         }, 2000);
 
         return () => clearTimeout(timeoutID);
-    }, [currentMessage]);
+    }, [currentMessage, setCurrentMessage]);
 
     if (!currentMessage) {
         return null;
