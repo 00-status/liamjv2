@@ -55,17 +55,6 @@ export const validCommands = new Map<string, ICommand>([
     ['pwd', WorkingDirectoryCommand],
 ]);
 
-
-// Redux reducer per each command
-// Redux Store
-const store = {
-    directories: [],
-    currentDirectory: {},
-    commandHistory: [],
-    serverName: "Server",
-    outputs: []
-};
-
 // Create shared initial state.
 // Create a reducer/action file for each command.
 // Combine the reducers.
