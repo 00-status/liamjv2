@@ -1,16 +1,11 @@
-import { ICommand, Command, TerminalDirectory } from "../types";
+import { ICommand } from "../types";
 
 export const HistoryCommand: ICommand = {
     execute(
-        command: Command,
-        commandHistory: Array<Command>,
-        setServerName: (serverName: string) => void,
-        directories: Map<string, TerminalDirectory>,
-        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
-        currentDirectory: TerminalDirectory,
-        setCurrentDirectory: (directory: TerminalDirectory) => void,
-        args: Array<string>
+        command,
+        terminal,
+        setTerminal
     ): string {
-        return commandHistory.map(command => command.text.trim()).join("\n");
+        return terminal.commandHistory.map(command => command.text.trim()).join("\n");
     }
 }

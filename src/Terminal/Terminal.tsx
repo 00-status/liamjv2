@@ -11,17 +11,28 @@ type Output = {
     output: string;
 };
 
+export type TerminalState = {
+    serverName: string;
+    directories: Map<string, TerminalDirectory>;
+    currentDirectory: TerminalDirectory;
+    commandHistory: Array<Command>;
+    outputs: Array<Output>;
+};
+
 export const Terminal = () => {
-    const [serverName, setServerName] = useState<string>("local");
-    const [currentDirectories, setCurrentDirectories] = useState<Map<string, TerminalDirectory>>(directories);
-    const [currentDirectory, setCurrentDirectory] = useState<TerminalDirectory>(startingDirectory);
+    const [terminal, setTerminal] = useState<TerminalState>(
+        {
+            serverName: 'local',
+            directories: directories,
+            currentDirectory: startingDirectory,
+            commandHistory: [],
+            outputs: [
+                { id: crypto.randomUUID(), output: 'Welcome. Type "help" for a list of commands' }
+            ]
+        }
+    );
 
-    const [commandHistory, setCommandHistory] = useState<Array<Command>>([]);
-
-    const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(currentDirectory.name));
-    const [outputs, setOutputs] = useState<Array<Output>>([
-        { id: crypto.randomUUID(), output: 'Welcome. Type "help" for a list of commands' }
-    ]);
+    const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(terminal.currentDirectory.name));
 
     const inputRef = useRef<HTMLInputElement | null>(null);
     const outputRef = useRef<HTMLDivElement | null>(null);
@@ -32,23 +43,23 @@ export const Terminal = () => {
 
     useEffect(() => {
         setCurrentCommand((state) => {
-            return {...state, workingDirectory: currentDirectory.name}
+            return {...state, workingDirectory: terminal.currentDirectory.name}
         })
-    }, [currentDirectory]);
+    }, [terminal.currentDirectory]);
 
     useEffect(() => {
         if (outputRef.current) {
             outputRef.current.scrollTop = outputRef.current.scrollHeight;
         }
-    }, [outputRef, outputs]);
+    }, [outputRef, terminal.outputs]);
 
     return <div className="terminal">
         <div className="terminal__output-wrapper" ref={outputRef}>
-            {outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
+            {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
         <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
             <div>
-                {serverName + '@' + currentCommand.workingDirectory + '% '}
+                {terminal.serverName + '@' + currentCommand.workingDirectory + '% '}
             </div>
             <input
                 ref={inputRef}
@@ -63,30 +74,35 @@ export const Terminal = () => {
                 onKeyUp={(event) => {
                     if (event.key === 'Enter' && currentCommand.text) {
                         const result = executeCommand(
-                            commandHistory,
+                            terminal,
+                            setTerminal,
                             currentCommand,
-                            setServerName,
-                            currentDirectories,
-                            setCurrentDirectories,
-                            currentDirectory,
-                            setCurrentDirectory
                         );
 
-                        setOutputs([
-                            ...outputs,
-                            { id: crypto.randomUUID(), output: serverName + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
-                            { id: crypto.randomUUID(), output: result }
-                        ]);
-                        setCommandHistory([...commandHistory, currentCommand]);
-                        setCurrentCommand(createNewCommand(currentDirectory.name));
+                        setTerminal((state) => {
+                            return {
+                                ...state,
+                                outputs: [
+                                    ...terminal.outputs,
+                                    { id: crypto.randomUUID(), output: terminal.serverName + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
+                                    { id: crypto.randomUUID(), output: result }
+                                ],
+                                commandHistory: [
+                                    ...terminal.commandHistory,
+                                    currentCommand
+                                ]
+                            };
+                        });
+
+                        setCurrentCommand(createNewCommand(terminal.currentDirectory.name));
                     }
 
                     if (event.key === 'Tab' && currentCommand.text) {
                         findNextFileSystemObject(
                             currentCommand,
                             setCurrentCommand,
-                            currentDirectories,
-                            currentDirectory
+                            terminal.directories,
+                            terminal.currentDirectory
                         );
                     }
                 }}
@@ -105,13 +121,9 @@ const createNewCommand = (directoryName: string): Command => {
 };
 
 const executeCommand = (
-    commandHistory: Array<Command>,
-    currentCommand: Command,
-    setServerName: (serverName: string) => void,
-    currentDirectories: Map<string, TerminalDirectory>,
-    setDirectories: (directories: Map<string, TerminalDirectory>) => void,
-    currentDirectory: TerminalDirectory,
-    setCurrentDirectory: (directory: TerminalDirectory) => void
+    terminal: TerminalState,
+    setTerminal: (terminalState: TerminalState) => void,
+    currentCommand: Command
 ): string => {
     const textCommand = currentCommand.text.split(' ');
     const command: ICommand|undefined = validCommands.get(textCommand[0]);
@@ -123,13 +135,8 @@ const executeCommand = (
 
         return command.execute(
             currentCommand,
-            commandHistory,
-            setServerName,
-            currentDirectories,
-            setDirectories,
-            currentDirectory,
-            setCurrentDirectory,
-            []
+            terminal,
+            setTerminal,
         );
     } else {
         return 'Command not found!'

@@ -1,17 +1,12 @@
 
 import { servers } from "../directories";
-import { ICommand, Command, TerminalDirectory } from "../types";
+import { ICommand } from "../types";
 
 export const ConnectCommand: ICommand = {
     execute(
-        command: Command,
-        commandHistory: Array<Command>,
-        setServerName: (serverName: string) => void,
-        directories: Map<string, TerminalDirectory>,
-        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
-        currentDirectory: TerminalDirectory,
-        setCurrentDirectory: (directory: TerminalDirectory) => void,
-        args: Array<string>
+        command,
+        terminal,
+        setTerminal
     ): string {
         const splitCommand = command.text.trim().split(" ");
 
@@ -28,10 +23,13 @@ export const ConnectCommand: ICommand = {
             return "Cannot Connect to server!";
         }
 
-        // TODO: Set the new server name.
-        setServerName(serverName);
-        setDirectories(newServers);
-        setCurrentDirectory(newRootDirectory);
+        setTerminal({
+            ...terminal,
+            serverName,
+            directories: newServers,
+            currentDirectory: newRootDirectory
+        });
+
         return "Connecting to " + serverName + "...";
     }
 }

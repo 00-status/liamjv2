@@ -1,17 +1,14 @@
 import { navigateDirectories } from "../navigateDirectories";
-import { ICommand, Command, TerminalDirectory, TerminalFile } from "../types";
+import { ICommand, TerminalFile } from "../types";
 
 export const OpenCommand: ICommand = {
     execute(
-        command: Command,
-        commandHistory: Array<Command>,
-        setServerName: (serverName: string) => void,
-        directories: Map<string, TerminalDirectory>,
-        setDirectories: (directories: Map<string, TerminalDirectory>) => void,
-        currentDirectory: TerminalDirectory,
-        setCurrentDirectory: (directory: TerminalDirectory) => void,
-        args: Array<string>
+        command,
+        terminal,
+        setTerminal
     ): string {
+        const {directories, currentDirectory} = terminal;
+
         const splitCommandText = command.text.trim().split(" ");
 
         const filePathGroups = splitCommandText[1].split("/");
