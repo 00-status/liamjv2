@@ -18,8 +18,6 @@ export const ChangeDirectoryCommand: ICommand = {
             currentDirectory
         );
 
-        console.log(newDirectory);
-
         setTerminal({...terminal, currentDirectory: newDirectory});
 
         return '';
