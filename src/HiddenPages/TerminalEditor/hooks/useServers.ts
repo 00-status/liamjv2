@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useCreateServer } from "./useCreateServer";
+import { useDeleteServer } from "./useDeleteServer";
 
 type Server = {
     id: number;
@@ -10,6 +11,7 @@ type UseServers = {
     servers: Array<Server>;
     fetchServers: () => void;
     createServer: (serverName: string) => void;
+    deleteServer: (serverId: number) => void;
 };
 
 export const useServers = (): UseServers => {
@@ -23,6 +25,7 @@ export const useServers = (): UseServers => {
     }, [setServers]);
 
     const { createServer } = useCreateServer(fetchServers);
+    const { deleteServer} = useDeleteServer(fetchServers);
 
-    return { servers, fetchServers, createServer };
+    return { servers, fetchServers, createServer, deleteServer };
 };

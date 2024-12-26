@@ -4,18 +4,20 @@ import "./terminal-editor-page.css";
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useServers } from "./hooks/useServers";
-import { Button } from "../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
+import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
 
 export const TerminalEditorPage = () => {
     // ToDO
-    //      Fetch Servers
-    //      Create Server
+    //      Fetch Servers ✅
+    //      Create Server ✅
+    //      Delete Server
     //      Fetch Directories
     //      Create Directories
 
     const [newServerName, setNewServerName] = useState<string>("");
 
-    const { servers, fetchServers, createServer } = useServers();
+    const { servers, fetchServers, createServer, deleteServer } = useServers();
 
     useEffect(() => {
         fetchServers();
@@ -28,7 +30,7 @@ export const TerminalEditorPage = () => {
                     <TextInput value={newServerName} onChange={(value) => setNewServerName(value || "")} />
                     <Button onClick={() => createServer(newServerName)} >Submit</Button>
                 </div>
-                {servers.map(server => <div>{server.name}</div>)}
+                {servers.map(server => <div>{server.name} <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteServer(server.id)}><TrashIcon /></Button></div>)}
             </div>
             <div>
                 Directory List
