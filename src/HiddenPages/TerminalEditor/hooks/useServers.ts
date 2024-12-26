@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useCreateServer } from "./useCreateServer";
 
 type Server = {
     id: number;
@@ -8,9 +9,11 @@ type Server = {
 type UseServers = {
     servers: Array<Server>;
     fetchServers: () => void;
+    createServer: (serverName: string) => void;
 };
 
 export const useServers = (): UseServers => {
+    // TODO: Add a loading state to the fetch.
     const [servers, setServers] = useState<Array<Server>>([]);
 
     const fetchServers = useCallback(() => {
@@ -19,5 +22,7 @@ export const useServers = (): UseServers => {
             .then(json => setServers(json));
     }, [setServers]);
 
-    return { servers, fetchServers };
+    const { createServer } = useCreateServer(fetchServers);
+
+    return { servers, fetchServers, createServer };
 };

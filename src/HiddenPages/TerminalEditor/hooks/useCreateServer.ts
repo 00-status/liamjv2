@@ -5,7 +5,7 @@ type UseCreateServer = {
     createServer: (newServer: string) => void;
 };
 
-export const useCreateServer = (): UseCreateServer => {
+export const useCreateServer = (fetchServers: () => void): UseCreateServer => {
     const createServer = useCallback((newServerName: string) => {
         const newServer = {
             id: 0,
@@ -18,8 +18,11 @@ export const useCreateServer = (): UseCreateServer => {
             body: serverJson,
             headers: { "Content-type": "application/json; charset=UTF-8" }
         })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+            .then((response) => response.json())
+            .then((json) => {
+                console.log(json);
+                fetchServers();
+            });
     }, []);
 
     return { createServer };

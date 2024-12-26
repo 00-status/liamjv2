@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+
+import "./terminal-editor-page.css";
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useServers } from "./hooks/useServers";
 import { Button } from "../../SharedComponents/Button/Button";
-import { useCreateServer } from "./hooks/useCreateServer";
 
 export const TerminalEditorPage = () => {
     // ToDO
@@ -14,21 +15,20 @@ export const TerminalEditorPage = () => {
 
     const [newServerName, setNewServerName] = useState<string>("");
 
-    const { servers, fetchServers } = useServers();
-    const { createServer } = useCreateServer();
+    const { servers, fetchServers, createServer } = useServers();
 
     useEffect(() => {
         fetchServers();
     }, []);
 
     return <Page title="Terminal Editor" routes={[]}>
-        <div>
-            <div>
+        <div className="terminal-editor-page">
+            <div className="terminal-editor-page__server-list">
                 <div>
                     <TextInput value={newServerName} onChange={(value) => setNewServerName(value || "")} />
                     <Button onClick={() => createServer(newServerName)} >Submit</Button>
                 </div>
-                {servers.map(server => server.name)}
+                {servers.map(server => <div>{server.name}</div>)}
             </div>
             <div>
                 Directory List

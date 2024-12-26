@@ -1,0 +1,10 @@
+.terminal-editor-page {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.terminal-editor-page__server-list {
+    display: flex;
+    flex-direction: column;
+}
