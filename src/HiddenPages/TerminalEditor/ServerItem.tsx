@@ -2,7 +2,7 @@
 import "./server-item.css";
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
-import { Server } from "./hooks/useServers";
+import { Server } from "./hooks/server/useServers";
 
 type Props = {
     server: Server;

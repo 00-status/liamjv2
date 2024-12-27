@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import "./terminal-editor-page.css";
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
-import { useServers } from "./hooks/useServers";
-import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
+import { Button } from "../../SharedComponents/Button/Button";
 import { ServerItem } from "./ServerItem";
+import { useServers } from "./hooks/server/useServers";
 
 export const TerminalEditorPage = () => {
     // ToDO
