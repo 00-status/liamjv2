@@ -8,18 +8,24 @@ type UseCreateDirectory = {
 
 export const useCreateDirectory = (fetchDirectories: (serverId: number) => void): UseCreateDirectory => {
     const createDirectory = useCallback((directory: Directory) => {
-        const directoryJson = JSON.stringify(directory);
+        const newDirectory = {
+            id: directory.id,
+            server_id: directory.serverId,
+            name: directory.name,
+            date_created: directory.dateCreated,
+            parent_directory: directory.parentDirectory,
+            sub_directories: directory.subDirectories,
+            files: directory.files,
+        };
+
+        const directoryJson = JSON.stringify(newDirectory);
 
         fetch("/api/1/terminal_directories", {
             method: "POST",
             body: directoryJson,
             headers: { "Content-type": "application/json; charset=UTF-8" }
         })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                fetchDirectories(directory.serverId);
-        });
+            .then((response) => fetchDirectories(directory.serverId));
     }, []);
 
     return {
