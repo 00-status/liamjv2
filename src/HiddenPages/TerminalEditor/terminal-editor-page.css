@@ -7,4 +7,13 @@
 .terminal-editor-page__server-list {
     display: flex;
     flex-direction: column;
+    gap: 12px;
+}
+
+.terminal-editor-page__server-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    gap: 20px;
 }

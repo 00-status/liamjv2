@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useCreateServer } from "./useCreateServer";
 import { useDeleteServer } from "./useDeleteServer";
 
-type Server = {
+export type Server = {
     id: number;
     name: string;
 };
