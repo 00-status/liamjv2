@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
+import { useCreateDirectory } from "./useCreateDirectory";
 
-type Directory = {
+export type Directory = {
     id: number;
     serverId: number;
     name: string;
@@ -13,6 +14,7 @@ type Directory = {
 type UseDirectories = {
     directories: Array<Directory>;
     fetchDirectories: (serverId: number) => void;
+    createDirectory: (directory: Directory) => void;
 };
 
 export const useDirectories = (): UseDirectories => {
@@ -24,8 +26,11 @@ export const useDirectories = (): UseDirectories => {
             .then(json => setDirectories(json));
     }, [setDirectories]);
 
+    const { createDirectory } = useCreateDirectory(fetchDirectories);
+
     return {
         directories,
-        fetchDirectories
+        fetchDirectories,
+        createDirectory
     };
 };
