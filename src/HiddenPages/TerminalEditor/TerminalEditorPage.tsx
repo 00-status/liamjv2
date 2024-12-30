@@ -4,7 +4,7 @@ import "./terminal-editor-page.css";
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
-import { ServerItem } from "./ServerItem";
+import { TerminalListItem } from "./ServerItem";
 import { useServers } from "./hooks/server/useServers";
 import { Directory, useDirectories } from "./hooks/directories/useDirectories";
 
@@ -15,7 +15,7 @@ export const TerminalEditorPage = () => {
     //      Delete Server ✅
     //      Directories
     //          READ ✅
-    //          Create
+    //          Create ✅
     //          Delete
     //      Create Directories
 
@@ -56,11 +56,11 @@ export const TerminalEditorPage = () => {
                     />
                     <Button onClick={() => createServer(newServerName)} >Submit</Button>
                 </div>
-                {servers.map(server => <ServerItem
+                {servers.map(server => <TerminalListItem
                     key={server.id}
-                    server={server}
-                    onServerDelete={onServerDelete}
-                    onServerClick={() => setSelectedServerId(server.id)}
+                    label={server.name}
+                    onDelete={() => onServerDelete(server.id)}
+                    onClick={() => setSelectedServerId(server.id)}
                 />)}
             </div>
             <div>
@@ -82,12 +82,17 @@ export const TerminalEditorPage = () => {
                                 files: []
                             };
                             createDirectory(newDirectory);
+                            setNewDirectoryName("");
                         }
                     }}>
                         Submit
                     </Button>
                 </div>}
-                {directories.map(directory => directory.name)}
+                {directories.map(directory => <TerminalListItem
+                    label={directory.name}
+                    onClick={() => {}}
+                    onDelete={() => {}}
+                />)}
             </div>
             <div>
                 Directory Editor
