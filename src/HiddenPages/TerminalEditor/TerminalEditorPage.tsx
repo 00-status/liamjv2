@@ -27,7 +27,6 @@ export const TerminalEditorPage = () => {
     const { servers, fetchServers, createServer, deleteServer } = useServers();
     const {
         isLoadingDirectories,
-        isDeletingDirectory,
         directories,
         fetchDirectories,
         createDirectory,
