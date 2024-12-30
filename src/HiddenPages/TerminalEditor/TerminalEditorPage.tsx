@@ -7,6 +7,7 @@ import { Button } from "../../SharedComponents/Button/Button";
 import { TerminalListItem } from "./TerminalListItem";
 import { useServers } from "./hooks/server/useServers";
 import { Directory, useDirectories } from "./hooks/directories/useDirectories";
+import { Loader } from "../../SharedComponents/Loader/Loader";
 
 export const TerminalEditorPage = () => {
     // ToDO
@@ -24,7 +25,14 @@ export const TerminalEditorPage = () => {
     const [newDirectoryName, setNewDirectoryName] = useState<string>("");
 
     const { servers, fetchServers, createServer, deleteServer } = useServers();
-    const { directories, fetchDirectories, createDirectory, deleteDirectory } = useDirectories();
+    const {
+        isLoadingDirectories,
+        isDeletingDirectory,
+        directories,
+        fetchDirectories,
+        createDirectory,
+        deleteDirectory
+    } = useDirectories();
 
     useEffect(() => {
         fetchServers();
@@ -62,7 +70,7 @@ export const TerminalEditorPage = () => {
                     onClick={() => setSelectedServerId(server.id)}
                 />)}
             </div>
-            <div>
+            <div className="terminal-editor-page__server-list">
                 {selectedServerId && <div className="terminal-editor-page__server-input">
                     <TextInput
                         placeholder="directory name"
@@ -87,14 +95,12 @@ export const TerminalEditorPage = () => {
                         Submit
                     </Button>
                 </div>}
-                <div className="terminal-editor-page__server-list">
-                    {directories.map(directory => <TerminalListItem
-                        key={directory.id}
-                        label={directory.name}
-                        onClick={() => {}}
-                        onDelete={() => deleteDirectory(directory.serverId, directory.id)}
-                    />)}
-                </div>
+                {isLoadingDirectories ? <Loader /> : directories.map(directory => <TerminalListItem
+                    key={directory.id}
+                    label={directory.name}
+                    onClick={() => {}}
+                    onDelete={() => deleteDirectory(directory.serverId, directory.id)}
+                />)}
             </div>
             <div>
                 Directory Editor
