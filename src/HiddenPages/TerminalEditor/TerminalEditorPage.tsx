@@ -4,7 +4,7 @@ import "./terminal-editor-page.css";
 import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
-import { TerminalListItem } from "./ServerItem";
+import { TerminalListItem } from "./TerminalListItem";
 import { useServers } from "./hooks/server/useServers";
 import { Directory, useDirectories } from "./hooks/directories/useDirectories";
 
@@ -17,7 +17,6 @@ export const TerminalEditorPage = () => {
     //          READ ✅
     //          Create ✅
     //          Delete
-    //      Create Directories
 
     const [newServerName, setNewServerName] = useState<string>("");
     const [selectedServerId, setSelectedServerId] = useState<number|null>(null);
