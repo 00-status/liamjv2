@@ -24,7 +24,7 @@ export const TerminalEditorPage = () => {
     const [newDirectoryName, setNewDirectoryName] = useState<string>("");
 
     const { servers, fetchServers, createServer, deleteServer } = useServers();
-    const { directories, fetchDirectories, createDirectory } = useDirectories();
+    const { directories, fetchDirectories, createDirectory, deleteDirectory } = useDirectories();
 
     useEffect(() => {
         fetchServers();
@@ -87,11 +87,14 @@ export const TerminalEditorPage = () => {
                         Submit
                     </Button>
                 </div>}
-                {directories.map(directory => <TerminalListItem
-                    label={directory.name}
-                    onClick={() => {}}
-                    onDelete={() => {}}
-                />)}
+                <div className="terminal-editor-page__server-list">
+                    {directories.map(directory => <TerminalListItem
+                        key={directory.id}
+                        label={directory.name}
+                        onClick={() => {}}
+                        onDelete={() => deleteDirectory(directory.serverId, directory.id)}
+                    />)}
+                </div>
             </div>
             <div>
                 Directory Editor
