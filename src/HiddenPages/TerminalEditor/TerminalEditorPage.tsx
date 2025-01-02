@@ -8,6 +8,7 @@ import { TerminalListItem } from "./TerminalListItem";
 import { useServers } from "./hooks/server/useServers";
 import { Directory, useDirectories } from "./hooks/directories/useDirectories";
 import { Loader } from "../../SharedComponents/Loader/Loader";
+import { DirectoryEditor } from "./DirectoryEditor";
 
 export const TerminalEditorPage = () => {
     // ToDO
@@ -17,12 +18,14 @@ export const TerminalEditorPage = () => {
     //      Directories
     //          READ ✅
     //          Create ✅
-    //          Delete
+    //          Delete ✅
+    //          Update 
 
     const [newServerName, setNewServerName] = useState<string>("");
     const [selectedServerId, setSelectedServerId] = useState<number|null>(null);
 
     const [newDirectoryName, setNewDirectoryName] = useState<string>("");
+    const [selectedDirectory, setSelectedDirectory] = useState<Directory|null>(null);
 
     const { servers, fetchServers, createServer, deleteServer } = useServers();
     const {
@@ -43,12 +46,27 @@ export const TerminalEditorPage = () => {
         }
     }, [selectedServerId]);
 
+    const onServerClick = (serverId: number) => {
+        setSelectedDirectory(null);
+        setSelectedServerId(serverId);
+    };
+
     const onServerDelete = (serverId: number) => {
         if (serverId === selectedServerId) {
             setSelectedServerId(null);
         }
 
         deleteServer(serverId);
+    };
+
+    const onDirectoryClick = (directoryId: number) => {
+        const newSelectedDirectory = directories.find((directory) => directory.id == directoryId);
+
+        if (!newSelectedDirectory) {
+            return;
+        }
+
+        setSelectedDirectory(newSelectedDirectory);
     };
 
     return <Page title="Terminal Editor" routes={[]}>
@@ -65,8 +83,8 @@ export const TerminalEditorPage = () => {
                 {servers.map(server => <TerminalListItem
                     key={server.id}
                     label={server.name}
+                    onClick={() => onServerClick(server.id)}
                     onDelete={() => onServerDelete(server.id)}
-                    onClick={() => setSelectedServerId(server.id)}
                 />)}
             </div>
             <div className="terminal-editor-page__server-list">
@@ -97,14 +115,13 @@ export const TerminalEditorPage = () => {
                 {isLoadingDirectories ? <Loader /> : directories.map(directory => <TerminalListItem
                     key={directory.id}
                     label={directory.name}
-                    onClick={() => {}}
+                    onClick={() => onDirectoryClick(directory.id)}
                     onDelete={() => deleteDirectory(directory.serverId, directory.id)}
                 />)}
             </div>
             <div>
-                Directory Editor
+                {selectedDirectory && <DirectoryEditor directory={selectedDirectory} updateDirectory={() => {}} />}
             </div>
         </div>
-        <div>File Modal</div>
     </Page>;
 };

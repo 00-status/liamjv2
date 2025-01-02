@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "../../SharedComponents/Button/Button";
 import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
@@ -19,9 +19,24 @@ export const DirectoryEditor = (props: Props) => {
     const [name, setName] = useState<string>(directory.name);
     const [dateCreated, setDateCreated] = useState<string>(directory.dateCreated);
     const [parentDirectory, setParentDirectory] = useState<number>(directory.parentDirectory);
-
     const [subDirectories, setSubDirectories] = useState<Array<number>>(directory.subDirectories);
+
     const [currentSubDirectoryId, setCurrentSubDirectoryId ] = useState("");
+
+    useEffect(() => {
+        setServerId(directory.id)
+        setName(directory.name)
+        setDateCreated(directory.dateCreated)
+        setParentDirectory(directory.parentDirectory)
+        setSubDirectories(directory.subDirectories)
+    }, [
+        setServerId,
+        setName,
+        setDateCreated,
+        setParentDirectory,
+        setSubDirectories,
+        directory
+    ]);
 
     const saveButton = <Button>Save Directory <EditFileIcon /></Button>;
 
