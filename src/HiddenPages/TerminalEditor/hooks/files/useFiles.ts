@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-type File = {
+export type File = {
     id: number;
     directoryId: number;
     name: string;
