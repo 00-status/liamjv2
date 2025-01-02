@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useCreateFile } from "./useCreateFile";
+import { usedeleteFile } from "./useDeleteFile";
 
 export type File = {
     id: number;
@@ -17,6 +18,7 @@ type UseFiles = {
     isLoadingFiles: boolean;
     fetchFiles: (directoryId: number) => void;
     createFile: (file: File) => void;
+    deleteFile: (directoryId: number, fileId: number) => void;
 };
 
 export const useFiles = (): UseFiles => {
@@ -32,11 +34,13 @@ export const useFiles = (): UseFiles => {
     }, [setFiles, setIsLoadingFiles]);
 
     const { createFile } = useCreateFile(fetchFiles);
+    const { deleteFile } = usedeleteFile(fetchFiles);
 
     return {
         files,
         isLoadingFiles,
         fetchFiles,
-        createFile
+        createFile,
+        deleteFile
     };
 };
