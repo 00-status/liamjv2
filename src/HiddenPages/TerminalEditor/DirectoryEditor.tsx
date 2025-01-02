@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
+import './directory-editor.css';
 import { Button } from "../../SharedComponents/Button/Button";
 import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
@@ -41,6 +42,20 @@ export const DirectoryEditor = (props: Props) => {
 
     const {setMessageList} = useContext(ToastMessageContext);
 
+    const addSubDirectory = () => {
+        if (!currentSubDirectoryId) {
+            return;
+        }
+
+        const isAlreadyInList = subDirectories.find(subDirectoryId => subDirectoryId == Number(currentSubDirectoryId));
+
+        if (isAlreadyInList) {
+            return;
+        }
+
+        setSubDirectories((subDirectories) => [...subDirectories, Number(currentSubDirectoryId)])
+    };
+
     const onSave = () => {
         if (!serverId) {
             setMessageList(state => [...state, { message: "Error: Must set a server ID!"}]);
@@ -64,7 +79,7 @@ export const DirectoryEditor = (props: Props) => {
     const saveButton = <Button onClick={onSave}>Save Directory <EditFileIcon /></Button>;
 
     return <Card title={name} button={saveButton}>
-        <div>
+        <div className="directory-editor">
             <TextInput
                 placeholder="server ID"
                 value={serverId || ""}
@@ -80,28 +95,28 @@ export const DirectoryEditor = (props: Props) => {
                 value={dateCreated}
                 onChange={value => setDateCreated(value || "")}
             />
-        </div>
-        <div>
             <TextInput
                 placeholder="parent directory ID"
                 value={parentDirectory || ""}
                 onChange={value => setParentDirectory(value ? Number(value) : null)}
             />
-            <div>
-                <TextInput placeholder="child directory ID" value={currentSubDirectoryId} />
-                <Button>
-                    <PlusIcon />
+            <div className="directory-editor__inline-form">
+                <TextInput
+                    placeholder="sub-directory ID"
+                    value={currentSubDirectoryId}
+                    onChange={value => setCurrentSubDirectoryId(value || "")}
+                />
+                <Button onClick={addSubDirectory}>
+                    Add ID <PlusIcon />
                 </Button>
             </div>
-        </div>
-        <div>
             <div>
                 {subDirectories.map((directoryId: number) => <div>{directoryId}</div>)}
             </div>
-        </div>
-        <hr className="divider" />
-        <div>
-            Files
+            <hr className="divider" />
+            <div>
+                Files
+            </div>
         </div>
     </Card>;
 };

@@ -1,0 +1,12 @@
+.directory-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.directory-editor__inline-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+}
