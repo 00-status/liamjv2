@@ -19,7 +19,13 @@ export const TerminalEditorPage = () => {
     //          READ ✅
     //          Create ✅
     //          Delete ✅
-    //          Update 
+    //          Update ✅
+    // TODO:
+    //      Files
+    //          Create
+    //          Read
+    //          Delete
+    //          Update
 
     const [newServerName, setNewServerName] = useState<string>("");
     const [selectedServerId, setSelectedServerId] = useState<number|null>(null);

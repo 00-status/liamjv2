@@ -6,7 +6,6 @@ import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Directory } from "./hooks/directories/useDirectories";
 import { Card } from "../../SharedComponents/Card/Card";
-import { EditFileIcon } from "../../SharedComponents/Icons/EditFileIcon";
 import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
 
 type Props = {
@@ -23,7 +22,7 @@ export const DirectoryEditor = (props: Props) => {
     const [parentDirectory, setParentDirectory] = useState<number|null>(directory.parentDirectory);
     const [subDirectories, setSubDirectories] = useState<Array<number>>(directory.subDirectories);
 
-    const [currentSubDirectoryId, setCurrentSubDirectoryId ] = useState("");
+    const [currentFileName, setCurrentFileName] = useState<string>("");
 
     useEffect(() => {
         setServerId(directory.serverId)
@@ -41,20 +40,6 @@ export const DirectoryEditor = (props: Props) => {
     ]);
 
     const {setMessageList} = useContext(ToastMessageContext);
-
-    const addSubDirectory = () => {
-        if (!currentSubDirectoryId) {
-            return;
-        }
-
-        const isAlreadyInList = subDirectories.find(subDirectoryId => subDirectoryId == Number(currentSubDirectoryId));
-
-        if (isAlreadyInList) {
-            return;
-        }
-
-        setSubDirectories((subDirectories) => [...subDirectories, Number(currentSubDirectoryId)])
-    };
 
     const onSave = () => {
         if (!serverId) {
@@ -76,7 +61,7 @@ export const DirectoryEditor = (props: Props) => {
         updateDirectory(newDirectory);
     };
 
-    const saveButton = <Button onClick={onSave}>Save Directory <EditFileIcon /></Button>;
+    const saveButton = <Button onClick={onSave}>Save Directory</Button>;
 
     return <Card title={name} button={saveButton}>
         <div className="directory-editor">
@@ -106,6 +91,17 @@ export const DirectoryEditor = (props: Props) => {
             <hr className="divider" />
             <div>
                 Files
+                <div className="directory-editor__inline-form">
+                    <TextInput
+                        placeholder="file name"
+                        value={currentFileName}
+                        onChange={value => setCurrentFileName(value || "")}
+                    />
+                    <Button>
+                        <PlusIcon />
+                    </Button>
+                </div>
+                {directory.files.map(file => file.name)}
             </div>
         </div>
     </Card>;
