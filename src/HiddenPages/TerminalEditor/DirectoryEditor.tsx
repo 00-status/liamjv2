@@ -7,6 +7,8 @@ import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Directory } from "./hooks/directories/useDirectories";
 import { Card } from "../../SharedComponents/Card/Card";
 import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
+import { File, useFiles } from "./hooks/files/useFiles";
+import { Loader } from "../../SharedComponents/Loader/Loader";
 
 type Props = {
     directory: Directory;
@@ -14,6 +16,8 @@ type Props = {
 };
 
 export const DirectoryEditor = (props: Props) => {
+    const { setMessageList } = useContext(ToastMessageContext);
+
     const { directory, updateDirectory } = props;
 
     const [serverId, setServerId] = useState<number|null>(directory.serverId);
@@ -23,6 +27,12 @@ export const DirectoryEditor = (props: Props) => {
     const [subDirectories, setSubDirectories] = useState<Array<number>>(directory.subDirectories);
 
     const [currentFileName, setCurrentFileName] = useState<string>("");
+
+    const { isLoadingFiles, files, fetchFiles, createFile } = useFiles();
+
+    useEffect(() => {
+        fetchFiles(directory.id);
+    }, [fetchFiles, directory]);
 
     useEffect(() => {
         setServerId(directory.serverId)
@@ -39,7 +49,21 @@ export const DirectoryEditor = (props: Props) => {
         directory
     ]);
 
-    const {setMessageList} = useContext(ToastMessageContext);
+    const onCreateFile = () => {
+        const newFile: File = {
+            id: 0,
+            directoryId: directory.id,
+            name: currentFileName,
+            contents: "",
+            encryptionCode: "",
+            creatorUserName: "",
+            dateCreated: (new Date()).toISOString(),
+            dateModified: (new Date()).toISOString()
+        };
+
+        setCurrentFileName("");
+        createFile(newFile);
+    };
 
     const onSave = () => {
         if (!serverId) {
@@ -97,11 +121,11 @@ export const DirectoryEditor = (props: Props) => {
                         value={currentFileName}
                         onChange={value => setCurrentFileName(value || "")}
                     />
-                    <Button>
+                    <Button onClick={onCreateFile}>
                         <PlusIcon />
                     </Button>
                 </div>
-                {directory.files.map(file => file.name)}
+                {isLoadingFiles ? <Loader /> : files.map(file => file.name)}
             </div>
         </div>
     </Card>;
