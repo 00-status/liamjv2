@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import './directory-editor.css';
-import { Button } from "../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Directory } from "./hooks/directories/useDirectories";
@@ -9,6 +9,9 @@ import { Card } from "../../SharedComponents/Card/Card";
 import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
 import { File, useFiles } from "./hooks/files/useFiles";
 import { Loader } from "../../SharedComponents/Loader/Loader";
+import { FileEditorModal } from "./FileEditorModal";
+import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
+import { PencilIcon } from "../../SharedComponents/Icons/PencilIcon";
 
 type Props = {
     directory: Directory;
@@ -27,8 +30,9 @@ export const DirectoryEditor = (props: Props) => {
     const [subDirectories, setSubDirectories] = useState<Array<number>>(directory.subDirectories);
 
     const [currentFileName, setCurrentFileName] = useState<string>("");
+    const [selectedFile, setSelectedFile] = useState<File|null>(null);
 
-    const { isLoadingFiles, files, fetchFiles, createFile } = useFiles();
+    const { isLoadingFiles, files, fetchFiles, createFile, deleteFile } = useFiles();
 
     useEffect(() => {
         fetchFiles(directory.id);
@@ -125,8 +129,17 @@ export const DirectoryEditor = (props: Props) => {
                         <PlusIcon />
                     </Button>
                 </div>
-                {isLoadingFiles ? <Loader /> : files.map(file => file.name)}
+                {isLoadingFiles ? <Loader /> : files.map(file => <div key={file.id}>
+                    {file.name}
+                    <Button onClick={() => setSelectedFile(file)}><PencilIcon /></Button>
+                    <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteFile(file.directoryId, file.id)}><TrashIcon /></Button>
+                </div>)}
             </div>
         </div>
+        {selectedFile && <FileEditorModal
+            file={selectedFile}
+            isOpen={!!selectedFile}
+            onClose={() => setSelectedFile(null)}
+        />}
     </Card>;
 };
