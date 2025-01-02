@@ -83,7 +83,7 @@ export const TerminalEditorPage = () => {
                 </div>
                 {servers.map(server => <TerminalListItem
                     key={server.id}
-                    label={server.name}
+                    label={server.id + " | " + server.name}
                     onClick={() => onServerClick(server.id)}
                     onDelete={() => onServerDelete(server.id)}
                 />)}
@@ -115,7 +115,7 @@ export const TerminalEditorPage = () => {
                 </div>}
                 {isLoadingDirectories ? <Loader /> : directories.map(directory => <TerminalListItem
                     key={directory.id}
-                    label={directory.name}
+                    label={directory.id + " | " + directory.name}
                     onClick={() => onDirectoryClick(directory.id)}
                     onDelete={() => deleteDirectory(directory.serverId, directory.id)}
                 />)}

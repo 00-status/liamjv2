@@ -26,7 +26,7 @@ export const DirectoryEditor = (props: Props) => {
     const [currentSubDirectoryId, setCurrentSubDirectoryId ] = useState("");
 
     useEffect(() => {
-        setServerId(directory.id)
+        setServerId(directory.serverId)
         setName(directory.name)
         setDateCreated(directory.dateCreated)
         setParentDirectory(directory.parentDirectory)
@@ -100,16 +100,6 @@ export const DirectoryEditor = (props: Props) => {
                 value={parentDirectory || ""}
                 onChange={value => setParentDirectory(value ? Number(value) : null)}
             />
-            <div className="directory-editor__inline-form">
-                <TextInput
-                    placeholder="sub-directory ID"
-                    value={currentSubDirectoryId}
-                    onChange={value => setCurrentSubDirectoryId(value || "")}
-                />
-                <Button onClick={addSubDirectory}>
-                    Add ID <PlusIcon />
-                </Button>
-            </div>
             <div>
                 {subDirectories.map((directoryId: number) => <div>{directoryId}</div>)}
             </div>
