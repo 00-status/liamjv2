@@ -33,6 +33,7 @@ export const TerminalEditorPage = () => {
         directories,
         fetchDirectories,
         createDirectory,
+        updateDirectory,
         deleteDirectory
     } = useDirectories();
 
@@ -101,7 +102,7 @@ export const TerminalEditorPage = () => {
                                 serverId: selectedServerId,
                                 name: newDirectoryName,
                                 dateCreated: (new Date()).toISOString(),
-                                parentDirectory: 0,
+                                parentDirectory: null,
                                 subDirectories: [],
                                 files: []
                             };
@@ -120,7 +121,10 @@ export const TerminalEditorPage = () => {
                 />)}
             </div>
             <div>
-                {selectedDirectory && <DirectoryEditor directory={selectedDirectory} updateDirectory={() => {}} />}
+                {selectedDirectory && <DirectoryEditor
+                    directory={selectedDirectory}
+                    updateDirectory={updateDirectory}
+                />}
             </div>
         </div>
     </Page>;

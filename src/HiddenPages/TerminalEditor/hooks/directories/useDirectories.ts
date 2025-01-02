@@ -1,13 +1,14 @@
 import { useCallback, useState } from "react";
 import { useCreateDirectory } from "./useCreateDirectory";
 import { useDeleteDirectory } from "./useDeleteDirectory";
+import { useUpdateDirectory } from "./useUpdateDirectory";
 
 export type Directory = {
     id: number;
     serverId: number;
     name: string;
     dateCreated: string;
-    parentDirectory: number;
+    parentDirectory: number | null;
     subDirectories: Array<number>;
     files: Array<any>;
 };
@@ -18,6 +19,7 @@ type UseDirectories = {
     directories: Array<Directory>;
     fetchDirectories: (serverId: number) => void;
     createDirectory: (directory: Directory) => void;
+    updateDirectory: (directory: Directory) => void;
     deleteDirectory: (serverId: number, DirectoryId: number) => void;
 };
 
@@ -34,6 +36,7 @@ export const useDirectories = (): UseDirectories => {
     }, [setDirectories]);
 
     const { createDirectory } = useCreateDirectory(fetchDirectories);
+    const { updateDirectory } = useUpdateDirectory(fetchDirectories);
     const { isDeleting, deleteDirectory } = useDeleteDirectory(fetchDirectories);
 
     return {
@@ -42,6 +45,7 @@ export const useDirectories = (): UseDirectories => {
         directories,
         fetchDirectories,
         createDirectory,
+        updateDirectory,
         deleteDirectory
     };
 };
