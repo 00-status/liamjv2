@@ -78,8 +78,8 @@ export const TerminalEditorPage = () => {
 
     return <Page title="Terminal Editor" routes={[]}>
         <div className="terminal-editor-page">
-            <div className="terminal-editor-page__server-list">
-                <div className="terminal-editor-page__server-input">
+            <div className="terminal-editor-page__list">
+                <div className="terminal-editor-page__input">
                     <TextInput
                         placeholder="server name"
                         value={newServerName}
@@ -94,8 +94,8 @@ export const TerminalEditorPage = () => {
                     onDelete={() => onServerDelete(server.id)}
                 />)}
             </div>
-            <div className="terminal-editor-page__server-list">
-                {selectedServerId && <div className="terminal-editor-page__server-input">
+            <div className="terminal-editor-page__list">
+                {selectedServerId && <div className="terminal-editor-page__input">
                     <TextInput
                         placeholder="directory name"
                         value={newDirectoryName}
