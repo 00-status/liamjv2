@@ -12,6 +12,7 @@ import { NotFoundPage } from './NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
+import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
 
 initDataLayer();
 gtag('consent', 'default', {
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
     },
     { path: "/terminal", element: <TerminalPage /> },
     { path: "/unlisted/weapon_effects", element: <WeaponEffectList /> },
+    { path: "/unlisted/terminal_editor", element: <TerminalEditorPage /> },
     { path: '*', element: <NotFoundPage /> }
 ]);
 
