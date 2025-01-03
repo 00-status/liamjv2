@@ -129,10 +129,20 @@ export const DirectoryEditor = (props: Props) => {
                         <PlusIcon />
                     </Button>
                 </div>
-                {isLoadingFiles ? <Loader /> : files.map(file => <div key={file.id}>
+                {isLoadingFiles ? <Loader /> : files.map(file => <div
+                    className="directory-editor__file-item"
+                    key={file.id}
+                >
                     {file.name}
-                    <Button onClick={() => setSelectedFile(file)}><PencilIcon /></Button>
-                    <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteFile(file.directoryId, file.id)}><TrashIcon /></Button>
+                    <div className="directory-editor__file-item-buttons">
+                        <Button onClick={() => setSelectedFile(file)}><PencilIcon /></Button>
+                        <Button
+                            buttonTheme={ButtonTheme.Delete}
+                            onClick={() => deleteFile(file.directoryId, file.id)}
+                        >
+                            <TrashIcon />
+                        </Button>
+                    </div>
                 </div>)}
             </div>
         </div>

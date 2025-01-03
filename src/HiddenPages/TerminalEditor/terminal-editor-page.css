@@ -1,12 +1,15 @@
 .terminal-editor-page {
     display: flex;
     flex-direction: row;
+    width: 100%;
     gap: 20px;
 }
 
 .terminal-editor-page__server-list {
     display: flex;
     flex-direction: column;
+    flex: 1;
+
     gap: 12px;
 }
 
@@ -16,4 +19,8 @@
     justify-content: space-between;
 
     gap: 20px;
+}
+
+.terminal-editor-page__directory-editor {
+    flex: 6;
 }

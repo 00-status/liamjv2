@@ -126,7 +126,7 @@ export const TerminalEditorPage = () => {
                     onDelete={() => deleteDirectory(directory.serverId, directory.id)}
                 />)}
             </div>
-            <div>
+            <div className="terminal-editor-page__directory-editor">
                 {selectedDirectory && <DirectoryEditor
                     directory={selectedDirectory}
                     updateDirectory={updateDirectory}
