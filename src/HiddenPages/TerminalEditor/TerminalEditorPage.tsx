@@ -22,9 +22,9 @@ export const TerminalEditorPage = () => {
     //          Update ✅
     // TODO:
     //      Files
-    //          Create
-    //          Read
-    //          Delete
+    //          Create ✅
+    //          Read ✅
+    //          Delete ✅
     //          Update
 
     const [newServerName, setNewServerName] = useState<string>("");
