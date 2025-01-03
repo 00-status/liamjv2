@@ -32,7 +32,7 @@ export const DirectoryEditor = (props: Props) => {
     const [currentFileName, setCurrentFileName] = useState<string>("");
     const [selectedFile, setSelectedFile] = useState<File|null>(null);
 
-    const { isLoadingFiles, files, fetchFiles, createFile, deleteFile } = useFiles();
+    const { isLoadingFiles, files, fetchFiles, createFile, updateFile, deleteFile } = useFiles();
 
     useEffect(() => {
         fetchFiles(directory.id);
@@ -138,6 +138,7 @@ export const DirectoryEditor = (props: Props) => {
         </div>
         {selectedFile && <FileEditorModal
             file={selectedFile}
+            onSubmit={updateFile}
             isOpen={!!selectedFile}
             onClose={() => setSelectedFile(null)}
         />}
