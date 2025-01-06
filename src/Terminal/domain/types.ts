@@ -50,6 +50,3 @@ export const validCommands = new Map<string, IHandler>([
     ['clera', ClearHandler],
     ['pwd', WorkingDirectoryHandler],
 ]);
-
-// In the WorkingDirectoryHandler file
-
