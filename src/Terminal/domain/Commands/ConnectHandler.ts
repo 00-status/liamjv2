@@ -1,8 +1,8 @@
 
 import { servers } from "../directories";
-import { ICommand } from "../types";
+import { IHandler } from "../types";
 
-export const ConnectCommand: ICommand = {
+export const ConnectHandler: IHandler = {
     execute(
         command,
         terminal,

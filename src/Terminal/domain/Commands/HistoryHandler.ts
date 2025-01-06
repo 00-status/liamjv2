@@ -1,6 +1,6 @@
-import { ICommand } from "../types";
+import { IHandler } from "../types";
 
-export const HistoryCommand: ICommand = {
+export const HistoryHandler: IHandler = {
     execute(
         command,
         terminal,

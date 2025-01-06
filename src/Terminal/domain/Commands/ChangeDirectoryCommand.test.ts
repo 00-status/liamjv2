@@ -1,6 +1,6 @@
 import { directories, startingDirectory } from "../directories";
 import { Command, TerminalDirectory } from "../types";
-import { ChangeDirectoryCommand } from "./ChangeDirectoryCommand";
+import { ChangeDirectoryHandler } from "./ChangeDirectoryHandler";
 
 describe('ChangeDirectoryCommand', () => {
     const setServerName = jest.fn();
@@ -14,7 +14,7 @@ describe('ChangeDirectoryCommand', () => {
             workingDirectory: '/'
         };
 
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -38,7 +38,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails/john');
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -61,7 +61,7 @@ describe('ChangeDirectoryCommand', () => {
             workingDirectory: '/'
         };
 
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -85,7 +85,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails/john')
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -109,7 +109,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails/john');
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -133,7 +133,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails/john')
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -157,7 +157,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails')
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,
@@ -181,7 +181,7 @@ describe('ChangeDirectoryCommand', () => {
         };
 
         const startingDirectory = directories.get('/emails/john')
-        ChangeDirectoryCommand.execute(
+        ChangeDirectoryHandler.execute(
             executedCommand,
             [],
             setServerName,

@@ -1,7 +1,7 @@
 import { navigateDirectories } from "../navigateDirectories";
-import { ICommand } from "../types";
+import { IHandler } from "../types";
 
-export const ChangeDirectoryCommand: ICommand = {
+export const ChangeDirectoryHandler: IHandler = {
     execute: function (
         command,
         terminal,

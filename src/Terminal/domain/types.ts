@@ -1,12 +1,12 @@
 import { TerminalState } from "../Terminal";
-import { ChangeDirectoryCommand } from "./Commands/ChangeDirectoryCommand";
-import { ClearCommand } from "./Commands/ClearCommand";
-import { ConnectCommand } from "./Commands/ConnectCommand";
-import { HelpCommand } from "./Commands/HelpCommand";
-import { HistoryCommand } from "./Commands/HistoryCommand";
-import { ListCommand } from "./Commands/ListCommand";
-import { OpenCommand } from "./Commands/OpenCommand";
-import { WorkingDirectoryCommand } from "./Commands/WorkingDirectoryCommand";
+import { ChangeDirectoryHandler } from "./Commands/ChangeDirectoryHandler";
+import { ClearHandler } from "./Commands/ClearHandler";
+import { ConnectHandler } from "./Commands/ConnectHandler";
+import { HelpHandler } from "./Commands/HelpHandler";
+import { HistoryHandler } from "./Commands/HistoryHandler";
+import { ListHandler } from "./Commands/ListHandler";
+import { OpenHandler } from "./Commands/OpenHandler";
+import { WorkingDirectoryHandler } from "./Commands/WorkingDirectoryHandler";
 
 export type TerminalDirectory = {
     name: string;
@@ -30,7 +30,7 @@ export type Command = {
     workingDirectory: string;
 };
 
-export interface ICommand {
+export interface IHandler {
     execute(
         command: Command,
         terminal: TerminalState,
@@ -38,15 +38,18 @@ export interface ICommand {
     ): string;
 };
 
-export const validCommands = new Map<string, ICommand>([
-    ["help", HelpCommand],
-    ["history", HistoryCommand],
-    ['cd', ChangeDirectoryCommand],
-    ['list', ListCommand],
-    ['ls', ListCommand],
-    ['open', OpenCommand],
-    ['connect', ConnectCommand],
-    ['clear', ClearCommand],
-    ['clera', ClearCommand],
-    ['pwd', WorkingDirectoryCommand],
+export const validCommands = new Map<string, IHandler>([
+    ["help", HelpHandler],
+    ["history", HistoryHandler],
+    ['cd', ChangeDirectoryHandler],
+    ['list', ListHandler],
+    ['ls', ListHandler],
+    ['open', OpenHandler],
+    ['connect', ConnectHandler],
+    ['clear', ClearHandler],
+    ['clera', ClearHandler],
+    ['pwd', WorkingDirectoryHandler],
 ]);
+
+// In the WorkingDirectoryHandler file
+

@@ -1,6 +1,6 @@
-import { ICommand } from "../types";
+import { IHandler } from "../types";
 
-export const WorkingDirectoryCommand: ICommand = {
+export const WorkingDirectoryHandler: IHandler = {
     execute(
         command,
         terminal,

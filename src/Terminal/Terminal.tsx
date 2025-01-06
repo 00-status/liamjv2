@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gtag } from "ga-gtag";
 
 import './terminal.css';
-import { Command, ICommand, TerminalDirectory, validCommands } from "./domain/types";
+import { Command, IHandler, TerminalDirectory, validCommands } from "./domain/types";
 import { directories, startingDirectory } from "./domain/directories";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 
@@ -126,7 +126,7 @@ const executeCommand = (
     currentCommand: Command
 ): string => {
     const textCommand = currentCommand.text.split(' ');
-    const command: ICommand|undefined = validCommands.get(textCommand[0]);
+    const command: IHandler|undefined = validCommands.get(textCommand[0]);
 
     if (command) {
         gtag("event", "terminal_command", {

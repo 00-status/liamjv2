@@ -1,7 +1,7 @@
 
-import { ICommand } from "../types";
+import { IHandler } from "../types";
 
-export const ClearCommand: ICommand = {
+export const ClearHandler: IHandler = {
     execute(
         command,
         terminal,
