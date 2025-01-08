@@ -3,8 +3,10 @@ import { gtag } from "ga-gtag";
 
 import './terminal.css';
 import { Command, IHandler, TerminalDirectory, validCommands } from "./domain/types";
-import { directories, startingDirectory } from "./domain/directories";
+import { startingDirectory } from "./domain/directories";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
+import { Server } from "./hooks/server/useServers";
+import { Directory } from "./hooks/directories/useDirectories";
 
 type Output = {
     id: string;
@@ -12,19 +14,56 @@ type Output = {
 };
 
 export type TerminalState = {
-    serverName: string;
-    directories: Map<string, TerminalDirectory>;
+    servers: Array<Server>;
+    currentServer: Server;
+    directories: Array<Directory>;
     currentDirectory: TerminalDirectory;
+    fetchDirectories: (serverId: number) => void;
     commandHistory: Array<Command>;
     outputs: Array<Output>;
 };
 
-export const Terminal = () => {
+type Props = {
+    servers: Array<Server>;
+    directories: Array<Directory>;
+    fetchDirectories: (serverId: number) => void;
+};
+
+export const Terminal = (props: Props) => {
+    // Fetch servers from API
+    // Fetch assocciated Directories and Files from API
+    // if the server response is null or the request has not completed yet
+    //      Return null
+    // else
+    //      set the directories in the TerminalState
+
+    // Switching Servers
+    // Find requested server from server list
+    // If the server exists in the list
+    //      Request directories and files from API
+    // else
+    //      Stay on the current server.
+
+    // New terminalState:
+    // type TerminalState = {
+    //     servers: Array<Server>;
+    //     currentServer: string;
+    //     directories: Map<string, TerminalDirectory>;
+    //     currentDirectory: TerminalDirectory;
+    //     fetchDirectories: (serverId: number) => void;
+    //     commandHistory: Array<Command>;
+    //     outputs: Array<Output>;
+    // }
+
+    const { servers, directories, fetchDirectories } = props;
+
     const [terminal, setTerminal] = useState<TerminalState>(
         {
-            serverName: 'local',
+            servers: servers,
+            currentServer: servers[0],
             directories: directories,
             currentDirectory: startingDirectory,
+            fetchDirectories,
             commandHistory: [],
             outputs: [
                 { id: crypto.randomUUID(), output: 'Welcome. Type "help" for a list of commands' }
@@ -59,7 +98,7 @@ export const Terminal = () => {
         </div>
         <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
             <div>
-                {terminal.serverName + '@' + currentCommand.workingDirectory + '% '}
+                {terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% '}
             </div>
             <input
                 ref={inputRef}
@@ -84,7 +123,7 @@ export const Terminal = () => {
                                 ...state,
                                 outputs: [
                                     ...terminal.outputs,
-                                    { id: crypto.randomUUID(), output: terminal.serverName + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
+                                    { id: crypto.randomUUID(), output: terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
                                     { id: crypto.randomUUID(), output: result }
                                 ],
                                 commandHistory: [

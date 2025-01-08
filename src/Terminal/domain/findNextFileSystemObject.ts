@@ -1,10 +1,11 @@
+import { Directory } from "../hooks/directories/useDirectories";
 import { navigateDirectories } from "./navigateDirectories";
 import { Command, TerminalDirectory } from "./types";
 
 export const findNextFileSystemObject = (
     command: Command,
     setCommand: (command: Command) => void,
-    directories: Map<string, TerminalDirectory>,
+    directories: Array<Directory>,
     currentDirectory: TerminalDirectory
 ): void => {
     const commandStringGroups = command.text.trim().split(" ");
@@ -23,7 +24,7 @@ export const findNextFileSystemObject = (
 
 const findFileName = (
     filePathGroups: Array<string>,
-    directories: Map<string, TerminalDirectory>,
+    directories: Array<Directory>,
     currentDirectory: TerminalDirectory
 ): string | null => {
     if (filePathGroups.length > 1) {
