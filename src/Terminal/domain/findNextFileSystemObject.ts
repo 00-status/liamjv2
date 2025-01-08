@@ -1,12 +1,13 @@
 import { Directory } from "../hooks/directories/useDirectories";
+import { File } from "../hooks/files/useFiles";
 import { navigateDirectories } from "./navigateDirectories";
-import { Command, TerminalDirectory } from "./types";
+import { Command } from "./types";
 
 export const findNextFileSystemObject = (
     command: Command,
     setCommand: (command: Command) => void,
     directories: Array<Directory>,
-    currentDirectory: TerminalDirectory
+    currentDirectory: Directory
 ): void => {
     const commandStringGroups = command.text.trim().split(" ");
 
@@ -15,34 +16,58 @@ export const findNextFileSystemObject = (
     }
 
     const filePathGroups = commandStringGroups[1].split("/");
-    const newFilePath = findFileName(filePathGroups, directories, currentDirectory);
+    const fileName = filePathGroups[filePathGroups.length -1];
 
-    if (newFilePath) {
-        setCommand({ ...command, text: commandStringGroups[0] + " " + newFilePath });
+    const workingDirectory = findWorkingDirectory(filePathGroups, directories, currentDirectory);
+
+    const childDirectoryNames = findChildDirectories(fileName, directories, currentDirectory);
+    const fileNames = findFiles(fileName, workingDirectory);
+
+    const potentialNames = [...childDirectoryNames, ...fileNames];
+
+    if (potentialNames.length > 0) {
+        const newPath = command.text.endsWith("/")
+            ? command.text + potentialNames[0]
+            : command.text + "/" + potentialNames[0];
+        setCommand({ ...command, text: newPath });
     }
 };
 
-const findFileName = (
+const findWorkingDirectory = (
     filePathGroups: Array<string>,
     directories: Array<Directory>,
-    currentDirectory: TerminalDirectory
-): string | null => {
+    currentDirectory: Directory
+): Directory => {
     if (filePathGroups.length > 1) {
-        const fileName = filePathGroups.pop();
-        const directory = navigateDirectories(filePathGroups, directories, currentDirectory);
-
-        const potentialFiles = [...directory.files.keys(), ...directory.subDirectories];
-        const filteredFiles = potentialFiles.filter((file: string) => fileName ? file.startsWith(fileName) : false);
-
-        return filteredFiles.length > 0
-            ? filePathGroups.join("/") + "/" + filteredFiles[0]
-            : null;
+        return navigateDirectories(filePathGroups, directories, currentDirectory);
     } else {
-        const potentialFiles = [...currentDirectory.files.keys(), ...currentDirectory.subDirectories];
-        const filteredFiles = potentialFiles.filter((file: string) => file.startsWith(filePathGroups[0]));
-
-        return filteredFiles.length > 0
-            ? filteredFiles[0]
-            : null;
+        return currentDirectory;
     }
+};
+
+const findChildDirectories = (
+    fileName: string,
+    directories: Array<Directory>,
+    workingDirectory: Directory
+): Array<string> => {
+    const childDirectories = directories.filter((directory) => {
+        return workingDirectory.subDirectories.find(childDirectoryId => childDirectoryId === directory.id);
+    });
+
+    return childDirectories
+        .filter((directory: Directory) => {
+            return directory.name.startsWith(fileName);
+        })
+        .map(directory => directory.name);
+};
+
+const findFiles = (
+    fileName: string,
+    workingDirectory: Directory
+): Array<string> => {
+    return workingDirectory.files
+        .filter((file: File) => {
+            return file.name.startsWith(fileName);
+        })
+        .map(file => file.name);
 };

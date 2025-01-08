@@ -17,7 +17,7 @@ export type TerminalState = {
     servers: Array<Server>;
     currentServer: Server;
     directories: Array<Directory>;
-    currentDirectory: TerminalDirectory;
+    currentDirectory: Directory;
     fetchDirectories: (serverId: number) => void;
     commandHistory: Array<Command>;
     outputs: Array<Output>;
@@ -62,7 +62,7 @@ export const Terminal = (props: Props) => {
             servers: servers,
             currentServer: servers[0],
             directories: directories,
-            currentDirectory: startingDirectory,
+            currentDirectory: directories[0],
             fetchDirectories,
             commandHistory: [],
             outputs: [

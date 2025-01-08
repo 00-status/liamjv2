@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useCreateDirectory } from "./useCreateDirectory";
 import { useDeleteDirectory } from "./useDeleteDirectory";
 import { useUpdateDirectory } from "./useUpdateDirectory";
+import { File } from "../files/useFiles";
 
 export type Directory = {
     id: number;
@@ -10,7 +11,7 @@ export type Directory = {
     dateCreated: string;
     parentDirectory: number | null;
     subDirectories: Array<number>;
-    files: Array<any>;
+    files: Array<File>;
 };
 
 type UseDirectories = {

@@ -30,7 +30,7 @@ export const TerminalPage = () => {
             fetchServers();
         }
 
-        if (servers.length >= 0) {
+        if (servers.length > 0) {
             fetchDirectories(servers[0].id);
         }
     }, [servers, fetchServers, fetchDirectories]);
