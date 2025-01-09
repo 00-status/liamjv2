@@ -9,7 +9,7 @@ export const ListHandler: IHandler = {
     ): string {
         const { directories, currentDirectory } = terminal;
 
-        const commandChunks: string[] = command.text.trim().split(' ');
+        const commandChunks: string[] = command.trim().split(' ');
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
         const newDirectory = navigateDirectories(

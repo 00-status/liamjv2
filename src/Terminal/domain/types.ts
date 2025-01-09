@@ -31,7 +31,7 @@ export type Command = {
 
 export interface IHandler {
     execute(
-        command: Command,
+        command: string,
         terminal: TerminalState,
         setTerminal: (terminal: TerminalState) => void
     ): string;

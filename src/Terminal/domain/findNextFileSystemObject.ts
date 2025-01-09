@@ -1,18 +1,16 @@
 import { Directory } from "../hooks/directories/useDirectories";
 import { File } from "../hooks/files/useFiles";
 import { navigateDirectories } from "./navigateDirectories";
-import { Command } from "./types";
 
 export const findNextFileSystemObject = (
-    command: Command,
-    setCommand: (command: Command) => void,
+    command: string,
     directories: Array<Directory>,
     currentDirectory: Directory
-): void => {
-    const commandStringGroups = command.text.trim().split(" ");
+): string => {
+    const commandStringGroups = command.trim().split(" ");
 
     if (commandStringGroups.length <= 1) {
-        return;
+        return command;
     }
 
     const filePathGroups = commandStringGroups[1].split("/");
@@ -25,15 +23,18 @@ export const findNextFileSystemObject = (
 
     const potentialNames = [...childDirectoryNames, ...fileNames];
 
-    if (potentialNames.length > 0) {
-        const commandStringGroups = command.text.trim().split(" ");
-        const basePath = filePathGroups.length > 1
-            ? filePathGroups.slice(0, -1).join("/") + "/"
-            : "";
-        const newPath = `${commandStringGroups[0]} ${basePath ? `${basePath}` : ""}${potentialNames[0]}`;
+    if (potentialNames.length <= 0) {
+        return command;
 
-        setCommand({ ...command, text: newPath });
     }
+
+    // const commandStringGroups = command.trim().split(" ");
+    const basePath = filePathGroups.length > 1
+        ? filePathGroups.slice(0, -1).join("/") + "/"
+        : "";
+    const newPath = `${commandStringGroups[0]} ${basePath ? `${basePath}` : ""}${potentialNames[0]}`;
+
+    return newPath;
 };
 
 const findWorkingDirectory = (

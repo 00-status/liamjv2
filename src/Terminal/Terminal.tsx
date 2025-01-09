@@ -46,7 +46,7 @@ export const Terminal = (props: Props) => {
         }
     );
 
-    const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand());
+    const [currentCommand, setCurrentCommand] = useState<string>("");
 
     const outputRef = useRef<HTMLDivElement | null>(null);
 
@@ -69,12 +69,6 @@ export const Terminal = (props: Props) => {
     }, [directories, setTerminal]);
 
     useEffect(() => {
-        setCurrentCommand((state) => {
-            return {...state, workingDirectory: terminal.currentDirectory.name}
-        })
-    }, [terminal.currentDirectory]);
-
-    useEffect(() => {
         if (outputRef.current) {
             outputRef.current.scrollTop = outputRef.current.scrollHeight;
         }
@@ -88,8 +82,8 @@ export const Terminal = (props: Props) => {
         </div>
         <TerminalInput
             prefixText={commandPrefix}
-            currentCommandText={currentCommand.text}
-            onChange={(newValue) => setCurrentCommand({ ...currentCommand, text: newValue })}
+            currentCommandText={currentCommand}
+            onChange={(newValue) => setCurrentCommand(newValue)}
             onEnter={() => {
                 const commandResult = executeCommand(terminal, setTerminal, currentCommand);
 
@@ -98,40 +92,37 @@ export const Terminal = (props: Props) => {
                         ...state,
                         outputs: [
                             ...terminal.outputs,
-                            { id: crypto.randomUUID(), output: commandPrefix + currentCommand.text },
+                            { id: crypto.randomUUID(), output: commandPrefix + currentCommand },
                             { id: crypto.randomUUID(), output: commandResult }
                         ],
                         commandHistory: [
                             ...terminal.commandHistory,
-                            currentCommand
+                            { id: crypto.randomUUID(), text: currentCommand }
                         ]
                     };
                 });
 
-                setCurrentCommand(createNewCommand());
+                setCurrentCommand("");
             }}
             onTab={() => {
-                findNextFileSystemObject(
+                const nextFSO = findNextFileSystemObject(
                     currentCommand,
-                    setCurrentCommand,
                     terminal.directories,
                     terminal.currentDirectory
                 );
+
+                setCurrentCommand(nextFSO);
             }}
         />
     </div>;
 };
 
-const createNewCommand = (): Command => {
-    return { id: crypto.randomUUID(), text: '' };
-};
-
 const executeCommand = (
     terminal: TerminalState,
     setTerminal: (terminalState: TerminalState) => void,
-    currentCommand: Command
+    currentCommand: string
 ): string => {
-    const textCommand = currentCommand.text.split(' ');
+    const textCommand = currentCommand.split(' ');
     const command: IHandler|undefined = validCommands.get(textCommand[0]);
 
     if (!command) {

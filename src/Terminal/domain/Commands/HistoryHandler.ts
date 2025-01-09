@@ -6,6 +6,6 @@ export const HistoryHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        return terminal.commandHistory.map(command => command.text.trim()).join("\n");
+        return terminal.commandHistory.map(historicalCommand => historicalCommand.text.trim()).join("\n");
     }
 }

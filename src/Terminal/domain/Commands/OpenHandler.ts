@@ -11,7 +11,7 @@ export const OpenHandler: IHandler = {
     ): string {
         const {directories, currentDirectory} = terminal;
 
-        const path = command.text.replace(/^open\s+/, "").trim();
+        const path = command.replace(/^open\s+/, "").trim();
         const fileName = path.split("/").pop() ?? "";
 
         const file = findFile(path, fileName, directories, currentDirectory);

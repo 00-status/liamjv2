@@ -9,7 +9,7 @@ export const ConnectHandler: IHandler = {
     ): string {
         const { servers, fetchDirectories } = terminal;
 
-        const splitCommand = command.text.trim().split(" ");
+        const splitCommand = command.trim().split(" ");
 
         if (splitCommand.length != 2) {
             return "Cannot connect to server!";
