@@ -46,7 +46,7 @@ export const Terminal = (props: Props) => {
         }
     );
 
-    const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(terminal.currentDirectory.name));
+    const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand());
 
     const outputRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,27 +80,25 @@ export const Terminal = (props: Props) => {
         }
     }, [outputRef, terminal.outputs]);
 
+    const commandPrefix = terminal.currentServer.name + '@' + terminal.currentDirectory.name + '% ';
+
     return <div className="terminal">
         <div className="terminal__output-wrapper" ref={outputRef}>
             {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
         <TerminalInput
-            prefixText={terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% '}
+            prefixText={commandPrefix}
             currentCommandText={currentCommand.text}
             onChange={(newValue) => setCurrentCommand({ ...currentCommand, text: newValue })}
             onEnter={() => {
                 const commandResult = executeCommand(terminal, setTerminal, currentCommand);
-
-                const executedCommandString = terminal.currentServer.name
-                    + '@' + currentCommand.workingDirectory
-                    + '% ' + currentCommand.text;
 
                 setTerminal((state) => {
                     return {
                         ...state,
                         outputs: [
                             ...terminal.outputs,
-                            { id: crypto.randomUUID(), output: executedCommandString },
+                            { id: crypto.randomUUID(), output: commandPrefix + currentCommand.text },
                             { id: crypto.randomUUID(), output: commandResult }
                         ],
                         commandHistory: [
@@ -110,7 +108,7 @@ export const Terminal = (props: Props) => {
                     };
                 });
 
-                setCurrentCommand(createNewCommand(terminal.currentDirectory.name));
+                setCurrentCommand(createNewCommand());
             }}
             onTab={() => {
                 findNextFileSystemObject(
@@ -124,8 +122,8 @@ export const Terminal = (props: Props) => {
     </div>;
 };
 
-const createNewCommand = (directoryName: string): Command => {
-    return { id: crypto.randomUUID(), text: '', workingDirectory: directoryName };
+const createNewCommand = (): Command => {
+    return { id: crypto.randomUUID(), text: '' };
 };
 
 const executeCommand = (

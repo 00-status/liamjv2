@@ -27,7 +27,6 @@ export type TerminalFile = {
 export type Command = {
     id: string;
     text: string;
-    workingDirectory: string;
 };
 
 export interface IHandler {
