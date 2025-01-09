@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gtag } from "ga-gtag";
 
 import './terminal.css';
-import { Command, IHandler, TerminalDirectory, validCommands } from "./domain/types";
-import { startingDirectory } from "./domain/directories";
+import { Command, IHandler, validCommands } from "./domain/types";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 import { Server } from "./hooks/server/useServers";
 import { Directory } from "./hooks/directories/useDirectories";
@@ -30,31 +29,6 @@ type Props = {
 };
 
 export const Terminal = (props: Props) => {
-    // Fetch servers from API
-    // Fetch assocciated Directories and Files from API
-    // if the server response is null or the request has not completed yet
-    //      Return null
-    // else
-    //      set the directories in the TerminalState
-
-    // Switching Servers
-    // Find requested server from server list
-    // If the server exists in the list
-    //      Request directories and files from API
-    // else
-    //      Stay on the current server.
-
-    // New terminalState:
-    // type TerminalState = {
-    //     servers: Array<Server>;
-    //     currentServer: string;
-    //     directories: Map<string, TerminalDirectory>;
-    //     currentDirectory: TerminalDirectory;
-    //     fetchDirectories: (serverId: number) => void;
-    //     commandHistory: Array<Command>;
-    //     outputs: Array<Output>;
-    // }
-
     const { servers, directories, fetchDirectories } = props;
 
     const [terminal, setTerminal] = useState<TerminalState>(
@@ -79,6 +53,17 @@ export const Terminal = (props: Props) => {
     const onInputWrapperClick = () => {
         inputRef.current?.focus();
     };
+
+    useEffect(() => {
+        const currentDirectory = directories[0];
+        setTerminal((terminalState) => {
+            return {
+                ...terminalState,
+                directories,
+                currentDirectory
+            };
+        });
+    }, [directories, setTerminal]);
 
     useEffect(() => {
         setCurrentCommand((state) => {
