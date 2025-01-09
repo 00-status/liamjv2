@@ -20,7 +20,7 @@ export const findNextFileSystemObject = (
 
     const workingDirectory = findWorkingDirectory(filePathGroups, directories, currentDirectory);
 
-    const childDirectoryNames = findChildDirectories(fileName, directories, currentDirectory);
+    const childDirectoryNames = findChildDirectories(fileName, directories, workingDirectory);
     const fileNames = findFiles(fileName, workingDirectory);
 
     const potentialNames = [...childDirectoryNames, ...fileNames];
