@@ -7,9 +7,13 @@ export const ChangeDirectoryHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        const {directories, currentDirectory} = terminal;
+        const { directories, currentDirectory } = terminal;
 
-        const commandChunks: string[] = command.text.trim().split(' ');
+        if (!currentDirectory) {
+            return '';
+        }
+
+        const commandChunks: string[] = command.trim().split(' ');
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
         const newDirectory = navigateDirectories(

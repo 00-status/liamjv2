@@ -7,17 +7,27 @@ export const ListHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        const commandChunks: string[] = command.text.trim().split(' ');
+        const { directories, currentDirectory } = terminal;
+
+        if (!currentDirectory) {
+            return '';
+        }
+
+        const commandChunks: string[] = command.trim().split(' ');
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
         const newDirectory = navigateDirectories(
             directoryToMoveTo.split("/"),
-            terminal.directories,
-            terminal.currentDirectory
+            directories,
+            currentDirectory
         );
 
-        const subDirectories = [...newDirectory.subDirectories].map(directory => '{dir}\t' + directory);
-        const files = [...newDirectory.files.keys()].map(file => '{file}\t' + file);
+        const childDirectories = directories.filter((directory) => {
+            return newDirectory.subDirectories.find(childDirectoryId => childDirectoryId === directory.id);
+        });
+
+        const subDirectories = childDirectories.map(directory => '{dir}\t' + directory.name);
+        const files = newDirectory.files.map(file => '{file}\t' + file.name);
 
         return [...subDirectories, ...files].join("\n");
     }

@@ -1,5 +1,4 @@
 
-import { servers } from "../directories";
 import { IHandler } from "../types";
 
 export const ConnectHandler: IHandler = {
@@ -8,7 +7,9 @@ export const ConnectHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        const splitCommand = command.text.trim().split(" ");
+        const { servers } = terminal;
+
+        const splitCommand = command.trim().split(" ");
 
         if (splitCommand.length != 2) {
             return "Cannot connect to server!";
@@ -16,20 +17,18 @@ export const ConnectHandler: IHandler = {
 
         const serverName = splitCommand[1];
 
-        const newServers = servers[serverName];
-        const newRootDirectory = newServers?.get("/");
+        const newServer = servers.find(server => server.name === serverName);
 
-        if (!newServers || !newRootDirectory) {
+        if (!newServer) {
             return "Cannot Connect to server!";
         }
 
         setTerminal({
             ...terminal,
-            serverName,
-            directories: newServers,
-            currentDirectory: newRootDirectory
+            currentServer: newServer,
+            currentDirectory: null
         });
 
-        return "Connecting to " + serverName + "...";
+        return "Connecting to " + serverName + " server:";
     }
 }

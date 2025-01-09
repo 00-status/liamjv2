@@ -1,5 +1,7 @@
+import { Directory } from "../../hooks/directories/useDirectories";
+import { File } from "../../hooks/files/useFiles";
 import { navigateDirectories } from "../navigateDirectories";
-import { IHandler, TerminalFile } from "../types";
+import { IHandler } from "../types";
 
 export const OpenHandler: IHandler = {
     execute(
@@ -9,24 +11,27 @@ export const OpenHandler: IHandler = {
     ): string {
         const {directories, currentDirectory} = terminal;
 
-        const splitCommandText = command.text.trim().split(" ");
-
-        const filePathGroups = splitCommandText[1].split("/");
-
-        var file: TerminalFile | null = null;
-        if (filePathGroups.length > 1) {
-            const fileName = filePathGroups.pop();
-            const directory = navigateDirectories(filePathGroups, directories, currentDirectory);
-
-            file = directory.files.get(fileName ?? '') ?? null;
-        } else {
-            file = currentDirectory.files.get(filePathGroups[0]) ?? null;
+        if (!currentDirectory) {
+            return '';
         }
 
-        if (file) {
-            return file.contents;
-        } else {
-            return 'No such file exists!';
-        }
+        const path = command.replace(/^open\s+/, "").trim();
+        const fileName = path.split("/").pop() ?? "";
+
+        const file = findFile(path, fileName, directories, currentDirectory);
+
+        return file ? file.contents : 'No such file exists!';
     }
 }
+
+const findFile = (
+    path: string,
+    fileName: string,
+    directories: Array<Directory>,
+    currentDirectory: Directory
+): File | null => {
+    const directory = navigateDirectories(path.split("/"), directories, currentDirectory);
+
+    const fileToOpen = directory.files.find(directory => directory.name === fileName);
+    return fileToOpen ?? null;
+};

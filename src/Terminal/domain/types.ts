@@ -8,31 +8,14 @@ import { ListHandler } from "./Commands/ListHandler";
 import { OpenHandler } from "./Commands/OpenHandler";
 import { WorkingDirectoryHandler } from "./Commands/WorkingDirectoryHandler";
 
-export type TerminalDirectory = {
-    name: string;
-    dateCreated: string; // 2024-01-01 00:00:00
-    parent: string | null;
-    subDirectories: Array<string>;
-    files: Map<string, TerminalFile>;
-}
-
-export type TerminalFile = {
-    name: string;
-    contents: string;
-    creatorUsername: string;
-    dateCreated: string;
-    dateModified: string;
-};
-
 export type Command = {
     id: string;
     text: string;
-    workingDirectory: string;
 };
 
 export interface IHandler {
     execute(
-        command: Command,
+        command: string,
         terminal: TerminalState,
         setTerminal: (terminal: TerminalState) => void
     ): string;

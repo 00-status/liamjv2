@@ -1,4 +1,3 @@
-import { directories, startingDirectory } from "../directories";
 import { Command, TerminalDirectory } from "../types";
 import { ChangeDirectoryHandler } from "./ChangeDirectoryHandler";
 

@@ -5,28 +5,12 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Button } from "../../SharedComponents/Button/Button";
 import { TerminalListItem } from "./TerminalListItem";
-import { useServers } from "./hooks/server/useServers";
-import { Directory, useDirectories } from "./hooks/directories/useDirectories";
+import { useServers } from "../../Terminal/hooks/server/useServers";
+import { Directory, useDirectories } from "../../Terminal/hooks/directories/useDirectories";
 import { Loader } from "../../SharedComponents/Loader/Loader";
 import { DirectoryEditor } from "./DirectoryEditor";
 
 export const TerminalEditorPage = () => {
-    // ToDO
-    //      Fetch Servers ✅
-    //      Create Server ✅
-    //      Delete Server ✅
-    //      Directories
-    //          READ ✅
-    //          Create ✅
-    //          Delete ✅
-    //          Update ✅
-    // TODO:
-    //      Files
-    //          Create ✅
-    //          Read ✅
-    //          Delete ✅
-    //          Update
-
     const [newServerName, setNewServerName] = useState<string>("");
     const [selectedServerId, setSelectedServerId] = useState<number|null>(null);
 

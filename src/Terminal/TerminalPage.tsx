@@ -6,6 +6,8 @@ import './terminal-page.css';
 import { Terminal } from "./Terminal";
 import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
+import { useServers } from './hooks/server/useServers';
+import { useDirectories } from './hooks/directories/useDirectories';
 
 
 export const TerminalPage = () => {
@@ -19,6 +21,19 @@ export const TerminalPage = () => {
             "page_title": "Terminal"
         });
     }, [gtag]);
+
+    const { servers, fetchServers } = useServers();
+    const { directories, fetchDirectories } = useDirectories();
+
+    useEffect(() => {
+        if (servers.length === 0) {
+            fetchServers();
+        }
+
+        if (servers.length > 0) {
+            fetchDirectories(servers[0].id);
+        }
+    }, [servers, fetchServers, fetchDirectories]);
 
     return <div className="terminal-page">
         <div className="terminal-page__header">
@@ -39,7 +54,10 @@ export const TerminalPage = () => {
                 {[...Array(10).keys()].map((value: number) => <CodeBlockGenerator key={value} />)}
             </div>
             <div className="terminal-page__foreground">
-                <Terminal />
+                {servers.length !== 0 && directories.length !== 0
+                    ? <Terminal servers={servers} directories={directories} fetchDirectories={fetchDirectories} />
+                    : null
+                }
             </div>
         </div>
     </div>;
