@@ -7,7 +7,11 @@ export const WorkingDirectoryHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        const { currentDirectory, directories } = terminal;
+        const { directories, currentDirectory } = terminal;
+
+        if (!currentDirectory) {
+            return '';
+        }
 
         return assembleFullPathString(currentDirectory.id, directories);
     }

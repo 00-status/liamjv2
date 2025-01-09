@@ -7,7 +7,7 @@ export const ConnectHandler: IHandler = {
         terminal,
         setTerminal
     ): string {
-        const { servers, fetchDirectories } = terminal;
+        const { servers } = terminal;
 
         const splitCommand = command.trim().split(" ");
 
@@ -25,10 +25,9 @@ export const ConnectHandler: IHandler = {
 
         setTerminal({
             ...terminal,
-            currentServer: newServer
+            currentServer: newServer,
+            currentDirectory: null
         });
-
-        fetchDirectories(newServer.id);
 
         return "Connecting to " + serverName + " server...";
     }

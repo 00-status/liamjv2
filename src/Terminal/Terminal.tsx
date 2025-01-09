@@ -17,8 +17,7 @@ export type TerminalState = {
     servers: Array<Server>;
     currentServer: Server;
     directories: Array<Directory>;
-    currentDirectory: Directory;
-    fetchDirectories: (serverId: number) => void;
+    currentDirectory: Directory|null;
     commandHistory: Array<Command>;
     outputs: Array<Output>;
 };
@@ -38,7 +37,6 @@ export const Terminal = (props: Props) => {
             currentServer: servers[0],
             directories: directories,
             currentDirectory: directories[0],
-            fetchDirectories,
             commandHistory: [],
             outputs: [
                 { id: crypto.randomUUID(), output: 'Welcome. Type "help" for a list of commands' }
@@ -49,6 +47,12 @@ export const Terminal = (props: Props) => {
     const [currentCommand, setCurrentCommand] = useState<string>("");
 
     const outputRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!terminal.currentDirectory) {
+            fetchDirectories(terminal.currentServer.id);
+        }
+    }, [terminal.currentDirectory]);
 
     useEffect(() => {
         const currentDirectory = directories[0];
@@ -74,7 +78,7 @@ export const Terminal = (props: Props) => {
         }
     }, [outputRef, terminal.outputs]);
 
-    const commandPrefix = terminal.currentServer.name + '@' + terminal.currentDirectory.name + '% ';
+    const commandPrefix = terminal.currentServer.name + '@' + (terminal?.currentDirectory?.name ?? "") + '% ';
 
     return <div className="terminal">
         <div className="terminal__output-wrapper" ref={outputRef}>
@@ -105,13 +109,17 @@ export const Terminal = (props: Props) => {
                 setCurrentCommand("");
             }}
             onTab={() => {
-                const nextFSO = findNextFileSystemObject(
-                    currentCommand,
-                    terminal.directories,
-                    terminal.currentDirectory
-                );
+                const currentDirectory = terminal.currentDirectory;
 
-                setCurrentCommand(nextFSO);
+                if (currentDirectory) {
+                    const nextFSO = findNextFileSystemObject(
+                        currentCommand,
+                        terminal.directories,
+                        currentDirectory
+                    );
+    
+                    setCurrentCommand(nextFSO);
+                }
             }}
         />
     </div>;

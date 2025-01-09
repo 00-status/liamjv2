@@ -9,6 +9,10 @@ export const ChangeDirectoryHandler: IHandler = {
     ): string {
         const { directories, currentDirectory } = terminal;
 
+        if (!currentDirectory) {
+            return '';
+        }
+
         const commandChunks: string[] = command.trim().split(' ');
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 

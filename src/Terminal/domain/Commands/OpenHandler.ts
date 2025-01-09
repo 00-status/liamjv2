@@ -11,6 +11,10 @@ export const OpenHandler: IHandler = {
     ): string {
         const {directories, currentDirectory} = terminal;
 
+        if (!currentDirectory) {
+            return '';
+        }
+
         const path = command.replace(/^open\s+/, "").trim();
         const fileName = path.split("/").pop() ?? "";
 
