@@ -29,6 +29,6 @@ export const ConnectHandler: IHandler = {
             currentDirectory: null
         });
 
-        return "Connecting to " + serverName + " server...";
+        return "Connecting to " + serverName + " server:";
     }
 }

@@ -84,7 +84,8 @@ export const Terminal = (props: Props) => {
         <div className="terminal__output-wrapper" ref={outputRef}>
             {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
-        <TerminalInput
+        {!terminal.currentDirectory && <div className="terminal__loader">Loading</div>}
+        {terminal.currentDirectory && <TerminalInput
             prefixText={commandPrefix}
             currentCommandText={currentCommand}
             onChange={(newValue) => setCurrentCommand(newValue)}
@@ -121,7 +122,7 @@ export const Terminal = (props: Props) => {
                     setCurrentCommand(nextFSO);
                 }
             }}
-        />
+        />}
     </div>;
 };
 
