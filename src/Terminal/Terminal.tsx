@@ -6,6 +6,7 @@ import { Command, IHandler, validCommands } from "./domain/types";
 import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 import { Server } from "./hooks/server/useServers";
 import { Directory } from "./hooks/directories/useDirectories";
+import { TerminalInput } from "./TerminalInput";
 
 type Output = {
     id: string;
@@ -47,12 +48,7 @@ export const Terminal = (props: Props) => {
 
     const [currentCommand, setCurrentCommand] = useState<Command>(createNewCommand(terminal.currentDirectory.name));
 
-    const inputRef = useRef<HTMLInputElement | null>(null);
     const outputRef = useRef<HTMLDivElement | null>(null);
-
-    const onInputWrapperClick = () => {
-        inputRef.current?.focus();
-    };
 
     useEffect(() => {
         const currentDirectory = directories[0];
@@ -60,7 +56,14 @@ export const Terminal = (props: Props) => {
             return {
                 ...terminalState,
                 directories,
-                currentDirectory
+                currentDirectory,
+                outputs: [
+                    ...terminalState.outputs,
+                    {
+                        id: crypto.randomUUID(),
+                        output: '\nSuccessfully connected to: ' + terminalState.currentServer.name
+                    }
+                ]
             };
         });
     }, [directories, setTerminal]);
@@ -81,62 +84,43 @@ export const Terminal = (props: Props) => {
         <div className="terminal__output-wrapper" ref={outputRef}>
             {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
-        <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
-            <div>
-                {terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% '}
-            </div>
-            <input
-                ref={inputRef}
-                autoFocus
-                className="terminal__input"
-                value={currentCommand.text}
-                onChange={(event) => {
-                    const newValue = event.target.value ?? '';
+        <TerminalInput
+            prefixText={terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% '}
+            currentCommandText={currentCommand.text}
+            onChange={(newValue) => setCurrentCommand({ ...currentCommand, text: newValue })}
+            onEnter={() => {
+                const commandResult = executeCommand(terminal, setTerminal, currentCommand);
 
-                    setCurrentCommand({ ...currentCommand, text: newValue });
-                }}
-                onKeyUp={(event) => {
-                    if (event.key === 'Enter' && currentCommand.text) {
-                        const result = executeCommand(
-                            terminal,
-                            setTerminal,
-                            currentCommand,
-                        );
+                const executedCommandString = terminal.currentServer.name
+                    + '@' + currentCommand.workingDirectory
+                    + '% ' + currentCommand.text;
 
-                        setTerminal((state) => {
-                            return {
-                                ...state,
-                                outputs: [
-                                    ...terminal.outputs,
-                                    { id: crypto.randomUUID(), output: terminal.currentServer.name + '@' + currentCommand.workingDirectory + '% ' + currentCommand.text },
-                                    { id: crypto.randomUUID(), output: result }
-                                ],
-                                commandHistory: [
-                                    ...terminal.commandHistory,
-                                    currentCommand
-                                ]
-                            };
-                        });
+                setTerminal((state) => {
+                    return {
+                        ...state,
+                        outputs: [
+                            ...terminal.outputs,
+                            { id: crypto.randomUUID(), output: executedCommandString },
+                            { id: crypto.randomUUID(), output: commandResult }
+                        ],
+                        commandHistory: [
+                            ...terminal.commandHistory,
+                            currentCommand
+                        ]
+                    };
+                });
 
-                        setCurrentCommand(createNewCommand(terminal.currentDirectory.name));
-                    }
-
-                    if (event.key === 'Tab' && currentCommand.text) {
-                        findNextFileSystemObject(
-                            currentCommand,
-                            setCurrentCommand,
-                            terminal.directories,
-                            terminal.currentDirectory
-                        );
-                    }
-                }}
-                onKeyDown={(event) => {
-                    if (event.key === "Tab") {
-                        event.preventDefault();
-                    }
-                }}
-            />
-        </div>
+                setCurrentCommand(createNewCommand(terminal.currentDirectory.name));
+            }}
+            onTab={() => {
+                findNextFileSystemObject(
+                    currentCommand,
+                    setCurrentCommand,
+                    terminal.directories,
+                    terminal.currentDirectory
+                );
+            }}
+        />
     </div>;
 };
 
@@ -152,17 +136,17 @@ const executeCommand = (
     const textCommand = currentCommand.text.split(' ');
     const command: IHandler|undefined = validCommands.get(textCommand[0]);
 
-    if (command) {
-        gtag("event", "terminal_command", {
-            "value": textCommand[0]
-        });
-
-        return command.execute(
-            currentCommand,
-            terminal,
-            setTerminal,
-        );
-    } else {
-        return 'Command not found!'
+    if (!command) {
+        return "Command not found!";
     }
+
+    gtag("event", "terminal_command", {
+        "value": textCommand[0]
+    });
+
+    return command.execute(
+        currentCommand,
+        terminal,
+        setTerminal,
+    );
 };

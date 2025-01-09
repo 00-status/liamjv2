@@ -30,6 +30,6 @@ export const ConnectHandler: IHandler = {
 
         fetchDirectories(newServer.id);
 
-        return "Connecting to " + serverName + "...";
+        return "Connecting to " + serverName + " server...";
     }
 }
