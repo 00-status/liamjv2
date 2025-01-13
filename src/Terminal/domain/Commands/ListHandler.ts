@@ -22,6 +22,10 @@ export const ListHandler: IHandler = {
             currentDirectory
         );
 
+        if (!newDirectory) {
+            return "";
+        }
+
         const childDirectories = directories.filter((directory) => {
             return newDirectory.subDirectories.find(childDirectoryId => childDirectoryId === directory.id);
         });

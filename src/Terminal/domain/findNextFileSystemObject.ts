@@ -18,6 +18,10 @@ export const findNextFileSystemObject = (
 
     const workingDirectory = findWorkingDirectory(filePathGroups, directories, currentDirectory);
 
+    if (!workingDirectory) {
+        return command;
+    }
+
     const childDirectoryNames = findChildDirectories(fileName, directories, workingDirectory);
     const fileNames = findFiles(fileName, workingDirectory);
 
@@ -41,7 +45,7 @@ const findWorkingDirectory = (
     filePathGroups: Array<string>,
     directories: Array<Directory>,
     currentDirectory: Directory
-): Directory => {
+): Directory|null => {
     if (filePathGroups.length > 1) {
         return navigateDirectories(filePathGroups, directories, currentDirectory);
     } else {

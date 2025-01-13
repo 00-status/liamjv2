@@ -22,6 +22,10 @@ export const ChangeDirectoryHandler: IHandler = {
             currentDirectory
         );
 
+        if (!newDirectory) {
+            return "";
+        }
+
         setTerminal({...terminal, currentDirectory: newDirectory});
 
         return '';

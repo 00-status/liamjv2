@@ -5,7 +5,9 @@ export const navigateDirectories = (
     directoryGroups: Array<string>,
     directories: Array<Directory>,
     currentDirectory: Directory
-): Directory => {
+): Directory|null => {
+    var chainBrokenAt: string | null = null;
+
     var carry: Directory = currentDirectory;
     directoryGroups.forEach((group: string, index: number) => {
         switch (group) {
@@ -31,14 +33,18 @@ export const navigateDirectories = (
                 break;
             default:
                 const newSubDirectory = moveDownDirectory(directories, carry, group);
-                if (newSubDirectory) {
-                    carry = newSubDirectory;
+
+                if (!newSubDirectory) {
+                    chainBrokenAt = group;
+                    break;
                 }
+
+                carry = newSubDirectory;
                 break;
         }
     });
 
-    return carry;
+    return chainBrokenAt ? null : carry;
 };
 
 const moveUpDirectory = (
