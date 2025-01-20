@@ -23,7 +23,7 @@ export const TerminalPage = () => {
         });
     }, [gtag]);
 
-    const [ codeBlockKeys, setCodeBlockKeys ] = useState<Array<number>>([...Array(10).keys()]);
+    const [ codeBlockKeys, setCodeBlockKeys ] = useState<Array<number|string>>([...Array(10).keys()]);
     const { servers, fetchServers } = useServers();
     const { directories, fetchDirectories } = useDirectories();
 
@@ -53,14 +53,30 @@ export const TerminalPage = () => {
         </div>
         <div className='terminal-page__content'>
             <div className="terminal-page__background">
-                {codeBlockKeys.map((value: number) => <CodeBlockGenerator key={"code-block-" + value} />)}
+                {codeBlockKeys.map((value: number|string) => <CodeBlockGenerator key={"code-block-" + value} />)}
             </div>
             <div className="terminal-page__foreground">
                 {servers.length !== 0 && directories.length !== 0
-                    ? <Terminal servers={servers} directories={directories} fetchDirectories={fetchDirectories} />
+                    ? <Terminal
+                        servers={servers}
+                        directories={directories}
+                        fetchDirectories={fetchDirectories}
+                        onEnteredCommand={() => changeKey(codeBlockKeys, setCodeBlockKeys)}
+                    />
                     : <TerminalLoader />
                 }
             </div>
         </div>
     </div>;
+};
+
+const changeKey = (array: Array<number|string>, setArray: (newArray: Array<number|string>) => void) => {
+    const arrayCopy = [...array];
+    const arrayLength = arrayCopy.length;
+
+    const indexToChange = Math.floor(Math.random() * (arrayLength - 1 + 1) + 1);
+
+    arrayCopy[indexToChange] = crypto.randomUUID();
+
+    setArray(arrayCopy);
 };

@@ -2,19 +2,8 @@ import { useEffect, useState } from 'react';
 import './code-block-generator.css';
 
 export const CodeBlockGenerator = () => {
-    const [uniqueID, setUniqueID] = useState<string>(crypto.randomUUID());
-    const [snippet, setSnippet] = useState(getSnippet());
-
-    useEffect(() => {
-        const milliSecondVariance = Math.floor(Math.random() * (40000 - 10000 + 1) + 10000);
-
-        const timeoutID = setTimeout(() => {
-            setSnippet(getSnippet());
-            setUniqueID(crypto.randomUUID());
-        }, milliSecondVariance);
-
-        return () => clearTimeout(timeoutID);
-    }, [setSnippet, getSnippet, snippet]);
+    const [uniqueID] = useState<string>(crypto.randomUUID());
+    const [snippet] = useState(getSnippet());
 
     const result = snippet.split("").map((character, index) => {
         const style = { "animationDelay": (0.2 + index / 10) + "s" };

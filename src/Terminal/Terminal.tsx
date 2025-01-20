@@ -27,10 +27,11 @@ type Props = {
     servers: Array<Server>;
     directories: Array<Directory>;
     fetchDirectories: (serverId: number) => void;
+    onEnteredCommand: () => void;
 };
 
 export const Terminal = (props: Props) => {
-    const { servers, directories, fetchDirectories } = props;
+    const { servers, directories, fetchDirectories, onEnteredCommand } = props;
 
     const [terminal, setTerminal] = useState<TerminalState>(
         {
@@ -91,6 +92,8 @@ export const Terminal = (props: Props) => {
             currentCommandText={currentCommand}
             onChange={(newValue) => setCurrentCommand(newValue)}
             onEnter={() => {
+                onEnteredCommand();
+                
                 const commandResult = executeCommand(terminal, setTerminal, currentCommand);
 
                 setTerminal((state) => {
