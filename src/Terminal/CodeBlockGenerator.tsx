@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './code-block-generator.css';
 
 export const CodeBlockGenerator = () => {
+    const [uniqueID, setUniqueID] = useState<string>(crypto.randomUUID());
     const [snippet, setSnippet] = useState(getSnippet());
 
     useEffect(() => {
@@ -9,6 +10,7 @@ export const CodeBlockGenerator = () => {
 
         const timeoutID = setTimeout(() => {
             setSnippet(getSnippet());
+            setUniqueID(crypto.randomUUID());
         }, milliSecondVariance);
 
         return () => clearTimeout(timeoutID);
@@ -16,7 +18,7 @@ export const CodeBlockGenerator = () => {
 
     const result = snippet.split("").map((character, index) => {
         const style = { "animationDelay": (0.2 + index / 10) + "s" };
-        return <span className='character-span' aria-hidden key={crypto.randomUUID()} style={style}>
+        return <span className='character-span' aria-hidden key={uniqueID + "|" + index} style={style}>
             {character}
         </span>;
     });

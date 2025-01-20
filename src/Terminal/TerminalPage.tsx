@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { gtag } from 'ga-gtag';
 
 import './terminal-page.css';
@@ -22,6 +22,7 @@ export const TerminalPage = () => {
         });
     }, [gtag]);
 
+    const [ codeBlockKeys, setCodeBlockKeys ] = useState<Array<number>>([...Array(10).keys()]);
     const { servers, fetchServers } = useServers();
     const { directories, fetchDirectories } = useDirectories();
 
@@ -51,7 +52,7 @@ export const TerminalPage = () => {
         </div>
         <div className='terminal-page__content'>
             <div className="terminal-page__background">
-                {[...Array(10).keys()].map((value: number) => <CodeBlockGenerator key={value} />)}
+                {codeBlockKeys.map((value: number) => <CodeBlockGenerator key={"code-block-" + value} />)}
             </div>
             <div className="terminal-page__foreground">
                 {servers.length !== 0 && directories.length !== 0
