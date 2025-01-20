@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { gtag } from 'ga-gtag';
 
 import './terminal-page.css';
@@ -8,6 +8,7 @@ import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
 import { useServers } from './hooks/server/useServers';
 import { useDirectories } from './hooks/directories/useDirectories';
+import { TerminalLoader } from './TerminalLoader';
 
 
 export const TerminalPage = () => {
@@ -22,6 +23,7 @@ export const TerminalPage = () => {
         });
     }, [gtag]);
 
+    const [ codeBlockKeys, setCodeBlockKeys ] = useState<Array<number|string>>([...Array(10).keys()]);
     const { servers, fetchServers } = useServers();
     const { directories, fetchDirectories } = useDirectories();
 
@@ -51,14 +53,30 @@ export const TerminalPage = () => {
         </div>
         <div className='terminal-page__content'>
             <div className="terminal-page__background">
-                {[...Array(10).keys()].map((value: number) => <CodeBlockGenerator key={value} />)}
+                {codeBlockKeys.map((value: number|string) => <CodeBlockGenerator key={"code-block-" + value} />)}
             </div>
             <div className="terminal-page__foreground">
                 {servers.length !== 0 && directories.length !== 0
-                    ? <Terminal servers={servers} directories={directories} fetchDirectories={fetchDirectories} />
-                    : null
+                    ? <Terminal
+                        servers={servers}
+                        directories={directories}
+                        fetchDirectories={fetchDirectories}
+                        onEnteredCommand={() => changeKey(codeBlockKeys, setCodeBlockKeys)}
+                    />
+                    : <TerminalLoader />
                 }
             </div>
         </div>
     </div>;
+};
+
+const changeKey = (array: Array<number|string>, setArray: (newArray: Array<number|string>) => void) => {
+    const arrayCopy = [...array];
+    const arrayLength = arrayCopy.length;
+
+    const indexToChange = Math.floor(Math.random() * (arrayLength - 1 + 1) + 1);
+
+    arrayCopy[indexToChange] = crypto.randomUUID();
+
+    setArray(arrayCopy);
 };

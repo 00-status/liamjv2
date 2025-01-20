@@ -7,6 +7,7 @@ import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 import { Server } from "./hooks/server/useServers";
 import { Directory } from "./hooks/directories/useDirectories";
 import { TerminalInput } from "./TerminalInput";
+import { TerminalLoader } from "./TerminalLoader";
 
 type Output = {
     id: string;
@@ -26,10 +27,11 @@ type Props = {
     servers: Array<Server>;
     directories: Array<Directory>;
     fetchDirectories: (serverId: number) => void;
+    onEnteredCommand: () => void;
 };
 
 export const Terminal = (props: Props) => {
-    const { servers, directories, fetchDirectories } = props;
+    const { servers, directories, fetchDirectories, onEnteredCommand } = props;
 
     const [terminal, setTerminal] = useState<TerminalState>(
         {
@@ -84,12 +86,14 @@ export const Terminal = (props: Props) => {
         <div className="terminal__output-wrapper" ref={outputRef}>
             {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
-        {!terminal.currentDirectory && <div className="terminal__loader">Loading</div>}
+        {!terminal.currentDirectory && <TerminalLoader />}
         {terminal.currentDirectory && <TerminalInput
             prefixText={commandPrefix}
             currentCommandText={currentCommand}
             onChange={(newValue) => setCurrentCommand(newValue)}
             onEnter={() => {
+                onEnteredCommand();
+                
                 const commandResult = executeCommand(terminal, setTerminal, currentCommand);
 
                 setTerminal((state) => {
@@ -132,7 +136,7 @@ const executeCommand = (
     currentCommand: string
 ): string => {
     const textCommand = currentCommand.split(' ');
-    const command: IHandler|undefined = validCommands.get(textCommand[0]);
+    const command: IHandler|undefined = validCommands.get(textCommand[0]?.toLowerCase());
 
     if (!command) {
         return "Command not found!";
