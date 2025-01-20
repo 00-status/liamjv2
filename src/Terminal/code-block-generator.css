@@ -1,4 +1,5 @@
 .code-block-generator {
+    width: 50%;
     min-height: 50px;
     white-space: pre;
     user-select: none;
