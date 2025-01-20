@@ -7,6 +7,7 @@ import { findNextFileSystemObject } from "./domain/findNextFileSystemObject";
 import { Server } from "./hooks/server/useServers";
 import { Directory } from "./hooks/directories/useDirectories";
 import { TerminalInput } from "./TerminalInput";
+import { TerminalLoader } from "./TerminalLoader";
 
 type Output = {
     id: string;
@@ -84,7 +85,7 @@ export const Terminal = (props: Props) => {
         <div className="terminal__output-wrapper" ref={outputRef}>
             {terminal.outputs.map((output) => <div className="terminal__output" key={output.id}>{output.output}</div>)}
         </div>
-        {!terminal.currentDirectory && <div className="terminal__loader">Loading</div>}
+        {!terminal.currentDirectory && <TerminalLoader />}
         {terminal.currentDirectory && <TerminalInput
             prefixText={commandPrefix}
             currentCommandText={currentCommand}

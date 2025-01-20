@@ -8,6 +8,7 @@ import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
 import { useServers } from './hooks/server/useServers';
 import { useDirectories } from './hooks/directories/useDirectories';
+import { TerminalLoader } from './TerminalLoader';
 
 
 export const TerminalPage = () => {
@@ -57,7 +58,7 @@ export const TerminalPage = () => {
             <div className="terminal-page__foreground">
                 {servers.length !== 0 && directories.length !== 0
                     ? <Terminal servers={servers} directories={directories} fetchDirectories={fetchDirectories} />
-                    : null
+                    : <TerminalLoader />
                 }
             </div>
         </div>
