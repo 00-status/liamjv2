@@ -132,7 +132,7 @@ const executeCommand = (
     currentCommand: string
 ): string => {
     const textCommand = currentCommand.split(' ');
-    const command: IHandler|undefined = validCommands.get(textCommand[0]);
+    const command: IHandler|undefined = validCommands.get(textCommand[0]?.toLowerCase());
 
     if (!command) {
         return "Command not found!";
