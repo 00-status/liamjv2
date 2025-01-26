@@ -21,6 +21,6 @@
 @media only screen and (max-width: 600px) {
     .cart-item {
         height: 100px;
-        width: 100%;
+        width: 90%;
     }
 }

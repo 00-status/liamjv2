@@ -5,6 +5,10 @@
     gap: 12px;
 }
 
+.inventory__search {
+    width: 100%;
+}
+
 .inventory__list {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,7 @@
 @media only screen and (max-width: 600px) {
     .inventory {
         width: 90%;
+        margin-top: 20px;
     }
 
     .inventory__list {

@@ -18,5 +18,6 @@
 @media only screen and (max-width: 600px) {
     .cart {
         height: 150px;
+        justify-items: center;
     }
 }
