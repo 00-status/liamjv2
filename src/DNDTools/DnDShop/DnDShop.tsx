@@ -89,9 +89,3 @@ export const DndShop = () => {
         </div>
     </Page>;
 };
-
-// ToDo
-// Track Player Currency
-//      Create a BalanceRemaining component
-//      Takes in the player's currency and the player's cart and calculates what the player oews and their remaining balance.
-// Calculate change remaining.

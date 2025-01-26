@@ -1,7 +1,15 @@
 .inventory {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.inventory__list {
+    display: flex;
+    flex-direction: column;
     height: 400px;
+    width: 100%;
     gap: 8px;
 
     overflow-y: scroll;
@@ -9,18 +17,21 @@
     scrollbar-width: none; /* FireFox */
 }
 
-.inventory::-webkit-scrollbar {
+.inventory__list::-webkit-scrollbar {
     display: none;
 }
 
 @media only screen and (max-width: 600px) {
     .inventory {
+        width: 90%;
+    }
+
+    .inventory__list {
         flex-direction: row;
 
         overflow-y: hidden;
         overflow-x: scroll;
 
         height: 90px;
-        width: 90%;
     }
 }
