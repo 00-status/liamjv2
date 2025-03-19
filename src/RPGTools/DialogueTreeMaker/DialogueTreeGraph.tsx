@@ -8,13 +8,13 @@ import { Dialogue, DialogueCoordinate } from "./domain/types";
 
 type Props = {
     dialogues: Array<Dialogue>;
-    dialogueCoordiantes: DialogueCoordinate;
+    dialogueCoordinates: DialogueCoordinate;
     onDialogueClick: (dialogueID: number) => void;
     onDialogueMoveFinish: (dialogueID: number, x: number, y: number) => void;
 };
 
 export const DialogueTreeGraph = (props: Props) => {
-    const { dialogues, dialogueCoordiantes: dialogueCoordinates, onDialogueClick, onDialogueMoveFinish } = props;
+    const { dialogues, dialogueCoordinates: dialogueCoordinates, onDialogueClick, onDialogueMoveFinish } = props;
 
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
 

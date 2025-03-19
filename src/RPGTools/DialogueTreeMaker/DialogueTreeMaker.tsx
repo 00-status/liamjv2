@@ -156,7 +156,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                     <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
                         <DialogueTreeGraph
                             dialogues={dialogues}
-                            dialogueCoordiantes={dialogueCoordinates}
+                            dialogueCoordinates={dialogueCoordinates}
                             onDialogueClick={onDialogueClick}
                             onDialogueMoveFinish={onDialogueMoveFinish}
                         />
