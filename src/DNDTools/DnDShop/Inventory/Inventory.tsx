@@ -41,7 +41,3 @@ export const Inventory = (props: Props) => {
         </div>
     </div>;
 };
-
-// Save items to state
-// add search textField
-// Filter items based on search value. (useEffect)
