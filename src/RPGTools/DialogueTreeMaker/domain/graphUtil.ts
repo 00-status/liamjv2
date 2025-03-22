@@ -26,11 +26,16 @@ export const convertDialoguesToNodes = (
     return nodes;
 };
 
-export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<SerializedEdge> => {
-    const dialoguesByID = dialogues.reduce((acc, dialogue) => {
-        acc[dialogue.id] = dialogue;
+export const convertDialoguesToEdges = (
+    dialogues: Array<Dialogue>,
+    skillTests: Array<SkillTest>
+): Array<SerializedEdge> => {
+    const nodes: Array<Dialogue | SkillTest> = [...dialogues, ...skillTests];
+
+    const nodeIDsById = nodes.reduce((acc, node) => {
+        acc[node.id] = node.id;
         return acc;
-    }, {} as {[key: number]: Dialogue|undefined});
+    }, {} as {[key: number]: number|undefined});
 
     const mappedEdges = dialogues.reduce<Array<SerializedEdge>>((acc, dialogue) => {
         const edges: Array<SerializedEdge> = dialogue.choices
@@ -41,23 +46,34 @@ export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<Seria
                 );
 
                 const isUniqueChoice = firstChoiceOccurance === position;
-                const doesNextDialogueExist = dialoguesByID[Number(choice.nextDialogueID)];
+                const doesNextNodeExist = nodeIDsById[Number(choice.nextDialogueID)];
 
-                return doesNextDialogueExist && isUniqueChoice;
+                return doesNextNodeExist && isUniqueChoice;
             })
             .map((choice) => {
                 return {
                     key: dialogue.id + '-' + choice.nextDialogueID,
                     source: String(dialogue.id),
                     target: choice.nextDialogueID,
-                    attributes: { label: choice.shortDescription, type: 'arrow', size: 4, undirected: false }
+                    attributes: { type: 'arrow', size: 4, undirected: false }
                 };
             });
 
         return [...acc, ...edges];
     }, []);
 
-    return mappedEdges;
+    const skillTestEdges: Array<SerializedEdge> = skillTests
+        .filter(skillTest => nodeIDsById[skillTest.nextDialogueID])
+        .map((skillTest) => {
+            return {
+                key: skillTest.id + '-' + skillTest.nextDialogueID,
+                source: String(skillTest.id),
+                target: String(skillTest.nextDialogueID),
+                attributes: { type: 'arrow', size: 4, undirected: false }
+            };
+        });
+
+    return [...mappedEdges, ...skillTestEdges];
 };
 
 export const convertSkillTestsToEdges = (
