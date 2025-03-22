@@ -4,11 +4,11 @@ import { SerializedGraph } from "graphology-types";
 import { DirectedGraph } from "graphology";
 
 import { convertDialoguesToEdges, convertDialoguesToNodes } from "./domain/graphUtil";
-import { Dialogue, DialogueCoordinate } from "./domain/types";
+import { Dialogue, NodeCoordinate } from "./domain/types";
 
 type Props = {
     dialogues: Array<Dialogue>;
-    dialogueCoordinates: DialogueCoordinate;
+    dialogueCoordinates: NodeCoordinate;
     onDialogueClick: (dialogueID: number) => void;
     onDialogueMoveFinish: (dialogueID: number, x: number, y: number) => void;
 };

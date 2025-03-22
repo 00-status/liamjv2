@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 
-import { Dialogue, DialogueCoordinate, DialogueTree } from "./domain/types";
+import { Dialogue, NodeCoordinate, DialogueTree } from "./domain/types";
 
 type UseDialogueTree = {
     dialogueTreeID: string;
     dialogueTreeName: string;
     dialogues: Array<Dialogue>;
-    dialogueCoordinates: DialogueCoordinate;
+    dialogueCoordinates: NodeCoordinate;
     setDialogueTreeID: (id: string) => void;
     setDialogueTreeName: (name: string) => void;
     setDialogues: (dialogues: Array<Dialogue>) => void;
-    setDialogueCoordinates: (dialogueCoordinates: DialogueCoordinate) => void;
+    setDialogueCoordinates: (dialogueCoordinates: NodeCoordinate) => void;
 };
 
 export const useDialogueTree = (): UseDialogueTree => {
     const [dialogueTreeID, setDialogueTreeID] = useState<string>('tree_1');
     const [dialogueTreeName, setDialogueTreeName] = useState<string>('Tree 1');
     const [dialogues, setDialogues] = useState<Array<Dialogue>>([]);
-    const [nodeCoordinates, setDialogueCoordinates] = useState<DialogueCoordinate>(new Map());
+    const [nodeCoordinates, setDialogueCoordinates] = useState<NodeCoordinate>(new Map());
 
     useEffect(() => {
         const dialogueTreeJson = localStorage.getItem('dialogueTree');

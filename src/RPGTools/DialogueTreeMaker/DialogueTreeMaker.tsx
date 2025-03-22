@@ -54,11 +54,11 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueCoordinates(new Map());
     };
 
-    const onSave = (updatedArea: Dialogue) => {
-        const copiedAreas = [...dialogues];
-        copiedAreas[currentIndex] = updatedArea;
+    const onSave = (updatedDialogues: Dialogue) => {
+        const dialoguesCopy = [...dialogues];
+        dialoguesCopy[currentIndex] = updatedDialogues;
 
-        setDialogues(copiedAreas);
+        setDialogues(dialoguesCopy);
     };
 
     const deleteDialogue = () => {
