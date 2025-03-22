@@ -30,7 +30,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueCoordinates
     } = useDialogueTree();
 
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [currentDialogue, setCurrentDialogue] = useState<Dialogue|null>(null);
 
     const uploadDialogueTree = (parsedTree: Array<any> | UnknownObject) => {
         const dialogueTree = validateDialogueTree(parsedTree);
@@ -54,21 +54,35 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueCoordinates(new Map());
     };
 
-    const onSave = (updatedDialogues: Dialogue) => {
+    const onSave = (updatedDialogue: Dialogue) => {
         const dialoguesCopy = [...dialogues];
-        dialoguesCopy[currentIndex] = updatedDialogues;
 
+        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === updatedDialogue.id);
+
+        if (currentDialogueIndex === -1) {
+            return;
+        }
+
+        dialoguesCopy[currentDialogueIndex] = updatedDialogue;
+
+        setCurrentDialogue(updatedDialogue);
         setDialogues(dialoguesCopy);
     };
 
     const deleteDialogue = () => {
-        if (dialogues.length === 1) {
+        if (dialogues.length === 1 || !currentDialogue) {
+            return;
+        }
+
+        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === currentDialogue.id);
+        if (currentDialogueIndex === -1) {
             return;
         }
 
         const dialoguesCopy = [...dialogues];
-        dialoguesCopy.splice(currentIndex, 1);
-        setCurrentIndex(0);
+        dialoguesCopy.splice(currentDialogueIndex, 1);
+
+        setCurrentDialogue(null);
         setDialogues(dialoguesCopy);
     };
 
@@ -89,16 +103,16 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogues([...dialogues, newDialogue]);
     };
 
-    const onDialogueClick = (areaID: number) => {
-        const clickedAreaIndex = dialogues.findIndex((dialogue: Dialogue) => {
-            return dialogue.id === areaID;
+    const onDialogueClick = (dialogueID: number) => {
+        const newCurrentDialogue = dialogues.find((dialogue: Dialogue) => {
+            return dialogue.id === dialogueID;
         });
 
-        if (clickedAreaIndex === -1) {
+        if (!newCurrentDialogue) {
             return;
         }
 
-        setCurrentIndex(clickedAreaIndex);
+        setCurrentDialogue(newCurrentDialogue);
     };
 
     const onNodeMoveFinish = (id: number, x: number, y: number) => {
@@ -163,8 +177,8 @@ export const DialogueTreeMaker = (): ReactElement => {
                     </SigmaContainer>
                 </div>
                 <hr className="divider" />
-                {dialogues.length > 0
-                    ? <DialogueMaker dialogue={dialogues[currentIndex]} onSave={onSave} onDelete={deleteDialogue} />
+                {currentDialogue
+                    ? <DialogueMaker dialogue={currentDialogue} onSave={onSave} onDelete={deleteDialogue} />
                     : null
                 }
             </div>

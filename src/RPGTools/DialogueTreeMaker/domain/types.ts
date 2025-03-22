@@ -1,11 +1,8 @@
 import { Character } from "../../CharacterMaker";
 
-export type DialogueTreeNode = {
+export type DialogueTree = {
     id: string;
     name: string;
-};
-
-export interface DialogueTree extends DialogueTreeNode {
     dialogues: Array<Dialogue>;
     nodeCoordinates: NodeCoordinate;
 };
@@ -39,7 +36,9 @@ export type Choice = {
     shortDescription: string;
 };
 
-export interface SkillTest extends DialogueTreeNode {
+export type SkillTest = {
+    id: number,
+    name: string,
     skillID: string;
     // TODO: Add skill test array
     nextDialogueID: number;
