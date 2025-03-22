@@ -1,10 +1,13 @@
 import { SerializedEdge, SerializedNode } from "graphology-types";
-import { Dialogue } from "./types";
+import { Choice, Dialogue, SkillTest } from "./types";
 
 type DialogueMap = Map<number, { x: number, y: number }>;
 
-export const convertDialoguesToNodes = (dialogues: Array<Dialogue>, existingDialogues: DialogueMap): Array<SerializedNode> => {
-    const nodes = dialogues.map((dialogue: Dialogue) => {
+export const convertDialoguesToNodes = (
+    dialogues: Array<Dialogue | SkillTest>,
+    existingDialogues: DialogueMap
+): Array<SerializedNode> => {
+    const nodes = dialogues.map((dialogue: Dialogue | SkillTest) => {
         const graphDialogue = existingDialogues.get(dialogue.id);
 
         return {
@@ -24,6 +27,11 @@ export const convertDialoguesToNodes = (dialogues: Array<Dialogue>, existingDial
 };
 
 export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<SerializedEdge> => {
+    const dialoguesByID = dialogues.reduce((acc, dialogue) => {
+        acc[dialogue.id] = dialogue;
+        return acc;
+    }, {} as {[key: number]: Dialogue|undefined});
+
     const mappedEdges = dialogues.reduce<Array<SerializedEdge>>((acc, dialogue) => {
         const edges: Array<SerializedEdge> = dialogue.choices
             .filter((choice, position) => {
@@ -31,9 +39,9 @@ export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<Seria
                 const firstChoiceOccurance = dialogue.choices.findIndex((innerChoice) =>
                     innerChoice.nextDialogueID == choice.nextDialogueID
                 );
-                const isUniqueChoice = firstChoiceOccurance === position;
 
-                const doesNextDialogueExist = !!dialogues.find(dialogue => dialogue.id === Number(choice.nextDialogueID));
+                const isUniqueChoice = firstChoiceOccurance === position;
+                const doesNextDialogueExist = dialoguesByID[Number(choice.nextDialogueID)];
 
                 return doesNextDialogueExist && isUniqueChoice;
             })
@@ -50,4 +58,14 @@ export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<Seria
     }, []);
 
     return mappedEdges;
+};
+
+export const convertSkillTestsToEdges = (
+    skillTests: Array<SkillTest>,
+    dialogues: Array<Dialogue>
+): Array<SerializedEdge> => {
+
+
+
+    return [];
 };
