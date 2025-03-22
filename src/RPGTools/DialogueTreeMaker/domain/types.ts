@@ -4,7 +4,7 @@ export type DialogueTree = {
     id: string;
     name: string;
     dialogues: Array<Dialogue>;
-    dialogueCoordinates: DialogueCoordinate;
+    nodeCoordinates: DialogueCoordinate;
 };
 
 export type DialogueCoordinate = Map<number, {x: number, y: number}>;

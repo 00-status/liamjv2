@@ -3,7 +3,7 @@ import { DialogueTree } from "./types";
 export const getDownloadLink = (dialogueTree: DialogueTree): string => {
     const dialogueTreeSerialized = {
         ...dialogueTree,
-        dialogueCoordinates: Array.from(dialogueTree.dialogueCoordinates.entries())
+        dialogueCoordinates: Array.from(dialogueTree.nodeCoordinates.entries())
     };
 
     const jsonString = JSON.stringify(dialogueTreeSerialized, null, 4);

@@ -9,21 +9,21 @@ export const validateDialogueTree = (dialogueTree: Array<any> | UnknownObject): 
     }
 
     const hasDialogues = Array.isArray(dialogueTree.dialogues);
-    const hasDialogueCoordinates = Array.isArray(dialogueTree.dialogueCoordinates);
+    const hasNodeCoordinates = Array.isArray(dialogueTree.nodeCoordinates);
 
     if (typeof dialogueTree.id === 'string'
         && typeof dialogueTree.name === 'string'
         && hasDialogues
-        && hasDialogueCoordinates
+        && hasNodeCoordinates
     ) {
         const dialogues: Array<Dialogue> = dialogueTree.dialogues as Array<Dialogue>;
-        const dialogueCoordinatesMap = new Map(dialogueTree.dialogueCoordinates as SerializedMap);
+        const nodeCoordinatesMap = new Map(dialogueTree.nodeCoordinates as SerializedMap);
 
         const dialogueTreeTyped: DialogueTree = {
             id: dialogueTree.id,
             name: dialogueTree.name,
             dialogues: dialogues,
-            dialogueCoordinates: dialogueCoordinatesMap
+            nodeCoordinates: nodeCoordinatesMap
         };
 
         return dialogueTreeTyped;

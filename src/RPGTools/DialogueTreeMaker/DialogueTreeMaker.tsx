@@ -44,7 +44,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueTreeID(dialogueTree.id);
         setDialogueTreeName(dialogueTree.name);
         setDialogues(dialogueTree.dialogues);
-        setDialogueCoordinates(dialogueTree.dialogueCoordinates);
+        setDialogueCoordinates(dialogueTree.nodeCoordinates);
     };
 
     const resetDialogueTree = () => {
@@ -101,7 +101,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         setCurrentIndex(clickedAreaIndex);
     };
 
-    const onDialogueMoveFinish = (id: number, x: number, y: number) => {
+    const onNodeMoveFinish = (id: number, x: number, y: number) => {
         setDialogueCoordinates(new Map(dialogueCoordinates.set(id, { x, y })));
     };
 
@@ -116,7 +116,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             id: dialogueTreeID,
                             name: dialogueTreeName,
                             dialogues,
-                            dialogueCoordinates
+                            nodeCoordinates: dialogueCoordinates
                         })}
                     >
                         <DownloadIcon /> Download tree
@@ -158,7 +158,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             dialogues={dialogues}
                             dialogueCoordinates={dialogueCoordinates}
                             onDialogueClick={onDialogueClick}
-                            onDialogueMoveFinish={onDialogueMoveFinish}
+                            onDialogueMoveFinish={onNodeMoveFinish}
                         />
                     </SigmaContainer>
                 </div>

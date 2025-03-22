@@ -17,7 +17,7 @@ export const useDialogueTree = (): UseDialogueTree => {
     const [dialogueTreeID, setDialogueTreeID] = useState<string>('tree_1');
     const [dialogueTreeName, setDialogueTreeName] = useState<string>('Tree 1');
     const [dialogues, setDialogues] = useState<Array<Dialogue>>([]);
-    const [dialogueCoordinates, setDialogueCoordinates] = useState<DialogueCoordinate>(new Map());
+    const [nodeCoordinates, setDialogueCoordinates] = useState<DialogueCoordinate>(new Map());
 
     useEffect(() => {
         const dialogueTreeJson = localStorage.getItem('dialogueTree');
@@ -28,7 +28,7 @@ export const useDialogueTree = (): UseDialogueTree => {
             setDialogueTreeID(dialogueTreeParsed.id);
             setDialogueTreeName(dialogueTreeParsed.name);
             setDialogues(dialogueTreeParsed.dialogues);
-            setDialogueCoordinates(new Map(dialogueTreeParsed.dialogueCoordinates));
+            setDialogueCoordinates(new Map(dialogueTreeParsed.nodeCoordinates));
         }
     }, [setDialogueTreeID, setDialogueTreeName, setDialogues, setDialogueCoordinates]);
 
@@ -37,18 +37,18 @@ export const useDialogueTree = (): UseDialogueTree => {
             id: dialogueTreeID,
             name: dialogueTreeName,
             dialogues,
-            dialogueCoordinates: Array.from(dialogueCoordinates.entries())
+            nodeCoordinates: Array.from(nodeCoordinates.entries())
         };
         const serializedDialogueTree = JSON.stringify(dialogueTree);
         
         localStorage.setItem('dialogueTree', serializedDialogueTree);
-    }, [dialogueTreeID, dialogueTreeName, dialogues, dialogueCoordinates]);
+    }, [dialogueTreeID, dialogueTreeName, dialogues, nodeCoordinates]);
 
     return {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
-        dialogueCoordinates,
+        dialogueCoordinates: nodeCoordinates,
         setDialogues,
         setDialogueTreeID,
         setDialogueTreeName,
