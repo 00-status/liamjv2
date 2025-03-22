@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Dialogue, NodeCoordinate, DialogueTree } from "./domain/types";
+import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from "./domain/types";
 
 type UseDialogueTree = {
     dialogueTreeID: string;

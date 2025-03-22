@@ -66,10 +66,10 @@ export const DialogueTreeMaker = (): ReactElement => {
             return;
         }
 
-        const areasCopy = [...dialogues];
-        areasCopy.splice(currentIndex, 1);
+        const dialoguesCopy = [...dialogues];
+        dialoguesCopy.splice(currentIndex, 1);
         setCurrentIndex(0);
-        setDialogues(areasCopy);
+        setDialogues(dialoguesCopy);
     };
 
     const createNewDialogue = () => {
@@ -77,7 +77,7 @@ export const DialogueTreeMaker = (): ReactElement => {
             ? dialogues[dialogues.length - 1].id
             : 0;
 
-        const newArea = {
+        const newDialogue = {
             id: lastDialogueNumber + 1,
             name: 'Dialogue ' + (Number(lastDialogueNumber) + 1),
             character: null,
@@ -86,12 +86,12 @@ export const DialogueTreeMaker = (): ReactElement => {
             choices: []
         };
 
-        setDialogues([...dialogues, newArea]);
+        setDialogues([...dialogues, newDialogue]);
     };
 
     const onDialogueClick = (areaID: number) => {
-        const clickedAreaIndex = dialogues.findIndex((area: Dialogue) => {
-            return area.id === areaID;
+        const clickedAreaIndex = dialogues.findIndex((dialogue: Dialogue) => {
+            return dialogue.id === areaID;
         });
 
         if (clickedAreaIndex === -1) {
