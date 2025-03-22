@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from "./domain/types";
+import { Dialogue, NodeCoordinate, DialogueTree } from "./domain/types";
 
 type UseDialogueTree = {
     dialogueTreeID: string;
     dialogueTreeName: string;
     dialogues: Array<Dialogue>;
-    dialogueCoordinates: NodeCoordinate;
+    nodeCoordinates: NodeCoordinate;
     setDialogueTreeID: (id: string) => void;
     setDialogueTreeName: (name: string) => void;
     setDialogues: (dialogues: Array<Dialogue>) => void;
-    setDialogueCoordinates: (dialogueCoordinates: NodeCoordinate) => void;
+    setDialogueCoordinates: (nodeCoordinates: NodeCoordinate) => void;
 };
 
 export const useDialogueTree = (): UseDialogueTree => {
@@ -48,7 +48,7 @@ export const useDialogueTree = (): UseDialogueTree => {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
-        dialogueCoordinates: nodeCoordinates,
+        nodeCoordinates,
         setDialogues,
         setDialogueTreeID,
         setDialogueTreeName,

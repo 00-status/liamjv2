@@ -23,7 +23,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
-        dialogueCoordinates,
+        nodeCoordinates,
         setDialogueTreeID,
         setDialogueTreeName,
         setDialogues,
@@ -116,7 +116,7 @@ export const DialogueTreeMaker = (): ReactElement => {
     };
 
     const onNodeMoveFinish = (id: number, x: number, y: number) => {
-        setDialogueCoordinates(new Map(dialogueCoordinates.set(id, { x, y })));
+        setDialogueCoordinates(new Map(nodeCoordinates.set(id, { x, y })));
     };
 
     return <Page title="RPG Tools" routes={RPGRoutes} >
@@ -130,7 +130,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             id: dialogueTreeID,
                             name: dialogueTreeName,
                             dialogues,
-                            nodeCoordinates: dialogueCoordinates
+                            nodeCoordinates: nodeCoordinates
                         })}
                     >
                         <DownloadIcon /> Download tree
@@ -170,7 +170,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                     <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
                         <DialogueTreeGraph
                             dialogues={dialogues}
-                            dialogueCoordinates={dialogueCoordinates}
+                            dialogueCoordinates={nodeCoordinates}
                             onDialogueClick={onDialogueClick}
                             onDialogueMoveFinish={onNodeMoveFinish}
                         />
