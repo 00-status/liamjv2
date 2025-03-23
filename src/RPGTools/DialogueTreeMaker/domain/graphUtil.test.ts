@@ -1,5 +1,5 @@
 import { SerializedEdge } from "graphology-types";
-import { convertDialoguesToEdges, convertDialoguesToNodes, convertSkillTestsToEdges } from "./graphUtil";
+import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
 import { Choice, Dialogue, SkillTest } from "./types";
 
 describe('graphUtil', () => {
@@ -18,18 +18,18 @@ describe('graphUtil', () => {
                 } as Dialogue
             ];
 
-            const result = convertDialoguesToNodes(areas, new Map());
+            const result = convertDialoguesToNodes(areas, [], new Map());
 
             expect(result).toEqual([
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Area one", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: "Area one", size: 20, color: '#d6a840', type: "dialogue" }
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840', type: "dialogue" }
                 },
             ]);
         });
@@ -52,25 +52,44 @@ describe('graphUtil', () => {
                 [1, { x: 1, y: 2 }]
             ]);
 
-            const result = convertDialoguesToNodes(areas, coordsMap);
+            const result = convertDialoguesToNodes(areas, [], coordsMap);
 
             expect(result).toEqual([
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 1, y: 2, label: "Area one", size: 20, color: '#d6a840' }
+                    attributes: { x: 1, y: 2, label: "Area one", size: 20, color: '#d6a840', type: "dialogue" }
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840', type: "dialogue" }
                 },
             ]);
         });
 
-        it('should return an empty array when areas is empty', () => {
-            const result = convertDialoguesToNodes([], new Map());
+        it('should return an empty array when the dialogue list is empty', () => {
+            const result = convertDialoguesToNodes([], [], new Map());
             expect(result).toHaveLength(0);
+        });
+
+        it("should convert SkillTests to Nodes", () => {
+            const skillTests: Array<SkillTest> = [
+                {
+                    id: 1,
+                    name: "Skill Test 1",
+                } as SkillTest,
+            ];
+
+            const result = convertDialoguesToNodes([], skillTests, new Map());
+
+            expect(result).toEqual([
+                {
+                    key: '1',
+                    node: 1,
+                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840', type: "skillTest" }
+                },
+            ]);
         });
     });
 

@@ -3,7 +3,7 @@ import { SigmaContainer } from "@react-sigma/core";
 
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
-import { Dialogue, UnknownObject } from "./domain/types";
+import { Dialogue, SkillTest, UnknownObject } from "./domain/types";
 import { DialogueTreeGraph } from "./DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
@@ -31,6 +31,7 @@ export const DialogueTreeMaker = (): ReactElement => {
     } = useDialogueTree();
 
     const [currentDialogue, setCurrentDialogue] = useState<Dialogue|null>(null);
+    const [currentSkillTest, setCurrentSkillTest] = useState<SkillTest|null>(null);
 
     const uploadDialogueTree = (parsedTree: Array<any> | UnknownObject) => {
         const dialogueTree = validateDialogueTree(parsedTree);

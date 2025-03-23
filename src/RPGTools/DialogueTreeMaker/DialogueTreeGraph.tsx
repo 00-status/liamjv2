@@ -32,7 +32,7 @@ export const DialogueTreeGraph = (props: Props) => {
                 multi: false,
                 type: 'directed',
             },
-            nodes: convertDialoguesToNodes(dialogues, dialogueCoordinates),
+            nodes: convertDialoguesToNodes(dialogues, [], dialogueCoordinates),
             edges: convertDialoguesToEdges(dialogues, []),
         };
         const graph = DirectedGraph.from(serializedGraph);

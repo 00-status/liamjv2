@@ -1,29 +1,37 @@
 import { SerializedEdge, SerializedNode } from "graphology-types";
-import { Choice, Dialogue, SkillTest } from "./types";
-
-type DialogueMap = Map<number, { x: number, y: number }>;
+import { Dialogue, NodeCoordinate, SkillTest } from "./types";
 
 export const convertDialoguesToNodes = (
-    dialogues: Array<Dialogue | SkillTest>,
-    existingDialogues: DialogueMap
+    dialogues: Array<Dialogue>,
+    skillTests: Array<SkillTest>,
+    nodeCoordinates: NodeCoordinate
 ): Array<SerializedNode> => {
-    const nodes = dialogues.map((dialogue: Dialogue | SkillTest) => {
-        const graphDialogue = existingDialogues.get(dialogue.id);
+    const createNode = (id: number, name: string, type: string) => {
+        const nodeCoordinate = nodeCoordinates.get(id);
 
         return {
-            key: String(dialogue.id),
-            node: dialogue.id,
+            key: String(id),
+            node: id,
             attributes: {
-                x: graphDialogue ? graphDialogue.x : 0,
-                y: graphDialogue ? graphDialogue.y : 0,
-                label: dialogue.name,
+                x: nodeCoordinate?.x ?? 0,
+                y: nodeCoordinate?.y ?? 0,
+                label: name,
                 size: 20,
-                color: '#d6a840'
-            }
-        }
-    });
+                color: '#d6a840',
+                type,
+            },
+        };
+    };
 
-    return nodes;
+    const dialogueNodes = dialogues.map(dialogue =>
+        createNode(dialogue.id, dialogue.name, "dialogue")
+    );
+
+    const skillTestNodes = skillTests.map(skillTest =>
+        createNode(skillTest.id, skillTest.name, "skillTest")
+    );
+
+    return [...dialogueNodes, ...skillTestNodes];
 };
 
 export const convertDialoguesToEdges = (
@@ -74,14 +82,4 @@ export const convertDialoguesToEdges = (
         });
 
     return [...mappedEdges, ...skillTestEdges];
-};
-
-export const convertSkillTestsToEdges = (
-    skillTests: Array<SkillTest>,
-    dialogues: Array<Dialogue>
-): Array<SerializedEdge> => {
-
-
-
-    return [];
 };
