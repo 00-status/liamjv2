@@ -23,10 +23,12 @@ export const DialogueTreeMaker = (): ReactElement => {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
+        skillTests,
         nodeCoordinates,
         setDialogueTreeID,
         setDialogueTreeName,
         setDialogues,
+        setSkillTests,
         setDialogueCoordinates
     } = useDialogueTree();
 
@@ -72,16 +74,31 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogues([...dialogues, newDialogue]);
     };
 
-    const onDialogueClick = (nodeID: number) => {
-        const newCurrentDialogue = dialogues.find((dialogue: Dialogue) => {
-            return dialogue.id === nodeID;
-        });
+    const createNewSkillTest = () => {
+        const newSkillTest: SkillTest = {
+            id: Math.trunc(Date.now() + Math.random()),
+            name: "New Skill Test",
+            skillID: "",
+            nextDialogueID: null
+        };
 
-        if (!newCurrentDialogue) {
+        setSkillTests([...skillTests, newSkillTest]);
+    };
+
+    const onNodeClick = (nodeID: number) => {
+        const newCurrentDialogue = dialogues.find(dialogue => dialogue.id === nodeID) ?? null;
+        const newCurrentSkillTest = skillTests.find(skillTest => skillTest.id === nodeID) ?? null;
+
+        if (!newCurrentDialogue && !newCurrentSkillTest) {
             return;
         }
 
+        if (newCurrentDialogue && newCurrentSkillTest) {
+            throw new Error("Cannot have two nodes with the same ID!");
+        }
+
         setCurrentDialogue(newCurrentDialogue);
+        setCurrentSkillTest(newCurrentSkillTest);
     };
 
     const onNodeMoveFinish = (id: number, x: number, y: number) => {
@@ -99,7 +116,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             id: dialogueTreeID,
                             name: dialogueTreeName,
                             dialogues,
-                            skillTests: [],
+                            skillTests,
                             nodeCoordinates: nodeCoordinates
                         })}
                     >
@@ -136,12 +153,16 @@ export const DialogueTreeMaker = (): ReactElement => {
                         <Button onClick={createNewDialogue}>
                             <PlusIcon /> Create dialogue
                         </Button>
+                        <Button onClick={createNewSkillTest}>
+                            <PlusIcon /> Create skill test
+                        </Button>
                     </div>
                     <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
                         <DialogueTreeGraph
                             dialogues={dialogues}
-                            dialogueCoordinates={nodeCoordinates}
-                            onDialogueClick={onDialogueClick}
+                            skillTests={skillTests}
+                            nodeCoordinates={nodeCoordinates}
+                            onDialogueClick={onNodeClick}
                             onDialogueMoveFinish={onNodeMoveFinish}
                         />
                     </SigmaContainer>
@@ -153,6 +174,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                     setDialogues={setDialogues}
                     setCurrentDialogue={setCurrentDialogue}
                 />
+                {currentSkillTest ? <h1>Skill Test</h1> : null}
             </div>
         </div>
     </Page>;

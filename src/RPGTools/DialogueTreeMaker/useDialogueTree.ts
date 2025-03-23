@@ -6,10 +6,12 @@ type UseDialogueTree = {
     dialogueTreeID: string;
     dialogueTreeName: string;
     dialogues: Array<Dialogue>;
+    skillTests: Array<SkillTest>,
     nodeCoordinates: NodeCoordinate;
     setDialogueTreeID: (id: string) => void;
     setDialogueTreeName: (name: string) => void;
     setDialogues: (dialogues: Array<Dialogue>) => void;
+    setSkillTests: (skillTests: Array<SkillTest>) => void;
     setDialogueCoordinates: (nodeCoordinates: NodeCoordinate) => void;
 };
 
@@ -51,8 +53,10 @@ export const useDialogueTree = (): UseDialogueTree => {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
+        skillTests,
         nodeCoordinates,
         setDialogues,
+        setSkillTests,
         setDialogueTreeID,
         setDialogueTreeName,
         setDialogueCoordinates

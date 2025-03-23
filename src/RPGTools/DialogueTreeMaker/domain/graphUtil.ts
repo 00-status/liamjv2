@@ -70,7 +70,7 @@ export const convertDialoguesToEdges = (
     }, []);
 
     const skillTestEdges: Array<SerializedEdge> = skillTests
-        .filter(skillTest => nodeIDsById[skillTest.nextDialogueID])
+        .filter(skillTest => nodeIDsById[skillTest.nextDialogueID ?? -1])
         .map((skillTest) => {
             return {
                 key: skillTest.id + '-' + skillTest.nextDialogueID,

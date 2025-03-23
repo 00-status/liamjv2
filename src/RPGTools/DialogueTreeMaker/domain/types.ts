@@ -42,7 +42,7 @@ export type SkillTest = {
     name: string,
     skillID: string;
     // TODO: Add skill test array
-    nextDialogueID: number;
+    nextDialogueID: number|null;
 };
 
 export type UnknownObject = {
