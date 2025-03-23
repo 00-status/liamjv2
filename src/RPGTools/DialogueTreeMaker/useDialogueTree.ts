@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Dialogue, NodeCoordinate, DialogueTree } from "./domain/types";
+import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from "./domain/types";
 
 type UseDialogueTree = {
     dialogueTreeID: string;
@@ -17,6 +17,7 @@ export const useDialogueTree = (): UseDialogueTree => {
     const [dialogueTreeID, setDialogueTreeID] = useState<string>('tree_1');
     const [dialogueTreeName, setDialogueTreeName] = useState<string>('Tree 1');
     const [dialogues, setDialogues] = useState<Array<Dialogue>>([]);
+    const [skillTests, setSkillTests] = useState<Array<SkillTest>>([]);
     const [nodeCoordinates, setDialogueCoordinates] = useState<NodeCoordinate>(new Map());
 
     useEffect(() => {
@@ -28,15 +29,17 @@ export const useDialogueTree = (): UseDialogueTree => {
             setDialogueTreeID(dialogueTreeParsed.id);
             setDialogueTreeName(dialogueTreeParsed.name);
             setDialogues(dialogueTreeParsed.dialogues);
+            setSkillTests(dialogueTreeParsed.skillTests ?? []);
             setDialogueCoordinates(new Map(dialogueTreeParsed.nodeCoordinates));
         }
-    }, [setDialogueTreeID, setDialogueTreeName, setDialogues, setDialogueCoordinates]);
+    }, []);
 
     useEffect(() => {
         const dialogueTree = {
             id: dialogueTreeID,
             name: dialogueTreeName,
             dialogues,
+            skillTests,
             nodeCoordinates: Array.from(nodeCoordinates.entries())
         };
         const serializedDialogueTree = JSON.stringify(dialogueTree);

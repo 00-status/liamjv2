@@ -72,9 +72,9 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogues([...dialogues, newDialogue]);
     };
 
-    const onDialogueClick = (dialogueID: number) => {
+    const onDialogueClick = (nodeID: number) => {
         const newCurrentDialogue = dialogues.find((dialogue: Dialogue) => {
-            return dialogue.id === dialogueID;
+            return dialogue.id === nodeID;
         });
 
         if (!newCurrentDialogue) {
@@ -99,6 +99,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             id: dialogueTreeID,
                             name: dialogueTreeName,
                             dialogues,
+                            skillTests: [],
                             nodeCoordinates: nodeCoordinates
                         })}
                     >

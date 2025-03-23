@@ -4,6 +4,7 @@ export type DialogueTree = {
     id: string;
     name: string;
     dialogues: Array<Dialogue>;
+    skillTests: Array<SkillTest>;
     nodeCoordinates: NodeCoordinate;
 };
 
