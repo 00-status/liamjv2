@@ -15,8 +15,8 @@ import { ButtonLink } from "../../SharedComponents/ButtonLink/ButtonLink";
 import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { JSONFileInput } from "../../SharedComponents/FileInput/JSONFileInput";
 import { validateDialogueTree } from "./domain/validateDialogueTree";
-import { DialogueMaker } from "./DialogueMaker/DialogueMaker";
 import { RPGRoutes } from "../domain";
+import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -53,38 +53,6 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueTreeName('');
         setDialogues([]);
         setDialogueCoordinates(new Map());
-    };
-
-    const onSave = (updatedDialogue: Dialogue) => {
-        const dialoguesCopy = [...dialogues];
-
-        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === updatedDialogue.id);
-
-        if (currentDialogueIndex === -1) {
-            return;
-        }
-
-        dialoguesCopy[currentDialogueIndex] = updatedDialogue;
-
-        setCurrentDialogue(updatedDialogue);
-        setDialogues(dialoguesCopy);
-    };
-
-    const deleteDialogue = () => {
-        if (dialogues.length === 1 || !currentDialogue) {
-            return;
-        }
-
-        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === currentDialogue.id);
-        if (currentDialogueIndex === -1) {
-            return;
-        }
-
-        const dialoguesCopy = [...dialogues];
-        dialoguesCopy.splice(currentDialogueIndex, 1);
-
-        setCurrentDialogue(null);
-        setDialogues(dialoguesCopy);
     };
 
     const createNewDialogue = () => {
@@ -178,10 +146,12 @@ export const DialogueTreeMaker = (): ReactElement => {
                     </SigmaContainer>
                 </div>
                 <hr className="divider" />
-                {currentDialogue
-                    ? <DialogueMaker dialogue={currentDialogue} onSave={onSave} onDelete={deleteDialogue} />
-                    : null
-                }
+                <DialogueMakerContainer
+                    dialogues={dialogues}
+                    currentDialogue={currentDialogue}
+                    setDialogues={setDialogues}
+                    setCurrentDialogue={setCurrentDialogue}
+                />
             </div>
         </div>
     </Page>;

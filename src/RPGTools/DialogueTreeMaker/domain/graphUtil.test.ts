@@ -24,12 +24,12 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Area one", size: 20, color: '#d6a840', type: "dialogue" }
+                    attributes: { x: 0, y: 0, label: "Area one", size: 20, color: '#d6a840' }
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840', type: "dialogue" }
+                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
                 },
             ]);
         });
@@ -58,12 +58,12 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 1, y: 2, label: "Area one", size: 20, color: '#d6a840', type: "dialogue" }
+                    attributes: { x: 1, y: 2, label: "Area one", size: 20, color: '#d6a840' }
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840', type: "dialogue" }
+                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
                 },
             ]);
         });
@@ -87,7 +87,7 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840', type: "skillTest" }
+                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840' }
                 },
             ]);
         });
