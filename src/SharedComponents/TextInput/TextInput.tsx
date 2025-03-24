@@ -9,10 +9,11 @@ type Props = {
     placeholder?: string;
     onChange?: (value?: string) => void;
     readonly?: boolean;
+    numbersOnly?: boolean;
 };
 
 export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
-    const { label, value, id, placeholder, onChange, readonly } = props;
+    const { label, value, id, placeholder, onChange, readonly, numbersOnly } = props;
 
     return <div className="text-input">
         {label && <label htmlFor={id}>{label}</label>}
@@ -20,7 +21,7 @@ export const TextInput = forwardRef<HTMLInputElement, Props>((props: Props, ref)
             ref={ref}
             className='text-input__input'
             readOnly={readonly}
-            type="text"
+            type={numbersOnly ? "number" : "text"}
             id={id}
             placeholder={placeholder}
             value={value}

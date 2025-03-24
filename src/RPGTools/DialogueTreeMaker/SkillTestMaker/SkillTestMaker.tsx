@@ -17,15 +17,28 @@ export const SkillTestMaker = (props: Props) => {
         <div>
             <TextInput
                 id="skill-test-id"
-                label="Skill Test ID"
+                label="ID"
                 value={currentSkillTest.id}
                 readonly
             />
             <TextInput
                 id="skill-test-name"
-                label="Skill Test Name"
+                label="Name"
                 value={currentSkillTest.name}
                 onChange={(value) => value ? onSave({...currentSkillTest, name: value}) : null}
+            />
+            <TextInput
+                id="skill-test-skill-id"
+                label="Skill ID"
+                value={currentSkillTest.skillID}
+                onChange={(value) => value ? onSave({...currentSkillTest, skillID: value}) : null}
+            />
+            <TextInput
+                id="skill-test-next-dialogue-id"
+                label="Next Dialogue ID"
+                value={currentSkillTest.nextDialogueID ?? ""}
+                onChange={(value) => onSave({...currentSkillTest, nextDialogueID: value ? Number(value) : null})}
+                numbersOnly={true}
             />
         </div>
     </div>
