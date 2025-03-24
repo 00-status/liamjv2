@@ -1,7 +1,9 @@
 
 import "./skill-test-maker.css";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
-import { SkillTest } from "../domain/types";
+import { SkillTest, SkillTestDifficulty } from "../domain/types";
+import { Card } from "../../../SharedComponents/Card/Card";
+import { Pill } from "../../../SharedComponents/Pill/Pill";
 
 type Props = {
     currentSkillTest: SkillTest;
@@ -11,6 +13,18 @@ type Props = {
 
 export const SkillTestMaker = (props: Props) => {
     const { currentSkillTest, onSave, onDelete } = props;
+
+    const updateDifficulty = (updatedDifficulty: SkillTestDifficulty) => {
+        const difficultiesCopy = [...currentSkillTest.difficulties];
+        const index = difficultiesCopy.findIndex((difficulty) => difficulty.id === updatedDifficulty.id);
+
+        if (index === -1) {
+            return;
+        }
+
+        difficultiesCopy[index] = updatedDifficulty;
+        onSave({...currentSkillTest, difficulties: difficultiesCopy});
+    };
 
     return <div>
         <div>
@@ -43,5 +57,18 @@ export const SkillTestMaker = (props: Props) => {
                 numbersOnly={true}
             />
         </div>
+        <Card title="Difficulties">
+            {currentSkillTest.difficulties.map((difficulty) => {
+                return <div>
+                    <TextInput
+                        id={"skill-test-difficulty-" + difficulty.id}
+                        value={difficulty.threshold}
+                        onChange={() => updateDifficulty({...difficulty, threshold: difficulty.threshold})}
+                        numbersOnly
+                    />
+                    {difficulty.conditionOutcomes.map((outcome) => <Pill>{outcome.conditionName}</Pill>)}
+                </div>;
+            })}
+        </Card>
     </div>
 };

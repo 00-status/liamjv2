@@ -47,11 +47,12 @@ export type SkillTest = {
 
 export type SkillTestDifficulty = {
     id: number;
-    difficulty: number;
+    threshold: number;
     conditionOutcomes: Array<ConditionOutcome>;
 };
 
 export type ConditionOutcome = {
+    id: number;
     conditionName: string;
     addingOrRemoving: Array<string>;
 };
