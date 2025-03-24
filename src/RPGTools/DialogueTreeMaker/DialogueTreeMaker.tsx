@@ -17,6 +17,7 @@ import { JSONFileInput } from "../../SharedComponents/FileInput/JSONFileInput";
 import { validateDialogueTree } from "./domain/validateDialogueTree";
 import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
+import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -174,7 +175,12 @@ export const DialogueTreeMaker = (): ReactElement => {
                     setDialogues={setDialogues}
                     setCurrentDialogue={setCurrentDialogue}
                 />
-                {currentSkillTest ? <h1>Skill Test</h1> : null}
+                <SkillTestMakerContainer
+                    skillTests={skillTests}
+                    currentSkillTest={currentSkillTest}
+                    setSkillTests={setSkillTests}
+                    setCurrentSkillTest={setCurrentSkillTest}
+                />
             </div>
         </div>
     </Page>;

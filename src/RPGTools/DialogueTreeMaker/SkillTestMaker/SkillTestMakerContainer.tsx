@@ -1,8 +1,10 @@
+import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest } from "../domain/types";
+import { SkillTestMaker } from "./SkillTestMaker";
 
 type Props = {
     skillTests: Array<SkillTest>;
-    currentSkillTest: SkillTest;
+    currentSkillTest: SkillTest|null;
     setSkillTests: (skillTest: Array<SkillTest>) => void;
     setCurrentSkillTest: (skillTest: SkillTest|null) => void;
 };
@@ -43,7 +45,11 @@ export const SkillTestMakerContainer = (props: Props) => {
         setSkillTests(dialoguesCopy);
     };
 
-    return <div>
-        <h2>{currentSkillTest.name}</h2>
-    </div>;
+    return currentSkillTest
+        ? <SkillTestMaker
+            currentSkillTest={currentSkillTest}
+            onSave={onSave}
+            onDelete={onDelete}
+        />
+        : null;
 };
