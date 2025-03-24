@@ -41,8 +41,19 @@ export type SkillTest = {
     id: number,
     name: string,
     skillID: string;
-    // TODO: Add skill test array
+    difficulties: Array<SkillTestDifficulty>;
     nextDialogueID: number|null;
+};
+
+export type SkillTestDifficulty = {
+    id: number;
+    difficulty: number;
+    conditionOutcomes: Array<ConditionOutcome>;
+};
+
+export type ConditionOutcome = {
+    conditionName: string;
+    addingOrRemoving: Array<string>;
 };
 
 export type UnknownObject = {

@@ -6,7 +6,7 @@ type UseDialogueTree = {
     dialogueTreeID: string;
     dialogueTreeName: string;
     dialogues: Array<Dialogue>;
-    skillTests: Array<SkillTest>,
+    skillTests: Array<SkillTest>;
     nodeCoordinates: NodeCoordinate;
     setDialogueTreeID: (id: string) => void;
     setDialogueTreeName: (name: string) => void;
@@ -47,7 +47,7 @@ export const useDialogueTree = (): UseDialogueTree => {
         const serializedDialogueTree = JSON.stringify(dialogueTree);
         
         localStorage.setItem('dialogueTree', serializedDialogueTree);
-    }, [dialogueTreeID, dialogueTreeName, dialogues, nodeCoordinates]);
+    }, [dialogueTreeID, dialogueTreeName, dialogues, skillTests, nodeCoordinates]);
 
     return {
         dialogueTreeID,

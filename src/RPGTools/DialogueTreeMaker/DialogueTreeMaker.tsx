@@ -80,6 +80,7 @@ export const DialogueTreeMaker = (): ReactElement => {
             id: Math.trunc(Date.now() + Math.random()),
             name: "New Skill Test",
             skillID: "",
+            difficulties: [],
             nextDialogueID: null
         };
 

@@ -1,3 +1,5 @@
+
+import "./skill-test-maker.css";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest } from "../domain/types";
 
@@ -14,7 +16,7 @@ export const SkillTestMaker = (props: Props) => {
         <div>
             <h2>{currentSkillTest.name}</h2>
         </div>
-        <div>
+        <div className="skill-test-maker__form">
             <TextInput
                 id="skill-test-id"
                 label="ID"
