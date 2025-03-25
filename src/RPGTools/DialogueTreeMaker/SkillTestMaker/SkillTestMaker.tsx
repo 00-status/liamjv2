@@ -4,6 +4,10 @@ import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest, SkillTestDifficulty } from "../domain/types";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { Pill } from "../../../SharedComponents/Pill/Pill";
+import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
+import { useState } from "react";
+import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
+import { Button } from "../../../SharedComponents/Button/Button";
 
 type Props = {
     currentSkillTest: SkillTest;
@@ -13,6 +17,8 @@ type Props = {
 
 export const SkillTestMaker = (props: Props) => {
     const { currentSkillTest, onSave, onDelete } = props;
+
+    const [isDifficultyModalOpen, setIsDifficultyModalOpen] = useState<boolean>(false);
 
     const updateDifficulty = (updatedDifficulty: SkillTestDifficulty) => {
         const difficultiesCopy = [...currentSkillTest.difficulties];
@@ -57,7 +63,10 @@ export const SkillTestMaker = (props: Props) => {
                 numbersOnly={true}
             />
         </div>
-        <Card title="Difficulties">
+        <Card
+            title="Difficulties"
+            button={<Button onClick={() => setIsDifficultyModalOpen(true)}><PlusIcon />Add difficulty</Button>}
+        >
             {currentSkillTest.difficulties.map((difficulty) => {
                 return <div>
                     <TextInput
@@ -71,5 +80,10 @@ export const SkillTestMaker = (props: Props) => {
                 </div>;
             })}
         </Card>
+        <SkillTestDifficultyModal
+            isOpen={isDifficultyModalOpen}
+            updateDifficulty={updateDifficulty}
+            onClose={() => setIsDifficultyModalOpen(false)}
+        />
     </div>;
 };

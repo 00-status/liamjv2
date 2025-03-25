@@ -16,8 +16,24 @@ export const SkillTestDifficultyModal = (props: Props) => {
     const [threshold, setThreshold] = useState<number|null>(null);
     const [conditionOutcomes, setConditionOutcomes] = useState<Array<ConditionOutcome>>([]);
 
+    const [currentConditionID, setCurrentConditionID] = useState<string|null>(null);
     const [currentConditionName, setCurrentConditionName] = useState<string|null>(null);
     const [addingOrRemoving, setAddingOrRemoving] = useState<string|null>("adding");
+
+    const onAddConditionOutcome = () => {
+        if (!currentConditionID || !currentConditionName || !addingOrRemoving) {
+            return;
+        }
+
+        setConditionOutcomes([
+            ...conditionOutcomes,
+            { id: currentConditionID, conditionName: currentConditionName, addingOrRemoving }
+        ]);
+
+        setCurrentConditionID(null);
+        setCurrentConditionName(null);
+        setAddingOrRemoving(null);
+    };
 
     // TODO: Ideally we would disable the submit button until the form is valid.
     const onSubmit = () => {
@@ -35,6 +51,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
         <div>
             <TextInput
                 id={"skill-test-difficulty-threshold-modal"}
+                placeholder="Condition threshold"
                 value={threshold ?? ""}
                 onChange={(value) => setThreshold(value ? Number(value) : null)}
                 numbersOnly
@@ -42,19 +59,28 @@ export const SkillTestDifficultyModal = (props: Props) => {
         </div>
         <div>
             <TextInput
+                id={"skill-test-difficulty-condition-id"}
+                placeholder="Condition ID"
+                value={currentConditionID ?? ""}
+                onChange={(value) => setCurrentConditionID(value ?? null)}
+            />
+            <TextInput
                 id={"skill-test-difficulty-condition-name"}
+                placeholder="Condition name"
                 value={currentConditionName ?? ""}
                 onChange={(value) => setCurrentConditionName(value ?? null)}
             />
             <TextInput
                 id={"skill-test-difficulty-condition-add-or-remove"}
+                placeholder="adding or removing"
                 value={addingOrRemoving ?? ""}
                 onChange={(value) => setAddingOrRemoving(value ?? null)}
             />
-            <Button>Add condition</Button>
+            <Button onClick={onAddConditionOutcome}>Add condition</Button>
         </div>
         <div>
-            {conditionOutcomes.map(outcome => <div>{outcome.conditionName + " : " + outcome.addingOrRemoving}</div>)}
+            {conditionOutcomes.map(outcome =>
+                <div key={outcome.id}>{outcome.conditionName + " : " + outcome.addingOrRemoving}</div>)}
         </div>
     </Modal>;
 };

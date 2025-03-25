@@ -52,7 +52,7 @@ export type SkillTestDifficulty = {
 };
 
 export type ConditionOutcome = {
-    id: number;
+    id: string;
     conditionName: string;
     addingOrRemoving: string;
 };
