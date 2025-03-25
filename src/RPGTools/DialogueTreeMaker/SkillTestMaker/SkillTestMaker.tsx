@@ -68,17 +68,23 @@ export const SkillTestMaker = (props: Props) => {
             title="Difficulties"
             button={<Button onClick={() => setIsDifficultyModalOpen(true)}><PlusIcon />Add difficulty</Button>}
         >
+            <div className="skill-test-maker__outcome-item">
+                <div className="skill-test-maker__outcome-item-child">
+                    Threshold
+                </div>
+                <div className="skill-test-maker__outcome-item-child">
+                    Outcomes
+                </div>
+            </div>
             {currentSkillTest.difficulties.map((difficulty) => {
-                return <div key={difficulty.id}>
-                    <TextInput
-                        id={"skill-test-difficulty-" + difficulty.id}
-                        placeholder="threshold"
-                        value={difficulty.threshold}
-                        onChange={() => updateDifficulty({...difficulty, threshold: difficulty.threshold})}
-                        numbersOnly
-                    />
-                    Outcomes: {difficulty.conditionOutcomes.map((outcome) =>
-                        <div key={outcome.id}>{outcome.addingOrRemoving} : {outcome.conditionName}</div>
+                return <div className="skill-test-maker__outcome-item" key={difficulty.id}>
+                    <div className="skill-test-maker__outcome-item-child">
+                        {difficulty.threshold}
+                    </div>
+                    {difficulty.conditionOutcomes.map((outcome) =>
+                        <div key={outcome.id} className="skill-test-maker__outcome-item-child">
+                            {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + "]"}
+                        </div>
                     )}
                 </div>;
             })}

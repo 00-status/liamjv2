@@ -1,4 +1,3 @@
-import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest } from "../domain/types";
 import { SkillTestMaker } from "./SkillTestMaker";
 

@@ -3,3 +3,13 @@
     flex-direction: row;
     gap: 20px;
 }
+
+.skill-test-maker__outcome-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.skill-test-maker__outcome-item-child {
+    flex: 1 1;
+}
