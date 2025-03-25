@@ -49,7 +49,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
             return;
         }
 
-        updateDifficulty({ id: 1, threshold, conditionOutcomes });
+        updateDifficulty({ id: Math.trunc(Date.now() + Math.random()), threshold, conditionOutcomes });
         setCurrentConditionID(null);
         setCurrentConditionName(null);
         setAddingOrRemoving("adding");

@@ -3,7 +3,6 @@ import "./skill-test-maker.css";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest, SkillTestDifficulty } from "../domain/types";
 import { Card } from "../../../SharedComponents/Card/Card";
-import { Pill } from "../../../SharedComponents/Pill/Pill";
 import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
 import { useState } from "react";
 import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
@@ -81,11 +80,13 @@ export const SkillTestMaker = (props: Props) => {
                     <div className="skill-test-maker__outcome-item-child">
                         {difficulty.threshold}
                     </div>
-                    {difficulty.conditionOutcomes.map((outcome) =>
-                        <div key={outcome.id} className="skill-test-maker__outcome-item-child">
-                            {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + "]"}
-                        </div>
-                    )}
+                    <div className="skill-test-maker__outcome-item-child">
+                        {difficulty.conditionOutcomes.map((outcome) =>
+                            <div key={outcome.id}>
+                                {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + "]"}
+                            </div>
+                        )}
+                    </div>
                 </div>;
             })}
         </Card>
