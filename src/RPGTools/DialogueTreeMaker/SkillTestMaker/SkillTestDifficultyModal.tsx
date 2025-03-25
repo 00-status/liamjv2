@@ -5,12 +5,18 @@ import { Modal } from "../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
 import { Button } from "../../../SharedComponents/Button/Button";
+import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 
 type Props = {
     isOpen: boolean;
     updateDifficulty: (difficulty: SkillTestDifficulty) => void;
     onClose: () => void;
 };
+
+const conditionOutcomeOptions = [
+    { label: "Adding", value: "adding"},
+    { label: "Removing", value: "removing"},
+];
 
 export const SkillTestDifficultyModal = (props: Props) => {
     const {isOpen, updateDifficulty, onClose} = props;
@@ -20,10 +26,10 @@ export const SkillTestDifficultyModal = (props: Props) => {
 
     const [currentConditionID, setCurrentConditionID] = useState<string|null>(null);
     const [currentConditionName, setCurrentConditionName] = useState<string|null>(null);
-    const [addingOrRemoving, setAddingOrRemoving] = useState<string|null>("adding");
+    const [addingOrRemoving, setAddingOrRemoving] = useState<string>("adding");
 
     const onAddConditionOutcome = () => {
-        if (!currentConditionID || !currentConditionName || !addingOrRemoving) {
+        if (!currentConditionID || !currentConditionName) {
             return;
         }
 
@@ -34,7 +40,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
 
         setCurrentConditionID(null);
         setCurrentConditionName(null);
-        setAddingOrRemoving(null);
+        setAddingOrRemoving("adding");
     };
 
     // TODO: Ideally we would disable the submit button until the form is valid.
@@ -44,6 +50,9 @@ export const SkillTestDifficultyModal = (props: Props) => {
         }
 
         updateDifficulty({ id: 1, threshold, conditionOutcomes });
+        setCurrentConditionID(null);
+        setCurrentConditionName(null);
+        setAddingOrRemoving("adding");
         onClose();
     };
 
@@ -73,11 +82,10 @@ export const SkillTestDifficultyModal = (props: Props) => {
                 value={currentConditionName ?? ""}
                 onChange={(value) => setCurrentConditionName(value ?? null)}
             />
-            <TextInput
-                id={"skill-test-difficulty-condition-add-or-remove"}
-                placeholder="adding or removing"
-                value={addingOrRemoving ?? ""}
-                onChange={(value) => setAddingOrRemoving(value ?? null)}
+            <Dropdown
+                defaultValue="adding"
+                options={conditionOutcomeOptions}
+                onOptionSelect={value => setAddingOrRemoving(value)}
             />
             <Button onClick={onAddConditionOutcome}>Add condition</Button>
         </div>
