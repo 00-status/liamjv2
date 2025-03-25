@@ -45,7 +45,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
 
     // TODO: Ideally we would disable the submit button until the form is valid.
     const onSubmit = () => {
-        if (!threshold || conditionOutcomes.length < 1) {
+        if (threshold === null || threshold === undefined || conditionOutcomes.length < 1) {
             return;
         }
 

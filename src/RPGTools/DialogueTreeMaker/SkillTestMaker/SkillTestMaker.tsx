@@ -25,10 +25,11 @@ export const SkillTestMaker = (props: Props) => {
         const index = difficultiesCopy.findIndex((difficulty) => difficulty.id === updatedDifficulty.id);
 
         if (index === -1) {
-            return;
+            difficultiesCopy.push(updatedDifficulty);
+        } else {
+            difficultiesCopy[index] = updatedDifficulty;
         }
-
-        difficultiesCopy[index] = updatedDifficulty;
+        
         onSave({...currentSkillTest, difficulties: difficultiesCopy});
     };
 
@@ -68,7 +69,7 @@ export const SkillTestMaker = (props: Props) => {
             button={<Button onClick={() => setIsDifficultyModalOpen(true)}><PlusIcon />Add difficulty</Button>}
         >
             {currentSkillTest.difficulties.map((difficulty) => {
-                return <div>
+                return <div key={difficulty.id}>
                     <TextInput
                         id={"skill-test-difficulty-" + difficulty.id}
                         placeholder="threshold"
@@ -76,7 +77,9 @@ export const SkillTestMaker = (props: Props) => {
                         onChange={() => updateDifficulty({...difficulty, threshold: difficulty.threshold})}
                         numbersOnly
                     />
-                    {difficulty.conditionOutcomes.map((outcome) => <Pill>{outcome.conditionName}</Pill>)}
+                    Outcomes: {difficulty.conditionOutcomes.map((outcome) =>
+                        <div key={outcome.id}>{outcome.addingOrRemoving} : {outcome.conditionName}</div>
+                    )}
                 </div>;
             })}
         </Card>
