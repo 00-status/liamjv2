@@ -54,7 +54,7 @@ export type SkillTestDifficulty = {
 export type ConditionOutcome = {
     id: number;
     conditionName: string;
-    addingOrRemoving: Array<string>;
+    addingOrRemoving: string;
 };
 
 export type UnknownObject = {

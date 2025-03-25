@@ -62,6 +62,7 @@ export const SkillTestMaker = (props: Props) => {
                 return <div>
                     <TextInput
                         id={"skill-test-difficulty-" + difficulty.id}
+                        placeholder="threshold"
                         value={difficulty.threshold}
                         onChange={() => updateDifficulty({...difficulty, threshold: difficulty.threshold})}
                         numbersOnly
@@ -70,5 +71,5 @@ export const SkillTestMaker = (props: Props) => {
                 </div>;
             })}
         </Card>
-    </div>
+    </div>;
 };
