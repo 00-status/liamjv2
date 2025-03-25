@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import "./skill-test-difficulty-modal.css"
 import { Modal } from "../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
@@ -57,7 +59,8 @@ export const SkillTestDifficultyModal = (props: Props) => {
                 numbersOnly
             />
         </div>
-        <div>
+        <hr className="divider" />
+        <div className="skill-test-difficulty-modal-outcome__form">
             <TextInput
                 id={"skill-test-difficulty-condition-id"}
                 placeholder="Condition ID"
@@ -80,7 +83,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
         </div>
         <div>
             {conditionOutcomes.map(outcome =>
-                <div key={outcome.id}>{outcome.conditionName + " : " + outcome.addingOrRemoving}</div>)}
+                <div key={outcome.id}>{outcome.addingOrRemoving + " : " + outcome.conditionName}</div>)}
         </div>
     </Modal>;
 };
