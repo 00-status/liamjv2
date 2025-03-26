@@ -4,8 +4,9 @@ import "./skill-test-difficulty-modal.css"
 import { Modal } from "../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
-import { Button } from "../../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
+import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 
 type Props = {
     isOpen: boolean;
@@ -49,6 +50,18 @@ export const SkillTestDifficultyModal = (props: Props) => {
         setCurrentConditionID(null);
         setCurrentConditionName(null);
         setAddingOrRemoving("adding");
+    };
+
+    const deleteConditionOutcome = (outcomeID: string) => {
+        const conditionOutcomesCopy = [...conditionOutcomes];
+        const indexToDelete = conditionOutcomesCopy.findIndex(outcome => outcome.id === outcomeID);
+
+        if (indexToDelete === -1) {
+            return;
+        }
+
+        conditionOutcomesCopy.splice(indexToDelete, 1);
+        setConditionOutcomes(conditionOutcomesCopy);
     };
 
     // TODO: Ideally we would disable the submit button until the form is valid.
@@ -105,7 +118,11 @@ export const SkillTestDifficultyModal = (props: Props) => {
         </div>
         <div>
             {conditionOutcomes.map(outcome =>
-                <div key={outcome.id}>{outcome.addingOrRemoving + " : " + outcome.conditionName}</div>)}
+                <div key={outcome.id} className="skill-test-difficulty-modal__condition-outcome">
+                    <div>{outcome.addingOrRemoving + " : " + outcome.conditionName}</div>
+                    <div><Button onClick={() => deleteConditionOutcome(outcome.id)} buttonTheme={ButtonTheme.Delete}><TrashIcon /></Button></div>
+                </div>
+            )}
         </div>
     </Modal>;
 };
