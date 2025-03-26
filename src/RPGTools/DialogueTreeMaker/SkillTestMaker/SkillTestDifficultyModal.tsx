@@ -7,6 +7,7 @@ import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
+import { DescriptionCard } from "../../../SharedComponents/DescriptionCard/DescriptionCard";
 
 type Props = {
     isOpen: boolean;
@@ -86,6 +87,10 @@ export const SkillTestDifficultyModal = (props: Props) => {
     const submitButton = <Button onClick={onSubmit}>Submit</Button>
 
     return <Modal isOpen={isOpen} title="Difficulty" onClose={onClose} footer={submitButton}>
+        <DescriptionCard>
+            <p>This modal allows you to add a Difficulty to your Skill Test. A Difficulty has a "Threshold" which represents the value that the character must pass, and a "Condition Outcome" which represents the Game Engine adding or removing a condition from the game state.</p>
+            <p>For example, a Skill Test to climb a wall may add an "exhausted" condition to the game state if the character does poorly.</p>
+        </DescriptionCard>
         <div>
             <TextInput
                 id={"skill-test-difficulty-threshold-modal"}

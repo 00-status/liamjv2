@@ -3,8 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 650px;
-    height: 550px;
+    width: 700px;
+    height: 650px;
 
     padding: 20px;
 
@@ -14,8 +14,6 @@
     outline: none;
 
     background-color: #313137;
-    
-    /* overflow: auto; */
 }
 
 .modal-overlay {
@@ -36,6 +34,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.modal__body {
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.modal__body::-webkit-scrollbar {
+    display: none;
 }
 
 .modal__footer {
