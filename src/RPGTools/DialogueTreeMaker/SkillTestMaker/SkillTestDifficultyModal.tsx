@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./skill-test-difficulty-modal.css"
 import { Modal } from "../../../SharedComponents/Modal/Modal";
@@ -9,6 +9,7 @@ import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 
 type Props = {
     isOpen: boolean;
+    difficulty: SkillTestDifficulty | null;
     updateDifficulty: (difficulty: SkillTestDifficulty) => void;
     onClose: () => void;
 };
@@ -19,14 +20,21 @@ const conditionOutcomeOptions = [
 ];
 
 export const SkillTestDifficultyModal = (props: Props) => {
-    const {isOpen, updateDifficulty, onClose} = props;
+    const {isOpen, difficulty, updateDifficulty, onClose} = props;
 
-    const [threshold, setThreshold] = useState<number|null>(null);
-    const [conditionOutcomes, setConditionOutcomes] = useState<Array<ConditionOutcome>>([]);
+    const [threshold, setThreshold] = useState<number|null>(difficulty?.threshold ?? null);
+    const [conditionOutcomes, setConditionOutcomes] = useState<Array<ConditionOutcome>>(
+        difficulty?.conditionOutcomes ?? []
+    );
 
     const [currentConditionID, setCurrentConditionID] = useState<string|null>(null);
     const [currentConditionName, setCurrentConditionName] = useState<string|null>(null);
     const [addingOrRemoving, setAddingOrRemoving] = useState<string>("adding");
+
+    useEffect(() => {
+        setThreshold(difficulty?.threshold ?? null);
+        setConditionOutcomes(difficulty?.conditionOutcomes ?? []);
+    }, [difficulty]);
 
     const onAddConditionOutcome = () => {
         if (!currentConditionID || !currentConditionName) {
@@ -49,7 +57,13 @@ export const SkillTestDifficultyModal = (props: Props) => {
             return;
         }
 
-        updateDifficulty({ id: Math.trunc(Date.now() + Math.random()), threshold, conditionOutcomes });
+        updateDifficulty({
+            id: difficulty?.id
+                ? difficulty.id
+                : Math.trunc(Date.now() + Math.random()),
+            threshold,
+            conditionOutcomes
+        });
         setCurrentConditionID(null);
         setCurrentConditionName(null);
         setAddingOrRemoving("adding");

@@ -8,6 +8,7 @@ import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
 import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
+import { PencilIcon } from "../../../SharedComponents/Icons/PencilIcon";
 
 type Props = {
     currentSkillTest: SkillTest;
@@ -17,8 +18,8 @@ type Props = {
 
 // TODO:
 //      Delete the Skill Test ✅
-//      Delete Difficulty
-//      Edit Difficulty
+//      Delete Difficulty ✅
+//      Edit Difficulty ✅
 //      Add description to modal.
 //      Put focus on text field after adding outcome
 
@@ -26,6 +27,7 @@ export const SkillTestMaker = (props: Props) => {
     const { currentSkillTest, onSave, onDelete } = props;
 
     const [isDifficultyModalOpen, setIsDifficultyModalOpen] = useState<boolean>(false);
+    const [currentDifficulty, setCurrentDifficulty] = useState<SkillTestDifficulty|null>(null);
 
     const updateDifficulty = (updatedDifficulty: SkillTestDifficulty) => {
         const difficultiesCopy = [...currentSkillTest.difficulties];
@@ -113,6 +115,12 @@ export const SkillTestMaker = (props: Props) => {
                         )}
                     </div>
                     <div className="skill-test-maker__outcome-item-child--last">
+                        <Button onClick={() => {
+                            setCurrentDifficulty(difficulty);
+                            setIsDifficultyModalOpen(true);
+                        }}>
+                            <PencilIcon />
+                        </Button>
                         <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteDifficulty(difficulty.id)}>
                             <TrashIcon />
                         </Button>
@@ -122,6 +130,7 @@ export const SkillTestMaker = (props: Props) => {
         </Card>
         <SkillTestDifficultyModal
             isOpen={isDifficultyModalOpen}
+            difficulty={currentDifficulty}
             updateDifficulty={updateDifficulty}
             onClose={() => setIsDifficultyModalOpen(false)}
         />
