@@ -1,3 +1,9 @@
+.skill-test-maker__title {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
 .skill-test-maker__form {
     display: flex;
     flex-direction: row;

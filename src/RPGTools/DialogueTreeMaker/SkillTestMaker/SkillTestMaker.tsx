@@ -1,18 +1,26 @@
+import { useState } from "react";
 
 import "./skill-test-maker.css";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest, SkillTestDifficulty } from "../domain/types";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
-import { useState } from "react";
 import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
-import { Button } from "../../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
+import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 
 type Props = {
     currentSkillTest: SkillTest;
     onSave: (skillTest: SkillTest) => void;
     onDelete: () => void;
 };
+
+// TODO:
+//      Delete the Skill Test
+//      Delete Difficulty
+//      Edit Difficulty
+//      Add description to modal.
+//      Put focus on text field after adding outcome
 
 export const SkillTestMaker = (props: Props) => {
     const { currentSkillTest, onSave, onDelete } = props;
@@ -33,8 +41,11 @@ export const SkillTestMaker = (props: Props) => {
     };
 
     return <div>
-        <div>
+        <div className="skill-test-maker__title">
             <h2>{currentSkillTest.name}</h2>
+            <Button buttonTheme={ButtonTheme.Delete} onClick={() => onDelete()}>
+                <TrashIcon /> Delete
+            </Button>
         </div>
         <div className="skill-test-maker__form">
             <TextInput
