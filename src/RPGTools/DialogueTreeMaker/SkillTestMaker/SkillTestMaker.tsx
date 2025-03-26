@@ -100,7 +100,7 @@ export const SkillTestMaker = (props: Props) => {
                 <div className="skill-test-maker__outcome-item-child">
                     Outcomes
                 </div>
-                <div className="skill-test-maker__outcome-item-child--last" />
+                <div className="skill-test-maker__outcome-item-child--controls" />
             </div>
             {currentSkillTest.difficulties.map((difficulty) => {
                 return <div className="skill-test-maker__outcome-item" key={difficulty.id}>
@@ -114,7 +114,7 @@ export const SkillTestMaker = (props: Props) => {
                             </div>
                         )}
                     </div>
-                    <div className="skill-test-maker__outcome-item-child--last">
+                    <div className="skill-test-maker__outcome-item-child--controls">
                         <Button onClick={() => {
                             setCurrentDifficulty(difficulty);
                             setIsDifficultyModalOpen(true);
