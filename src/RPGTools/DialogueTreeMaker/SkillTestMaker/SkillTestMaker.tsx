@@ -16,7 +16,7 @@ type Props = {
 };
 
 // TODO:
-//      Delete the Skill Test
+//      Delete the Skill Test ✅
 //      Delete Difficulty
 //      Edit Difficulty
 //      Add description to modal.
@@ -37,6 +37,19 @@ export const SkillTestMaker = (props: Props) => {
             difficultiesCopy[index] = updatedDifficulty;
         }
         
+        onSave({...currentSkillTest, difficulties: difficultiesCopy});
+    };
+
+    const deleteDifficulty = (difficultyId: number) => {
+        const difficultiesCopy = [...currentSkillTest.difficulties];
+        const index = difficultiesCopy.findIndex((difficulty) => difficulty.id === difficultyId);
+
+        if (index === -1) {
+            return;
+        }
+
+        difficultiesCopy.splice(index, 1);
+
         onSave({...currentSkillTest, difficulties: difficultiesCopy});
     };
 
@@ -85,6 +98,7 @@ export const SkillTestMaker = (props: Props) => {
                 <div className="skill-test-maker__outcome-item-child">
                     Outcomes
                 </div>
+                <div className="skill-test-maker__outcome-item-child--last" />
             </div>
             {currentSkillTest.difficulties.map((difficulty) => {
                 return <div className="skill-test-maker__outcome-item" key={difficulty.id}>
@@ -97,6 +111,11 @@ export const SkillTestMaker = (props: Props) => {
                                 {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + "]"}
                             </div>
                         )}
+                    </div>
+                    <div className="skill-test-maker__outcome-item-child--last">
+                        <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteDifficulty(difficulty.id)}>
+                            <TrashIcon />
+                        </Button>
                     </div>
                 </div>;
             })}

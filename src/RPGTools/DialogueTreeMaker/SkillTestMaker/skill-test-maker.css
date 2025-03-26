@@ -7,6 +7,7 @@
 .skill-test-maker__form {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -18,4 +19,9 @@
 
 .skill-test-maker__outcome-item-child {
     flex: 1 1;
+}
+
+.skill-test-maker__outcome-item-child--last {
+    flex: 1 1;
+    justify-items: self-end;
 }
