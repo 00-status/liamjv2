@@ -1,6 +1,7 @@
 .skill-test-maker__title {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -9,6 +10,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
+
+    margin-bottom: 20px;
 }
 
 .skill-test-maker__outcome-item {
@@ -28,4 +31,10 @@
     gap: 8px;
 
     flex: 1 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .skill-test-maker__title {
+        justify-content: center;
+    }
 }
