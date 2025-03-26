@@ -16,13 +16,6 @@ type Props = {
     onDelete: () => void;
 };
 
-// TODO:
-//      Delete the Skill Test ✅
-//      Delete Difficulty ✅
-//      Edit Difficulty ✅
-//      Add description to modal.
-//      Put focus on text field after adding outcome
-
 export const SkillTestMaker = (props: Props) => {
     const { currentSkillTest, onSave, onDelete } = props;
 

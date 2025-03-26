@@ -88,7 +88,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
         onClose();
     };
 
-    const submitButton = <Button onClick={onSubmit}>Submit</Button>
+    const submitButton = <Button onClick={onSubmit}>Save difficulty</Button>
 
     return <Modal isOpen={isOpen} title="Difficulty" onClose={onClose} footer={submitButton}>
         <DescriptionCard>
@@ -124,7 +124,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
                 options={conditionOutcomeOptions}
                 onOptionSelect={value => setAddingOrRemoving(value)}
             />
-            <Button onClick={onAddConditionOutcome}>Add condition</Button>
+            <Button onClick={onAddConditionOutcome}>Add condition outcome</Button>
         </div>
         <div>
             {conditionOutcomes.map(outcome =>
