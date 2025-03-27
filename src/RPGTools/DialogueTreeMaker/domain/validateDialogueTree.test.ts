@@ -1,7 +1,7 @@
 import { DialogueTree } from "./types";
 import { validateDialogueTree } from "./validateDialogueTree";
 
-const dialogueCoordiantes: SerializedMap = [
+const nodeCoordinates: SerializedMap = [
     [ 1, { x: -0.49275321906224445, y: -0.01206896479437589 } ],
     [ 2, { x: -0.0303340534111972, y: 0.5068965430098933 } ]
 ];
@@ -47,7 +47,8 @@ const testData = {
             choices: []
         }
     ],
-    dialogueCoordinates: dialogueCoordiantes
+    skillTests: [],
+    nodeCoordinates: nodeCoordinates
 }
 
 export type SerializedMap = Iterable<readonly [number, { x: number; y: number; }]>;
@@ -56,7 +57,7 @@ describe('validateDialogueTree', () => {
     it('should return a dialogue tree when given a valid dialogue tree', () => {
         const result = validateDialogueTree(testData);
 
-        const expected: DialogueTree = {...testData, dialogueCoordinates: new Map(testData.dialogueCoordinates) };
+        const expected: DialogueTree = {...testData, nodeCoordinates: new Map(testData.nodeCoordinates) };
         expect(result).toEqual(expected);
     });
 
@@ -79,21 +80,28 @@ describe('validateDialogueTree', () => {
         expect(result).toEqual(null);
     });
 
-    it('should return null when dialogues is missing', () => {
-        const result = validateDialogueTree({ ...testData, dialogues: undefined });
+    it('should return make an empty dialogue array when dialogues are missing', () => {
+        const result = validateDialogueTree({ ...testData, dialogues: null });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {
+            ...testData,
+            dialogues: [],
+            nodeCoordinates: new Map(testData.nodeCoordinates)
+        };
+        expect(result).toEqual(expected);
     });
 
-    it('should return null when dialogueCoordinates is missing', () => {
-        const result = validateDialogueTree({ ...testData, dialogueCoordinates: undefined });
+    it('should return an empty Map when nodeCoordinates is missing', () => {
+        const result = validateDialogueTree({ ...testData, nodeCoordinates: undefined });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {...testData, nodeCoordinates: new Map()};
+        expect(result).toEqual(expected);
     });
 
-    it('should return null when dialogueCoordinates is an empty object', () => {
-        const result = validateDialogueTree({ ...testData, dialogueCoordinates: {} });
+    it('should return an empty Map when dialogueCoordinates is an empty object', () => {
+        const result = validateDialogueTree({ ...testData, nodeCoordinates: {} });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {...testData, nodeCoordinates: new Map()};
+        expect(result).toEqual(expected);
     });
 });

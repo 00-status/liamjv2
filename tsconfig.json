@@ -9,8 +9,8 @@
         "noImplicitAny": true,
         "noImplicitReturns": true,
 
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
         "target": "ESNext",
         "jsx": "react-jsx",
         "esModuleInterop": true,

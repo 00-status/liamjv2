@@ -4,17 +4,24 @@ import { SerializedGraph } from "graphology-types";
 import { DirectedGraph } from "graphology";
 
 import { convertDialoguesToEdges, convertDialoguesToNodes } from "./domain/graphUtil";
-import { Dialogue, DialogueCoordinate } from "./domain/types";
+import { Dialogue, NodeCoordinate, SkillTest } from "./domain/types";
 
 type Props = {
     dialogues: Array<Dialogue>;
-    dialogueCoordiantes: DialogueCoordinate;
+    skillTests: Array<SkillTest>;
+    nodeCoordinates: NodeCoordinate;
     onDialogueClick: (dialogueID: number) => void;
     onDialogueMoveFinish: (dialogueID: number, x: number, y: number) => void;
 };
 
 export const DialogueTreeGraph = (props: Props) => {
-    const { dialogues, dialogueCoordiantes: dialogueCoordinates, onDialogueClick, onDialogueMoveFinish } = props;
+    const {
+        dialogues,
+        skillTests,
+        nodeCoordinates,
+        onDialogueClick,
+        onDialogueMoveFinish
+    } = props;
 
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
 
@@ -32,13 +39,13 @@ export const DialogueTreeGraph = (props: Props) => {
                 multi: false,
                 type: 'directed',
             },
-            nodes: convertDialoguesToNodes(dialogues, dialogueCoordinates),
-            edges: convertDialoguesToEdges(dialogues),
+            nodes: convertDialoguesToNodes(dialogues, skillTests, nodeCoordinates),
+            edges: convertDialoguesToEdges(dialogues, skillTests),
         };
         const graph = DirectedGraph.from(serializedGraph);
 
         loadgraph(graph);
-    }, [loadgraph, dialogues, dialogueCoordinates]);
+    }, [loadgraph, dialogues, skillTests, nodeCoordinates]);
 
     useEffect(() => {
         registerEvents({

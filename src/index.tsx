@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
-import "@react-sigma/core/lib/react-sigma.min.css";
+import "@react-sigma/core/lib/style.css";
 
 import { AboutMe } from './AboutMe/AboutMe';
 import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';

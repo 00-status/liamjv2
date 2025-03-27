@@ -22,7 +22,7 @@ export const Modal = (props: Props) => {
                 <h2>{props.title}</h2>
                 <Button buttonTheme={ButtonTheme.Subtle} onClick={props.onClose}><CloseIcon /></Button>
             </div>
-            <div>
+            <div className="modal__body">
                 {props.children}
             </div>
             <div className="modal__footer">

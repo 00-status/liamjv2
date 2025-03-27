@@ -1,6 +1,6 @@
 import { SerializedEdge } from "graphology-types";
 import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
-import { Choice, Dialogue } from "./types";
+import { Choice, Dialogue, SkillTest } from "./types";
 
 describe('graphUtil', () => {
     describe('convertAreasToNodes', () => {
@@ -18,7 +18,7 @@ describe('graphUtil', () => {
                 } as Dialogue
             ];
 
-            const result = convertDialoguesToNodes(areas, new Map());
+            const result = convertDialoguesToNodes(areas, [], new Map());
 
             expect(result).toEqual([
                 {
@@ -52,7 +52,7 @@ describe('graphUtil', () => {
                 [1, { x: 1, y: 2 }]
             ]);
 
-            const result = convertDialoguesToNodes(areas, coordsMap);
+            const result = convertDialoguesToNodes(areas, [], coordsMap);
 
             expect(result).toEqual([
                 {
@@ -68,9 +68,28 @@ describe('graphUtil', () => {
             ]);
         });
 
-        it('should return an empty array when areas is empty', () => {
-            const result = convertDialoguesToNodes([], new Map());
+        it('should return an empty array when the dialogue list is empty', () => {
+            const result = convertDialoguesToNodes([], [], new Map());
             expect(result).toHaveLength(0);
+        });
+
+        it("should convert SkillTests to Nodes", () => {
+            const skillTests: Array<SkillTest> = [
+                {
+                    id: 1,
+                    name: "Skill Test 1",
+                } as SkillTest,
+            ];
+
+            const result = convertDialoguesToNodes([], skillTests, new Map());
+
+            expect(result).toEqual([
+                {
+                    key: '1',
+                    node: 1,
+                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840' }
+                },
+            ]);
         });
     });
 
@@ -110,20 +129,20 @@ describe('graphUtil', () => {
                 } as Dialogue,
             ];
 
-            const result = convertDialoguesToEdges(areas);
+            const result = convertDialoguesToEdges(areas, []);
 
             const expected: Array<SerializedEdge> = [
                 {
                     key: '1-2',
                     source: '1',
                     target: '2',
-                    attributes: { label: 'description 1', size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false }
                 },
                 {
                     key: '1-3',
                     source: '1',
                     target: '3',
-                    attributes: { label: 'description 2', size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false }
                 },
             ];
             expect(result).toEqual(expected);
@@ -146,7 +165,7 @@ describe('graphUtil', () => {
                 } as Dialogue
             ];
 
-            const result = convertDialoguesToEdges(areas);
+            const result = convertDialoguesToEdges(areas, []);
 
             expect(result).toHaveLength(0);
         });
@@ -180,13 +199,13 @@ describe('graphUtil', () => {
                 } as Dialogue
             ];
 
-            const result = convertDialoguesToEdges(areas);
+            const result = convertDialoguesToEdges(areas, []);
 
             expect(result).toHaveLength(1);
         });
 
         it('should return an empty array when areas is empty.', () => {
-            const result = convertDialoguesToEdges([]);
+            const result = convertDialoguesToEdges([], []);
             expect(result).toHaveLength(0);
         });
 
@@ -200,9 +219,80 @@ describe('graphUtil', () => {
                 } as Dialogue
             ];
 
-            const result = convertDialoguesToEdges(areas);
+            const result = convertDialoguesToEdges(areas, []);
 
             expect(result).toHaveLength(0);
+        });
+
+        it('should return an edge for each choice that points to a SkillTest.', () => {
+            const dialogues: Array<Dialogue> = [
+                {
+                    id: 1,
+                    name: "Area one",
+                    description: 'Description one',
+                    choices: [
+                        {
+                            id: 'id_1',
+                            conditionID: '',
+                            nextDialogueID: '2',
+                            shortDescription: 'description 1',
+                        }
+                    ]
+                } as Dialogue
+            ];
+            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 7 } as SkillTest];
+
+            const result = convertDialoguesToEdges(dialogues, skillTests);
+
+            const expected: Array<SerializedEdge> = [
+                {
+                    key: '1-2',
+                    source: '1',
+                    target: '2',
+                    attributes: { size: 4, type: 'arrow', undirected: false }
+                },
+            ];
+            expect(result).toEqual(expected);
+        });
+
+        it('should return an edge for each SkillTest that points to a Dialogue.', () => {
+            const dialogues: Array<Dialogue> = [
+                {
+                    id: 1,
+                    name: "Area one",
+                    description: 'Description one',
+                    choices: [] as Array<Choice>
+                } as Dialogue
+            ];
+            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 1 } as SkillTest];
+
+            const result = convertDialoguesToEdges(dialogues, skillTests);
+
+            const expected: Array<SerializedEdge> = [
+                {
+                    key: '2-1',
+                    source: '2',
+                    target: '1',
+                    attributes: { size: 4, type: 'arrow', undirected: false }
+                },
+            ];
+            expect(result).toEqual(expected);
+        });
+
+        it('should NOT return an edge when SkillTest points to a Dialogue that does not exist.', () => {
+            const dialogues: Array<Dialogue> = [
+                {
+                    id: 1,
+                    name: "Area one",
+                    description: 'Description one',
+                    choices: [] as Array<Choice>
+                } as Dialogue
+            ];
+            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 7 } as SkillTest];
+
+            const result = convertDialoguesToEdges(dialogues, skillTests);
+
+            expect(result).toEqual([]);
         });
     });
 });

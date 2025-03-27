@@ -3,7 +3,7 @@ import { SigmaContainer } from "@react-sigma/core";
 
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
-import { Dialogue, UnknownObject } from "./domain/types";
+import { Dialogue, SkillTest, UnknownObject } from "./domain/types";
 import { DialogueTreeGraph } from "./DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
@@ -15,22 +15,31 @@ import { ButtonLink } from "../../SharedComponents/ButtonLink/ButtonLink";
 import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { JSONFileInput } from "../../SharedComponents/FileInput/JSONFileInput";
 import { validateDialogueTree } from "./domain/validateDialogueTree";
-import { DialogueMaker } from "./DialogueMaker/DialogueMaker";
 import { RPGRoutes } from "../domain";
+import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
+import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
+
+// TODO: Add Skill Test capabilities to...
+//      Validator ✅
+//      Uploader
+//      Downloader
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
         dialogueTreeID,
         dialogueTreeName,
         dialogues,
-        dialogueCoordinates,
+        skillTests,
+        nodeCoordinates,
         setDialogueTreeID,
         setDialogueTreeName,
         setDialogues,
+        setSkillTests,
         setDialogueCoordinates
     } = useDialogueTree();
 
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [currentDialogue, setCurrentDialogue] = useState<Dialogue|null>(null);
+    const [currentSkillTest, setCurrentSkillTest] = useState<SkillTest|null>(null);
 
     const uploadDialogueTree = (parsedTree: Array<any> | UnknownObject) => {
         const dialogueTree = validateDialogueTree(parsedTree);
@@ -44,32 +53,16 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueTreeID(dialogueTree.id);
         setDialogueTreeName(dialogueTree.name);
         setDialogues(dialogueTree.dialogues);
-        setDialogueCoordinates(dialogueTree.dialogueCoordinates);
+        setSkillTests(dialogueTree.skillTests);
+        setDialogueCoordinates(dialogueTree.nodeCoordinates);
     };
 
     const resetDialogueTree = () => {
         setDialogueTreeID('');
         setDialogueTreeName('');
         setDialogues([]);
+        setSkillTests([]);
         setDialogueCoordinates(new Map());
-    };
-
-    const onSave = (updatedArea: Dialogue) => {
-        const copiedAreas = [...dialogues];
-        copiedAreas[currentIndex] = updatedArea;
-
-        setDialogues(copiedAreas);
-    };
-
-    const deleteDialogue = () => {
-        if (dialogues.length === 1) {
-            return;
-        }
-
-        const areasCopy = [...dialogues];
-        areasCopy.splice(currentIndex, 1);
-        setCurrentIndex(0);
-        setDialogues(areasCopy);
     };
 
     const createNewDialogue = () => {
@@ -77,7 +70,7 @@ export const DialogueTreeMaker = (): ReactElement => {
             ? dialogues[dialogues.length - 1].id
             : 0;
 
-        const newArea = {
+        const newDialogue = {
             id: lastDialogueNumber + 1,
             name: 'Dialogue ' + (Number(lastDialogueNumber) + 1),
             character: null,
@@ -86,23 +79,39 @@ export const DialogueTreeMaker = (): ReactElement => {
             choices: []
         };
 
-        setDialogues([...dialogues, newArea]);
+        setDialogues([...dialogues, newDialogue]);
     };
 
-    const onDialogueClick = (areaID: number) => {
-        const clickedAreaIndex = dialogues.findIndex((area: Dialogue) => {
-            return area.id === areaID;
-        });
+    const createNewSkillTest = () => {
+        const newSkillTest: SkillTest = {
+            id: Math.trunc(Date.now() + Math.random()),
+            name: "New Skill Test",
+            skillID: "",
+            difficulties: [],
+            nextDialogueID: null
+        };
 
-        if (clickedAreaIndex === -1) {
+        setSkillTests([...skillTests, newSkillTest]);
+    };
+
+    const onNodeClick = (nodeID: number) => {
+        const newCurrentDialogue = dialogues.find(dialogue => dialogue.id === nodeID) ?? null;
+        const newCurrentSkillTest = skillTests.find(skillTest => skillTest.id === nodeID) ?? null;
+
+        if (!newCurrentDialogue && !newCurrentSkillTest) {
             return;
         }
 
-        setCurrentIndex(clickedAreaIndex);
+        if (newCurrentDialogue && newCurrentSkillTest) {
+            throw new Error("Cannot have two nodes with the same ID!");
+        }
+
+        setCurrentDialogue(newCurrentDialogue);
+        setCurrentSkillTest(newCurrentSkillTest);
     };
 
-    const onDialogueMoveFinish = (id: number, x: number, y: number) => {
-        setDialogueCoordinates(new Map(dialogueCoordinates.set(id, { x, y })));
+    const onNodeMoveFinish = (id: number, x: number, y: number) => {
+        setDialogueCoordinates(new Map(nodeCoordinates.set(id, { x, y })));
     };
 
     return <Page title="RPG Tools" routes={RPGRoutes} >
@@ -116,7 +125,8 @@ export const DialogueTreeMaker = (): ReactElement => {
                             id: dialogueTreeID,
                             name: dialogueTreeName,
                             dialogues,
-                            dialogueCoordinates
+                            skillTests,
+                            nodeCoordinates: nodeCoordinates
                         })}
                     >
                         <DownloadIcon /> Download tree
@@ -152,21 +162,33 @@ export const DialogueTreeMaker = (): ReactElement => {
                         <Button onClick={createNewDialogue}>
                             <PlusIcon /> Create dialogue
                         </Button>
+                        <Button onClick={createNewSkillTest}>
+                            <PlusIcon /> Create skill test
+                        </Button>
                     </div>
                     <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
                         <DialogueTreeGraph
                             dialogues={dialogues}
-                            dialogueCoordiantes={dialogueCoordinates}
-                            onDialogueClick={onDialogueClick}
-                            onDialogueMoveFinish={onDialogueMoveFinish}
+                            skillTests={skillTests}
+                            nodeCoordinates={nodeCoordinates}
+                            onDialogueClick={onNodeClick}
+                            onDialogueMoveFinish={onNodeMoveFinish}
                         />
                     </SigmaContainer>
                 </div>
                 <hr className="divider" />
-                {dialogues.length > 0
-                    ? <DialogueMaker dialogue={dialogues[currentIndex]} onSave={onSave} onDelete={deleteDialogue} />
-                    : null
-                }
+                <DialogueMakerContainer
+                    dialogues={dialogues}
+                    currentDialogue={currentDialogue}
+                    setDialogues={setDialogues}
+                    setCurrentDialogue={setCurrentDialogue}
+                />
+                <SkillTestMakerContainer
+                    skillTests={skillTests}
+                    currentSkillTest={currentSkillTest}
+                    setSkillTests={setSkillTests}
+                    setCurrentSkillTest={setCurrentSkillTest}
+                />
             </div>
         </div>
     </Page>;

@@ -4,10 +4,11 @@ export type DialogueTree = {
     id: string;
     name: string;
     dialogues: Array<Dialogue>;
-    dialogueCoordinates: DialogueCoordinate;
+    skillTests: Array<SkillTest>;
+    nodeCoordinates: NodeCoordinate;
 };
 
-export type DialogueCoordinate = Map<number, {x: number, y: number}>;
+export type NodeCoordinate = Map<number, {x: number, y: number}>;
 
 export type Dialogue = {
     id: number;
@@ -34,6 +35,26 @@ export type Choice = {
     conditionID: string | null;
     nextDialogueID: string;
     shortDescription: string;
+};
+
+export type SkillTest = {
+    id: number,
+    name: string,
+    skillID: string;
+    difficulties: Array<SkillTestDifficulty>;
+    nextDialogueID: number|null;
+};
+
+export type SkillTestDifficulty = {
+    id: number;
+    threshold: number;
+    conditionOutcomes: Array<ConditionOutcome>;
+};
+
+export type ConditionOutcome = {
+    id: string;
+    conditionName: string;
+    addingOrRemoving: string;
 };
 
 export type UnknownObject = {

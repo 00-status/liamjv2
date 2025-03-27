@@ -1,29 +1,49 @@
 import { SerializedEdge, SerializedNode } from "graphology-types";
-import { Dialogue } from "./types";
+import { Dialogue, NodeCoordinate, SkillTest } from "./types";
 
-type DialogueMap = Map<number, { x: number, y: number }>;
-
-export const convertDialoguesToNodes = (dialogues: Array<Dialogue>, existingDialogues: DialogueMap): Array<SerializedNode> => {
-    const nodes = dialogues.map((dialogue: Dialogue) => {
-        const graphDialogue = existingDialogues.get(dialogue.id);
+export const convertDialoguesToNodes = (
+    dialogues: Array<Dialogue>,
+    skillTests: Array<SkillTest>,
+    nodeCoordinates: NodeCoordinate
+): Array<SerializedNode> => {
+    const createNode = (id: number, name: string, type: string) => {
+        const nodeCoordinate = nodeCoordinates.get(id);
 
         return {
-            key: String(dialogue.id),
-            node: dialogue.id,
+            key: String(id),
+            node: id,
             attributes: {
-                x: graphDialogue ? graphDialogue.x : 0,
-                y: graphDialogue ? graphDialogue.y : 0,
-                label: dialogue.name,
+                x: nodeCoordinate?.x ?? 0,
+                y: nodeCoordinate?.y ?? 0,
+                label: name,
                 size: 20,
-                color: '#d6a840'
-            }
-        }
-    });
+                color: '#d6a840',
+            },
+        };
+    };
 
-    return nodes;
+    const dialogueNodes = dialogues.map(dialogue =>
+        createNode(dialogue.id, dialogue.name, "dialogue")
+    );
+
+    const skillTestNodes = skillTests.map(skillTest =>
+        createNode(skillTest.id, skillTest.name, "skillTest")
+    );
+
+    return [...dialogueNodes, ...skillTestNodes];
 };
 
-export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<SerializedEdge> => {
+export const convertDialoguesToEdges = (
+    dialogues: Array<Dialogue>,
+    skillTests: Array<SkillTest>
+): Array<SerializedEdge> => {
+    const nodes: Array<Dialogue | SkillTest> = [...dialogues, ...skillTests];
+
+    const nodeIDsById = nodes.reduce((acc, node) => {
+        acc[node.id] = node.id;
+        return acc;
+    }, {} as {[key: number]: number|undefined});
+
     const mappedEdges = dialogues.reduce<Array<SerializedEdge>>((acc, dialogue) => {
         const edges: Array<SerializedEdge> = dialogue.choices
             .filter((choice, position) => {
@@ -31,23 +51,34 @@ export const convertDialoguesToEdges = (dialogues: Array<Dialogue>): Array<Seria
                 const firstChoiceOccurance = dialogue.choices.findIndex((innerChoice) =>
                     innerChoice.nextDialogueID == choice.nextDialogueID
                 );
+
                 const isUniqueChoice = firstChoiceOccurance === position;
+                const doesNextNodeExist = nodeIDsById[Number(choice.nextDialogueID)];
 
-                const doesNextDialogueExist = !!dialogues.find(dialogue => dialogue.id === Number(choice.nextDialogueID));
-
-                return doesNextDialogueExist && isUniqueChoice;
+                return doesNextNodeExist && isUniqueChoice;
             })
             .map((choice) => {
                 return {
                     key: dialogue.id + '-' + choice.nextDialogueID,
                     source: String(dialogue.id),
                     target: choice.nextDialogueID,
-                    attributes: { label: choice.shortDescription, type: 'arrow', size: 4, undirected: false }
+                    attributes: { type: 'arrow', size: 4, undirected: false }
                 };
             });
 
         return [...acc, ...edges];
     }, []);
 
-    return mappedEdges;
+    const skillTestEdges: Array<SerializedEdge> = skillTests
+        .filter(skillTest => nodeIDsById[skillTest.nextDialogueID ?? -1])
+        .map((skillTest) => {
+            return {
+                key: skillTest.id + '-' + skillTest.nextDialogueID,
+                source: String(skillTest.id),
+                target: String(skillTest.nextDialogueID),
+                attributes: { type: 'arrow', size: 4, undirected: false }
+            };
+        });
+
+    return [...mappedEdges, ...skillTestEdges];
 };
