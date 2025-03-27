@@ -18,6 +18,7 @@ export const convertDialoguesToNodes = (
                 label: name,
                 size: 20,
                 color: '#d6a840',
+                type: type === "skillTest" ? "square" : undefined
             },
         };
     };

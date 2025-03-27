@@ -1,5 +1,6 @@
 import { ReactElement, useState } from "react";
 import { SigmaContainer } from "@react-sigma/core";
+import { NodeSquareProgram } from "@sigma/node-square";
 
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
@@ -19,10 +20,10 @@ import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 
-// TODO: Add Skill Test capabilities to...
-//      Validator ✅
-//      Uploader
-//      Downloader
+const sigmaSettings = {
+    nodeProgramClasses: { square: NodeSquareProgram },
+    defaultEdgeType: 'arrow',
+};
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -166,7 +167,10 @@ export const DialogueTreeMaker = (): ReactElement => {
                             <PlusIcon /> Create skill test
                         </Button>
                     </div>
-                    <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
+                    <SigmaContainer
+                        settings={sigmaSettings}
+                        style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}
+                    >
                         <DialogueTreeGraph
                             dialogues={dialogues}
                             skillTests={skillTests}
