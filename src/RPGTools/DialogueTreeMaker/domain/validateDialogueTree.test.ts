@@ -47,6 +47,7 @@ const testData = {
             choices: []
         }
     ],
+    skillTests: [],
     nodeCoordinates: nodeCoordinates
 }
 
@@ -79,21 +80,28 @@ describe('validateDialogueTree', () => {
         expect(result).toEqual(null);
     });
 
-    it('should return null when dialogues is missing', () => {
-        const result = validateDialogueTree({ ...testData, dialogues: undefined });
+    it('should return make an empty dialogue array when dialogues are missing', () => {
+        const result = validateDialogueTree({ ...testData, dialogues: null });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {
+            ...testData,
+            dialogues: [],
+            nodeCoordinates: new Map(testData.nodeCoordinates)
+        };
+        expect(result).toEqual(expected);
     });
 
-    it('should return null when nodeCoordinates is missing', () => {
+    it('should return an empty Map when nodeCoordinates is missing', () => {
         const result = validateDialogueTree({ ...testData, nodeCoordinates: undefined });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {...testData, nodeCoordinates: new Map()};
+        expect(result).toEqual(expected);
     });
 
-    it('should return null when dialogueCoordinates is an empty object', () => {
+    it('should return an empty Map when dialogueCoordinates is an empty object', () => {
         const result = validateDialogueTree({ ...testData, nodeCoordinates: {} });
 
-        expect(result).toEqual(null);
+        const expected: DialogueTree = {...testData, nodeCoordinates: new Map()};
+        expect(result).toEqual(expected);
     });
 });

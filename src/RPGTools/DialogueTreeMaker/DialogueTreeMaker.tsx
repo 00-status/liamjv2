@@ -19,6 +19,11 @@ import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 
+// TODO: Add Skill Test capabilities to...
+//      Validator
+//      Uploader
+//      Downloader
+
 export const DialogueTreeMaker = (): ReactElement => {
     const {
         dialogueTreeID,
