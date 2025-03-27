@@ -20,7 +20,7 @@ import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 
 // TODO: Add Skill Test capabilities to...
-//      Validator
+//      Validator ✅
 //      Uploader
 //      Downloader
 
@@ -53,6 +53,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueTreeID(dialogueTree.id);
         setDialogueTreeName(dialogueTree.name);
         setDialogues(dialogueTree.dialogues);
+        setSkillTests(dialogueTree.skillTests);
         setDialogueCoordinates(dialogueTree.nodeCoordinates);
     };
 
@@ -60,6 +61,7 @@ export const DialogueTreeMaker = (): ReactElement => {
         setDialogueTreeID('');
         setDialogueTreeName('');
         setDialogues([]);
+        setSkillTests([]);
         setDialogueCoordinates(new Map());
     };
 

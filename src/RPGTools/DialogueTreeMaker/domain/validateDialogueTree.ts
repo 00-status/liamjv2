@@ -82,7 +82,7 @@ const getSkillTests = (dialogueTree: UnknownObject): Array<SkillTest> | null => 
             && typeof skillTest.name === 'string'
             && typeof skillTest.skillID === 'string'
             && Array.isArray(skillTest.difficulties)
-            && (typeof skillTest.nextDialogueID === 'string' || skillTest.nextDialogueID === null)
+            && (typeof skillTest.nextDialogueID === 'number' || skillTest.nextDialogueID === null)
         ) {
             return true
         }
