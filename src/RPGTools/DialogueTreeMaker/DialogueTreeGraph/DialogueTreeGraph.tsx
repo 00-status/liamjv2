@@ -3,8 +3,8 @@ import { useLoadGraph, useRegisterEvents, useSigma } from "@react-sigma/core";
 import { SerializedGraph } from "graphology-types";
 import { DirectedGraph } from "graphology";
 
-import { convertDialoguesToEdges, convertDialoguesToNodes } from "./domain/graphUtil";
-import { Dialogue, NodeCoordinate, SkillTest } from "./domain/types";
+import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
+import { Dialogue, NodeCoordinate, SkillTest } from "../domain/types";
 
 type Props = {
     dialogues: Array<Dialogue>;
@@ -24,6 +24,7 @@ export const DialogueTreeGraph = (props: Props) => {
     } = props;
 
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     const sigma = useSigma();
     const registerEvents = useRegisterEvents();
@@ -57,8 +58,17 @@ export const DialogueTreeGraph = (props: Props) => {
             },
             mouseup: (event) => {
                 if (draggedNode) {
+                    if (isDragging) {
+                        const position = sigma.viewportToGraph(event);
+                        sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
+                        sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
+    
+                        onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
+                        setIsDragging(false);
+                    }
+
                     const nodeID = Number(draggedNode);
-                    
+
                     onDialogueClick(nodeID);
                     setDraggedNode(null);
                 }
@@ -70,11 +80,11 @@ export const DialogueTreeGraph = (props: Props) => {
             },
             mousemove: (event) => {
                 if (draggedNode) {
+                    setIsDragging(true);
+
                     const position = sigma.viewportToGraph(event);
                     sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
                     sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
-
-                    onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
 
                     // Prevent sigma from moving the camera
                     event.preventSigmaDefault();
@@ -83,7 +93,7 @@ export const DialogueTreeGraph = (props: Props) => {
                 }
             }
         });
-    }, [registerEvents, sigma, draggedNode, setDraggedNode]);
+    }, [registerEvents, sigma, draggedNode, isDragging, setDraggedNode, setIsDragging]);
 
     return null;
 };

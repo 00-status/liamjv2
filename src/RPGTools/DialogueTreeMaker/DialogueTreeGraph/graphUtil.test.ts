@@ -1,6 +1,6 @@
 import { SerializedEdge } from "graphology-types";
 import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
-import { Choice, Dialogue, SkillTest } from "./types";
+import { Choice, Dialogue, SkillTest } from "../domain/types";
 
 describe('graphUtil', () => {
     describe('convertAreasToNodes', () => {
@@ -87,7 +87,28 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840', type: "square" }
+                },
+            ]);
+        });
+
+        it("should be the associated character's color", () => {
+            const dialogues: Array<Dialogue> = [
+                {
+                    id: 1,
+                    name: "node one",
+                    description: 'Description one',
+                    character: { nameColor: "#FFFFFF" }
+                } as Dialogue,
+            ];
+
+            const result = convertDialoguesToNodes(dialogues, [], new Map());
+
+            expect(result).toEqual([
+                {
+                    key: '1',
+                    node: 1,
+                    attributes: { x: 0, y: 0, label: "node one", size: 20, color: '#FFFFFF' }
                 },
             ]);
         });

@@ -1,10 +1,9 @@
 import { ReactElement, useState } from "react";
-import { SigmaContainer } from "@react-sigma/core";
 
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { Dialogue, SkillTest, UnknownObject } from "./domain/types";
-import { DialogueTreeGraph } from "./DialogueTreeGraph";
+import { DialogueTreeGraph } from "./DialogueTreeGraph/DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
 import { getDownloadLink } from "./domain/getDownloadLink";
@@ -18,11 +17,7 @@ import { validateDialogueTree } from "./domain/validateDialogueTree";
 import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
-
-// TODO: Add Skill Test capabilities to...
-//      Validator ✅
-//      Uploader
-//      Downloader
+import { GraphContainer } from "./DialogueTreeGraph/GraphContainer";
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -166,7 +161,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             <PlusIcon /> Create skill test
                         </Button>
                     </div>
-                    <SigmaContainer style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}>
+                    <GraphContainer>
                         <DialogueTreeGraph
                             dialogues={dialogues}
                             skillTests={skillTests}
@@ -174,7 +169,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             onDialogueClick={onNodeClick}
                             onDialogueMoveFinish={onNodeMoveFinish}
                         />
-                    </SigmaContainer>
+                    </GraphContainer>
                 </div>
                 <hr className="divider" />
                 <DialogueMakerContainer
