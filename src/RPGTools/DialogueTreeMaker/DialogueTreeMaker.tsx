@@ -5,7 +5,7 @@ import { NodeSquareProgram } from "@sigma/node-square";
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { Dialogue, SkillTest, UnknownObject } from "./domain/types";
-import { DialogueTreeGraph } from "./DialogueTreeGraph";
+import { DialogueTreeGraph } from "./DialogueTreeGraph/DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
 import { getDownloadLink } from "./domain/getDownloadLink";
