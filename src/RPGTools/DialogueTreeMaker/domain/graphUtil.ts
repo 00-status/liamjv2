@@ -6,7 +6,7 @@ export const convertDialoguesToNodes = (
     skillTests: Array<SkillTest>,
     nodeCoordinates: NodeCoordinate
 ): Array<SerializedNode> => {
-    const createNode = (id: number, name: string, type: string) => {
+    const createNode = (id: number, name: string, type: string, customColor?: string) => {
         const nodeCoordinate = nodeCoordinates.get(id);
 
         return {
@@ -17,14 +17,14 @@ export const convertDialoguesToNodes = (
                 y: nodeCoordinate?.y ?? 0,
                 label: name,
                 size: 20,
-                color: '#d6a840',
+                color: customColor ?? '#d6a840',
                 type: type === "skillTest" ? "square" : undefined
             },
         };
     };
 
     const dialogueNodes = dialogues.map(dialogue =>
-        createNode(dialogue.id, dialogue.name, "dialogue")
+        createNode(dialogue.id, dialogue.name, "dialogue", dialogue.character?.nameColor)
     );
 
     const skillTestNodes = skillTests.map(skillTest =>
