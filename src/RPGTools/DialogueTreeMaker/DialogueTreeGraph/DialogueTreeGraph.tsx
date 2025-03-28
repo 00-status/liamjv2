@@ -3,7 +3,7 @@ import { useLoadGraph, useRegisterEvents, useSigma } from "@react-sigma/core";
 import { SerializedGraph } from "graphology-types";
 import { DirectedGraph } from "graphology";
 
-import { convertDialoguesToEdges, convertDialoguesToNodes } from "../domain/graphUtil";
+import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
 import { Dialogue, NodeCoordinate, SkillTest } from "../domain/types";
 
 type Props = {

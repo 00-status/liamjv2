@@ -1,6 +1,6 @@
 import { SerializedEdge } from "graphology-types";
 import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
-import { Choice, Dialogue, SkillTest } from "./types";
+import { Choice, Dialogue, SkillTest } from "../domain/types";
 
 describe('graphUtil', () => {
     describe('convertAreasToNodes', () => {
