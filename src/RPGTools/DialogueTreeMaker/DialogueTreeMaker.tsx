@@ -19,10 +19,36 @@ import { validateDialogueTree } from "./domain/validateDialogueTree";
 import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
+import { PlainObject } from "sigma/types";
+
+
+const hoverRenderer = function (context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
+    const { x, y, size: nodeSize } = data;
+
+    const hoverSize = nodeSize * 1.1;
+
+    context.beginPath();
+    context.arc(x, y, hoverSize, 0, Math.PI * 2);
+    context.fillStyle = "#d6a840";
+    context.fill();
+};
+
+const squareHoverRenderer = function (context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
+    const { x, y, size: nodeSize } = data;
+
+    const hoverSize = nodeSize * 1.1;
+
+    context.fillRect(x - hoverSize, y - hoverSize, hoverSize * 2, hoverSize * 2);
+};
+
+class NodeSquareProgramTest extends NodeSquareProgram {
+    override drawHover = squareHoverRenderer;
+}
 
 const sigmaSettings = {
-    nodeProgramClasses: { square: NodeSquareProgram },
+    nodeProgramClasses: { square: NodeSquareProgramTest },
     defaultEdgeType: 'arrow',
+    defaultDrawNodeHover: hoverRenderer
 };
 
 export const DialogueTreeMaker = (): ReactElement => {

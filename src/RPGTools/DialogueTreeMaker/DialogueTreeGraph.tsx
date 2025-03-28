@@ -59,6 +59,12 @@ export const DialogueTreeGraph = (props: Props) => {
                 if (draggedNode) {
                     const nodeID = Number(draggedNode);
                     
+                    const position = sigma.viewportToGraph(event);
+                    sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
+                    sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
+
+                    onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
+
                     onDialogueClick(nodeID);
                     setDraggedNode(null);
                 }
@@ -73,8 +79,6 @@ export const DialogueTreeGraph = (props: Props) => {
                     const position = sigma.viewportToGraph(event);
                     sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
                     sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
-
-                    onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
 
                     // Prevent sigma from moving the camera
                     event.preventSigmaDefault();
