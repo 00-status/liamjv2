@@ -24,6 +24,7 @@ export const DialogueTreeGraph = (props: Props) => {
     } = props;
 
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     const sigma = useSigma();
     const registerEvents = useRegisterEvents();
@@ -57,13 +58,16 @@ export const DialogueTreeGraph = (props: Props) => {
             },
             mouseup: (event) => {
                 if (draggedNode) {
-                    const nodeID = Number(draggedNode);
-                    
-                    const position = sigma.viewportToGraph(event);
-                    sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
-                    sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
+                    if (isDragging) {
+                        const position = sigma.viewportToGraph(event);
+                        sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
+                        sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
+    
+                        onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
+                        setIsDragging(false);
+                    }
 
-                    onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
+                    const nodeID = Number(draggedNode);
 
                     onDialogueClick(nodeID);
                     setDraggedNode(null);
@@ -76,6 +80,8 @@ export const DialogueTreeGraph = (props: Props) => {
             },
             mousemove: (event) => {
                 if (draggedNode) {
+                    setIsDragging(true);
+
                     const position = sigma.viewportToGraph(event);
                     sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
                     sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
@@ -87,7 +93,7 @@ export const DialogueTreeGraph = (props: Props) => {
                 }
             }
         });
-    }, [registerEvents, sigma, draggedNode, setDraggedNode]);
+    }, [registerEvents, sigma, draggedNode, isDragging, setDraggedNode, setIsDragging]);
 
     return null;
 };
