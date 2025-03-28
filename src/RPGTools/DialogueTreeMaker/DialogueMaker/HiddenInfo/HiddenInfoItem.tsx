@@ -14,14 +14,17 @@ type Props = {
 export const HiddenInfoItem = (props: Props) => {
     const { hiddenInfo, onEdit, onDelete } = props;
     return <div className="hidden-info-item">
-        <div className="hidden-info-item__description">
+        <div className="hidden-info-item__segment">
             {hiddenInfo.conditionIDs.map((condition) => {
-                return <span key={condition.id}>
-                    <b>{'[' + condition.name + ']'}</b>
-                </span>;
-            })}: {hiddenInfo.description}
+                return <div key={condition.id}>
+                    {condition.name}
+                </div>;
+            })}
         </div>
-        <div className="hidden-info-item__actions">
+        <div className='hidden-info-item__segment'>
+            {hiddenInfo.description}
+        </div>
+        <div className="hidden-info-item__segment--actions">
             <Button onClick={onEdit}><PencilIcon /></Button>
             <Button onClick={() => onDelete(hiddenInfo.id)} buttonTheme={ButtonTheme.Delete}><TrashIcon /></Button>
         </div>

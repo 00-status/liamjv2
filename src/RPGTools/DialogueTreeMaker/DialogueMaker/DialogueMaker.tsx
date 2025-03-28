@@ -107,6 +107,15 @@ export const DialogueMaker = (props: Props): ReactElement => {
                         />
                     </div>
                     <div className="dialogue-maker__description--hidden-info">
+                        <div className="hidden-info-item">
+                            <div className="hidden-info-item__segment">
+                                Conditions
+                            </div>
+                            <div className="hidden-info-item__segment">
+                                Description
+                            </div>
+                            <div className="hidden-info-item__segment" />
+                        </div>
                         {dialogue.hiddenInfo.map((hiddenInfo) => {
                             return <HiddenInfoItem
                                 key={hiddenInfo.id}
