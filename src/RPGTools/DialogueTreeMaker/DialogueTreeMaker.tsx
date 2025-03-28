@@ -1,6 +1,4 @@
 import { ReactElement, useState } from "react";
-import { SigmaContainer } from "@react-sigma/core";
-import { NodeSquareProgram } from "@sigma/node-square";
 
 import './dialogue-tree-maker.css';
 import { Page } from "../../SharedComponents/Page/Page";
@@ -19,37 +17,7 @@ import { validateDialogueTree } from "./domain/validateDialogueTree";
 import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
-import { PlainObject } from "sigma/types";
-
-
-const hoverRenderer = function (context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
-    const { x, y, size: nodeSize } = data;
-
-    const hoverSize = nodeSize * 1.1;
-
-    context.beginPath();
-    context.arc(x, y, hoverSize, 0, Math.PI * 2);
-    context.fillStyle = "#d6a840";
-    context.fill();
-};
-
-const squareHoverRenderer = function (context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
-    const { x, y, size: nodeSize } = data;
-
-    const hoverSize = nodeSize * 1.1;
-
-    context.fillRect(x - hoverSize, y - hoverSize, hoverSize * 2, hoverSize * 2);
-};
-
-class NodeSquareProgramTest extends NodeSquareProgram {
-    override drawHover = squareHoverRenderer;
-}
-
-const sigmaSettings = {
-    nodeProgramClasses: { square: NodeSquareProgramTest },
-    defaultEdgeType: 'arrow',
-    defaultDrawNodeHover: hoverRenderer
-};
+import { GraphContainer } from "./DialogueTreeGraph/GraphContainer";
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -193,10 +161,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             <PlusIcon /> Create skill test
                         </Button>
                     </div>
-                    <SigmaContainer
-                        settings={sigmaSettings}
-                        style={{ height: '350px', backgroundColor: '#3b3b40', color: '#FCFEFF' }}
-                    >
+                    <GraphContainer>
                         <DialogueTreeGraph
                             dialogues={dialogues}
                             skillTests={skillTests}
@@ -204,7 +169,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                             onDialogueClick={onNodeClick}
                             onDialogueMoveFinish={onNodeMoveFinish}
                         />
-                    </SigmaContainer>
+                    </GraphContainer>
                 </div>
                 <hr className="divider" />
                 <DialogueMakerContainer
