@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import './update-hidden-info-modal.css';
 import { HiddenInfo, HiddenInfoCondition } from "../../domain/types";
@@ -26,6 +26,8 @@ export const UpdateHiddenInfoModal = (props: Props) => {
     const [newConditionID, setNewConditionID] = useState<string | null>(null);
     const [newConditionName, setNewConditionName] = useState<string | null>(null);
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         setHiddenInfoID(hiddenInfoToEdit?.id ?? null);
         setDescription(hiddenInfoToEdit?.description ?? "");
@@ -40,6 +42,7 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         setConditions([...conditions, { id: newConditionID, name: newConditionName }]);
         setNewConditionID(null);
         setNewConditionName(null);
+        inputRef.current?.focus();
     };
 
     const removeCondition = (conditionID: string) => {
@@ -78,6 +81,7 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         <div className="add-hidden-info-modal">
             <div className="add-hidden-info-modal__form">
                 <TextInput
+                    ref={inputRef}
                     placeholder="Condition ID"
                     value={newConditionID ?? ""}
                     onChange={(newValue) => {
