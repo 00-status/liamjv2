@@ -6,6 +6,7 @@ import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
+import { DescriptionCard } from "../../../../SharedComponents/DescriptionCard/DescriptionCard";
 
 type Props = {
     hiddenInfoToEdit: HiddenInfo | null;
@@ -79,6 +80,9 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         footer={<Button onClick={saveHiddenInfo}>Save</Button>}
     >
         <div className="add-hidden-info-modal">
+            <DescriptionCard>
+                This modal allows you to add and edit Hidden Info to your dialogue. Hidden Info shows up when a certain condition exists in the game state. For example, if a character has the "High Perception" condition, then perhaps they get more information on a situation than they otherwise would have received.
+            </DescriptionCard>
             <div className="add-hidden-info-modal__form">
                 <TextInput
                     ref={inputRef}
