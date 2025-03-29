@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import './update-hidden-info-modal.css';
 import { HiddenInfo, HiddenInfoCondition } from "../../domain/types";
-import { HiddenInfoConditions } from "./HiddenInfoConditions";
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
