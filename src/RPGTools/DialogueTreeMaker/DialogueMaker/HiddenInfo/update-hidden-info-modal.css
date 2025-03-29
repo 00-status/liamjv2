@@ -5,6 +5,14 @@
     gap: 8px;
 }
 
+.add-hidden-info-modal__form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
 .add-hidden-info-modal__description {
     height: 230px;
 
