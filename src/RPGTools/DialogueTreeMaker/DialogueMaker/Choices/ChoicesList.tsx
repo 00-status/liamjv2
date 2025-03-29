@@ -5,6 +5,7 @@ import { Choice } from "../../domain/types";
 import { Card } from "../../../../SharedComponents/Card/Card";
 import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
+import { PlusIcon } from "../../../../SharedComponents/Icons/PlusIcon";
 
 type Props = {
     choices: Array<Choice>;
@@ -39,7 +40,7 @@ export const ChoicesList = (props: Props): ReactElement => {
         );
     };
 
-    return <Card title="Choices" button={<Button onClick={onAddNew}>Add choice</Button>}>
+    return <Card title="Choices" button={<Button onClick={onAddNew}><PlusIcon /> Add choice</Button>}>
         <div className="choices-list__container">
             {choices.map((choice: Choice, index: number) => {
                 return <div className="choice-list-item" key={choice.id}>

@@ -11,6 +11,7 @@ import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 import { useCharacters } from "../../CharacterMaker";
 import { HiddenInfoItem } from "./HiddenInfo/HiddenInfoItem";
 import { UpdateHiddenInfoModal } from "./HiddenInfo/UpdateHiddenInfoModal";
+import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
 
 type Props = {
     dialogue: Dialogue;
@@ -91,7 +92,7 @@ export const DialogueMaker = (props: Props): ReactElement => {
             <div className="dialogue-maker__content">
                 <Card
                     title="Description"
-                    button={<Button onClick={() => setIsAddHiddenInfoModalOpen(true)}>Add hidden info</Button>}
+                    button={<Button onClick={() => setIsAddHiddenInfoModalOpen(true)}><PlusIcon /> Add hidden info</Button>}
                 >
                     <div className="dialogue-maker__description">
                         <label htmlFor="dialogue-description">Dialogue description</label>
