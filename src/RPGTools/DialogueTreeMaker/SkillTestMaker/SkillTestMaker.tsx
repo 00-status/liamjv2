@@ -125,7 +125,10 @@ export const SkillTestMaker = (props: Props) => {
             isOpen={isDifficultyModalOpen}
             difficulty={currentDifficulty}
             updateDifficulty={updateDifficulty}
-            onClose={() => setIsDifficultyModalOpen(false)}
+            onClose={() => {
+                setIsDifficultyModalOpen(false)
+                setCurrentDifficulty(null);
+            }}
         />
     </div>;
 };
