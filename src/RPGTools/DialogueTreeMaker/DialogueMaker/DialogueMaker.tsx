@@ -22,7 +22,7 @@ export const DialogueMaker = (props: Props): ReactElement => {
     const { dialogue, onSave, onDelete } = props;
 
     const [isAddHiddenInfoModalOpen, setIsAddHiddenInfoModalOpen] = useState<boolean>(false);
-    const [hiddenInfoToEdit, setHiddenInfoToEdit] = useState<HiddenInfo|undefined>(undefined);
+    const [hiddenInfoToEdit, setHiddenInfoToEdit] = useState<HiddenInfo|null>(null);
 
     const { characters } = useCharacters();
 
@@ -121,7 +121,10 @@ export const DialogueMaker = (props: Props): ReactElement => {
                                 key={hiddenInfo.id}
                                 hiddenInfo={hiddenInfo}
                                 onDelete={deleteHiddenInfo}
-                                onEdit={() => setHiddenInfoToEdit(hiddenInfo)}
+                                onEdit={() => {
+                                    setHiddenInfoToEdit(hiddenInfo)
+                                    setIsAddHiddenInfoModalOpen(true);
+                                }}
                             />;
                         })}
                     </div>
@@ -140,32 +143,24 @@ export const DialogueMaker = (props: Props): ReactElement => {
         </div>
         <UpdateHiddenInfoModal
             hiddenInfoToEdit={hiddenInfoToEdit}
-            isOpen={!!hiddenInfoToEdit}
-            onClose={() => setHiddenInfoToEdit(undefined)}
+            isOpen={isAddHiddenInfoModalOpen}
+            onClose={() => {
+                setIsAddHiddenInfoModalOpen(false);
+                setHiddenInfoToEdit(null)
+            }}
             onSave={(newHiddenInfo) => {
-                const hiddenInfoToReplace = dialogue.hiddenInfo.findIndex((existingHiddenInfo) => {
+                const hiddenInfosCopy = [...dialogue.hiddenInfo];
+                const hiddenInfoIDToReplace = dialogue.hiddenInfo.findIndex((existingHiddenInfo) => {
                     return existingHiddenInfo.id === newHiddenInfo.id;
                 });
         
-                if (hiddenInfoToReplace === -1) {
-                    return;
+                if (hiddenInfoIDToReplace === -1) {
+                    hiddenInfosCopy.push(newHiddenInfo);
+                } else {
+                    hiddenInfosCopy[hiddenInfoIDToReplace] = newHiddenInfo;
                 }
 
-                const hiddenInfosCopy = [...dialogue.hiddenInfo];
-                hiddenInfosCopy[hiddenInfoToReplace] = newHiddenInfo;
-
                 onSave({ ...dialogue, hiddenInfo: hiddenInfosCopy });
-                setHiddenInfoToEdit(undefined);
-            }}
-        />
-        <UpdateHiddenInfoModal
-            isOpen={isAddHiddenInfoModalOpen}
-            onClose={() => setIsAddHiddenInfoModalOpen(false)}
-            onSave={(hiddenInfo) => {
-                const newHiddenInfos = [ ...dialogue.hiddenInfo, hiddenInfo ];
-
-                onSave({ ...dialogue, hiddenInfo: newHiddenInfos });
-                setIsAddHiddenInfoModalOpen(false);
             }}
         />
     </>;

@@ -17,7 +17,8 @@ type Props = {
 export const UpdateHiddenInfoModal = (props: Props) => {
     const { hiddenInfoToEdit, isOpen, onClose, onSave} = props;
 
-    const [conditionIDs, setConditionIds] = useState<Array<HiddenInfoCondition>>(
+    const [hiddenInfoID, setHiddenInfoID] = useState<string | null>(hiddenInfoToEdit?.id ?? null);
+    const [conditions, setConditions] = useState<Array<HiddenInfoCondition>>(
         hiddenInfoToEdit?.conditionIDs ?? []
     );
     const [description, setDescription] = useState<string | null>(hiddenInfoToEdit?.description ?? null);
@@ -25,22 +26,42 @@ export const UpdateHiddenInfoModal = (props: Props) => {
     const [newConditionID, setNewConditionID] = useState<string | null>(null);
     const [newConditionName, setNewConditionName] = useState<string | null>(null);
 
+    useEffect(() => {
+        setHiddenInfoID(hiddenInfoToEdit?.id ?? null);
+        setDescription(hiddenInfoToEdit?.description ?? "");
+        setConditions(hiddenInfoToEdit?.conditionIDs ?? []);
+    }, [hiddenInfoToEdit]);
+
     const addCondition = () => {
         if (!newConditionID || !newConditionName) {
             return;
         }
 
-        setConditionIds([...conditionIDs, { id: newConditionID, name: newConditionName }]);
+        setConditions([...conditions, { id: newConditionID, name: newConditionName }]);
+        setNewConditionID(null);
+        setNewConditionName(null);
+    };
+
+    const removeCondition = (conditionID: string) => {
+        const conditionsCopy = [...conditions];
+        const conditionIdToDelete = conditionsCopy.findIndex(condition => condition.id === conditionID);
+
+        if (conditionIdToDelete === -1) {
+            return ;
+        }
+
+        conditionsCopy.splice(conditionIdToDelete, 1);
+        setConditions(conditionsCopy);
     };
 
     const saveHiddenInfo = () => {
-        if (conditionIDs.length <= 0 || !description) {
+        if (conditions.length <= 0 || !description) {
             return;
         }
 
         const newHiddenInfo: HiddenInfo = {
-            id: hiddenInfoToEdit?.id ?? crypto.randomUUID(),
-            conditionIDs,
+            id: hiddenInfoID ?? crypto.randomUUID(),
+            conditionIDs: conditions,
             description
         };
 
@@ -55,30 +76,32 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         footer={<Button onClick={saveHiddenInfo}>Save</Button>}
     >
         <div className="add-hidden-info-modal">
-            <TextInput
-                placeholder="Condition ID"
-                value={newConditionID ?? ""}
-                onChange={(newValue) => {
-                    setNewConditionID(newValue ?? '');
-                }}
-            />
-            <TextInput
-                placeholder="Condition name"
-                value={newConditionName ?? ""}
-                onChange={(newValue) => {
-                    setNewConditionName(newValue ?? '');
-                }}
-            />
-            <Button disabled={!(newConditionID && newConditionName)} onClick={addCondition}>
-                Add condition
-            </Button>
-            {conditionIDs.map((condition) => {
-                return <div className="hidden-info-item">
+            <div className="add-hidden-info-modal__form">
+                <TextInput
+                    placeholder="Condition ID"
+                    value={newConditionID ?? ""}
+                    onChange={(newValue) => {
+                        setNewConditionID(newValue ?? '');
+                    }}
+                />
+                <TextInput
+                    placeholder="Condition name"
+                    value={newConditionName ?? ""}
+                    onChange={(newValue) => {
+                        setNewConditionName(newValue ?? '');
+                    }}
+                />
+                <Button disabled={!(newConditionID && newConditionName)} onClick={addCondition}>
+                    Add condition
+                </Button>
+            </div>
+            {conditions.map((condition) => {
+                return <div key={condition.id} className="hidden-info-item">
                     <div className="hidden-info-item__segment">
                         {condition.id} | {condition.name}
                     </div>
                     <div className="hidden-info-item__segment--actions">
-                        <Button buttonTheme={ButtonTheme.Delete}>
+                        <Button onClick={() => removeCondition(condition.id)} buttonTheme={ButtonTheme.Delete}>
                             <TrashIcon />
                         </Button>
                     </div>
