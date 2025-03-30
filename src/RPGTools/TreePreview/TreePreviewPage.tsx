@@ -4,6 +4,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
 import { Choice } from "../DialogueTreeMaker/domain/types";
+import { ChoiceButton } from "./ChoiceButton";
 
 export const TreePreviewPage = () => {
     // list of dialogues
@@ -44,8 +45,6 @@ export const TreePreviewPage = () => {
 
         const startingDialogue = dialogues.find(dialogue => dialogue.id === 1);
 
-        console.log(startingDialogue);
-
         if (!startingDialogue) {
             return;
         }
@@ -64,7 +63,12 @@ export const TreePreviewPage = () => {
                     {histories.map(history => <div key={history}>{history}</div>)}
                 </div>
                 <div>
-                    {currentChoices.map(choice => <div key={choice.id}>{choice.shortDescription}</div>)}
+                    {currentChoices.map(choice => <ChoiceButton
+                        key={choice.id}
+                        name={choice.shortDescription}
+                        nextNodeID={Number(choice.nextDialogueID)}
+                        type=""
+                    />)}
                 </div>
             </div>
         </div>
