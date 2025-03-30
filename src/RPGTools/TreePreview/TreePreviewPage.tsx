@@ -3,8 +3,17 @@ import { useEffect, useState } from "react";
 import { Page } from "../../SharedComponents/Page/Page";
 import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
-import { Choice } from "../DialogueTreeMaker/domain/types";
 import { ChoiceButton } from "./ChoiceButton";
+import { convertChoiceToPreviewChoice } from "./util";
+import { Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
+
+// TODO: Force next dialogue IDs on choices to be numbers
+
+export type PreviewChoice = {
+    id: string;
+    name: string;
+    nextNodeID: number;
+};
 
 export const TreePreviewPage = () => {
     // list of dialogues
@@ -34,7 +43,7 @@ export const TreePreviewPage = () => {
     } = useDialogueTree();
 
     const [histories, setHistories] = useState<Array<string>>([]);
-    const [currentChoices, setCurrentChoices] = useState<Array<Choice>>([]);
+    const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
     const [conditions, setConditions] = useState<Array<string>>([]);
 
@@ -50,11 +59,11 @@ export const TreePreviewPage = () => {
         }
 
         setHistories([...histories, startingDialogue.description]);
-        setCurrentChoices([...startingDialogue.choices]);
+        setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
 
     const onChoiceClick = (nextDialogueID: number, description: string) => {
-        const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
+        const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID);
 
         if (!nextDialogue) {
             return;
@@ -76,12 +85,42 @@ export const TreePreviewPage = () => {
                 <div>
                     {currentChoices.map(choice => <ChoiceButton
                         key={choice.id}
-                        name={choice.shortDescription}
-                        nextNodeID={Number(choice.nextDialogueID)}
+                        name={choice.name}
+                        nextNodeID={choice.nextNodeID}
                         onClick={onChoiceClick}
                     />)}
                 </div>
             </div>
         </div>
     </Page>;
+};
+
+const findNextDialogue = (
+    dialogues: Array<Dialogue>,
+    skillTests: Array<SkillTest>,
+    nextDialogueID: number
+): { description: string, choices: Array<PreviewChoice> } | null => {
+    const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
+
+    if (nextDialogue) {
+        return {
+            description: nextDialogue.description,
+            choices: nextDialogue.choices.map(convertChoiceToPreviewChoice)
+        };
+    }
+
+    const nextSkillTest = skillTests.find(skillTest => skillTest.id === nextDialogueID);
+
+    if (nextSkillTest) {
+        return {
+            description: nextSkillTest.name + " | " + nextSkillTest.skillID,
+            choices: [{
+                id: String(nextSkillTest.id),
+                name: "Perform Skill Test",
+                nextNodeID: nextSkillTest.nextDialogueID ?? -1
+            }]
+        };
+    }
+
+    return null;
 };
