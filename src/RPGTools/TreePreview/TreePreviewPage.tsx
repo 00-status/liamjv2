@@ -53,6 +53,17 @@ export const TreePreviewPage = () => {
         setCurrentChoices([...startingDialogue.choices]);
     }, [dialogues, histories]);
 
+    const onChoiceClick = (nextDialogueID: number, description: string) => {
+        const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
+
+        if (!nextDialogue) {
+            return;
+        }
+
+        setHistories([...histories, description, nextDialogue.description]);
+        setCurrentChoices([...nextDialogue.choices]);
+    };
+
     return <Page routes={RPGRoutes} title="RPG Tools">
         <div>
             <div>
@@ -67,7 +78,7 @@ export const TreePreviewPage = () => {
                         key={choice.id}
                         name={choice.shortDescription}
                         nextNodeID={Number(choice.nextDialogueID)}
-                        type=""
+                        onClick={onChoiceClick}
                     />)}
                 </div>
             </div>
