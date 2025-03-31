@@ -5,7 +5,7 @@ import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
 import { ChoiceButton } from "./ChoiceButton";
 import { convertChoiceToPreviewChoice } from "./util";
-import { Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
+import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
 
 // TODO:
 //      Allow Skill Tests to add (or remove) conditions.
@@ -19,6 +19,7 @@ export type PreviewChoice = {
     id: string;
     name: string;
     nextNodeID: number;
+    conditionOutcomes: Array<ConditionOutcome>;
 };
 
 export const TreePreviewPage = () => {
@@ -30,7 +31,7 @@ export const TreePreviewPage = () => {
     const [histories, setHistories] = useState<Array<string>>([]);
     const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
-    const [conditions, setConditions] = useState<Array<string>>([]);
+    const [conditions, setConditions] = useState<Array<{ id: string, name: string }>>([]);
 
     useEffect(() => {
         if (histories.length > 0) {
@@ -47,13 +48,34 @@ export const TreePreviewPage = () => {
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
 
-    const onChoiceClick = (nextDialogueID: number, description: string) => {
+    const onChoiceClick = (nextDialogueID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => {
         const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID);
 
         if (!nextDialogue) {
             return;
         }
 
+        const conditionsCopy = [...conditions];
+
+        for (let index = 0; index < conditionOutcomes.length; index++) {
+            if (conditionOutcomes[index].addingOrRemoving === "adding") {
+                conditionsCopy.push({ id: conditionOutcomes[index].id, name: conditionOutcomes[1].conditionName });
+                continue;
+            }
+
+            const conditionToRemoveID = conditionsCopy.findIndex(condition =>
+                condition.id === conditionOutcomes[index].id);
+
+            if (conditionToRemoveID === -1) {
+                continue;
+            }
+
+            conditionsCopy.splice(conditionToRemoveID, 1);
+        }
+
+        console.log(conditionsCopy);
+
+        setConditions(conditionsCopy);
         setHistories([...histories, description, nextDialogue.description]);
         setCurrentChoices([...nextDialogue.choices]);
     };
@@ -61,7 +83,7 @@ export const TreePreviewPage = () => {
     return <Page routes={RPGRoutes} title="RPG Tools">
         <div>
             <div>
-                Conditions
+                {conditions.map(condition => <div>{condition.id} : {condition.name}</div>)}
             </div>
             <div>
                 <div>
@@ -72,6 +94,7 @@ export const TreePreviewPage = () => {
                         key={choice.id}
                         name={choice.name}
                         nextNodeID={choice.nextNodeID}
+                        conditionOutcomes={choice.conditionOutcomes}
                         onClick={onChoiceClick}
                     />)}
                 </div>
@@ -90,7 +113,7 @@ const findNextDialogue = (
     if (nextDialogue) {
         return {
             description: nextDialogue.description,
-            choices: nextDialogue.choices.map(convertChoiceToPreviewChoice)
+            choices: nextDialogue.choices.map(convertChoiceToPreviewChoice),
         };
     }
 
@@ -101,7 +124,8 @@ const findNextDialogue = (
             return {
                 id: String(difficulty.id),
                 name: "Threshold: " + difficulty.threshold,
-                nextNodeID: nextSkillTest.nextDialogueID ?? -1
+                nextNodeID: nextSkillTest.nextDialogueID ?? -1,
+                conditionOutcomes: [...difficulty.conditionOutcomes]
             };
         });
 

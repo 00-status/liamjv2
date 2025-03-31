@@ -1,14 +1,16 @@
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
+import { ConditionOutcome } from "../DialogueTreeMaker/domain/types";
 
 type Props = {
     name: string;
     nextNodeID: number;
-    onClick: (nextNodeID: number, description: string) => void;
+    conditionOutcomes: Array<ConditionOutcome>;
+    onClick: (nextNodeID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => void;
 };
 
 export const ChoiceButton = (props: Props) => {
-    const { name, nextNodeID, onClick } = props;
-    return <Button onClick={() => onClick(nextNodeID, name)} buttonTheme={ButtonTheme.Default}>
+    const { name, nextNodeID, conditionOutcomes, onClick } = props;
+    return <Button onClick={() => onClick(nextNodeID, name, conditionOutcomes)} buttonTheme={ButtonTheme.Default}>
         {name}
     </Button>;
 };
