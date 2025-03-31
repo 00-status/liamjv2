@@ -7,18 +7,18 @@ import { RPGRoutes } from "../domain";
 import { ChoiceButton } from "./ChoiceButton";
 import { convertChoiceToPreviewChoice } from "./util";
 import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
+import { HistoryItem } from "./HistoryItem";
 
 // TODO:
 //      Style component.
 //      Display what character is talking (and their name colour) for the history.
 //      Display hidden info in the history.
 
-// { name: "Narrator", nameColor: "#FCFEFF" }
-
 type PreviewCharacter = { name: string, nameColor: string };
-type History = {
+export type DialogueHistory = {
     description: string,
     character: PreviewCharacter | null;
+    isCentered: boolean;
 };
 
 type Condition = {
@@ -40,7 +40,7 @@ export const TreePreviewPage = () => {
         skillTests
     } = useDialogueTree();
 
-    const [histories, setHistories] = useState<Array<History>>([]);
+    const [histories, setHistories] = useState<Array<DialogueHistory>>([]);
     const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
     const [conditions, setConditions] = useState<Array<Condition>>([]);
@@ -62,7 +62,7 @@ export const TreePreviewPage = () => {
 
         setHistories([
             ...histories,
-            { description: startingDialogue.description, character }]
+            { description: startingDialogue.description, character, isCentered: false }]
         );
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
@@ -92,8 +92,12 @@ export const TreePreviewPage = () => {
             conditionsCopy.splice(conditionToRemoveID, 1);
         }
 
-        const choiceHistory = { description, character: null };
-        const nextDialogueHistory = { description: nextDialogue.description, character: nextDialogue.character};
+        const choiceHistory = { description, character: null, isCentered: true };
+        const nextDialogueHistory = {
+            description: nextDialogue.description,
+            character: nextDialogue.character,
+            isCentered: false
+        };
 
         setConditions(conditionsCopy);
         setHistories([...histories, choiceHistory, nextDialogueHistory]);
@@ -110,7 +114,7 @@ export const TreePreviewPage = () => {
                 </div>
                 <div className="tree-preview-page__content">
                     <div className="tree-preview-page__history">
-                        {histories.map(history => <div key={history.description}>{history.description}</div>)}
+                        {histories.map(history => <HistoryItem key={history.description} history={history} />)}
                     </div>
                     <div className="tree-preview-page__choices">
                         {currentChoices.map(choice => <ChoiceButton
@@ -139,7 +143,7 @@ const findNextDialogue = (
             choices: nextDialogue.choices.map(convertChoiceToPreviewChoice),
             character: nextDialogue.character
                 ? { name: nextDialogue.character.name, nameColor: nextDialogue.character.nameColor }
-                : null
+                : { name: "Unknown", nameColor: "#FCFEFF" }
         };
     }
 
@@ -159,7 +163,7 @@ const findNextDialogue = (
         return {
             description: nextSkillTest.name + " | " + nextSkillTest.skillID,
             choices,
-            character: null
+            character: { name: "Skill Test", nameColor: "#FCFEFF" }
         };
     }
 

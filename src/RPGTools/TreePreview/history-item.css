@@ -1,0 +1,15 @@
+.history-item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+.history-item--centered {
+    justify-self: center;
+}
+
+.history-item__character {
+    font-weight: 700;
+    text-shadow: 1px 1px 4px black;
+}
