@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import './tree-preview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
@@ -8,7 +9,6 @@ import { convertChoiceToPreviewChoice } from "./util";
 import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
 
 // TODO:
-//      disable choices based on conditions.
 //      Style component.
 //      Display what character is talking (and their name colour) for the history.
 //      Display hidden info in the history.
@@ -83,21 +83,25 @@ export const TreePreviewPage = () => {
     };
 
     return <Page routes={RPGRoutes} title="RPG Tools">
-        <div>
-            <div>
-                {conditions.map(condition => <div key={condition.id}>{condition.id} : {condition.name}</div>)}
-            </div>
-            <div>
-                <div>
-                    {histories.map(history => <div key={history}>{history}</div>)}
+        <div className="tree-preview-page">
+            <h1>Dialogue Tree Preview</h1>
+            <div className="tree-preview-page__container">
+                <div className="tree-preview-page__active-conditions">
+                    <h3>Active Conditions</h3>
+                    {conditions.map(condition => <div key={condition.id}>{condition.id} : {condition.name}</div>)}
                 </div>
-                <div>
-                    {currentChoices.map(choice => <ChoiceButton
-                        key={choice.id}
-                        choice={choice}
-                        currentConditions={conditions}
-                        onClick={onChoiceClick}
-                    />)}
+                <div className="tree-preview-page__content">
+                    <div className="tree-preview-page__history">
+                        {histories.map(history => <div key={history}>{history}</div>)}
+                    </div>
+                    <div className="tree-preview-page__choices">
+                        {currentChoices.map(choice => <ChoiceButton
+                            key={choice.id}
+                            choice={choice}
+                            currentConditions={conditions}
+                            onClick={onChoiceClick}
+                        />)}
+                    </div>
                 </div>
             </div>
         </div>
