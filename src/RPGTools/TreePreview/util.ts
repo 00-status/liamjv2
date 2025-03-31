@@ -6,6 +6,7 @@ export const convertChoiceToPreviewChoice = (choice: Choice): PreviewChoice => {
         id: choice.id,
         name: choice.shortDescription,
         nextNodeID: Number(choice.nextDialogueID),
+        prerequisiteIDs: choice.conditionID ? [choice.conditionID] : [],
         conditionOutcomes: []
     };
 };

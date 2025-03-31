@@ -8,17 +8,21 @@ import { convertChoiceToPreviewChoice } from "./util";
 import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
 
 // TODO:
-//      Allow Skill Tests to add (or remove) conditions.
-//          For skill tests, treat each difficulty as a separate choice (they just add different conditions.)
 //      disable choices based on conditions.
 //      Style component.
 //      Display what character is talking (and their name colour) for the history.
 //      Display hidden info in the history.
 
+export type Condition = {
+    id: string;
+    name: string;
+};
+
 export type PreviewChoice = {
     id: string;
     name: string;
     nextNodeID: number;
+    prerequisiteIDs: Array<string>;
     conditionOutcomes: Array<ConditionOutcome>;
 };
 
@@ -31,7 +35,7 @@ export const TreePreviewPage = () => {
     const [histories, setHistories] = useState<Array<string>>([]);
     const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
-    const [conditions, setConditions] = useState<Array<{ id: string, name: string }>>([]);
+    const [conditions, setConditions] = useState<Array<Condition>>([]);
 
     useEffect(() => {
         if (histories.length > 0) {
@@ -90,9 +94,8 @@ export const TreePreviewPage = () => {
                 <div>
                     {currentChoices.map(choice => <ChoiceButton
                         key={choice.id}
-                        name={choice.name}
-                        nextNodeID={choice.nextNodeID}
-                        conditionOutcomes={choice.conditionOutcomes}
+                        choice={choice}
+                        currentConditions={conditions}
                         onClick={onChoiceClick}
                     />)}
                 </div>
@@ -122,6 +125,7 @@ const findNextDialogue = (
             return {
                 id: String(difficulty.id),
                 name: "Threshold: " + difficulty.threshold,
+                prerequisiteIDs: [],
                 nextNodeID: nextSkillTest.nextDialogueID ?? -1,
                 conditionOutcomes: [...difficulty.conditionOutcomes]
             };
