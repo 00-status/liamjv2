@@ -7,7 +7,13 @@ import { ChoiceButton } from "./ChoiceButton";
 import { convertChoiceToPreviewChoice } from "./util";
 import { Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
 
-// TODO: Force next dialogue IDs on choices to be numbers
+// TODO:
+//      Allow Skill Tests to add (or remove) conditions.
+//          For skill tests, treat each difficulty as a separate choice (they just add different conditions.)
+//      disable choices based on conditions.
+//      Style component.
+//      Display what character is talking (and their name colour) for the history.
+//      Display hidden info in the history.
 
 export type PreviewChoice = {
     id: string;
@@ -16,27 +22,6 @@ export type PreviewChoice = {
 };
 
 export const TreePreviewPage = () => {
-    // list of dialogues
-
-    // Dialogue History
-    // current conditions
-    // current choices
-
-    // On start
-    //      Find dialogue with ID 1
-    //      Add dialogue 1's description to dialogueHistory
-    //      Display choices
-
-    // When a choice is clicked,
-    //      Add choice description to history.
-    //      Find next node via ID.
-    //      If node is dialogue
-    //          Add new dialogue's description to history.
-    //          load new choices.
-    //      if node is Skill Test
-    //          Add skill test details to history
-    //          display difficulties as though they were choices
-
     const {
         dialogues,
         skillTests
@@ -112,13 +97,17 @@ const findNextDialogue = (
     const nextSkillTest = skillTests.find(skillTest => skillTest.id === nextDialogueID);
 
     if (nextSkillTest) {
+        const choices = nextSkillTest.difficulties.map((difficulty) => {
+            return {
+                id: String(difficulty.id),
+                name: "Threshold: " + difficulty.threshold,
+                nextNodeID: nextSkillTest.nextDialogueID ?? -1
+            };
+        });
+
         return {
             description: nextSkillTest.name + " | " + nextSkillTest.skillID,
-            choices: [{
-                id: String(nextSkillTest.id),
-                name: "Perform Skill Test",
-                nextNodeID: nextSkillTest.nextDialogueID ?? -1
-            }]
+            choices
         };
     }
 
