@@ -13,7 +13,15 @@ import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/doma
 //      Display what character is talking (and their name colour) for the history.
 //      Display hidden info in the history.
 
-export type Condition = {
+// { name: "Narrator", nameColor: "#FCFEFF" }
+
+type PreviewCharacter = { name: string, nameColor: string };
+type History = {
+    description: string,
+    character: PreviewCharacter | null;
+};
+
+type Condition = {
     id: string;
     name: string;
 };
@@ -32,7 +40,7 @@ export const TreePreviewPage = () => {
         skillTests
     } = useDialogueTree();
 
-    const [histories, setHistories] = useState<Array<string>>([]);
+    const [histories, setHistories] = useState<Array<History>>([]);
     const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
     const [conditions, setConditions] = useState<Array<Condition>>([]);
@@ -48,7 +56,14 @@ export const TreePreviewPage = () => {
             return;
         }
 
-        setHistories([...histories, startingDialogue.description]);
+        const character = startingDialogue.character
+            ? { name: startingDialogue.character.name, nameColor: startingDialogue.character.nameColor }
+            : null;
+
+        setHistories([
+            ...histories,
+            { description: startingDialogue.description, character }]
+        );
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
 
@@ -77,8 +92,11 @@ export const TreePreviewPage = () => {
             conditionsCopy.splice(conditionToRemoveID, 1);
         }
 
+        const choiceHistory = { description, character: null };
+        const nextDialogueHistory = { description: nextDialogue.description, character: nextDialogue.character};
+
         setConditions(conditionsCopy);
-        setHistories([...histories, description, nextDialogue.description]);
+        setHistories([...histories, choiceHistory, nextDialogueHistory]);
         setCurrentChoices([...nextDialogue.choices]);
     };
 
@@ -92,7 +110,7 @@ export const TreePreviewPage = () => {
                 </div>
                 <div className="tree-preview-page__content">
                     <div className="tree-preview-page__history">
-                        {histories.map(history => <div key={history}>{history}</div>)}
+                        {histories.map(history => <div key={history.description}>{history.description}</div>)}
                     </div>
                     <div className="tree-preview-page__choices">
                         {currentChoices.map(choice => <ChoiceButton
@@ -112,13 +130,16 @@ const findNextDialogue = (
     dialogues: Array<Dialogue>,
     skillTests: Array<SkillTest>,
     nextDialogueID: number
-): { description: string, choices: Array<PreviewChoice> } | null => {
+): { description: string, choices: Array<PreviewChoice>, character: PreviewCharacter|null } | null => {
     const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
 
     if (nextDialogue) {
         return {
             description: nextDialogue.description,
             choices: nextDialogue.choices.map(convertChoiceToPreviewChoice),
+            character: nextDialogue.character
+                ? { name: nextDialogue.character.name, nameColor: nextDialogue.character.nameColor }
+                : null
         };
     }
 
@@ -131,13 +152,14 @@ const findNextDialogue = (
                 name: "Threshold: " + difficulty.threshold,
                 prerequisiteIDs: [],
                 nextNodeID: nextSkillTest.nextDialogueID ?? -1,
-                conditionOutcomes: [...difficulty.conditionOutcomes]
+                conditionOutcomes: [...difficulty.conditionOutcomes],
             };
         });
 
         return {
             description: nextSkillTest.name + " | " + nextSkillTest.skillID,
-            choices
+            choices,
+            character: null
         };
     }
 
