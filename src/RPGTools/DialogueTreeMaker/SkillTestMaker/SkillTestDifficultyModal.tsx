@@ -129,7 +129,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
         <div>
             {conditionOutcomes.map(outcome =>
                 <div key={outcome.id} className="skill-test-difficulty-modal__condition-outcome">
-                    <div>{outcome.addingOrRemoving + " : " + outcome.conditionName}</div>
+                    <div>{outcome.addingOrRemoving + " : " + outcome.conditionName + " (" + outcome.id + ")"}</div>
                     <div><Button onClick={() => deleteConditionOutcome(outcome.id)} buttonTheme={ButtonTheme.Delete}><TrashIcon /></Button></div>
                 </div>
             )}
