@@ -59,7 +59,7 @@ export const TreePreviewPage = () => {
 
         for (let index = 0; index < conditionOutcomes.length; index++) {
             if (conditionOutcomes[index].addingOrRemoving === "adding") {
-                conditionsCopy.push({ id: conditionOutcomes[index].id, name: conditionOutcomes[1].conditionName });
+                conditionsCopy.push({ id: conditionOutcomes[index].id, name: conditionOutcomes[index].conditionName });
                 continue;
             }
 
@@ -73,8 +73,6 @@ export const TreePreviewPage = () => {
             conditionsCopy.splice(conditionToRemoveID, 1);
         }
 
-        console.log(conditionsCopy);
-
         setConditions(conditionsCopy);
         setHistories([...histories, description, nextDialogue.description]);
         setCurrentChoices([...nextDialogue.choices]);
@@ -83,7 +81,7 @@ export const TreePreviewPage = () => {
     return <Page routes={RPGRoutes} title="RPG Tools">
         <div>
             <div>
-                {conditions.map(condition => <div>{condition.id} : {condition.name}</div>)}
+                {conditions.map(condition => <div key={condition.id}>{condition.id} : {condition.name}</div>)}
             </div>
             <div>
                 <div>
