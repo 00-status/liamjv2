@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const HistoryItem = (props: Props) => {
-    const { description, character, isCentered } = props.history;
+    const { description, character, isChoice: isCentered } = props.history;
 
     const styles = character ? {color: character.nameColor} : undefined;
 

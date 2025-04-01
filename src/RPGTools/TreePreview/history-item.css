@@ -6,7 +6,7 @@
     margin-bottom: 8px;
 }
 .history-item--centered {
-    justify-self: center;
+    margin-left: 24px;
 }
 
 .history-item__character {

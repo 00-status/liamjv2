@@ -14,7 +14,7 @@ export const ChoiceButton = (props: Props) => {
     const meetingAllPrerequisites = arePrerequisitesMet(currentConditions, choice.prerequisiteIDs);
 
     return <Button
-        onClick={() => onClick(choice.nextNodeID, choice.name, choice.conditionOutcomes)}
+        onClick={() => onClick(choice.nextNodeID, "> " + choice.name, choice.conditionOutcomes)}
         buttonTheme={ButtonTheme.Default}
         disabled={!meetingAllPrerequisites}
     >

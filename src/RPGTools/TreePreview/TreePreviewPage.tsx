@@ -10,18 +10,19 @@ import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/doma
 import { HistoryItem } from "./HistoryItem";
 
 // TODO:
-//      Style component.
-//      Display what character is talking (and their name colour) for the history.
 //      Display hidden info in the history.
+//      Make this file more concise where possible.
+//      Consider indenting choices instead of centering them.
+//      Scroll to end of container when adding to history.
 
 type PreviewCharacter = { name: string, nameColor: string };
 export type DialogueHistory = {
     description: string,
     character: PreviewCharacter | null;
-    isCentered: boolean;
+    isChoice: boolean;
 };
 
-type Condition = {
+export type Condition = {
     id: string;
     name: string;
 };
@@ -62,7 +63,7 @@ export const TreePreviewPage = () => {
 
         setHistories([
             ...histories,
-            { description: startingDialogue.description, character, isCentered: false }]
+            { description: startingDialogue.description, character, isChoice: false }]
         );
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
@@ -92,11 +93,11 @@ export const TreePreviewPage = () => {
             conditionsCopy.splice(conditionToRemoveID, 1);
         }
 
-        const choiceHistory = { description, character: null, isCentered: true };
+        const choiceHistory = { description, character: null, isChoice: true };
         const nextDialogueHistory = {
             description: nextDialogue.description,
             character: nextDialogue.character,
-            isCentered: false
+            isChoice: false
         };
 
         setConditions(conditionsCopy);
