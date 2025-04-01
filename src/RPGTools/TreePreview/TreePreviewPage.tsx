@@ -12,7 +12,7 @@ import { HistoryItem } from "./HistoryItem";
 // TODO:
 //      Display hidden info in the history.
 //      Make this file more concise where possible.
-//      Consider indenting choices instead of centering them.
+//      Consider indenting choices instead of centering them. ✅
 //      Scroll to end of container when adding to history.
 
 type PreviewCharacter = { name: string, nameColor: string };
@@ -69,12 +69,6 @@ export const TreePreviewPage = () => {
     }, [dialogues, histories]);
 
     const onChoiceClick = (nextDialogueID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => {
-        const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID);
-
-        if (!nextDialogue) {
-            return;
-        }
-
         const conditionsCopy = [...conditions];
 
         for (let index = 0; index < conditionOutcomes.length; index++) {
@@ -91,6 +85,12 @@ export const TreePreviewPage = () => {
             }
 
             conditionsCopy.splice(conditionToRemoveID, 1);
+        }
+
+        const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID, conditionsCopy);
+
+        if (!nextDialogue) {
+            return;
         }
 
         const choiceHistory = { description, character: null, isChoice: true };
@@ -134,13 +134,27 @@ export const TreePreviewPage = () => {
 const findNextDialogue = (
     dialogues: Array<Dialogue>,
     skillTests: Array<SkillTest>,
-    nextDialogueID: number
+    nextDialogueID: number,
+    conditions: Array<Condition>
 ): { description: string, choices: Array<PreviewChoice>, character: PreviewCharacter|null } | null => {
     const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
 
     if (nextDialogue) {
+        const conditionsByID = conditions.reduce((acc, condition) => {
+            acc[condition.id] = condition;
+
+            return acc;
+        }, {} as {[key: string]: Condition});
+
+        const filteredHiddenInfos = nextDialogue.hiddenInfo.filter((hiddenInfo) => {
+            return hiddenInfo.conditionIDs.every(conditionID => conditionsByID[conditionID.id]);
+        });
+
+        const description = nextDialogue.description + "\n"
+            + filteredHiddenInfos.map(hiddenInfo => hiddenInfo.description + "\n");
+
         return {
-            description: nextDialogue.description,
+            description: description,
             choices: nextDialogue.choices.map(convertChoiceToPreviewChoice),
             character: nextDialogue.character
                 ? { name: nextDialogue.character.name, nameColor: nextDialogue.character.nameColor }

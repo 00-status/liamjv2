@@ -13,3 +13,7 @@
     font-weight: 700;
     text-shadow: 1px 1px 4px black;
 }
+
+.history-item__text {
+    white-space: pre-wrap;
+}

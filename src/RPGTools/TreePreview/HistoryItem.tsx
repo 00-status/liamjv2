@@ -20,7 +20,7 @@ export const HistoryItem = (props: Props) => {
             </div>
             : null
         }
-        <div>
+        <div className="history-item__text">
             {description}
         </div>
     </div>;
