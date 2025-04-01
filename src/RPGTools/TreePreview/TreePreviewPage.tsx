@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import './tree-preview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
@@ -10,7 +10,7 @@ import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/doma
 import { HistoryItem } from "./HistoryItem";
 
 // TODO:
-//      Display hidden info in the history.
+//      Display hidden info in the history. ✅
 //      Make this file more concise where possible.
 //      Consider indenting choices instead of centering them. ✅
 //      Scroll to end of container when adding to history.
@@ -45,6 +45,8 @@ export const TreePreviewPage = () => {
     const [currentChoices, setCurrentChoices] = useState<Array<PreviewChoice>>([]);
 
     const [conditions, setConditions] = useState<Array<Condition>>([]);
+
+    const historyRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (histories.length > 0) {
@@ -105,6 +107,12 @@ export const TreePreviewPage = () => {
         setCurrentChoices([...nextDialogue.choices]);
     };
 
+    useEffect(() => {
+        if (historyRef.current) {
+            historyRef.current.scrollTop = historyRef.current.scrollHeight;
+        }
+    }, [historyRef, histories]);
+
     return <Page routes={RPGRoutes} title="RPG Tools">
         <div className="tree-preview-page">
             <h1>Dialogue Tree Preview</h1>
@@ -114,7 +122,7 @@ export const TreePreviewPage = () => {
                     {conditions.map(condition => <div key={condition.id}>{condition.id} : {condition.name}</div>)}
                 </div>
                 <div className="tree-preview-page__content">
-                    <div className="tree-preview-page__history">
+                    <div ref={historyRef} className="tree-preview-page__history">
                         {histories.map(history => <HistoryItem key={history.description} history={history} />)}
                     </div>
                     <div className="tree-preview-page__choices">
