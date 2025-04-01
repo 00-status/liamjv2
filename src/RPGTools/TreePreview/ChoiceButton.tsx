@@ -1,6 +1,6 @@
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { ConditionOutcome } from "../DialogueTreeMaker/domain/types";
-import { Condition, PreviewChoice } from "./TreePreviewPage";
+import { Condition, PreviewChoice } from "./domain/types";
 
 type Props = {
     choice: PreviewChoice;

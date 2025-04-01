@@ -5,35 +5,13 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
 import { ChoiceButton } from "./ChoiceButton";
-import { convertChoiceToPreviewChoice } from "./util";
+import { convertChoiceToPreviewChoice } from "./domain/util";
 import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
 import { HistoryItem } from "./HistoryItem";
+import { Condition, DialogueHistory, PreviewCharacter, PreviewChoice } from "./domain/types";
 
 // TODO:
-//      Display hidden info in the history. ✅
 //      Make this file more concise where possible.
-//      Consider indenting choices instead of centering them. ✅
-//      Scroll to end of container when adding to history.
-
-type PreviewCharacter = { name: string, nameColor: string };
-export type DialogueHistory = {
-    description: string,
-    character: PreviewCharacter | null;
-    isChoice: boolean;
-};
-
-export type Condition = {
-    id: string;
-    name: string;
-};
-
-export type PreviewChoice = {
-    id: string;
-    name: string;
-    nextNodeID: number;
-    prerequisiteIDs: Array<string>;
-    conditionOutcomes: Array<ConditionOutcome>;
-};
 
 export const TreePreviewPage = () => {
     const {

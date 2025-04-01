@@ -1,5 +1,5 @@
-import { Choice } from "../DialogueTreeMaker/domain/types";
-import { PreviewChoice } from "./TreePreviewPage";
+import { Choice } from "../../DialogueTreeMaker/domain/types";
+import { PreviewChoice } from "./types";
 
 export const convertChoiceToPreviewChoice = (choice: Choice): PreviewChoice => {
     return {
