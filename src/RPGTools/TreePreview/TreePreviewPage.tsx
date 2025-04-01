@@ -5,13 +5,10 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { useDialogueTree } from "../DialogueTreeMaker/useDialogueTree";
 import { RPGRoutes } from "../domain";
 import { ChoiceButton } from "./ChoiceButton";
-import { convertChoiceToPreviewChoice } from "./domain/util";
-import { ConditionOutcome, Dialogue, SkillTest } from "../DialogueTreeMaker/domain/types";
+import { convertChoiceToPreviewChoice, findNextDialogue, updateConditions } from "./domain/util";
+import { ConditionOutcome } from "../DialogueTreeMaker/domain/types";
 import { HistoryItem } from "./HistoryItem";
-import { Condition, DialogueHistory, PreviewCharacter, PreviewChoice } from "./domain/types";
-
-// TODO:
-//      Make this file more concise where possible.
+import { Condition, DialogueHistory, PreviewChoice } from "./domain/types";
 
 export const TreePreviewPage = () => {
     const {
@@ -49,25 +46,9 @@ export const TreePreviewPage = () => {
     }, [dialogues, histories]);
 
     const onChoiceClick = (nextDialogueID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => {
-        const conditionsCopy = [...conditions];
-
-        for (let index = 0; index < conditionOutcomes.length; index++) {
-            if (conditionOutcomes[index].addingOrRemoving === "adding") {
-                conditionsCopy.push({ id: conditionOutcomes[index].id, name: conditionOutcomes[index].conditionName });
-                continue;
-            }
-
-            const conditionToRemoveID = conditionsCopy.findIndex(condition =>
-                condition.id === conditionOutcomes[index].id);
-
-            if (conditionToRemoveID === -1) {
-                continue;
-            }
-
-            conditionsCopy.splice(conditionToRemoveID, 1);
-        }
-
-        const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID, conditionsCopy);
+        
+        const updatedConditions = updateConditions(conditions, conditionOutcomes);
+        const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID, updatedConditions);
 
         if (!nextDialogue) {
             return;
@@ -80,7 +61,7 @@ export const TreePreviewPage = () => {
             isChoice: false
         };
 
-        setConditions(conditionsCopy);
+        setConditions(updatedConditions);
         setHistories([...histories, choiceHistory, nextDialogueHistory]);
         setCurrentChoices([...nextDialogue.choices]);
     };
@@ -115,58 +96,4 @@ export const TreePreviewPage = () => {
             </div>
         </div>
     </Page>;
-};
-
-const findNextDialogue = (
-    dialogues: Array<Dialogue>,
-    skillTests: Array<SkillTest>,
-    nextDialogueID: number,
-    conditions: Array<Condition>
-): { description: string, choices: Array<PreviewChoice>, character: PreviewCharacter|null } | null => {
-    const nextDialogue = dialogues.find(dialogue => dialogue.id === nextDialogueID);
-
-    if (nextDialogue) {
-        const conditionsByID = conditions.reduce((acc, condition) => {
-            acc[condition.id] = condition;
-
-            return acc;
-        }, {} as {[key: string]: Condition});
-
-        const filteredHiddenInfos = nextDialogue.hiddenInfo.filter((hiddenInfo) => {
-            return hiddenInfo.conditionIDs.every(conditionID => conditionsByID[conditionID.id]);
-        });
-
-        const description = nextDialogue.description + "\n"
-            + filteredHiddenInfos.map(hiddenInfo => hiddenInfo.description + "\n");
-
-        return {
-            description: description,
-            choices: nextDialogue.choices.map(convertChoiceToPreviewChoice),
-            character: nextDialogue.character
-                ? { name: nextDialogue.character.name, nameColor: nextDialogue.character.nameColor }
-                : { name: "Unknown", nameColor: "#FCFEFF" }
-        };
-    }
-
-    const nextSkillTest = skillTests.find(skillTest => skillTest.id === nextDialogueID);
-
-    if (nextSkillTest) {
-        const choices = nextSkillTest.difficulties.map((difficulty) => {
-            return {
-                id: String(difficulty.id),
-                name: "Threshold: " + difficulty.threshold,
-                prerequisiteIDs: [],
-                nextNodeID: nextSkillTest.nextDialogueID ?? -1,
-                conditionOutcomes: [...difficulty.conditionOutcomes],
-            };
-        });
-
-        return {
-            description: nextSkillTest.name + " | " + nextSkillTest.skillID,
-            choices,
-            character: { name: "Skill Test", nameColor: "#FCFEFF" }
-        };
-    }
-
-    return null;
 };
