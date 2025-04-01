@@ -16,6 +16,12 @@
     --button-color-shadow: 1px 1px 4px #1f2028;
 }
 
+[data-theme="disabled-button"] {
+    --button-color-main: #7e7d7e;
+    --button-color-hover: #7e7d7e;
+    --button-color-shadow: 1px 1px 4px #1f2028;
+}
+
 button {
     display: flex;
     flex-direction: row;
@@ -38,6 +44,15 @@ button:hover {
 button:active {
     transform: translateY(-1px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.disabled-button:hover {
+    transform: none;
+}
+
+.disabled-button:active {
+    transform: none;
+    box-shadow: none;
 }
 
 .custom-button {

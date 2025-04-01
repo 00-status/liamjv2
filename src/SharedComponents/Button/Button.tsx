@@ -17,14 +17,39 @@ export enum ButtonTheme {
 };
 
 export const Button = (props: Props) => {
-    const buttonTheme = props.buttonTheme ?? ButtonTheme.Default;
+    const {buttonTheme, hasSheen, children, onClick, disabled} = props;
+
+    const theme = getTheme(disabled, buttonTheme);
+    const classes = getClasses(disabled, hasSheen);
 
     return <button
-        data-theme={buttonTheme}
-        className={"custom-button " + (props.hasSheen ? " button-sheen" : "")}
-        disabled={props?.disabled}
-        onClick={props.onClick}
+        data-theme={theme}
+        className={classes}
+        disabled={disabled}
+        onClick={onClick}
     >
-        {props.children}
+        {children}
     </button>;
+};
+
+const getTheme = (disabled?: boolean, theme?: ButtonTheme): string => {
+    if (disabled) {
+        return "disabled-button"
+    } else {
+        return theme ?? ButtonTheme.Default;
+    }
+};
+
+const getClasses = (disabled?: boolean, hasSheen?: boolean): string => {
+    let classes = "custom-button"
+
+    if (disabled) {
+        classes += " disabled-button";
+    }
+
+    if (hasSheen && !disabled) {
+        classes += " button-sheen";
+    }
+
+    return classes;
 };
