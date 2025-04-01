@@ -13,6 +13,7 @@ import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
 import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
+import { TreePreviewPage } from './RPGTools/TreePreview/TreePreviewPage';
 
 initDataLayer();
 gtag('consent', 'default', {
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
         children: [
             { path: "", element: <DialogueTreeMaker /> },
             { path: "dialogue_tree", element: <DialogueTreeMaker /> },
-            { path: "characters", element: <CharacterMaker /> }
+            { path: "characters", element: <CharacterMaker /> },
+            { path: "tree_preview", element: <TreePreviewPage /> }
         ]
     },
     { path: "/terminal", element: <TerminalPage /> },

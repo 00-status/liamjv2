@@ -103,7 +103,7 @@ export const SkillTestMaker = (props: Props) => {
                     <div className="skill-test-maker__outcome-item-child">
                         {difficulty.conditionOutcomes.map((outcome) =>
                             <div key={outcome.id}>
-                                {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + "]"}
+                                {"[" + outcome.addingOrRemoving + " : " + outcome.conditionName + " (" + outcome.id + ") ]"}
                             </div>
                         )}
                     </div>
