@@ -53,17 +53,26 @@ export const ChoiceModal = (props: Props) => {
                     id="modal-condition-id"
                     label="Condition ID"
                     value={conditionID ?? ""}
+                    onChange={(value) => {
+                        setConditionID(value ?? null);
+                    }}
                 />
                 <TextInput
                     id="modal-condition-next-dialogue-id"
                     label="Next Dialogue ID"
                     value={nextDialogueID ??""}
+                    onChange={(value) => {
+                        setNextDialogueID(value ?? null);
+                    }}
                 />
             </div>
             <TextInput
                 id="modal-condition-short-description"
                 label="Short Description"
                 value={shortDescription ?? ""}
+                onChange={(value) => {
+                    setShortDescription(value ?? null);
+                }}
             />
             <hr className="divider" />
         </div>
