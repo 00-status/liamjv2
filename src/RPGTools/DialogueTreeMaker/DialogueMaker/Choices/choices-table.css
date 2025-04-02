@@ -11,5 +11,9 @@
 }
 
 .choices-table__item--actions {
-    place-items: end;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    justify-content: end;
 }

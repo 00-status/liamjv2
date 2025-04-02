@@ -7,6 +7,7 @@ import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { Card } from "../../../../SharedComponents/Card/Card";
 import { ChoiceModal } from './ChoiceModal';
 import { PlusIcon } from '../../../../SharedComponents/Icons/PlusIcon';
+import { PencilIcon } from '../../../../SharedComponents/Icons/PencilIcon';
 
 type Props = {
     choices: Array<Choice>;
@@ -64,6 +65,12 @@ export const ChoicesTable = (props: Props) => {
                     <div>{choice.shortDescription}</div>
                     <div>{choice.nextDialogueID}</div>
                     <div className='choices-table__item--actions'>
+                        <Button onClick={() => {
+                            setCurrentChoice(choice);
+                            setIsModalOpen(true);
+                        }}>
+                            <PencilIcon />
+                        </Button>
                         <Button onClick={() => deleteChoice(choice.id)} buttonTheme={ButtonTheme.Delete}>
                             <TrashIcon />
                         </Button>

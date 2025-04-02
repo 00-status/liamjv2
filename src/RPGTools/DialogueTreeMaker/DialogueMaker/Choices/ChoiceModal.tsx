@@ -20,7 +20,7 @@ export const ChoiceModal = (props: Props) => {
     const [shortDescription, setShortDescription] = useState<string|null>(choice?.shortDescription ?? null);
 
     useEffect(() => {
-        setConditionID(choice?.id ?? null);
+        setConditionID(choice?.conditionID ?? null);
         setNextDialogueID(choice?.nextDialogueID ?? null);
         setShortDescription(choice?.shortDescription ?? null);
     }, [choice]);
