@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 import "./choices-table.css";
 import { Choice } from "../../domain/types";
@@ -12,6 +12,8 @@ type Props = {
 };
 
 export const ChoicesTable = (props: Props) => {
+
+    const [currentChoice, setCurrentChoice] = useState<Choice|null>(null);
 
     const deleteChoice = (id: string) => {
         const choicesCopy = [...choices];
