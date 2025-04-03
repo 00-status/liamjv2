@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import './choice-modal.css';
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
 import { Choice } from "../../domain/types";
@@ -48,7 +49,7 @@ export const ChoiceModal = (props: Props) => {
 
     return <Modal title="Choice" isOpen={isOpen} onClose={onClose} footer={submitButton}>
         <div>
-            <div>
+            <div className="choice-modal__inline-form">
                 <TextInput
                     id="modal-condition-id"
                     label="Condition ID"

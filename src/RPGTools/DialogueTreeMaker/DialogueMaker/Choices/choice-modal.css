@@ -1,0 +1,5 @@
+.choice-modal__inline-form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
