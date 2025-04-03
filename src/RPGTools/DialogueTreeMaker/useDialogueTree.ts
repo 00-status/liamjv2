@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from "./domain/types";
+import { validateDialogueTree } from "./domain/validateDialogueTree";
 
 type UseDialogueTree = {
     dialogueTreeID: string;
@@ -25,15 +26,22 @@ export const useDialogueTree = (): UseDialogueTree => {
     useEffect(() => {
         const dialogueTreeJson = localStorage.getItem('dialogueTree');
 
-        if (dialogueTreeJson) {
-            const dialogueTreeParsed: DialogueTree = JSON.parse(dialogueTreeJson);
-
-            setDialogueTreeID(dialogueTreeParsed.id);
-            setDialogueTreeName(dialogueTreeParsed.name);
-            setDialogues(dialogueTreeParsed.dialogues);
-            setSkillTests(dialogueTreeParsed.skillTests ?? []);
-            setDialogueCoordinates(new Map(dialogueTreeParsed.nodeCoordinates));
+        if (!dialogueTreeJson) {
+            return;
         }
+
+        const dialogueTreeParsed: DialogueTree = JSON.parse(dialogueTreeJson);
+        const validTree = validateDialogueTree(dialogueTreeParsed);
+
+        if (!validTree) {
+            return;
+        }
+
+        setDialogueTreeID(validTree.id);
+        setDialogueTreeName(validTree.name);
+        setDialogues(validTree.dialogues);
+        setSkillTests(validTree.skillTests ?? []);
+        setDialogueCoordinates(new Map(validTree.nodeCoordinates));
     }, []);
 
     useEffect(() => {

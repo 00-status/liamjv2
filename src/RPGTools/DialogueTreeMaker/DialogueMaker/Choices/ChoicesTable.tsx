@@ -53,10 +53,13 @@ export const ChoicesTable = (props: Props) => {
                 Condition ID
             </div>
             <div className="choices-table__header">
-                Short Description
+                Short description
             </div>
             <div className="choices-table__header">
-                Next Dialogue ID
+                Next dialogue ID
+            </div>
+            <div className="choices-table__header">
+                Outcomes
             </div>
             <div />
             {choices.map(choice => {
@@ -64,6 +67,11 @@ export const ChoicesTable = (props: Props) => {
                     <div>{choice.conditionID}</div>
                     <div>{choice.shortDescription}</div>
                     <div>{choice.nextDialogueID}</div>
+                    <div> {/** TODO: Remove the conditional after updating the validator */}
+                        {choice.conditionOutcomes?.map(outcome => <div key={outcome.id}>
+                            {outcome.addingOrRemoving} | {outcome.conditionName} ({outcome.id})
+                        </div>) ?? <div/>}
+                    </div>
                     <div className='choices-table__item--actions'>
                         <Button onClick={() => {
                             setCurrentChoice(choice);

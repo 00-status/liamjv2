@@ -13,13 +13,6 @@ type Props = {
     onSave: (choice: Choice) => void;
 };
 
-// ConditionOutcomes
-//      Add ConditionOutcomes array to Choice ✅
-//      update uploader
-//      update local storage storer
-//      add condition outcomes to choices modal
-//      Update validator
-
 export const ChoiceModal = (props: Props) => {
     const {choice, isOpen, onClose, onSave} = props;
 
