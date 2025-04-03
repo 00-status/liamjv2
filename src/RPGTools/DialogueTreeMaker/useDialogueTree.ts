@@ -41,7 +41,7 @@ export const useDialogueTree = (): UseDialogueTree => {
         setDialogueTreeName(validTree.name);
         setDialogues(validTree.dialogues);
         setSkillTests(validTree.skillTests ?? []);
-        setDialogueCoordinates(new Map(validTree.nodeCoordinates));
+        setDialogueCoordinates(validTree.nodeCoordinates);
     }, []);
 
     useEffect(() => {
