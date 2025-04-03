@@ -38,6 +38,7 @@ export const ChoiceModal = (props: Props) => {
         setConditionID(choice?.conditionID ?? null);
         setNextDialogueID(choice?.nextDialogueID ?? null);
         setShortDescription(choice?.shortDescription ?? null);
+        setConditionOutcomes(choice?.conditionOutcomes ?? []);
     }, [choice]);
 
     const addConditionOutcome = () => {
@@ -54,6 +55,9 @@ export const ChoiceModal = (props: Props) => {
         });
 
         setConditionOutcomes(conditionOutcomesCopy);
+        setAddingOrRemoving(null);
+        setConditionOutcomeID(null);
+        setConditionName(null);
     };
 
     const onSubmit = () => {
@@ -73,6 +77,7 @@ export const ChoiceModal = (props: Props) => {
         setConditionID(null);
         setNextDialogueID(null);
         setShortDescription(null);
+        setConditionOutcomes([]);
         onClose();
     };
 
