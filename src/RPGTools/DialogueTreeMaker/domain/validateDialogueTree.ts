@@ -57,7 +57,7 @@ const getDialogues = (dialogueTree: UnknownObject): Array<Dialogue> | null => {
             && Array.isArray(dialogue.hiddenInfo)
             && Array.isArray(dialogue.choices)
         ) {
-            return true
+            return true;
         }
 
         return false;

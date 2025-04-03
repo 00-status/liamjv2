@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import './choice-modal.css';
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
-import { Choice } from "../../domain/types";
+import { Choice, ConditionOutcome } from "../../domain/types";
 import { Button } from "../../../../SharedComponents/Button/Button";
 
 type Props = {
@@ -13,12 +13,21 @@ type Props = {
     onSave: (choice: Choice) => void;
 };
 
+// ConditionOutcomes
+//      Add ConditionOutcomes array to Choice
+//      update uploader
+//      update local storage storer
+//      add condition outcomes to choices modal
+
 export const ChoiceModal = (props: Props) => {
     const {choice, isOpen, onClose, onSave} = props;
 
     const [conditionID, setConditionID] = useState<string|null>(choice?.conditionID ?? null);
     const [nextDialogueID, setNextDialogueID] = useState<string|null>(choice?.nextDialogueID ?? null);
     const [shortDescription, setShortDescription] = useState<string|null>(choice?.shortDescription ?? null);
+    const [conditionOutcomes, setConditionOutcomes] = useState<Array<ConditionOutcome>>(
+        choice?.conditionOutcomes ?? []
+    );
 
     useEffect(() => {
         setConditionID(choice?.conditionID ?? null);
@@ -35,7 +44,8 @@ export const ChoiceModal = (props: Props) => {
             id: choice?.id ?? crypto.randomUUID(),
             conditionID,
             nextDialogueID,
-            shortDescription
+            shortDescription,
+            conditionOutcomes
         };
 
         onSave(newChoice);
@@ -76,6 +86,30 @@ export const ChoiceModal = (props: Props) => {
                 }}
             />
             <hr className="divider" />
+            <div>
+                <TextInput
+                    id="modal-condition-outcome-add-remove"
+                    label="Adding or Removing"
+                    value={shortDescription ?? ""}
+                    onChange={(value) => {
+                        setShortDescription(value ?? null);
+                    }}
+                />
+                <TextInput
+                    id="modal-condition-outcome-add-remove"
+                    label="Adding or Removing"
+                    value={shortDescription ?? ""}
+                    onChange={(value) => {
+                        setShortDescription(value ?? null);
+                    }}
+                />
+                <Button>
+                    Add Condition Outcome
+                </Button>
+            </div>
+            <div>
+                {conditionOutcomes.map(outcome => <div>{outcome.addingOrRemoving + " | " + outcome.conditionName}</div>)}
+            </div>
         </div>
     </Modal>;
 };
