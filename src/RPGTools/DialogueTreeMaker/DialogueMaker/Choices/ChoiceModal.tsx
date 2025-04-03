@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
 import './choice-modal.css';
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
@@ -79,7 +79,7 @@ export const ChoiceModal = (props: Props) => {
     const submitButton = <Button onClick={onSubmit}>Save</Button>
 
     return <Modal title="Choice" isOpen={isOpen} onClose={onClose} footer={submitButton}>
-        <div>
+        <div className="choice-modal">
             <div className="choice-modal__inline-form">
                 <TextInput
                     id="modal-condition-id"
@@ -106,7 +106,6 @@ export const ChoiceModal = (props: Props) => {
                     setShortDescription(value ?? null);
                 }}
             />
-            <hr className="divider" />
             <h3>Condition Outcomes</h3>
             <div className="choice-modal__condition-outcome-form">
                 <TextInput
@@ -142,8 +141,28 @@ export const ChoiceModal = (props: Props) => {
                     </Button>
                 </div>
             </div>
-            <div>
-                {conditionOutcomes.map(outcome => <div key={outcome.id}>{outcome.addingOrRemoving + " | " + outcome.conditionName}</div>)}
+            <hr className="divider" />
+            <div className="choice-modal__condition-outcome">
+                <div className="choice-modal__condition-outcome-header">
+                    Adding/Removing
+                </div>
+                <div className="choice-modal__condition-outcome-header">
+                    ID
+                </div>
+                <div className="choice-modal__condition-outcome-header">
+                    Name
+                </div>
+                {conditionOutcomes.map(outcome => <Fragment key={outcome.id}>
+                    <div>
+                        {outcome.addingOrRemoving}
+                    </div>
+                    <div>
+                        {outcome.id}
+                    </div>
+                    <div>
+                        {outcome.conditionName}
+                    </div>
+                </Fragment>)}
             </div>
         </div>
     </Modal>;
