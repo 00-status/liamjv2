@@ -3,3 +3,13 @@
     flex-direction: row;
     gap: 20px;
 }
+
+.choice-modal__condition-outcome-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.choice-modal__condition-outcome-form-button {
+    align-self: end;
+}

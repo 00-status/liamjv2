@@ -14,10 +14,11 @@ type Props = {
 };
 
 // ConditionOutcomes
-//      Add ConditionOutcomes array to Choice
+//      Add ConditionOutcomes array to Choice ✅
 //      update uploader
 //      update local storage storer
 //      add condition outcomes to choices modal
+//      Update validator
 
 export const ChoiceModal = (props: Props) => {
     const {choice, isOpen, onClose, onSave} = props;
@@ -29,11 +30,31 @@ export const ChoiceModal = (props: Props) => {
         choice?.conditionOutcomes ?? []
     );
 
+    const [conditionOutcomeID, setConditionOutcomeID] = useState<string|null>(null);
+    const [conditionName, setConditionName] = useState<string|null>(null);
+    const [addingOrRemoving, setAddingOrRemoving] = useState<string|null>(null);
+
     useEffect(() => {
         setConditionID(choice?.conditionID ?? null);
         setNextDialogueID(choice?.nextDialogueID ?? null);
         setShortDescription(choice?.shortDescription ?? null);
     }, [choice]);
+
+    const addConditionOutcome = () => {
+        if (!conditionOutcomeID || !conditionName || !addingOrRemoving) {
+            return;
+        }
+
+        const conditionOutcomesCopy = [...conditionOutcomes];
+
+        conditionOutcomesCopy.push({
+            id: conditionOutcomeID,
+            conditionName,
+            addingOrRemoving
+        });
+
+        setConditionOutcomes(conditionOutcomesCopy);
+    };
 
     const onSubmit = () => {
         if (!nextDialogueID || !shortDescription) {
@@ -86,29 +107,43 @@ export const ChoiceModal = (props: Props) => {
                 }}
             />
             <hr className="divider" />
-            <div>
+            <h3>Condition Outcomes</h3>
+            <div className="choice-modal__condition-outcome-form">
                 <TextInput
                     id="modal-condition-outcome-add-remove"
-                    label="Adding or Removing"
-                    value={shortDescription ?? ""}
+                    label="Add/Remove"
+                    placeholder="Add/Remove"
+                    value={addingOrRemoving ?? ""}
                     onChange={(value) => {
-                        setShortDescription(value ?? null);
+                        setAddingOrRemoving(value ?? null);
                     }}
                 />
                 <TextInput
-                    id="modal-condition-outcome-add-remove"
-                    label="Adding or Removing"
-                    value={shortDescription ?? ""}
+                    id="modal-condition-outcome-id"
+                    label="ID"
+                    placeholder="ID"
+                    value={conditionOutcomeID ?? ""}
                     onChange={(value) => {
-                        setShortDescription(value ?? null);
+                        setConditionOutcomeID(value ?? null);
                     }}
                 />
-                <Button>
-                    Add Condition Outcome
-                </Button>
+                <TextInput
+                    id="modal-condition-outcome-naem"
+                    label="Name"
+                    placeholder="Name"
+                    value={conditionName ?? ""}
+                    onChange={(value) => {
+                        setConditionName(value ?? null);
+                    }}
+                />
+                <div className="choice-modal__condition-outcome-form-button">
+                    <Button onClick={addConditionOutcome}>
+                        Add
+                    </Button>
+                </div>
             </div>
             <div>
-                {conditionOutcomes.map(outcome => <div>{outcome.addingOrRemoving + " | " + outcome.conditionName}</div>)}
+                {conditionOutcomes.map(outcome => <div key={outcome.id}>{outcome.addingOrRemoving + " | " + outcome.conditionName}</div>)}
             </div>
         </div>
     </Modal>;
