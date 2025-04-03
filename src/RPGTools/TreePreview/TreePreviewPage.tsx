@@ -46,7 +46,6 @@ export const TreePreviewPage = () => {
     }, [dialogues, histories]);
 
     const onChoiceClick = (nextDialogueID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => {
-        
         const updatedConditions = updateConditions(conditions, conditionOutcomes);
         const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID, updatedConditions);
 
