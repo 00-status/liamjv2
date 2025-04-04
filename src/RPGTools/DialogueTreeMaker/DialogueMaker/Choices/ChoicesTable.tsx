@@ -61,6 +61,9 @@ export const ChoicesTable = (props: Props) => {
             <div className="choices-table__header">
                 Outcomes
             </div>
+            <div className="choices-table__header">
+                Add to history
+            </div>
             <div />
             {choices.map(choice => {
                 return <Fragment key={choice.id}>
@@ -71,6 +74,9 @@ export const ChoicesTable = (props: Props) => {
                         {choice.conditionOutcomes.map(outcome => <div key={outcome.id}>
                             {outcome.addingOrRemoving} | {outcome.conditionName} ({outcome.id})
                         </div>)}
+                    </div>
+                    <div>
+                        {choice.addToHistory ? "true" : "false"}
                     </div>
                     <div className='choices-table__item--actions'>
                         <Button onClick={() => {
