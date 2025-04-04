@@ -5,7 +5,12 @@ import { Condition, PreviewChoice } from "./domain/types";
 type Props = {
     choice: PreviewChoice;
     currentConditions: Array<{ id: string, name: string; }>;
-    onClick: (nextNodeID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => void;
+    onClick: (
+        nextNodeID: number,
+        description: string,
+        addToHistory: boolean,
+        conditionOutcomes: Array<ConditionOutcome>
+    ) => void;
 };
 
 export const ChoiceButton = (props: Props) => {
@@ -14,7 +19,7 @@ export const ChoiceButton = (props: Props) => {
     const meetingAllPrerequisites = arePrerequisitesMet(currentConditions, choice.prerequisiteIDs);
 
     return <Button
-        onClick={() => onClick(choice.nextNodeID, "> " + choice.name, choice.conditionOutcomes)}
+        onClick={() => onClick(choice.nextNodeID, "> " + choice.name, choice.addToHistory, choice.conditionOutcomes)}
         buttonTheme={ButtonTheme.Default}
         disabled={!meetingAllPrerequisites}
     >

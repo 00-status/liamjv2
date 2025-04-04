@@ -67,6 +67,7 @@ export const findNextDialogue = (
                 prerequisiteIDs: [],
                 nextNodeID: nextSkillTest.nextDialogueID ?? -1,
                 conditionOutcomes: [...difficulty.conditionOutcomes],
+                addToHistory: true
             };
         });
 
@@ -86,6 +87,7 @@ export const convertChoiceToPreviewChoice = (choice: Choice): PreviewChoice => {
         name: choice.shortDescription,
         nextNodeID: Number(choice.nextDialogueID),
         prerequisiteIDs: choice.conditionID ? [choice.conditionID] : [],
-        conditionOutcomes: choice.conditionOutcomes
+        conditionOutcomes: choice.conditionOutcomes,
+        addToHistory: choice.addToHistory
     };
 };

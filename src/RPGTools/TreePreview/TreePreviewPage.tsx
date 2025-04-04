@@ -45,13 +45,14 @@ export const TreePreviewPage = () => {
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
 
-    const onChoiceClick = (nextDialogueID: number, description: string, conditionOutcomes: Array<ConditionOutcome>) => {
+    const onChoiceClick = (nextDialogueID: number, description: string, addToHistory: boolean, conditionOutcomes: Array<ConditionOutcome>) => {
         const updatedConditions = updateConditions(conditions, conditionOutcomes);
         const nextDialogue = findNextDialogue(dialogues, skillTests, nextDialogueID, updatedConditions);
 
         if (!nextDialogue) {
             return;
         }
+
 
         const choiceHistory = { description, character: null, isChoice: true };
         const nextDialogueHistory = {
@@ -60,8 +61,10 @@ export const TreePreviewPage = () => {
             isChoice: false
         };
 
+        const historiesToAdd = addToHistory ? [ choiceHistory, nextDialogueHistory ] : [ nextDialogueHistory ];
+
         setConditions(updatedConditions);
-        setHistories([...histories, choiceHistory, nextDialogueHistory]);
+        setHistories([...histories, ...historiesToAdd]);
         setCurrentChoices([...nextDialogue.choices]);
     };
 
