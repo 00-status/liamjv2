@@ -36,6 +36,7 @@ export type Choice = {
     nextDialogueID: string;
     shortDescription: string;
     conditionOutcomes: Array<ConditionOutcome>;
+    addToHistory: boolean;
 };
 
 export type SkillTest = {

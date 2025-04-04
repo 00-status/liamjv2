@@ -5,6 +5,7 @@ import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
 import { Choice, ConditionOutcome } from "../../domain/types";
 import { Button } from "../../../../SharedComponents/Button/Button";
+import { CheckboxInput } from "../../../../SharedComponents/CheckboxInput/CheckboxInput";
 
 type Props = {
     choice: Choice|null;
@@ -22,6 +23,7 @@ export const ChoiceModal = (props: Props) => {
     const [conditionOutcomes, setConditionOutcomes] = useState<Array<ConditionOutcome>>(
         choice?.conditionOutcomes ?? []
     );
+    const [addToHistory, setAddToHistory] = useState<boolean>(choice?.addToHistory ?? false);
 
     const [conditionOutcomeID, setConditionOutcomeID] = useState<string|null>(null);
     const [conditionName, setConditionName] = useState<string|null>(null);
@@ -63,7 +65,8 @@ export const ChoiceModal = (props: Props) => {
             conditionID,
             nextDialogueID,
             shortDescription,
-            conditionOutcomes
+            conditionOutcomes,
+            addToHistory
         };
 
         onSave(newChoice);
@@ -89,16 +92,22 @@ export const ChoiceModal = (props: Props) => {
                 />
                 <TextInput
                     id="modal-condition-next-dialogue-id"
-                    label="Next Dialogue ID"
+                    label="Next dialogue ID"
                     value={nextDialogueID ??""}
                     onChange={(value) => {
                         setNextDialogueID(value ?? null);
                     }}
                 />
+                <CheckboxInput
+                    id="modal-condition-next-dialogue-add-history"
+                    label={"Add to history"}
+                    value={addToHistory}
+                    onChange={value => setAddToHistory(value)}
+                />
             </div>
             <TextInput
                 id="modal-condition-short-description"
-                label="Short Description"
+                label="Short description"
                 value={shortDescription ?? ""}
                 onChange={(value) => {
                     setShortDescription(value ?? null);
