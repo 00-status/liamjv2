@@ -22,10 +22,17 @@
 
 .choice-modal__condition-outcome {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
 }
 
 .choice-modal__condition-outcome-header {
     font-weight: 700;
+}
+
+.choice-modal__condition-outcome-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: end;
 }

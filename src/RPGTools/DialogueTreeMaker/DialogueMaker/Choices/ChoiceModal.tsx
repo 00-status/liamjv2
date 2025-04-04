@@ -4,9 +4,10 @@ import './choice-modal.css';
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
 import { Choice, ConditionOutcome } from "../../domain/types";
-import { Button } from "../../../../SharedComponents/Button/Button";
+import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { CheckboxInput } from "../../../../SharedComponents/CheckboxInput/CheckboxInput";
 import { Dropdown } from "../../../../SharedComponents/Dropdown/Dropdown";
+import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 
 const conditionOutcomeOptions = [
     { label: "Adding", value: "adding"},
@@ -33,7 +34,7 @@ export const ChoiceModal = (props: Props) => {
 
     const [conditionOutcomeID, setConditionOutcomeID] = useState<string|null>(null);
     const [conditionName, setConditionName] = useState<string|null>(null);
-    const [addingOrRemoving, setAddingOrRemoving] = useState<string|null>(null);
+    const [addingOrRemoving, setAddingOrRemoving] = useState<string>("adding");
 
     useEffect(() => {
         setConditionID(choice?.conditionID ?? null);
@@ -57,9 +58,13 @@ export const ChoiceModal = (props: Props) => {
         });
 
         setConditionOutcomes(conditionOutcomesCopy);
-        setAddingOrRemoving(null);
+        setAddingOrRemoving("adding");
         setConditionOutcomeID(null);
         setConditionName(null);
+    };
+
+    const deleteOutcome = (id: string) => {
+        setConditionOutcomes([...conditionOutcomes].filter(outcome => outcome.id !== id));
     };
 
     const onSubmit = () => {
@@ -165,6 +170,7 @@ export const ChoiceModal = (props: Props) => {
                 <div className="choice-modal__condition-outcome-header">
                     Name
                 </div>
+                <div />
                 {conditionOutcomes.map(outcome => <Fragment key={outcome.id}>
                     <div>
                         {outcome.addingOrRemoving}
@@ -174,6 +180,11 @@ export const ChoiceModal = (props: Props) => {
                     </div>
                     <div>
                         {outcome.conditionName}
+                    </div>
+                    <div className="choice-modal__condition-outcome-actions">
+                        <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteOutcome(outcome.id)}>
+                            <TrashIcon />
+                        </Button>
                     </div>
                 </Fragment>)}
             </div>
