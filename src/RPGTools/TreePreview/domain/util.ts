@@ -1,16 +1,6 @@
 import { Choice, ConditionOutcome, Dialogue, SkillTest } from "../../DialogueTreeMaker/domain/types";
 import { Condition, PreviewCharacter, PreviewChoice } from "./types";
 
-export const convertChoiceToPreviewChoice = (choice: Choice): PreviewChoice => {
-    return {
-        id: choice.id,
-        name: choice.shortDescription,
-        nextNodeID: Number(choice.nextDialogueID),
-        prerequisiteIDs: choice.conditionID ? [choice.conditionID] : [],
-        conditionOutcomes: []
-    };
-};
-
 export const updateConditions = (
     currentConditions: Array<Condition>,
     conditionOutcomes: Array<ConditionOutcome>
@@ -77,6 +67,7 @@ export const findNextDialogue = (
                 prerequisiteIDs: [],
                 nextNodeID: nextSkillTest.nextDialogueID ?? -1,
                 conditionOutcomes: [...difficulty.conditionOutcomes],
+                addToHistory: true
             };
         });
 
@@ -88,4 +79,15 @@ export const findNextDialogue = (
     }
 
     return null;
+};
+
+export const convertChoiceToPreviewChoice = (choice: Choice): PreviewChoice => {
+    return {
+        id: choice.id,
+        name: choice.shortDescription,
+        nextNodeID: Number(choice.nextDialogueID),
+        prerequisiteIDs: choice.conditionID ? [choice.conditionID] : [],
+        conditionOutcomes: choice.conditionOutcomes,
+        addToHistory: choice.addToHistory
+    };
 };

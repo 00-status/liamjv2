@@ -34,7 +34,8 @@ const testData = {
                     id: "3e5359b2-f21f-4aff-82b1-eba2af21b857",
                     conditionID: null,
                     nextDialogueID: "2",
-                    shortDescription: ""
+                    shortDescription: "",
+                    conditionOutcomes: []
                 }
             ]
         },

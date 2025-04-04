@@ -1,4 +1,4 @@
-import { ConditionOutcome } from "../DialogueTreeMaker/domain/types";
+import { ConditionOutcome } from "../../DialogueTreeMaker/domain/types";
 
 export type PreviewCharacter = { name: string, nameColor: string };
 export type DialogueHistory = {
@@ -18,4 +18,5 @@ export type PreviewChoice = {
     nextNodeID: number;
     prerequisiteIDs: Array<string>;
     conditionOutcomes: Array<ConditionOutcome>;
+    addToHistory: boolean;
 };

@@ -2,7 +2,6 @@ import { ReactElement, useState } from "react";
 
 import './dialogue-maker.css';
 import { Dialogue, Choice, HiddenInfo } from "../domain/types";
-import { ChoicesList } from "./Choices/ChoicesList";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
@@ -12,6 +11,7 @@ import { useCharacters } from "../../CharacterMaker";
 import { HiddenInfoItem } from "./HiddenInfo/HiddenInfoItem";
 import { UpdateHiddenInfoModal } from "./HiddenInfo/UpdateHiddenInfoModal";
 import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
+import { ChoicesTable } from "./Choices/ChoicesTable";
 
 type Props = {
     dialogue: Dialogue;
@@ -130,16 +130,12 @@ export const DialogueMaker = (props: Props): ReactElement => {
                         })}
                     </div>
                 </Card>
-                <div className="dialogue-maker__widgets">
-                    <div className="dialogue-maker__widgets--choices">
-                        <ChoicesList
-                            choices={dialogue.choices}
-                            onChange={(choices: Array<Choice>) => {
-                                onSave({...dialogue, choices});
-                            }}
-                        />
-                    </div>
-                </div>
+                <ChoicesTable
+                    choices={dialogue.choices}
+                    onChange={(choices: Array<Choice>) => {
+                        onSave({...dialogue, choices});
+                    }}
+                />
             </div>
         </div>
         <UpdateHiddenInfoModal
