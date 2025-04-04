@@ -34,6 +34,7 @@ export const ChoiceModal = (props: Props) => {
         setNextDialogueID(choice?.nextDialogueID ?? null);
         setShortDescription(choice?.shortDescription ?? null);
         setConditionOutcomes(choice?.conditionOutcomes ?? []);
+        setAddToHistory(choice?.addToHistory ?? false);
     }, [choice]);
 
     const addConditionOutcome = () => {
@@ -74,6 +75,7 @@ export const ChoiceModal = (props: Props) => {
         setNextDialogueID(null);
         setShortDescription(null);
         setConditionOutcomes([]);
+        setAddToHistory(false);
         onClose();
     };
 
