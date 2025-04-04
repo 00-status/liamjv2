@@ -2,6 +2,7 @@ import { ConditionOutcome } from "../../DialogueTreeMaker/domain/types";
 
 export type PreviewCharacter = { name: string, nameColor: string };
 export type DialogueHistory = {
+    id: string;
     description: string,
     character: PreviewCharacter | null;
     isChoice: boolean;

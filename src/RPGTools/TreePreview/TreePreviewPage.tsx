@@ -40,8 +40,8 @@ export const TreePreviewPage = () => {
 
         setHistories([
             ...histories,
-            { description: startingDialogue.description, character, isChoice: false }]
-        );
+            { id: crypto.randomUUID(), description: startingDialogue.description, character, isChoice: false }
+        ]);
         setCurrentChoices([...startingDialogue.choices.map(convertChoiceToPreviewChoice)]);
     }, [dialogues, histories]);
 
@@ -54,8 +54,14 @@ export const TreePreviewPage = () => {
         }
 
 
-        const choiceHistory = { description, character: null, isChoice: true };
-        const nextDialogueHistory = {
+        const choiceHistory: DialogueHistory = {
+            id: crypto.randomUUID(),
+            description,
+            character: null,
+            isChoice: true
+        };
+        const nextDialogueHistory: DialogueHistory = {
+            id: crypto.randomUUID(),
             description: nextDialogue.description,
             character: nextDialogue.character,
             isChoice: false
@@ -84,7 +90,7 @@ export const TreePreviewPage = () => {
                 </div>
                 <div className="tree-preview-page__content">
                     <div ref={historyRef} className="tree-preview-page__history">
-                        {histories.map(history => <HistoryItem key={history.description} history={history} />)}
+                        {histories.map(history => <HistoryItem key={history.id} history={history} />)}
                     </div>
                     <div className="tree-preview-page__choices">
                         {currentChoices.map(choice => <ChoiceButton
