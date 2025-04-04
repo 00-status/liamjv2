@@ -6,6 +6,12 @@ import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
 import { Choice, ConditionOutcome } from "../../domain/types";
 import { Button } from "../../../../SharedComponents/Button/Button";
 import { CheckboxInput } from "../../../../SharedComponents/CheckboxInput/CheckboxInput";
+import { Dropdown } from "../../../../SharedComponents/Dropdown/Dropdown";
+
+const conditionOutcomeOptions = [
+    { label: "Adding", value: "adding"},
+    { label: "Removing", value: "removing"},
+];
 
 type Props = {
     choice: Choice|null;
@@ -117,14 +123,12 @@ export const ChoiceModal = (props: Props) => {
             />
             <h3>Condition Outcomes</h3>
             <div className="choice-modal__condition-outcome-form">
-                <TextInput
+                <Dropdown
                     id="modal-condition-outcome-add-remove"
                     label="Add/Remove"
-                    placeholder="Add/Remove"
-                    value={addingOrRemoving ?? ""}
-                    onChange={(value) => {
-                        setAddingOrRemoving(value ?? null);
-                    }}
+                    options={conditionOutcomeOptions}
+                    defaultValue={addingOrRemoving ?? ""}
+                    onOptionSelect={value => setAddingOrRemoving(value)}
                 />
                 <TextInput
                     id="modal-condition-outcome-id"
