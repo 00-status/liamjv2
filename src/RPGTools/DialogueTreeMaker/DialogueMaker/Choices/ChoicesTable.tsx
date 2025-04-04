@@ -72,7 +72,7 @@ export const ChoicesTable = (props: Props) => {
                     <div>{choice.nextDialogueID}</div>
                     <div>
                         {choice.conditionOutcomes.map(outcome => <div key={outcome.id}>
-                            {outcome.addingOrRemoving} | {outcome.id}
+                            {(outcome.addingOrRemoving === "adding" ? "+ " : "- ") + outcome.id}
                         </div>)}
                     </div>
                     <div>
