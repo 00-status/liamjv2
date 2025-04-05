@@ -1,6 +1,7 @@
 
 import './player-currency.css';
 import { Currency, CurrencyEnum } from './domain/types';
+import { TextInput } from '../../SharedComponents/TextInput/TextInput';
 
 type Props = {
     playerCurrency: Currency;
@@ -22,35 +23,29 @@ export const PlayerCurrency = (props: Props) => {
     };
 
     return <div className="player-currency">
-        <div className="player-currency__input-container">
-            <label>Gold</label>
-            <input
-                className='player-currency__input'
-                placeholder='Gold'
-                value={playerCurrency.gold !== 0 ? playerCurrency.gold : ""}
-                type="number"
-                onChange={(event) => onChangeCurrency(CurrencyEnum.Gold, event.target.value)}
-            />
-        </div>
-        <div className="player-currency__input-container">
-            <label>Silver</label>
-            <input
-                className='player-currency__input'
-                placeholder='Silver'
-                value={playerCurrency.silver !== 0 ? playerCurrency.silver : ""}
-                type="number"
-                onChange={(event) => onChangeCurrency(CurrencyEnum.Silver, event.target.value)}
-            />
-        </div>
-        <div className="player-currency__input-container">
-            <label>Copper</label>
-            <input
-                className='player-currency__input'
-                placeholder='Copper'
-                value={playerCurrency.copper !== 0 ? playerCurrency.copper : ""}
-                type="number"
-                onChange={(event) => onChangeCurrency(CurrencyEnum.Copper, event.target.value)}
-            />
-        </div>
+        <TextInput
+            placeholder='Gold'
+            label='Gold'
+            id='player-currency-gold'
+            value={playerCurrency.gold !== 0 ? playerCurrency.gold : ""}
+            numbersOnly={true}
+            onChange={(value) => onChangeCurrency(CurrencyEnum.Gold, value)}
+        />
+        <TextInput
+            placeholder='Silver'
+            label='Silver'
+            id='player-currency-silver'
+            value={playerCurrency.silver !== 0 ? playerCurrency.silver : ""}
+            numbersOnly={true}
+            onChange={(value) => onChangeCurrency(CurrencyEnum.Silver, value)}
+        />
+        <TextInput
+            placeholder='Copper'
+            label='Copper'
+            id='player-currency-copper'
+            value={playerCurrency.copper !== 0 ? playerCurrency.copper : ""}
+            numbersOnly={true}
+            onChange={(value) => onChangeCurrency(CurrencyEnum.Copper, value)}
+        />
     </div>;
 };

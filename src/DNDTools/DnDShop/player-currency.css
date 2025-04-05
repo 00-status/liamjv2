@@ -2,24 +2,5 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px;
-}
-
-.player-currency__input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.player-currency__input {
-    background-color: #3b3b40;
-    color: #FCFEFF;
-    border: 1px solid #444449;
-    box-shadow: 1px 1px 4px #1f2028;
-}
-
-@media only screen and (max-width: 600px) {
-    .player-currency__input-container {
-        width: 100%;
-    }
+    gap: 20px;
 }
