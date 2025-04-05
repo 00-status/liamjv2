@@ -5,6 +5,7 @@ import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Character } from "../domain/types";
 import { TrashIcon } from '../../../SharedComponents/Icons/TrashIcon';
 import { Button, ButtonTheme } from '../../../SharedComponents/Button/Button';
+import { ColorInput } from '../../../SharedComponents/ColorInput/ColorInput';
 
 type Props = {
     characters: Array<Character>;
@@ -60,9 +61,8 @@ export const CharacterList = (props: Props) => {
                             onCharacterChange(newCharacter, index);
                         }}
                     />
-                    <TextInput
-                        id={character.nameColor}
-                        placeholder='Character Name Color'
+                    <ColorInput
+                        id='character-name-color'
                         value={character.nameColor}
                         onChange={(newValue) => {
                             const newCharacter = { ...character, nameColor: newValue ?? '' };
