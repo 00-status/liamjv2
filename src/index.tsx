@@ -14,6 +14,7 @@ import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
 import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
 import { TreePreviewPage } from './RPGTools/TreePreview/TreePreviewPage';
+import { ErrorBoundary } from './ErrorBoundary';
 
 initDataLayer();
 gtag('consent', 'default', {
@@ -57,4 +58,8 @@ const router = createBrowserRouter([
 ]);
 
 const root = createRoot(rootDomNode);
-root.render(<RouterProvider router={router}/>);
+root.render(
+    <ErrorBoundary>
+        <RouterProvider router={router}/>
+    </ErrorBoundary>
+);
