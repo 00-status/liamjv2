@@ -25,6 +25,10 @@ gtag('consent', 'default', {
 });
 install('G-G0XWWY99FC', { 'anonymize_ip': true, 'send_page_view': false });
 
+// TODO:
+//      Define a react-router error boundary for errors that occur during routing and rendering of top-level components.
+//      Define a more traditional React ErrorBoundary for the Page component. This will replace the page's contents in case of an error.
+
 const rootDomNode = document.getElementById('app');
 
 if (!rootDomNode) {
@@ -40,7 +44,8 @@ const router = createBrowserRouter([
             { path: "dice_roller", element: <DiceRoller /> },
             { path: "weapon_maker", element: <WeaponMaker /> },
             { path: "the_shop", element: <DndShop /> }
-        ]
+        ],
+        ErrorBoundary
     },
     {
         path: "/rpg_tools/",
@@ -58,8 +63,4 @@ const router = createBrowserRouter([
 ]);
 
 const root = createRoot(rootDomNode);
-root.render(
-    <ErrorBoundary>
-        <RouterProvider router={router}/>
-    </ErrorBoundary>
-);
+root.render(<RouterProvider router={router}/>);
