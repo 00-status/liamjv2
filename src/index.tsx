@@ -8,7 +8,7 @@ import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';
 import { DndShop } from './DNDTools/DnDShop/DnDShop';
 import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
 import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
-import { NotFoundPage } from './NotFoundPage';
+import { NotFoundPage } from './ErrorStates/NotFoundPage';
 import { TerminalPage } from './Terminal/TerminalPage';
 import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
