@@ -7,6 +7,7 @@ import { ImageButton } from "../ImageButton/ImageButton";
 import { HomeIcon, HomeThemes } from "../Icons/HomeIcon";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
+import { PageErrorBoundary } from "./PageErrorBoundary";
 
 type Link = {
     label: string;
@@ -76,7 +77,9 @@ export const Page = (props: Props): ReactElement => {
                 </nav>
             </div>
             <div className="page-content-container">
-                {children}
+                <PageErrorBoundary>
+                    {children}
+                </PageErrorBoundary>
             </div>
             <div className="footer">
                 <hr className="divider" />
