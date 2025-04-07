@@ -14,7 +14,7 @@ import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
 import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
 import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
 import { TreePreviewPage } from './RPGTools/TreePreview/TreePreviewPage';
-import { ErrorBoundary } from './ErrorBoundary';
+import { RouterErrorBoundary } from './ErrorStates/ErrorBoundary';
 
 initDataLayer();
 gtag('consent', 'default', {
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
             { path: "weapon_maker", element: <WeaponMaker /> },
             { path: "the_shop", element: <DndShop /> }
         ],
-        ErrorBoundary
+        ErrorBoundary: RouterErrorBoundary
     },
     {
         path: "/rpg_tools/",
