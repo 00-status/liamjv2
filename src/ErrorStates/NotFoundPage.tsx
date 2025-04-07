@@ -1,6 +1,6 @@
 
 import './not-found-page.css';
-import { Page } from "./SharedComponents/Page/Page";
+import { Page } from "../SharedComponents/Page/Page";
 
 export const NotFoundPage = () => {
     const routes = [

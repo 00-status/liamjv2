@@ -4,9 +4,10 @@ import { gtag } from "ga-gtag";
 
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
-import { HomeIcon } from "../Icons/HomeIcon";
+import { HomeIcon, HomeThemes } from "../Icons/HomeIcon";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
+import { PageErrorBoundary } from "./PageErrorBoundary";
 
 type Link = {
     label: string;
@@ -46,7 +47,7 @@ export const Page = (props: Props): ReactElement => {
         }
     }, [routes, location]);
 
-    return <ToastMessageContext.Provider value={{ messageList, setMessageList }}>
+    return <ToastMessageContext value={{ messageList, setMessageList }}>
         <div className="page">
             <div className="page-title-container">
                 <div className="page-title">
@@ -69,14 +70,16 @@ export const Page = (props: Props): ReactElement => {
                         const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
 
                         return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                            { route.isHomeLink && <HomeIcon /> }
+                            { route.isHomeLink && <HomeIcon theme={HomeThemes.DARK} /> }
                             {route.label}
                         </a>;
                     })}
                 </nav>
             </div>
             <div className="page-content-container">
-                {children}
+                <PageErrorBoundary>
+                    {children}
+                </PageErrorBoundary>
             </div>
             <div className="footer">
                 <hr className="divider" />
@@ -84,5 +87,5 @@ export const Page = (props: Props): ReactElement => {
             </div>
             <Toast />
         </div>
-    </ToastMessageContext.Provider>;
+    </ToastMessageContext>;
 };
