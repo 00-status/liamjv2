@@ -46,7 +46,7 @@ export const Page = (props: Props): ReactElement => {
         }
     }, [routes, location]);
 
-    return <ToastMessageContext.Provider value={{ messageList, setMessageList }}>
+    return <ToastMessageContext value={{ messageList, setMessageList }}>
         <div className="page">
             <div className="page-title-container">
                 <div className="page-title">
@@ -84,5 +84,5 @@ export const Page = (props: Props): ReactElement => {
             </div>
             <Toast />
         </div>
-    </ToastMessageContext.Provider>;
+    </ToastMessageContext>;
 };
