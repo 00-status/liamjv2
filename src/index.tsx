@@ -25,10 +25,6 @@ gtag('consent', 'default', {
 });
 install('G-G0XWWY99FC', { 'anonymize_ip': true, 'send_page_view': false });
 
-// TODO:
-//      Define a react-router error boundary for errors that occur during routing and rendering of top-level components.
-//      Define a more traditional React ErrorBoundary for the Page component. This will replace the page's contents in case of an error.
-
 const rootDomNode = document.getElementById('app');
 
 if (!rootDomNode) {
@@ -36,7 +32,7 @@ if (!rootDomNode) {
 }
 
 const router = createBrowserRouter([
-    { path: "/", element: <AboutMe /> },
+    { path: "/", element: <AboutMe />, ErrorBoundary: RouterErrorBoundary },
     {
         path: "/dnd_tools/",
         children: [
@@ -54,12 +50,13 @@ const router = createBrowserRouter([
             { path: "dialogue_tree", element: <DialogueTreeMaker /> },
             { path: "characters", element: <CharacterMaker /> },
             { path: "tree_preview", element: <TreePreviewPage /> }
-        ]
+        ],
+        ErrorBoundary: RouterErrorBoundary
     },
-    { path: "/terminal", element: <TerminalPage /> },
-    { path: "/unlisted/weapon_effects", element: <WeaponEffectList /> },
-    { path: "/unlisted/terminal_editor", element: <TerminalEditorPage /> },
-    { path: '*', element: <NotFoundPage /> }
+    { path: "/terminal", element: <TerminalPage />, ErrorBoundary: RouterErrorBoundary},
+    { path: "/unlisted/weapon_effects", element: <WeaponEffectList />, ErrorBoundary: RouterErrorBoundary},
+    { path: "/unlisted/terminal_editor", element: <TerminalEditorPage />, ErrorBoundary: RouterErrorBoundary},
+    { path: '*', element: <NotFoundPage />, ErrorBoundary: RouterErrorBoundary }
 ]);
 
 const root = createRoot(rootDomNode);
