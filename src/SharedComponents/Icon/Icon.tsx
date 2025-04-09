@@ -1,7 +1,8 @@
 
 import { ReactNode } from 'react';
-import { CloseIcon } from '../Icons/CloseIcon';
+
 import './icon.css';
+import { CloseIcon } from '../Icons/CloseIcon';
 import { CopyIcon } from '../Icons/CopyIcon';
 import { Dice4 } from '../Icons/Dice4';
 import { Dice6 } from '../Icons/Dice6';
@@ -73,9 +74,12 @@ type Props = {
     iconType: IconType;
 };
 
+// TODO: update die.tsx to account for it's large icons
+
 export const Icon = (props: Props) => {
     const { iconType } = props;
 
     return <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        {iconComponents[iconType]}
     </svg>;
 };
