@@ -75,7 +75,8 @@ type Props = {
 };
 
 // TODO:
-//      Update die.tsx to account for it's large icons
+//      Update die.tsx to account for its super-large icons
+//      Update the Taunt to account for its large icon.
 //      Update icon to have color themes
 //      Update home icon to use themes properly: ErrorBoundary, Page, TerminalPage
 

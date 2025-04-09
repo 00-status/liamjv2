@@ -7,7 +7,6 @@ import { DialogueTreeGraph } from "./DialogueTreeGraph/DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
 import { getDownloadLink } from "./domain/getDownloadLink";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { ButtonLink } from "../../SharedComponents/ButtonLink/ButtonLink";
 import { JSONFileInput } from "../../SharedComponents/FileInput/JSONFileInput";
@@ -127,7 +126,7 @@ export const DialogueTreeMaker = (): ReactElement => {
                     </ButtonLink>
                 }
                 <Button buttonTheme={ButtonTheme.Delete} onClick={resetDialogueTree}>
-                    <TrashIcon /> Delete Tree
+                    <Icon iconType={IconType.TRASH} />Delete Tree
                 </Button>
             </div>
             <div className="dialogue-tree-maker__form">

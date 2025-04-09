@@ -1,7 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 
 import './page-error-boundary.css';
-import { VeryDissatisfiedIcon } from "../Icons/VeryDissatisfiedIcon";
 
 type Props = {
     children: ReactNode;

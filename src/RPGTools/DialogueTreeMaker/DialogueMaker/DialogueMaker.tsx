@@ -5,7 +5,6 @@ import { Dialogue, Choice, HiddenInfo } from "../domain/types";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 import { useCharacters } from "../../CharacterMaker";
 import { HiddenInfoItem } from "./HiddenInfo/HiddenInfoItem";
@@ -53,7 +52,7 @@ export const DialogueMaker = (props: Props): ReactElement => {
             <div className="dialogue-maker__title">
                 <h2>{dialogue.name}</h2>
                 <Button buttonTheme={ButtonTheme.Delete} onClick={onDelete}>
-                    <TrashIcon /> Delete dialogue
+                    <Icon iconType={IconType.TRASH} />Delete dialogue
                 </Button>
             </div>
             <div className="dialogue-maker__form">

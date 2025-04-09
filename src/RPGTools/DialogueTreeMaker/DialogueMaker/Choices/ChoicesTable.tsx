@@ -3,7 +3,6 @@ import { Fragment, useState } from 'react';
 import "./choices-table.css";
 import { Choice } from "../../domain/types";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { Card } from "../../../../SharedComponents/Card/Card";
 import { ChoiceModal } from './ChoiceModal';
 import { Icon, IconType } from '../../../../SharedComponents/Icon/Icon';
@@ -85,7 +84,7 @@ export const ChoicesTable = (props: Props) => {
                             <Icon iconType={IconType.PENCIL} />
                         </Button>
                         <Button onClick={() => deleteChoice(choice.id)} buttonTheme={ButtonTheme.Delete}>
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </Fragment>;

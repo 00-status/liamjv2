@@ -1,7 +1,7 @@
 
 import "./server-item.css";
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
+import { Icon, IconType } from "../../SharedComponents/Icon/Icon";
 
 type Props = {
     label: string
@@ -17,7 +17,7 @@ export const TerminalListItem = (props: Props) => {
             {label}
         </div>
         <Button buttonTheme={ButtonTheme.Delete} onClick={onDelete}>
-            <TrashIcon />
+            <Icon iconType={IconType.TRASH} />
         </Button>
     </div>
 };

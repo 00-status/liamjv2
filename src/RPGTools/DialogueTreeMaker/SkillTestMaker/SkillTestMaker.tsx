@@ -6,7 +6,6 @@ import { SkillTest, SkillTestDifficulty } from "../domain/types";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
 
 type Props = {
@@ -51,7 +50,7 @@ export const SkillTestMaker = (props: Props) => {
         <div className="skill-test-maker__title">
             <h2>{currentSkillTest.name}</h2>
             <Button buttonTheme={ButtonTheme.Delete} onClick={() => onDelete()}>
-                <TrashIcon /> Delete
+                <Icon iconType={IconType.TRASH} />Delete
             </Button>
         </div>
         <div className="skill-test-maker__form">
@@ -114,7 +113,7 @@ export const SkillTestMaker = (props: Props) => {
                             <Icon iconType={IconType.PENCIL} />
                         </Button>
                         <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteDifficulty(difficulty.id)}>
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </div>;

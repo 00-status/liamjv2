@@ -3,7 +3,7 @@ import { useDroppable } from "@dnd-kit/core";
 import './cart-item.css';
 import { Item } from "../domain/types";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
+import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
 
 type Props = {
     id: string;
@@ -26,7 +26,7 @@ export const CartItem = (props: Props) => {
             </h3>
             <div>
                 <Button buttonTheme={ButtonTheme.Subtle} onClick={() => deleteCartItem(id)} >
-                    <TrashIcon />
+                    <Icon iconType={IconType.TRASH} />
                 </Button>
             </div>
         </div>

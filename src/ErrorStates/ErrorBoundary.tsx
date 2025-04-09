@@ -1,10 +1,10 @@
 import { useRouteError } from "react-router-dom";
+import { useEffect } from "react";
 
 import './route-error-boundary.css';
-import { TauntIcon } from "../SharedComponents/Icons/TauntIcon";
 import { Button } from "../SharedComponents/Button/Button";
-import { HomeIcon, HomeThemes } from "../SharedComponents/Icons/HomeIcon";
-import { useEffect } from "react";
+import { HomeIcon } from "../SharedComponents/Icons/HomeIcon";
+import { Icon, IconType } from "../SharedComponents/Icon/Icon";
 
 export const RouterErrorBoundary = () => {
     const error = useRouteError();
@@ -15,7 +15,7 @@ export const RouterErrorBoundary = () => {
 
     return <div className="route-error-boundary">
         <div className="route-error-boundary__title">
-            <TauntIcon isLargeIcon={true} />
+            <Icon iconType={IconType.TAUNT} />
             <h1>Something Went Wrong...</h1>
         </div>
         <div className="route-error-boundary__content">
@@ -23,7 +23,7 @@ export const RouterErrorBoundary = () => {
             <Button onClick={() => {
                 window.location.href = "/";
             }}>
-                <HomeIcon theme={HomeThemes.LIGHT} />To homepage
+                <Icon iconType={IconType.HOME} />To homepage
             </Button>
         </div>
     </div>;

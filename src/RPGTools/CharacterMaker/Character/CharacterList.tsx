@@ -3,9 +3,9 @@ import './character-list.css';
 import { Card } from "../../../SharedComponents/Card/Card";
 import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Character } from "../domain/types";
-import { TrashIcon } from '../../../SharedComponents/Icons/TrashIcon';
 import { Button, ButtonTheme } from '../../../SharedComponents/Button/Button';
 import { ColorInput } from '../../../SharedComponents/ColorInput/ColorInput';
+import { Icon, IconType } from '../../../SharedComponents/Icon/Icon';
 
 type Props = {
     characters: Array<Character>;
@@ -71,7 +71,7 @@ export const CharacterList = (props: Props) => {
                         }}
                     />
                     <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteCharacter(index)}>
-                        <TrashIcon />
+                        <Icon iconType={IconType.TRASH} />
                     </Button>
                 </div>;
             })}

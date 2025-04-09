@@ -9,7 +9,6 @@ import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageCo
 import { File, useFiles } from "../../Terminal/hooks/files/useFiles";
 import { Loader } from "../../SharedComponents/Loader/Loader";
 import { FileEditorModal } from "./FileEditorModal";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
 import { Icon, IconType } from "../../SharedComponents/Icon/Icon";
 
 type Props = {
@@ -139,7 +138,7 @@ export const DirectoryEditor = (props: Props) => {
                             buttonTheme={ButtonTheme.Delete}
                             onClick={() => deleteFile(file.directoryId, file.id)}
                         >
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </div>)}

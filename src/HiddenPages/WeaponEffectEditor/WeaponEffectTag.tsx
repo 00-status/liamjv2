@@ -1,7 +1,7 @@
 
 import './weapon-effect-tag.css';
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
+import { Icon, IconType } from '../../SharedComponents/Icon/Icon';
 
 type Props = {
     tag: string;
@@ -12,7 +12,7 @@ export const WeaponEffectTag = (props: Props) => {
     return <div className="weapon-effect-tag">
         {props.tag}
         <Button buttonTheme={ButtonTheme.Delete} onClick={() => props.onDeleteTag(props.tag)}>
-            <TrashIcon />
+            <Icon iconType={IconType.TRASH} />
         </Button>
     </div>;
 };
