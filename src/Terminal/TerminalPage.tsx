@@ -5,10 +5,10 @@ import { gtag } from 'ga-gtag';
 import './terminal-page.css';
 import { Terminal } from "./Terminal";
 import { CodeBlockGenerator } from './CodeBlockGenerator';
-import { HomeIcon, HomeThemes } from '../SharedComponents/Icons/HomeIcon';
 import { useServers } from './hooks/server/useServers';
 import { useDirectories } from './hooks/directories/useDirectories';
 import { TerminalLoader } from './TerminalLoader';
+import { Icon, IconTheme, IconType } from '../SharedComponents/Icon/Icon';
 
 
 export const TerminalPage = () => {
@@ -44,7 +44,7 @@ export const TerminalPage = () => {
             </h1>
             <div className="terminal-page__nav">
                 <a className='terminal-page__link' onClick={() => navigate("/")}>
-                    <HomeIcon theme={HomeThemes.GREEN} /> Landing
+                    <Icon iconType={IconType.HOME} iconTheme={IconTheme.GREEN} />Landing
                 </a>
                 <a className='terminal-page__link terminal-page__link--active' onClick={() => navigate("#")}>
                     Terminal

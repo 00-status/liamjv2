@@ -4,10 +4,10 @@ import { gtag } from "ga-gtag";
 
 import "./app.css";
 import { ImageButton } from "../ImageButton/ImageButton";
-import { HomeIcon, HomeThemes } from "../Icons/HomeIcon";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
+import { Icon, IconTheme, IconType } from "../Icon/Icon";
 
 type Link = {
     label: string;
@@ -70,7 +70,7 @@ export const Page = (props: Props): ReactElement => {
                         const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
 
                         return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                            { route.isHomeLink && <HomeIcon theme={HomeThemes.DARK} /> }
+                            {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
                             {route.label}
                         </a>;
                     })}

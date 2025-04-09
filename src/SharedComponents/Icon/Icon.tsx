@@ -22,9 +22,47 @@ import { TrashIcon } from '../Icons/TrashIcon';
 import { UploadIcon } from '../Icons/UploadFile';
 import { VeryDissatisfiedIcon } from '../Icons/VeryDissatisfiedIcon';
 
-// size: {small, medium, large}
+// size: {small, medium, large, extra-large}
 // iconTheme: { dark, light, neon }
 // iconType: { close, copy, dice4, etc }
+
+// TODO:
+//      Update die.tsx to account for its super-large icons
+//      Update the Taunt to account for its large icon.
+//      Update icon to have color themes
+
+export enum IconTheme {
+    LIGHT,
+    DARK,
+    GREEN
+};
+
+type Props = {
+    iconType: IconType;
+    iconTheme?: IconTheme;
+}
+
+export const Icon = (props: Props) => {
+    const { iconType, iconTheme } = props;
+
+    const className = "icon " + getClasses(iconTheme);
+
+    return <svg className={className} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        {iconComponents[iconType]}
+    </svg>;
+};
+
+function getClasses(theme?: IconTheme): string {
+    switch (theme) {
+        case IconTheme.DARK:
+            return"icon-dark";
+        case IconTheme.GREEN:
+            return "icon-green";
+        case IconTheme.LIGHT:
+        default:
+            return "icon-light";
+    }
+}
 
 export enum IconType {
     CLOSE,
@@ -69,37 +107,6 @@ const iconComponents: Record<IconType, ReactNode> = {
     [IconType.UPLOAD_FILE]: <UploadIcon />,
     [IconType.VERY_DISSATISFIED]: <VeryDissatisfiedIcon />,
 };
-
-type Props = {
-    iconType: IconType;
-};
-
-// TODO:
-//      Update die.tsx to account for its super-large icons
-//      Update the Taunt to account for its large icon.
-//      Update icon to have color themes
-//      Update home icon to use themes properly: ErrorBoundary, Page, TerminalPage
-
-export const Icon = (props: Props) => {
-    const { iconType } = props;
-
-    return <svg className="icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-        {iconComponents[iconType]}
-    </svg>;
-};
-
-// function getClasses(theme?: HomeThemes): string {
-//     switch (theme) {
-//         case HomeThemes.DARK:
-//             return"icon-dark";
-//         case HomeThemes.LIGHT:
-//             return "icon";
-//         case HomeThemes.GREEN:
-//             return "icon-green";
-//         default:
-//             return "icon";
-//     }
-// }
 
 // type Props = {
 //     theme?: HomeThemes;

@@ -2,19 +2,16 @@
     width: 24px;
     height: 24px;
     margin: 0 4px;
+}
+
+.icon-light {
     fill: #FCFEFF;
 }
 
 .icon-dark {
-    width: 24px;
-    height: 24px;
-    margin: 0 4px;
     fill: #2a2b30;
 }
 
 .icon-green {
-    width: 24px;
-    height: 24px;
-    margin: 0 4px;
     fill: #67e016;
 }
