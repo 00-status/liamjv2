@@ -37,22 +37,36 @@ export enum IconTheme {
     GREEN
 };
 
+export enum IconSize {
+    SMALL = "24px",
+    MEDIUM = "32px",
+    LARGE = "40px",
+    EXTRA_LARGE = "80px",
+    RESPONSIVE = "70%"
+}
+
 type Props = {
     iconType: IconType;
     iconTheme?: IconTheme;
+    iconSize?: IconSize;
 }
 
 export const Icon = (props: Props) => {
-    const { iconType, iconTheme } = props;
+    const { iconType, iconTheme, iconSize } = props;
 
-    const className = "icon " + getClasses(iconTheme);
+    const styles = {
+        width: (iconSize ?? "24px"),
+        height: (iconSize ?? "24px")
+    }
 
-    return <svg className={className} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+    const className = "icon " + getTheme(iconTheme);
+
+    return <svg className={className} style={styles} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
         {iconComponents[iconType]}
     </svg>;
 };
 
-function getClasses(theme?: IconTheme): string {
+function getTheme(theme?: IconTheme): string {
     switch (theme) {
         case IconTheme.DARK:
             return"icon-dark";

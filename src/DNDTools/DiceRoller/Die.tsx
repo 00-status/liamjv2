@@ -1,6 +1,6 @@
 import './die.css';
 import { rollDie } from './util';
-import { Icon, IconType } from '../../SharedComponents/Icon/Icon';
+import { Icon, IconSize, IconType } from '../../SharedComponents/Icon/Icon';
 
 type Props = {
     diceType: number;
@@ -15,7 +15,7 @@ export const Die = (props: Props) => {
     };
 
     return <button className='die' onClick={generateNumber}>
-        <Icon iconType={getDieType(props.diceType)} />
+        <Icon iconType={getDieType(props.diceType)} iconSize={IconSize.RESPONSIVE} />
     </button>;
 };
 
