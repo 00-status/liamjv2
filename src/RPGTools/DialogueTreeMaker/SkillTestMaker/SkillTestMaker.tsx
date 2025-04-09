@@ -5,10 +5,9 @@ import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { SkillTest, SkillTestDifficulty } from "../domain/types";
 import { Card } from "../../../SharedComponents/Card/Card";
 import { SkillTestDifficultyModal } from "./SkillTestDifficultyModal";
-import { PlusIcon } from "../../../SharedComponents/Icons/PlusIcon";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
-import { PencilIcon } from "../../../SharedComponents/Icons/PencilIcon";
+import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
 
 type Props = {
     currentSkillTest: SkillTest;
@@ -84,7 +83,7 @@ export const SkillTestMaker = (props: Props) => {
         </div>
         <Card
             title="Difficulties"
-            button={<Button onClick={() => setIsDifficultyModalOpen(true)}><PlusIcon />Add difficulty</Button>}
+            button={<Button onClick={() => setIsDifficultyModalOpen(true)}><Icon iconType={IconType.PLUS} />Add difficulty</Button>}
         >
             <div className="skill-test-maker__outcome-item">
                 <div className="skill-test-maker__outcome-item-child">
@@ -112,7 +111,7 @@ export const SkillTestMaker = (props: Props) => {
                             setCurrentDifficulty(difficulty);
                             setIsDifficultyModalOpen(true);
                         }}>
-                            <PencilIcon />
+                            <Icon iconType={IconType.PENCIL} />
                         </Button>
                         <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteDifficulty(difficulty.id)}>
                             <TrashIcon />

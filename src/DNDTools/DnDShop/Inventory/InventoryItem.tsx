@@ -1,7 +1,7 @@
-
-import { DragIcon } from '../../../SharedComponents/Icons/DragIcon';
-import './inventory-item.css';
 import { useDraggable } from "@dnd-kit/core";
+
+import './inventory-item.css';
+import { Icon, IconType } from '../../../SharedComponents/Icon/Icon';
 
 type Props = {
     name: string,
@@ -17,7 +17,7 @@ export const InventoryItem = (props: Props) => {
 
     return <div className='inventory-item' ref={setNodeRef}>
         <div className='inventory-item__icon' {...listeners} {...attributes}>
-            <DragIcon />
+            <Icon iconType={IconType.DRAG} />
         </div>
         <div className='inventory-item__body'>
             <div>

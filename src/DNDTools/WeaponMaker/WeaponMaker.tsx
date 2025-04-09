@@ -3,13 +3,13 @@ import { gtag } from 'ga-gtag';
 
 import './weapon-maker.css';
 import { Button } from "../../SharedComponents/Button/Button";
-import { GearsIcon } from "../../SharedComponents/Icons/GearsIcon";
 import { Page } from "../../SharedComponents/Page/Page";
 import { dndRoutes } from "../domain";
 import { useGenerateWeapon } from "./useGenerateWeapon";
 import { WeaponCard } from './WeaponCard';
 import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 import { Loader } from '../../SharedComponents/Loader/Loader';
+import { Icon, IconType } from '../../SharedComponents/Icon/Icon';
 
 export const WeaponMaker = () => {
     const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
@@ -45,7 +45,7 @@ export const WeaponMaker = () => {
                 </div>
                 <div className="weapon-maker__button">
                     <Button disabled={isLoading} hasSheen onClick={onGenerateWeaponclick}>
-                        <GearsIcon /> Make weapon
+                        <Icon iconType={IconType.GEARS} />Make weapon
                     </Button>
                 </div>
             </div>

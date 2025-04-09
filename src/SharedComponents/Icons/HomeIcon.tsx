@@ -1,31 +1,8 @@
-type Props = {
-    theme?: HomeThemes;
-};
+export const HomeIcon = () => {
 
-export enum HomeThemes {
-    DARK = "dark",
-    LIGHT = "white",
-    GREEN = "green"
-};
-
-export const HomeIcon = (props: Props) => {
-    const classes = getClasses(props.theme);
-
-    return <svg className={classes} role="img" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+    return <>
         <title>Home</title>
         <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
-    </svg>;
+    </>;
 };
-function getClasses(theme?: HomeThemes): string {
-    switch (theme) {
-        case HomeThemes.DARK:
-            return"icon-dark";
-        case HomeThemes.LIGHT:
-            return "icon";
-        case HomeThemes.GREEN:
-            return "icon-green";
-        default:
-            return "icon";
-    }
-}
 

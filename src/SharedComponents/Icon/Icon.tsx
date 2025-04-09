@@ -74,12 +74,38 @@ type Props = {
     iconType: IconType;
 };
 
-// TODO: update die.tsx to account for it's large icons
+// TODO:
+//      Update die.tsx to account for it's large icons
+//      Update icon to have color themes
+//      Update home icon to use themes properly: ErrorBoundary, Page, TerminalPage
 
 export const Icon = (props: Props) => {
     const { iconType } = props;
 
-    return <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+    return <svg className="icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
         {iconComponents[iconType]}
     </svg>;
 };
+
+// function getClasses(theme?: HomeThemes): string {
+//     switch (theme) {
+//         case HomeThemes.DARK:
+//             return"icon-dark";
+//         case HomeThemes.LIGHT:
+//             return "icon";
+//         case HomeThemes.GREEN:
+//             return "icon-green";
+//         default:
+//             return "icon";
+//     }
+// }
+
+// type Props = {
+//     theme?: HomeThemes;
+// };
+
+// export enum HomeThemes {
+//     DARK = "dark",
+//     LIGHT = "white",
+//     GREEN = "green"
+// };
