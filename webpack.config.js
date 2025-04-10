@@ -18,6 +18,13 @@ module.exports = (env) => {
     optimization: {
       splitChunks: {
         chunks: "all",
+        cacheGroups: {
+          sharedComponents: {
+            test: /[\\/]src[\\/]SharedComponents[\\/]/, // Target the sharedComponents folder
+            name: 'shared-components', // Name of the output bundle
+            chunks: 'all', // Include both synchronous and asynchronous chunks
+          },
+        },
       }
     },
     plugins: [

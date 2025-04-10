@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack build --mode production",
     "start": "NODE_ENV=development webpack build --watch --mode development",
-    "analyze": "NODE_ENV=production webpack build --watch --mode production --env analyze=true",
+    "analyze": "NODE_ENV=production webpack build --mode production --env analyze=true",
     "test": "jest"
   },
   "author": "00-status",
