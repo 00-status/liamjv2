@@ -3,11 +3,10 @@ import { Fragment, useState } from 'react';
 import "./choices-table.css";
 import { Choice } from "../../domain/types";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { Card } from "../../../../SharedComponents/Card/Card";
 import { ChoiceModal } from './ChoiceModal';
-import { PlusIcon } from '../../../../SharedComponents/Icons/PlusIcon';
-import { PencilIcon } from '../../../../SharedComponents/Icons/PencilIcon';
+import { Icon } from '../../../../SharedComponents/Icon/Icon';
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 type Props = {
     choices: Array<Choice>;
@@ -45,7 +44,7 @@ export const ChoicesTable = (props: Props) => {
         onChange(choicesCopy);
     };
 
-    const newChoiceButton = <Button onClick={() => setIsModalOpen(true)}><PlusIcon />Add Choice</Button>;
+    const newChoiceButton = <Button onClick={() => setIsModalOpen(true)}><Icon iconType={IconType.PLUS} />Add Choice</Button>;
 
     return <Card title="Choices" button={newChoiceButton}>
         <div className="choices-table">
@@ -83,10 +82,10 @@ export const ChoicesTable = (props: Props) => {
                             setCurrentChoice(choice);
                             setIsModalOpen(true);
                         }}>
-                            <PencilIcon />
+                            <Icon iconType={IconType.PENCIL} />
                         </Button>
                         <Button onClick={() => deleteChoice(choice.id)} buttonTheme={ButtonTheme.Delete}>
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </Fragment>;

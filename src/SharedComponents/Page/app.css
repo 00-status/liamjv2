@@ -61,27 +61,6 @@ input[type=number] {
     appearance: textfield;
 }
 
-.icon {
-    width: 24px;
-    height: 24px;
-    margin: 0 4px;
-    fill: #FCFEFF;
-}
-
-.icon-dark {
-    width: 24px;
-    height: 24px;
-    margin: 0 4px;
-    fill: #2a2b30;
-}
-
-.icon-green {
-    width: 24px;
-    height: 24px;
-    margin: 0 4px;
-    fill: #67e016;
-}
-
 .divider {
     width: 90%;
     border: none;

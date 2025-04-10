@@ -2,9 +2,10 @@ import { useContext } from "react";
 
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { Card } from "../../SharedComponents/Card/Card";
-import { CopyIcon } from "../../SharedComponents/Icons/CopyIcon";
 import { Weapon, WeaponDamage } from "./domain/types";
 import { ToastMessage, ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 type Props = {
     weapon: Weapon;
@@ -25,7 +26,7 @@ export const WeaponCard = (props: Props) => {
     };
 
     const copyButton = <Button buttonTheme={ButtonTheme.Subtle} onClick={copyText}>
-        <CopyIcon />
+        <Icon iconType={IconType.COPY} />
     </Button>;
 
     return <Card title={weapon.name || weapon.defaultName} button={copyButton}>

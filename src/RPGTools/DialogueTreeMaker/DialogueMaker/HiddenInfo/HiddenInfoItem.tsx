@@ -1,9 +1,9 @@
 
 import './hidden-info-item.css';
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { HiddenInfo } from "../../domain/types";
-import { PencilIcon } from '../../../../SharedComponents/Icons/PencilIcon';
+import { Icon } from '../../../../SharedComponents/Icon/Icon';
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 type Props = {
     hiddenInfo: HiddenInfo;
@@ -25,8 +25,10 @@ export const HiddenInfoItem = (props: Props) => {
             {hiddenInfo.description}
         </div>
         <div className="hidden-info-item__segment--actions">
-            <Button onClick={onEdit}><PencilIcon /></Button>
-            <Button onClick={() => onDelete(hiddenInfo.id)} buttonTheme={ButtonTheme.Delete}><TrashIcon /></Button>
+            <Button onClick={onEdit}><Icon iconType={IconType.PENCIL} /></Button>
+            <Button onClick={() => onDelete(hiddenInfo.id)} buttonTheme={ButtonTheme.Delete}>
+                <Icon iconType={IconType.TRASH} />
+            </Button>
         </div>
     </div>;
 };

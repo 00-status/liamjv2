@@ -7,17 +7,16 @@ import { DialogueTreeGraph } from "./DialogueTreeGraph/DialogueTreeGraph";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { useDialogueTree } from "./useDialogueTree";
 import { getDownloadLink } from "./domain/getDownloadLink";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
-import { DownloadIcon } from "../../SharedComponents/Icons/DownloadIcon";
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { ButtonLink } from "../../SharedComponents/ButtonLink/ButtonLink";
-import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { JSONFileInput } from "../../SharedComponents/FileInput/JSONFileInput";
 import { validateDialogueTree } from "./domain/validateDialogueTree";
 import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 import { GraphContainer } from "./DialogueTreeGraph/GraphContainer";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {
@@ -124,11 +123,11 @@ export const DialogueTreeMaker = (): ReactElement => {
                             nodeCoordinates: nodeCoordinates
                         })}
                     >
-                        <DownloadIcon /> Download tree
+                        <Icon iconType={IconType.DOANLOAD} />Download tree
                     </ButtonLink>
                 }
                 <Button buttonTheme={ButtonTheme.Delete} onClick={resetDialogueTree}>
-                    <TrashIcon /> Delete Tree
+                    <Icon iconType={IconType.TRASH} />Delete Tree
                 </Button>
             </div>
             <div className="dialogue-tree-maker__form">
@@ -155,10 +154,10 @@ export const DialogueTreeMaker = (): ReactElement => {
                     <div className="dialogue-tree-maker__dialogue-tree-title">
                         <h2>Dialogue Tree</h2>
                         <Button onClick={createNewDialogue}>
-                            <PlusIcon /> Create dialogue
+                        <Icon iconType={IconType.PLUS} /> Create dialogue
                         </Button>
                         <Button onClick={createNewSkillTest}>
-                            <PlusIcon /> Create skill test
+                            <Icon iconType={IconType.PLUS} /> Create skill test
                         </Button>
                     </div>
                     <GraphContainer>

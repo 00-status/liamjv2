@@ -3,7 +3,8 @@ import ReactModal from "react-modal";
 
 import './modal.css';
 import { Button, ButtonTheme } from "../Button/Button";
-import { CloseIcon } from "../Icons/CloseIcon";
+import { Icon } from "../Icon/Icon";
+import { IconType } from '../Icon/domain';
 
 type Props = {
     title: string;
@@ -20,7 +21,9 @@ export const Modal = (props: Props) => {
         <div className="modal__contents">
             <div className="modal__title">
                 <h2>{props.title}</h2>
-                <Button buttonTheme={ButtonTheme.Subtle} onClick={props.onClose}><CloseIcon /></Button>
+                <Button buttonTheme={ButtonTheme.Subtle} onClick={props.onClose}>
+                    <Icon iconType={IconType.CLOSE} />
+                </Button>
             </div>
             <div className="modal__body">
                 {props.children}

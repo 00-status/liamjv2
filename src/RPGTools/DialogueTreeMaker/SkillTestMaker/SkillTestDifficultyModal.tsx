@@ -6,8 +6,9 @@ import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
-import { TrashIcon } from "../../../SharedComponents/Icons/TrashIcon";
 import { DescriptionCard } from "../../../SharedComponents/DescriptionCard/DescriptionCard";
+import { Icon } from "../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     isOpen: boolean;
@@ -130,7 +131,11 @@ export const SkillTestDifficultyModal = (props: Props) => {
             {conditionOutcomes.map(outcome =>
                 <div key={outcome.id} className="skill-test-difficulty-modal__condition-outcome">
                     <div>{outcome.addingOrRemoving + " : " + outcome.conditionName + " (" + outcome.id + ")"}</div>
-                    <div><Button onClick={() => deleteConditionOutcome(outcome.id)} buttonTheme={ButtonTheme.Delete}><TrashIcon /></Button></div>
+                    <div>
+                        <Button onClick={() => deleteConditionOutcome(outcome.id)} buttonTheme={ButtonTheme.Delete}>
+                            <Icon iconType={IconType.TRASH} />
+                        </Button>
+                    </div>
                 </div>
             )}
         </div>

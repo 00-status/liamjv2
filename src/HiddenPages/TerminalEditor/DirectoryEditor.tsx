@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 
 import './directory-editor.css';
 import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
-import { PlusIcon } from "../../SharedComponents/Icons/PlusIcon";
 import { TextInput } from "../../SharedComponents/TextInput/TextInput";
 import { Directory } from "../../Terminal/hooks/directories/useDirectories";
 import { Card } from "../../SharedComponents/Card/Card";
@@ -10,8 +9,8 @@ import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageCo
 import { File, useFiles } from "../../Terminal/hooks/files/useFiles";
 import { Loader } from "../../SharedComponents/Loader/Loader";
 import { FileEditorModal } from "./FileEditorModal";
-import { TrashIcon } from "../../SharedComponents/Icons/TrashIcon";
-import { PencilIcon } from "../../SharedComponents/Icons/PencilIcon";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 type Props = {
     directory: Directory;
@@ -126,7 +125,7 @@ export const DirectoryEditor = (props: Props) => {
                         onChange={value => setCurrentFileName(value || "")}
                     />
                     <Button onClick={onCreateFile}>
-                        <PlusIcon />
+                        <Icon iconType={IconType.PLUS} />
                     </Button>
                 </div>
                 {isLoadingFiles ? <Loader /> : files.map(file => <div
@@ -135,12 +134,12 @@ export const DirectoryEditor = (props: Props) => {
                 >
                     {file.name}
                     <div className="directory-editor__file-item-buttons">
-                        <Button onClick={() => setSelectedFile(file)}><PencilIcon /></Button>
+                        <Button onClick={() => setSelectedFile(file)}><Icon iconType={IconType.PENCIL} /></Button>
                         <Button
                             buttonTheme={ButtonTheme.Delete}
                             onClick={() => deleteFile(file.directoryId, file.id)}
                         >
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </div>)}

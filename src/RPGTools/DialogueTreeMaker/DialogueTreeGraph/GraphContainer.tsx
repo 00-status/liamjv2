@@ -5,6 +5,7 @@ import { CustomNodeSquareProgram } from "./CustomNodeSquareProgram";
 import { ReactNode } from "react";
 
 const sigmaSettings = {
+    allowInvalidContainer: true,
     nodeProgramClasses: { square: CustomNodeSquareProgram },
     defaultEdgeType: 'arrow',
     defaultDrawNodeHover: defaultCircleDrawHover

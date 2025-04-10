@@ -7,7 +7,8 @@ import { Choice, ConditionOutcome } from "../../domain/types";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { CheckboxInput } from "../../../../SharedComponents/CheckboxInput/CheckboxInput";
 import { Dropdown } from "../../../../SharedComponents/Dropdown/Dropdown";
-import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
+import { Icon } from "../../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 const conditionOutcomeOptions = [
     { label: "Adding", value: "adding"},
@@ -183,7 +184,7 @@ export const ChoiceModal = (props: Props) => {
                     </div>
                     <div className="choice-modal__condition-outcome-actions">
                         <Button buttonTheme={ButtonTheme.Delete} onClick={() => deleteOutcome(outcome.id)}>
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </Fragment>)}

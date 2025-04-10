@@ -1,14 +1,8 @@
-
-import { ReactElement } from 'react';
-
 import './die.css';
-import { Dice4 } from '../../SharedComponents/Icons/Dice4';
 import { rollDie } from './util';
-import { Dice6 } from '../../SharedComponents/Icons/Dice6';
-import { Dice8 } from '../../SharedComponents/Icons/Dice8';
-import { Dice10 } from '../../SharedComponents/Icons/Dice10';
-import { Dice12 } from '../../SharedComponents/Icons/Dice12';
-import { Dice20 } from '../../SharedComponents/Icons/Dice20';
+import { Icon } from '../../SharedComponents/Icon/Icon';
+import { IconSize } from '../../SharedComponents/Icon/domain';
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 type Props = {
     diceType: number;
@@ -22,23 +16,25 @@ export const Die = (props: Props) => {
         props.callback(result, '1d' + props.diceType, ['1d' + props.diceType + '=' + result]);
     };
 
-    return <button className='die' onClick={generateNumber}>{getDiceComponent(props.diceType)}</button>;
+    return <button className='die' onClick={generateNumber}>
+        <Icon iconType={getDieType(props.diceType)} iconSize={IconSize.RESPONSIVE} />
+    </button>;
 };
 
-const getDiceComponent = (diceType: number): ReactElement => {
+const getDieType = (diceType: number): IconType => {
     switch (diceType) {
         case 4:
-            return <Dice4 className='die--icon' />
+            return IconType.DICE4;
         default:
         case 6:
-            return <Dice6 className='die--icon' />
+            return IconType.DICE6;
         case 8:
-            return <Dice8 className='die--icon' />
+            return IconType.DICE8;
         case 10:
-            return <Dice10 className='die--icon' />
+            return IconType.DICE10;
         case 12:
-            return <Dice12 className='die--icon' />
+            return IconType.DICE12;
         case 20:
-            return <Dice20 className='die--icon' />
+            return IconType.DICE20;
     }
 };

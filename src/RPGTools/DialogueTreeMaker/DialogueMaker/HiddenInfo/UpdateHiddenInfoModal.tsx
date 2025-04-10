@@ -4,9 +4,10 @@ import './update-hidden-info-modal.css';
 import { HiddenInfo, HiddenInfoCondition } from "../../domain/types";
 import { Modal } from "../../../../SharedComponents/Modal/Modal";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
-import { TrashIcon } from "../../../../SharedComponents/Icons/TrashIcon";
 import { TextInput } from "../../../../SharedComponents/TextInput/TextInput";
 import { DescriptionCard } from "../../../../SharedComponents/DescriptionCard/DescriptionCard";
+import { Icon } from "../../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 type Props = {
     hiddenInfoToEdit: HiddenInfo | null;
@@ -110,7 +111,7 @@ export const UpdateHiddenInfoModal = (props: Props) => {
                     </div>
                     <div className="hidden-info-item__segment--actions">
                         <Button onClick={() => removeCondition(condition.id)} buttonTheme={ButtonTheme.Delete}>
-                            <TrashIcon />
+                            <Icon iconType={IconType.TRASH} />
                         </Button>
                     </div>
                 </div>;
