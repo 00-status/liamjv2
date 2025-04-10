@@ -1,17 +1,19 @@
 const path = require("path");
 const webpack = require("webpack");
 
-module.exports = (env) => {
-  const buildPath = env.buildForProd
-    ? path.resolve(__dirname, "../server_php/public/")
-    : path.resolve(__dirname, "dist/");
-
-    
+module.exports = (env) => {    
   return {
     entry: "./src/index.tsx",
     output: {
-      path: buildPath,
-      filename: "bundle.js"
+      path: path.resolve(__dirname, "../server_php/public/"),
+      filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[contenthash].js',
+      clean: true
+    },
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+      }
     },
     mode: "development",
     module: {
@@ -57,3 +59,4 @@ module.exports = (env) => {
     resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] }
   };
 }
+
