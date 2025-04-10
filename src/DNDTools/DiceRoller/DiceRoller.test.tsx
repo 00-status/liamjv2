@@ -3,7 +3,7 @@ import { Children } from "react";
 import userEvent from "@testing-library/user-event";
 import * as GTAG from "ga-gtag";
 
-import { DiceRoller } from "./DiceRoller";
+import DiceRoller from "./DiceRoller";
 
 jest.mock('../../SharedComponents/Page/Page', () => {
     return {

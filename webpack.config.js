@@ -1,11 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {    
   return {
     entry: "./src/index.tsx",
     output: {
       path: path.resolve(__dirname, "../server_php/public/"),
+      publicPath: '/public/',
       filename: '[name].[contenthash].js',
       chunkFilename: '[name].[contenthash].js',
       clean: true
@@ -15,6 +17,12 @@ module.exports = (env) => {
         chunks: "all",
       }
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        inject: 'body',
+      }),
+    ],
     mode: "development",
     module: {
       rules: [
