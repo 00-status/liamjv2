@@ -10,7 +10,7 @@ import { Directory, useDirectories } from "../../Terminal/hooks/directories/useD
 import { Loader } from "../../SharedComponents/Loader/Loader";
 import { DirectoryEditor } from "./DirectoryEditor";
 
-export const TerminalEditorPage = () => {
+const TerminalEditorPage = () => {
     const [newServerName, setNewServerName] = useState<string>("");
     const [selectedServerId, setSelectedServerId] = useState<number|null>(null);
 
@@ -119,3 +119,5 @@ export const TerminalEditorPage = () => {
         </div>
     </Page>;
 };
+
+export default TerminalEditorPage;

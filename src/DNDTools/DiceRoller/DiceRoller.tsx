@@ -8,7 +8,7 @@ import { CustomDiceRoller } from "./CustomDiceRoller";
 import { dndRoutes } from "../domain";
 import { Anchor } from "../../SharedComponents/Link/Anchor";
 
-export const DiceRoller = (): ReactElement => {
+const DiceRoller = (): ReactElement => {
     const [animationKey, setAnimationKey] = useState<number>(0);
 
     const [generatedNumber, setGeneratedNumber] = useState<number|null>(null);
@@ -83,3 +83,5 @@ const dice: Array<number> = [
     12,
     20
 ];
+
+export default DiceRoller;

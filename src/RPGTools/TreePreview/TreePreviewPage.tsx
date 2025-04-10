@@ -10,7 +10,7 @@ import { ConditionOutcome } from "../DialogueTreeMaker/domain/types";
 import { HistoryItem } from "./HistoryItem";
 import { Condition, DialogueHistory, PreviewChoice } from "./domain/types";
 
-export const TreePreviewPage = () => {
+const TreePreviewPage = () => {
     const {
         dialogues,
         skillTests
@@ -105,3 +105,5 @@ export const TreePreviewPage = () => {
         </div>
     </Page>;
 };
+
+export default TreePreviewPage;

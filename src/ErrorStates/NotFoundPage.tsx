@@ -2,7 +2,7 @@
 import './not-found-page.css';
 import { Page } from "../SharedComponents/Page/Page";
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
     const routes = [
         { label: 'Landing', route: '/', isHomeLink: true }
     ];
@@ -12,3 +12,5 @@ export const NotFoundPage = () => {
         </div>
     </Page>;
 };
+
+export default NotFoundPage;

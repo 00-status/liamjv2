@@ -1,20 +1,22 @@
+import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
 import "@react-sigma/core/lib/style.css";
 
-import { AboutMe } from './AboutMe/AboutMe';
-import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';
-import { DndShop } from './DNDTools/DnDShop/DnDShop';
-import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
-import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
-import { NotFoundPage } from './ErrorStates/NotFoundPage';
-import { TerminalPage } from './Terminal/TerminalPage';
-import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
-import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
-import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
-import { TreePreviewPage } from './RPGTools/TreePreview/TreePreviewPage';
 import { RouterErrorBoundary } from './ErrorStates/ErrorBoundary';
+
+const AboutMe = lazy(() => import('./AboutMe/AboutMe'));
+const DiceRoller = lazy(() => import('./DNDTools/DiceRoller/DiceRoller'));
+const DndShop = lazy(() => import('./DNDTools/DnDShop/DnDShop'));
+const DialogueTreeMaker = lazy(() => import('./RPGTools/DialogueTreeMaker/DialogueTreeMaker'));
+const CharacterMaker = lazy(() => import('./RPGTools/CharacterMaker/CharacterMaker'));
+const NotFoundPage = lazy(() => import('./ErrorStates/NotFoundPage'));
+const TerminalPage = lazy(() => import('./Terminal/TerminalPage'));
+const WeaponMaker = lazy(() => import('./DNDTools/WeaponMaker/WeaponMaker'));
+const WeaponEffectList = lazy(() => import('./HiddenPages/WeaponEffectEditor/WeaponEffectList'));
+const TerminalEditorPage = lazy(() => import('./HiddenPages/TerminalEditor/TerminalEditorPage'));
+const TreePreviewPage = lazy(() => import('./RPGTools/TreePreview/TreePreviewPage'));
 
 initDataLayer();
 gtag('consent', 'default', {

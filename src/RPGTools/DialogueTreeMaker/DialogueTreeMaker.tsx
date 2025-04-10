@@ -18,7 +18,7 @@ import { GraphContainer } from "./DialogueTreeGraph/GraphContainer";
 import { Icon } from "../../SharedComponents/Icon/Icon";
 import { IconType } from '../../SharedComponents/Icon/domain';
 
-export const DialogueTreeMaker = (): ReactElement => {
+const DialogueTreeMaker = (): ReactElement => {
     const {
         dialogueTreeID,
         dialogueTreeName,
@@ -187,3 +187,5 @@ export const DialogueTreeMaker = (): ReactElement => {
         </div>
     </Page>;
 };
+
+export default DialogueTreeMaker;
