@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+
 import './weapon-effect-list.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useFetchWeaponEffect } from "./useFetchWeaponEffect";
 import { WeaponEffect, WeaponEffectForm } from "../WeaponEffectEditor/WeaponEffectForm";
-import { useEffect, useState } from "react";
 
-export const WeaponEffectList = () => {
+const WeaponEffectList = () => {
     const { weaponEffects, fetchWeaponEffects} = useFetchWeaponEffect();
 
     const [currentWeaponEffect, setCurrentWeaponEffect] = useState<WeaponEffect|null>(null);
@@ -37,3 +38,5 @@ export const WeaponEffectList = () => {
         </div>
     </Page>
 };
+
+export default WeaponEffectList;

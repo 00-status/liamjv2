@@ -12,7 +12,7 @@ import { Loader } from '../../SharedComponents/Loader/Loader';
 import { Icon } from '../../SharedComponents/Icon/Icon';
 import { IconType } from '../../SharedComponents/Icon/domain';
 
-export const WeaponMaker = () => {
+const WeaponMaker = () => {
     const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");
 
     const {weapon, generateWeapon, isLoading} = useGenerateWeapon();
@@ -57,3 +57,5 @@ export const WeaponMaker = () => {
         </div>
     </Page>;
 };
+
+export default WeaponMaker;

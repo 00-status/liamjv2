@@ -13,7 +13,7 @@ import { IconTheme } from '../SharedComponents/Icon/domain';
 import { IconType } from '../SharedComponents/Icon/domain';
 
 
-export const TerminalPage = () => {
+const TerminalPage = () => {
     const navigate = useNavigate();
 
     document.title = "Terminal";
@@ -82,3 +82,5 @@ const changeKey = (array: Array<number|string>, setArray: (newArray: Array<numbe
 
     setArray(arrayCopy);
 };
+
+export default TerminalPage;

@@ -15,7 +15,7 @@ import { dndRoutes } from "../domain";
 
 export type CartSlot = { droppableID: string, item: null | Item };
 
-export const DndShop = () => {
+const DndShop = () => {
     const [playerCurrency, setPlayerCurrency] = useState<Currency>({ gold: 0, silver: 0, copper: 0 });
     const [cartSlots, setCartSlots] = useState<CartSlot[]>(generateEmptyCartSlots(0, 3));
     const [currentItem, setCurrentItem] = useState<{ name: string, cost: number, currency: string } | null>(null);
@@ -89,3 +89,5 @@ export const DndShop = () => {
         </div>
     </Page>;
 };
+
+export default DndShop;

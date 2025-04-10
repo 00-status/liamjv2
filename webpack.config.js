@@ -1,19 +1,39 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = (env) => {
-  const buildPath = env.buildForProd
-    ? path.resolve(__dirname, "../server_php/public/")
-    : path.resolve(__dirname, "dist/");
+  const shouldOpenAnalyzer = env.analyze;
 
-    
   return {
     entry: "./src/index.tsx",
     output: {
-      path: buildPath,
-      filename: "bundle.js"
+      path: path.resolve(__dirname, "../server_php/public/"),
+      publicPath: '/public/',
+      filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[contenthash].js',
+      clean: true
     },
-    mode: "development",
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+        cacheGroups: {
+          sharedComponents: {
+            test: /[\\/]src[\\/]SharedComponents[\\/]/, // Target the sharedComponents folder
+            name: 'shared-components', // Name of the output bundle
+            chunks: 'all', // Include both synchronous and asynchronous chunks
+          },
+        },
+      }
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        inject: 'body',
+      }),
+      ...(shouldOpenAnalyzer ? [new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: true})] : []),
+    ],
     module: {
       rules: [
         {
@@ -57,3 +77,4 @@ module.exports = (env) => {
     resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] }
   };
 }
+

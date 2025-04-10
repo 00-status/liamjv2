@@ -6,7 +6,7 @@ import { Skill, skills } from "./domain";
 import { SkillCard } from "./SkillCard";
 import { Anchor } from "../SharedComponents/Link/Anchor";
 
-export const AboutMe = (): ReactElement => {
+const AboutMe = (): ReactElement => {
     const routes = [
         { label: 'Landing', route: '/', isHomeLink: true },
         { label: 'D&D Tools', route: '/dnd_tools/dice_roller' },
@@ -33,3 +33,5 @@ export const AboutMe = (): ReactElement => {
         </div>
     </Page>;
 };
+
+export default AboutMe;

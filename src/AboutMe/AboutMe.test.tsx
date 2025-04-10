@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { Children } from "react";
 
-import { AboutMe } from "./AboutMe";
+import AboutMe from "./AboutMe";
 
 jest.mock('../SharedComponents/Page/Page', () => {
     return {

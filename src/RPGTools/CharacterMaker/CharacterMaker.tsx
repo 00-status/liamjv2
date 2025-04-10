@@ -5,7 +5,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { useCharacters } from "./useCharacters";
 import { RPGRoutes } from '../domain';
 
-export const CharacterMaker = () => {
+const CharacterMaker = () => {
     const { characters, setCharacters } = useCharacters();
 
     return <Page title="RPG Tools" routes={RPGRoutes}>
@@ -17,3 +17,5 @@ export const CharacterMaker = () => {
         </div>
     </Page>;
 };
+
+export default CharacterMaker;

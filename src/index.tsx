@@ -1,20 +1,21 @@
+import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
 import "@react-sigma/core/lib/style.css";
 
-import { AboutMe } from './AboutMe/AboutMe';
-import { DiceRoller } from './DNDTools/DiceRoller/DiceRoller';
-import { DndShop } from './DNDTools/DnDShop/DnDShop';
-import { DialogueTreeMaker } from './RPGTools/DialogueTreeMaker/DialogueTreeMaker';
-import { CharacterMaker } from './RPGTools/CharacterMaker/CharacterMaker';
-import { NotFoundPage } from './ErrorStates/NotFoundPage';
-import { TerminalPage } from './Terminal/TerminalPage';
-import { WeaponMaker } from './DNDTools/WeaponMaker/WeaponMaker';
-import { WeaponEffectList } from './HiddenPages/WeaponEffectEditor/WeaponEffectList';
-import { TerminalEditorPage } from './HiddenPages/TerminalEditor/TerminalEditorPage';
-import { TreePreviewPage } from './RPGTools/TreePreview/TreePreviewPage';
-import { RouterErrorBoundary } from './ErrorStates/ErrorBoundary';
+const AboutMe = lazy(() => import(/* webpackChunkName: "about-me" */ './AboutMe/AboutMe'));
+const DiceRoller = lazy(() => import(/* webpackChunkName: "dice-roller" */ './DNDTools/DiceRoller/DiceRoller'));
+const DndShop = lazy(() => import(/* webpackChunkName: "dnd-shop" */ './DNDTools/DnDShop/DnDShop'));
+const DialogueTreeMaker = lazy(() => import(/* webpackChunkName: "dialogue-tree-maker" */ './RPGTools/DialogueTreeMaker/DialogueTreeMaker'));
+const CharacterMaker = lazy(() => import(/* webpackChunkName: "character-maker" */ './RPGTools/CharacterMaker/CharacterMaker'));
+const NotFoundPage = lazy(() => import(/* webpackChunkName: "not-found-page" */ './ErrorStates/NotFoundPage'));
+const TerminalPage = lazy(() => import(/* webpackChunkName: "terminal-page" */ './Terminal/TerminalPage'));
+const WeaponMaker = lazy(() => import(/* webpackChunkName: "weapon-maker" */ './DNDTools/WeaponMaker/WeaponMaker'));
+const WeaponEffectList = lazy(() => import(/* webpackChunkName: "weapon-effect-list" */ './HiddenPages/WeaponEffectEditor/WeaponEffectList'));
+const TerminalEditorPage = lazy(() => import(/* webpackChunkName: "terminal-editor-page" */ './HiddenPages/TerminalEditor/TerminalEditorPage'));
+const TreePreviewPage = lazy(() => import(/* webpackChunkName: "tree-preview-page" */ './RPGTools/TreePreview/TreePreviewPage'));
+const RouterErrorBoundary = lazy(() => import(/* webpackChunkName: "about-me" */ './ErrorStates/ErrorBoundary'));
 
 initDataLayer();
 gtag('consent', 'default', {
