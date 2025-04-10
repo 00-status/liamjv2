@@ -9,7 +9,8 @@ import { ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageCo
 import { File, useFiles } from "../../Terminal/hooks/files/useFiles";
 import { Loader } from "../../SharedComponents/Loader/Loader";
 import { FileEditorModal } from "./FileEditorModal";
-import { Icon, IconType } from "../../SharedComponents/Icon/Icon";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 type Props = {
     directory: Directory;

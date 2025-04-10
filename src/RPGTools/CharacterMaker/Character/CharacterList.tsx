@@ -5,7 +5,8 @@ import { TextInput } from "../../../SharedComponents/TextInput/TextInput";
 import { Character } from "../domain/types";
 import { Button, ButtonTheme } from '../../../SharedComponents/Button/Button';
 import { ColorInput } from '../../../SharedComponents/ColorInput/ColorInput';
-import { Icon, IconType } from '../../../SharedComponents/Icon/Icon';
+import { Icon } from '../../../SharedComponents/Icon/Icon';
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     characters: Array<Character>;

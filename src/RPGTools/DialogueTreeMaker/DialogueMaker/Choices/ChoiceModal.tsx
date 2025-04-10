@@ -7,7 +7,8 @@ import { Choice, ConditionOutcome } from "../../domain/types";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { CheckboxInput } from "../../../../SharedComponents/CheckboxInput/CheckboxInput";
 import { Dropdown } from "../../../../SharedComponents/Dropdown/Dropdown";
-import { Icon, IconType } from "../../../../SharedComponents/Icon/Icon";
+import { Icon } from "../../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 const conditionOutcomeOptions = [
     { label: "Adding", value: "adding"},

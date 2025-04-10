@@ -1,7 +1,8 @@
 import { useDraggable } from "@dnd-kit/core";
 
 import './inventory-item.css';
-import { Icon, IconType } from '../../../SharedComponents/Icon/Icon';
+import { Icon } from '../../../SharedComponents/Icon/Icon';
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     name: string,

@@ -5,7 +5,8 @@ import { Choice } from "../../domain/types";
 import { Button, ButtonTheme } from "../../../../SharedComponents/Button/Button";
 import { Card } from "../../../../SharedComponents/Card/Card";
 import { ChoiceModal } from './ChoiceModal';
-import { Icon, IconType } from '../../../../SharedComponents/Icon/Icon';
+import { Icon } from '../../../../SharedComponents/Icon/Icon';
+import { IconType } from '../../../../SharedComponents/Icon/domain';
 
 type Props = {
     choices: Array<Choice>;

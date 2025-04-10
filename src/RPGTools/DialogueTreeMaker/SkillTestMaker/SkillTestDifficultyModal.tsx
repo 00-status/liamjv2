@@ -7,7 +7,8 @@ import { ConditionOutcome, SkillTestDifficulty } from "../domain/types";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
 import { Dropdown } from "../../../SharedComponents/Dropdown/Dropdown";
 import { DescriptionCard } from "../../../SharedComponents/DescriptionCard/DescriptionCard";
-import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
+import { Icon } from "../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     isOpen: boolean;

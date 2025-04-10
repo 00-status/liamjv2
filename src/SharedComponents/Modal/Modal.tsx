@@ -3,7 +3,8 @@ import ReactModal from "react-modal";
 
 import './modal.css';
 import { Button, ButtonTheme } from "../Button/Button";
-import { Icon, IconType } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
+import { IconType } from '../Icon/domain';
 
 type Props = {
     title: string;

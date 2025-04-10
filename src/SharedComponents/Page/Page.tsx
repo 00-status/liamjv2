@@ -7,7 +7,9 @@ import { ImageButton } from "../ImageButton/ImageButton";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
-import { Icon, IconTheme, IconType } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
+import { IconTheme } from '../Icon/domain';
+import { IconType } from '../Icon/domain';
 
 type Link = {
     label: string;

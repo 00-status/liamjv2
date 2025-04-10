@@ -4,7 +4,8 @@ import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
 import { Card } from "../../SharedComponents/Card/Card";
 import { Weapon, WeaponDamage } from "./domain/types";
 import { ToastMessage, ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
-import { Icon, IconType } from "../../SharedComponents/Icon/Icon";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 type Props = {
     weapon: Weapon;

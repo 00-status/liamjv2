@@ -21,15 +21,7 @@ import { TauntIcon } from './Icons/TauntIcon';
 import { TrashIcon } from './Icons/TrashIcon';
 import { UploadIcon } from './Icons/UploadFile';
 import { VeryDissatisfiedIcon } from './Icons/VeryDissatisfiedIcon';
-
-export enum IconTheme { LIGHT, DARK, GREEN };
-export enum IconSize {
-    SMALL = "24px",
-    MEDIUM = "32px",
-    LARGE = "40px",
-    EXTRA_LARGE = "80px",
-    RESPONSIVE = "70%"
-}
+import { IconSize, IconTheme, IconType } from './domain';
 
 type Props = {
     iconType: IconType;
@@ -52,7 +44,7 @@ export const Icon = (props: Props) => {
     </svg>;
 };
 
-function getTheme(theme?: IconTheme): string {
+const getTheme = (theme?: IconTheme): string => {
     switch (theme) {
         case IconTheme.DARK:
             return"icon-dark";
@@ -62,28 +54,6 @@ function getTheme(theme?: IconTheme): string {
         default:
             return "icon-light";
     }
-}
-
-export enum IconType {
-    CLOSE,
-    COPY,
-    DICE4,
-    DICE6,
-    DICE8,
-    DICE10,
-    DICE12,
-    DICE20,
-    DOANLOAD,
-    DRAG,
-    EDIT_FILE,
-    GEARS,
-    HOME,
-    PENCIL,
-    PLUS,
-    TAUNT,
-    TRASH,
-    UPLOAD_FILE,
-    VERY_DISSATISFIED
 };
 
 const iconComponents: Record<IconType, ReactNode> = {

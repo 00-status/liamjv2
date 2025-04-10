@@ -9,7 +9,8 @@ import { useGenerateWeapon } from "./useGenerateWeapon";
 import { WeaponCard } from './WeaponCard';
 import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 import { Loader } from '../../SharedComponents/Loader/Loader';
-import { Icon, IconType } from '../../SharedComponents/Icon/Icon';
+import { Icon } from '../../SharedComponents/Icon/Icon';
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 export const WeaponMaker = () => {
     const [selectedRarity, setSelectedRarity] = useState<string>("Uncommon");

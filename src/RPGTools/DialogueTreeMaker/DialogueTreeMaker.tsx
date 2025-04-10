@@ -15,7 +15,8 @@ import { RPGRoutes } from "../domain";
 import { DialogueMakerContainer } from "./DialogueMaker/DialogueMakerContainer";
 import { SkillTestMakerContainer } from "./SkillTestMaker/SkillTestMakerContainer";
 import { GraphContainer } from "./DialogueTreeGraph/GraphContainer";
-import { Icon, IconType } from "../../SharedComponents/Icon/Icon";
+import { Icon } from "../../SharedComponents/Icon/Icon";
+import { IconType } from '../../SharedComponents/Icon/domain';
 
 export const DialogueTreeMaker = (): ReactElement => {
     const {

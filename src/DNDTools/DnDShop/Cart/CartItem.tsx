@@ -3,7 +3,8 @@ import { useDroppable } from "@dnd-kit/core";
 import './cart-item.css';
 import { Item } from "../domain/types";
 import { Button, ButtonTheme } from "../../../SharedComponents/Button/Button";
-import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
+import { Icon } from "../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     id: string;

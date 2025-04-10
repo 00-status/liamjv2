@@ -8,7 +8,9 @@ import { CodeBlockGenerator } from './CodeBlockGenerator';
 import { useServers } from './hooks/server/useServers';
 import { useDirectories } from './hooks/directories/useDirectories';
 import { TerminalLoader } from './TerminalLoader';
-import { Icon, IconTheme, IconType } from '../SharedComponents/Icon/Icon';
+import { Icon } from '../SharedComponents/Icon/Icon';
+import { IconTheme } from '../SharedComponents/Icon/domain';
+import { IconType } from '../SharedComponents/Icon/domain';
 
 
 export const TerminalPage = () => {

@@ -10,7 +10,8 @@ import { useCharacters } from "../../CharacterMaker";
 import { HiddenInfoItem } from "./HiddenInfo/HiddenInfoItem";
 import { UpdateHiddenInfoModal } from "./HiddenInfo/UpdateHiddenInfoModal";
 import { ChoicesTable } from "./Choices/ChoicesTable";
-import { Icon, IconType } from "../../../SharedComponents/Icon/Icon";
+import { Icon } from "../../../SharedComponents/Icon/Icon";
+import { IconType } from '../../../SharedComponents/Icon/domain';
 
 type Props = {
     dialogue: Dialogue;
