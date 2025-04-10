@@ -4,8 +4,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
 import "@react-sigma/core/lib/style.css";
 
-import { RouterErrorBoundary } from './ErrorStates/ErrorBoundary';
-
 const AboutMe = lazy(() => import(/* webpackChunkName: "about-me" */ './AboutMe/AboutMe'));
 const DiceRoller = lazy(() => import(/* webpackChunkName: "dice-roller" */ './DNDTools/DiceRoller/DiceRoller'));
 const DndShop = lazy(() => import(/* webpackChunkName: "dnd-shop" */ './DNDTools/DnDShop/DnDShop'));
@@ -17,6 +15,7 @@ const WeaponMaker = lazy(() => import(/* webpackChunkName: "weapon-maker" */ './
 const WeaponEffectList = lazy(() => import(/* webpackChunkName: "weapon-effect-list" */ './HiddenPages/WeaponEffectEditor/WeaponEffectList'));
 const TerminalEditorPage = lazy(() => import(/* webpackChunkName: "terminal-editor-page" */ './HiddenPages/TerminalEditor/TerminalEditorPage'));
 const TreePreviewPage = lazy(() => import(/* webpackChunkName: "tree-preview-page" */ './RPGTools/TreePreview/TreePreviewPage'));
+const RouterErrorBoundary = lazy(() => import(/* webpackChunkName: "about-me" */ './ErrorStates/ErrorBoundary'));
 
 initDataLayer();
 gtag('consent', 'default', {

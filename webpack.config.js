@@ -1,8 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-module.exports = (env) => {    
+module.exports = (env) => {
+  const shouldOpenAnalyzer = env.analyze;
+
   return {
     entry: "./src/index.tsx",
     output: {
@@ -22,8 +25,8 @@ module.exports = (env) => {
         template: './src/index.html',
         inject: 'body',
       }),
+      ...(shouldOpenAnalyzer ? [new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: true})] : []),
     ],
-    mode: "development",
     module: {
       rules: [
         {
