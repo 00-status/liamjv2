@@ -2,41 +2,27 @@
 import { ReactNode } from 'react';
 
 import './icon.css';
-import { CloseIcon } from '../Icons/CloseIcon';
-import { CopyIcon } from '../Icons/CopyIcon';
-import { Dice4 } from '../Icons/Dice4';
-import { Dice6 } from '../Icons/Dice6';
-import { Dice8 } from '../Icons/Dice8';
-import { Dice10 } from '../Icons/Dice10';
-import { Dice12 } from '../Icons/Dice12';
-import { Dice20 } from '../Icons/Dice20';
-import { DownloadIcon } from '../Icons/DownloadIcon';
-import { DragIcon } from '../Icons/DragIcon';
-import { EditFileIcon } from '../Icons/EditFileIcon';
-import { GearsIcon } from '../Icons/GearsIcon';
-import { HomeIcon } from '../Icons/HomeIcon';
-import { PencilIcon } from '../Icons/PencilIcon';
-import { PlusIcon } from '../Icons/PlusIcon';
-import { TauntIcon } from '../Icons/TauntIcon';
-import { TrashIcon } from '../Icons/TrashIcon';
-import { UploadIcon } from '../Icons/UploadFile';
-import { VeryDissatisfiedIcon } from '../Icons/VeryDissatisfiedIcon';
+import { CloseIcon } from './Icons/CloseIcon';
+import { CopyIcon } from './Icons/CopyIcon';
+import { Dice4 } from './Icons/Dice4';
+import { Dice6 } from './Icons/Dice6';
+import { Dice8 } from './Icons/Dice8';
+import { Dice10 } from './Icons/Dice10';
+import { Dice12 } from './Icons/Dice12';
+import { Dice20 } from './Icons/Dice20';
+import { DownloadIcon } from './Icons/DownloadIcon';
+import { DragIcon } from './Icons/DragIcon';
+import { EditFileIcon } from './Icons/EditFileIcon';
+import { GearsIcon } from './Icons/GearsIcon';
+import { HomeIcon } from './Icons/HomeIcon';
+import { PencilIcon } from './Icons/PencilIcon';
+import { PlusIcon } from './Icons/PlusIcon';
+import { TauntIcon } from './Icons/TauntIcon';
+import { TrashIcon } from './Icons/TrashIcon';
+import { UploadIcon } from './Icons/UploadFile';
+import { VeryDissatisfiedIcon } from './Icons/VeryDissatisfiedIcon';
 
-// size: {small, medium, large, extra-large}
-// iconTheme: { dark, light, neon }
-// iconType: { close, copy, dice4, etc }
-
-// TODO:
-//      Update die.tsx to account for its super-large icons
-//      Update the Taunt to account for its large icon.
-//      Update icon to have color themes
-
-export enum IconTheme {
-    LIGHT,
-    DARK,
-    GREEN
-};
-
+export enum IconTheme { LIGHT, DARK, GREEN };
 export enum IconSize {
     SMALL = "24px",
     MEDIUM = "32px",
@@ -57,7 +43,7 @@ export const Icon = (props: Props) => {
     const styles = {
         width: (iconSize ?? "24px"),
         height: (iconSize ?? "24px")
-    }
+    };
 
     const className = "icon " + getTheme(iconTheme);
 
@@ -121,13 +107,3 @@ const iconComponents: Record<IconType, ReactNode> = {
     [IconType.UPLOAD_FILE]: <UploadIcon />,
     [IconType.VERY_DISSATISFIED]: <VeryDissatisfiedIcon />,
 };
-
-// type Props = {
-//     theme?: HomeThemes;
-// };
-
-// export enum HomeThemes {
-//     DARK = "dark",
-//     LIGHT = "white",
-//     GREEN = "green"
-// };

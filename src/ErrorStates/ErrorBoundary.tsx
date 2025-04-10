@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import './route-error-boundary.css';
 import { Button } from "../SharedComponents/Button/Button";
-import { HomeIcon } from "../SharedComponents/Icons/HomeIcon";
+import { HomeIcon } from "../SharedComponents/Icon/Icons/HomeIcon";
 import { Icon, IconType } from "../SharedComponents/Icon/Icon";
 
 export const RouterErrorBoundary = () => {
