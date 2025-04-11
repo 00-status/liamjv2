@@ -20,9 +20,9 @@ module.exports = (env) => {
         chunks: "all",
         cacheGroups: {
           sharedComponents: {
-            test: /[\\/]src[\\/]SharedComponents[\\/]/, // Target the sharedComponents folder
-            name: 'shared-components', // Name of the output bundle
-            chunks: 'all', // Include both synchronous and asynchronous chunks
+            test: /[\\/]src[\\/]SharedComponents[\\/]/,
+            name: 'shared-components',
+            chunks: 'all',
           },
         },
       }
