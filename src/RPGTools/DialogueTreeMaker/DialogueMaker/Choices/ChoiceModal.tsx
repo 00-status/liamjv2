@@ -68,6 +68,7 @@ export const ChoiceModal = (props: Props) => {
         setConditionOutcomes([...conditionOutcomes].filter(outcome => outcome.id !== id));
     };
 
+    const isSubmitDisabled = !nextDialogueID || !shortDescription;
     const onSubmit = () => {
         if (!nextDialogueID || !shortDescription) {
             return;
@@ -91,7 +92,7 @@ export const ChoiceModal = (props: Props) => {
         onClose();
     };
 
-    const submitButton = <Button onClick={onSubmit}>Save</Button>
+    const submitButton = <Button disabled={isSubmitDisabled} onClick={onSubmit}>Save</Button>;
 
     return <Modal title="Choice" isOpen={isOpen} onClose={onClose} footer={submitButton}>
         <div className="choice-modal">
