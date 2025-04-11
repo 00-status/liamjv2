@@ -70,7 +70,8 @@ export const SkillTestDifficultyModal = (props: Props) => {
         setConditionOutcomes(conditionOutcomesCopy);
     };
 
-    // TODO: Ideally we would disable the submit button until the form is valid.
+    const isSubmitEnabled = threshold === null || threshold === undefined || conditionOutcomes.length < 1;
+
     const onSubmit = () => {
         if (threshold === null || threshold === undefined || conditionOutcomes.length < 1) {
             return;
@@ -89,7 +90,7 @@ export const SkillTestDifficultyModal = (props: Props) => {
         onClose();
     };
 
-    const submitButton = <Button onClick={onSubmit}>Save difficulty</Button>
+    const submitButton = <Button disabled={isSubmitEnabled} onClick={onSubmit}>Save difficulty</Button>;
 
     return <Modal isOpen={isOpen} title="Difficulty" onClose={onClose} footer={submitButton}>
         <DescriptionCard>
