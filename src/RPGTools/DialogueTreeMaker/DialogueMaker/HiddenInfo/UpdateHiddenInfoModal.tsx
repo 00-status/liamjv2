@@ -59,6 +59,7 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         setConditions(conditionsCopy);
     };
 
+    const isSubmitDisabled = conditions.length <= 0 || !description;
     const saveHiddenInfo = () => {
         if (conditions.length <= 0 || !description) {
             return;
@@ -78,7 +79,7 @@ export const UpdateHiddenInfoModal = (props: Props) => {
         title={'Add Hidden Info'}
         isOpen={isOpen}
         onClose={onClose}
-        footer={<Button onClick={saveHiddenInfo}>Save</Button>}
+        footer={<Button disabled={isSubmitDisabled} onClick={saveHiddenInfo}>Save</Button>}
     >
         <div className="add-hidden-info-modal">
             <DescriptionCard>
