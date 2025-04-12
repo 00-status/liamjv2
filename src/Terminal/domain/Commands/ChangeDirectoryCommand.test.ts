@@ -1,198 +1,139 @@
-import { Command, TerminalDirectory } from "../types";
+import { Directory } from "../../hooks/directories/useDirectories";
+import { TerminalState } from "../../Terminal";
 import { ChangeDirectoryHandler } from "./ChangeDirectoryHandler";
 
+
+const rootDirectory = {
+    id: 1,
+    serverId: 115,
+    name: 'root',
+    parentDirectory: null,
+    subDirectories: [2, 3, 4] as Array<number>,
+} as Directory;
+const documentsDirectory = {
+    id: 2,
+    serverId: 115,
+    name: 'documents',
+    parentDirectory: 1,
+    subDirectories: [] as Array<number>,
+} as Directory;
+const picturesDirectory = {
+    id: 3,
+    serverId: 115,
+    name: 'pictures',
+    parentDirectory: 1,
+    subDirectories: [4] as Array<number>,
+} as Directory;
+const photosDirectory = {
+    id: 4,
+    serverId: 115,
+    name: 'photos',
+    parentDirectory: 3,
+    subDirectories: [] as Array<number>,
+} as Directory;
+
+const terminalState: TerminalState = {
+        servers: [],
+        currentServer: { id: 115, name: "test_server_name"},
+        directories: [
+            rootDirectory,
+            documentsDirectory,
+            picturesDirectory,
+            photosDirectory
+        ],
+        currentDirectory: rootDirectory,
+        commandHistory: [],
+        outputs: [],
+};
+
 describe('ChangeDirectoryCommand', () => {
-    const setServerName = jest.fn();
-    const setDirectories = jest.fn();
-    const setCurrentDirectory = jest.fn();
+    const setTerminal = jest.fn();
 
     it('should enter a subdirectory', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ./documents',
-            workingDirectory: '/'
-        };
-
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setDirectories,
-            startingDirectory,
-            setCurrentDirectory,
-            []
+            'cd ./documents',
+            terminalState,
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/documents');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
     });
 
-    it('should enter a subdirectory from the root directory', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd /documents',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails/john');
+    it('should enter a subdirectory using an absolute path', () => {
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd /documents',
+            {...terminalState, currentDirectory: picturesDirectory },
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/documents');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
     });
 
     it('should enter multiple sub-directories', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ./emails/john',
-            workingDirectory: '/'
-        };
-
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory,
-            setCurrentDirectory,
-            []
+            'cd ./pictures/photos',
+            terminalState,
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/emails/john');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: photosDirectory});
     });
 
     it('should enter a parent directory', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ../',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd ../',
+            {...terminalState, currentDirectory: documentsDirectory},
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/emails');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith(terminalState);
     });
 
     it('should enter multiple parent directories', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ../../',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails/john');
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd ../../',
+            {...terminalState, currentDirectory: photosDirectory},
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith(terminalState);
     });
 
     it('should move up multiple parent directories and enter a child directory', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ../../documents',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd ../../documents',
+            {...terminalState, currentDirectory: photosDirectory},
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/documents');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
     });
 
     it('should enter a sub-directory, move up two directories, and then enter a sub-directory.', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd ./john/../../documents',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails')
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd ./photos/../../documents',
+            {...terminalState, currentDirectory: picturesDirectory},
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/documents');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
     });
 
     it('should enter the root directory.', () => {
-        const executedCommand: Command = {
-            id: 'test-1',
-            text: 'cd /',
-            workingDirectory: '/'
-        };
-
-        const startingDirectory = directories.get('/emails/john')
         ChangeDirectoryHandler.execute(
-            executedCommand,
-            [],
-            setServerName,
-            directories,
-            setCurrentDirectory,
-            startingDirectory as TerminalDirectory,
-            setCurrentDirectory,
-            []
+            'cd /',
+            {...terminalState, currentDirectory: picturesDirectory},
+            setTerminal
         );
 
-        const expectedDirectory = directories.get('/');
-        expect(setCurrentDirectory).toHaveBeenCalledTimes(1);
-        expect(setCurrentDirectory).toHaveBeenCalledWith(expectedDirectory);
+        expect(setTerminal).toHaveBeenCalledTimes(1);
+        expect(setTerminal).toHaveBeenCalledWith(terminalState);
     });
 });
