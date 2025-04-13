@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { gtag } from "ga-gtag";
 
 import "./app.css";
@@ -10,16 +9,11 @@ import { PageErrorBoundary } from "./PageErrorBoundary";
 import { Icon } from "../Icon/Icon";
 import { IconTheme } from '../Icon/domain';
 import { IconType } from '../Icon/domain';
-
-type Link = {
-    label: string;
-    route: string;
-    isHomeLink?: boolean;
-};
+import { PageLink, VerticalNav } from "./VerticalNav";
 
 type Props = {
     title: string;
-    routes: Array<Link>;
+    routes: Array<PageLink>;
     children: ReactNode;
     footer?: ReactElement;
 };
@@ -28,15 +22,6 @@ export const Page = (props: Props): ReactElement => {
     const { title, routes, children, footer } = props;
 
     const [messageList, setMessageList] = useState<Array<ToastMessage>>([]);
-
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const goToRoute = (newPath: string) => {
-        if (newPath !== location.pathname) {
-            navigate(newPath);
-        }
-    };
 
     useEffect(() => {
         const currentRoute = routes.find((route) => route.route === location.pathname);
@@ -65,18 +50,7 @@ export const Page = (props: Props): ReactElement => {
                         />
                     </div>
                 </div>
-                <nav className="nav-list" >
-                    {routes.map((route) => {
-                        const isCurrentRoute = location.pathname === route.route;
-
-                        const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
-
-                        return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                            {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
-                            {route.label}
-                        </a>;
-                    })}
-                </nav>
+                <VerticalNav routes={routes} />
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
