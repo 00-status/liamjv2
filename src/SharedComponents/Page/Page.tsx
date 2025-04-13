@@ -8,6 +8,8 @@ import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
 import { PageLink, VerticalNav } from "./VerticalNav";
 import { Button, ButtonTheme } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
+import { IconTheme, IconType } from "../Icon/domain";
 
 type Props = {
     title: string;
@@ -41,7 +43,7 @@ export const Page = (props: Props): ReactElement => {
                     buttonTheme={ButtonTheme.Subtle}
                     onClick={() => setIsNavOpen(!isNavOpen)}
                 >
-                    NAV
+                    <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
                 </Button>
             </div>
             <div className="page-title-container">

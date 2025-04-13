@@ -31,7 +31,7 @@ export const VerticalNav = (props: Props) => {
             {routes.map((route) => {
                 const isCurrentRoute = location.pathname === route.route;
 
-                const classNames = `vertical-nav__item' ${isCurrentRoute ? ' vertical-nav__item--current' : ''}`;
+                const classNames = "vertical-nav__item" + (isCurrentRoute ? " vertical-nav__item--current" : "");
 
                 return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
                     {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}

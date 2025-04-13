@@ -16,9 +16,10 @@
 }
 
 .vertical-nav__list {
+    display: flex;
+    flex-direction: column;
+
     list-style-type: none;
-    padding: 0;
-    margin: 0 0 20px 0;
 }
 
 .vertical-nav__item {
@@ -27,14 +28,16 @@
     justify-content: center;
     align-items: center;
 
-    width: 140px;
+    width: 100%;
     padding: 12px;
 
     color: #2a2b30;
-    border: 1px solid #2a2b30;
-    border-radius: 12px;
-    transition: all .1s ease-in-out;
+    border-bottom: 1px solid #2a2b30;
     cursor: pointer;
+}
+
+.vertical-nav__item:hover {
+    background-color: #f2f4f5;
 }
 
 .vertical-nav__item--current {
