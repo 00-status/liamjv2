@@ -16,6 +16,17 @@ type Props = {
     setIsOpen: (isOpen: boolean) => void;
 };
 
+// TODO:
+//      Add LJ logo to top of nav
+//      Consider adding full nav tree to the navbar
+//          // That is, consider doing an accordion type sitch for nav sub-items.
+//      Create terminal theme
+//      Ensure SigmaJS graph is behind vertical nav and overlay (div.react-sigma).
+//      Update page tests.
+//      Make the sidebar take up more of the screen width on mobile.
+//      Update the menu button to have less of a box shadow.
+//      Have the menu button follow the user when they scroll on mobile.
+
 export const VerticalNav = (props: Props) => {
     const { routes, isOpen, setIsOpen } = props;
 
@@ -23,8 +34,10 @@ export const VerticalNav = (props: Props) => {
     const location = useLocation();
 
     const goToRoute = (newPath: string) => {
+        setIsOpen(false);
+
         if (newPath !== location.pathname) {
-            navigate(newPath);
+            setTimeout(() => navigate(newPath), 200);
         }
     };
 
