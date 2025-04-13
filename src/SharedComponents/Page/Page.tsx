@@ -60,7 +60,7 @@ export const Page = (props: Props): ReactElement => {
                         />
                     </div>
                 </div>
-                <VerticalNav routes={routes} isOpen={isNavOpen} />
+                <VerticalNav routes={routes} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
