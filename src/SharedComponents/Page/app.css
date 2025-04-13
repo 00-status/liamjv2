@@ -77,6 +77,10 @@ input[type=number] {
     flex-direction: column;
 }
 
+.page__nav-button {
+    background-color: #FCFEFF;
+}
+
 .page-title-container {
     display: flex;
     flex-direction: column;

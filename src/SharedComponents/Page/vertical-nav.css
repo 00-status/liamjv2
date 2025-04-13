@@ -11,7 +11,7 @@
     transform: translateX(-100%);
 }
 
-.vertical-nav.open {
+.vertical-nav--open {
     transform: translateX(0);
 }
 

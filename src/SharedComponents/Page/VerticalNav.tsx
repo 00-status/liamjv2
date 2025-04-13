@@ -12,10 +12,11 @@ export type PageLink = {
 
 type Props = {
     routes: Array<PageLink>;
+    isOpen: boolean;
 };
 
 export const VerticalNav = (props: Props) => {
-    const { routes } = props;
+    const { routes, isOpen } = props;
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -25,7 +26,7 @@ export const VerticalNav = (props: Props) => {
             navigate(newPath);
         }
     };
-    return <div className="vertical-nav">
+    return <div className={"vertical-nav" + (isOpen ? " vertical-nav--open" : "")}>
         <nav className="vertical-nav__list">
             {routes.map((route) => {
                 const isCurrentRoute = location.pathname === route.route;

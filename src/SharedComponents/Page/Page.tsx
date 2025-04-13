@@ -7,6 +7,7 @@ import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext"
 import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
 import { PageLink, VerticalNav } from "./VerticalNav";
+import { Button, ButtonTheme } from "../Button/Button";
 
 type Props = {
     title: string;
@@ -17,6 +18,8 @@ type Props = {
 
 export const Page = (props: Props): ReactElement => {
     const { title, routes, children, footer } = props;
+
+    const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
     const [messageList, setMessageList] = useState<Array<ToastMessage>>([]);
 
@@ -33,6 +36,14 @@ export const Page = (props: Props): ReactElement => {
 
     return <ToastMessageContext value={{ messageList, setMessageList }}>
         <div className="page">
+            <div className="page__nav-button">
+                <Button
+                    buttonTheme={ButtonTheme.Subtle}
+                    onClick={() => setIsNavOpen(!isNavOpen)}
+                >
+                    NAV
+                </Button>
+            </div>
             <div className="page-title-container">
                 <div className="page-title">
                     {title}
@@ -47,7 +58,7 @@ export const Page = (props: Props): ReactElement => {
                         />
                     </div>
                 </div>
-                <VerticalNav routes={routes} />
+                <VerticalNav routes={routes} isOpen={isNavOpen} />
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
