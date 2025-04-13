@@ -22,6 +22,7 @@ import { TrashIcon } from './Icons/TrashIcon';
 import { UploadIcon } from './Icons/UploadFile';
 import { VeryDissatisfiedIcon } from './Icons/VeryDissatisfiedIcon';
 import { IconSize, IconTheme, IconType } from './domain';
+import { MenuIcon } from './Icons/MenuIcon';
 
 type Props = {
     iconType: IconType;
@@ -76,4 +77,5 @@ const iconComponents: Record<IconType, ReactNode> = {
     [IconType.TRASH]: <TrashIcon />,
     [IconType.UPLOAD_FILE]: <UploadIcon />,
     [IconType.VERY_DISSATISFIED]: <VeryDissatisfiedIcon />,
+    [IconType.MENU]: <MenuIcon />,
 };

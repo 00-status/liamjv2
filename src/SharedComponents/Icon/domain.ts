@@ -17,7 +17,8 @@ export enum IconType {
     TAUNT,
     TRASH,
     UPLOAD_FILE,
-    VERY_DISSATISFIED
+    VERY_DISSATISFIED,
+    MENU
 };
 
 export enum IconTheme { LIGHT, DARK, GREEN };
