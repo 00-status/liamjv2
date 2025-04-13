@@ -1,4 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
+
+import './vertical-nav.css';
 import { IconTheme, IconType } from "../Icon/domain";
 import { Icon } from "../Icon/Icon";
 
@@ -23,12 +25,12 @@ export const VerticalNav = (props: Props) => {
             navigate(newPath);
         }
     };
-    return <div>
-        <nav className="nav-list" >
+    return <div className="vertical-nav">
+        <nav className="vertical-nav__list">
             {routes.map((route) => {
                 const isCurrentRoute = location.pathname === route.route;
 
-                const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
+                const classNames = `vertical-nav__item' ${isCurrentRoute ? ' vertical-nav__item--current' : ''}`;
 
                 return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
                     {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
