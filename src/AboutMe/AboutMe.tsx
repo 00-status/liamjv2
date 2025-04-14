@@ -7,14 +7,7 @@ import { SkillCard } from "./SkillCard";
 import { Anchor } from "../SharedComponents/Link/Anchor";
 
 const AboutMe = (): ReactElement => {
-    const routes = [
-        { label: 'Landing', route: '/', isHomeLink: true },
-        { label: 'D&D Tools', route: '/dnd_tools/dice_roller' },
-        { label: 'RPG Tools', route: '/rpg_tools/dialogue_tree' },
-        { label: 'Terminal', route: '/terminal' }
-    ];
-
-    return <Page title="Liam Johnson" routes={routes}>
+    return <Page title="Liam Johnson" routes={[]}>
         <div className="about-me">
             <div>
                 <h1>About Me</h1>

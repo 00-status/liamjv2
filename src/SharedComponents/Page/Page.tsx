@@ -10,6 +10,7 @@ import { VerticalNav } from "./VerticalNav";
 import { Icon } from "../Icon/Icon";
 import { IconTheme, IconType } from "../Icon/domain";
 import { PageLink } from "./domain";
+import { HorizontalNav } from "./HorizontalNav";
 
 type Props = {
     title: string;
@@ -59,6 +60,7 @@ export const Page = (props: Props): ReactElement => {
                     {title}
                 </div>
                 <VerticalNav isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
+                {routes.length > 0 ? <HorizontalNav routes={routes} /> : null}
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
