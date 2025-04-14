@@ -99,6 +99,14 @@ input[type=number] {
     transform: scale(1.1);
 }
 
+.page__nav-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin: 8px 0 8px 12px;
+}
+
 .page-title-container {
     display: flex;
     flex-direction: column;
@@ -120,12 +128,6 @@ input[type=number] {
     font-size: 96px;
     font-family: "Spectral-Regular";
     color: #CC1818;
-}
-
-.icon-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .page-content-container {
@@ -164,17 +166,6 @@ input[type=number] {
 
     .page-title {
         font-size: 55px;
-    }
-    .icon-list {
-        flex-direction: row;
-    }
-
-    .nav-list {
-        width: 100%;
-        justify-content: center;
-    }
-    .nav-item {
-        width: 90%;
     }
 
     .page-content-container {

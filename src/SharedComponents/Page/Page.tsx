@@ -43,20 +43,20 @@ export const Page = (props: Props): ReactElement => {
                     <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
                 </div>
                 <h3>Liam Johnson</h3>
+                <div className="page__nav-icons">
+                    <ImageButton
+                        locationUrl={"https://github.com/00-status"}
+                        imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
+                    />
+                    <ImageButton
+                        locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
+                        imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
+                    />
+                </div>
             </div>
             <div className="page-title-container">
                 <div className="page-title">
                     {title}
-                    <div className="icon-list">
-                        <ImageButton
-                            locationUrl={"https://github.com/00-status"}
-                            imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
-                        />
-                        <ImageButton
-                            locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
-                            imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
-                        />
-                    </div>
                 </div>
                 <VerticalNav routes={routes} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
             </div>

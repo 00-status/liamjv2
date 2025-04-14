@@ -17,13 +17,10 @@ type Props = {
 };
 
 // TODO:
-//      Add LJ logo to top of nav
 //      Consider adding full nav tree to the navbar
 //          // That is, consider doing an accordion type sitch for nav sub-items.
 //      Create terminal theme
-//      Ensure SigmaJS graph is behind vertical nav and overlay (div.react-sigma).
 //      Update page tests.
-//      Update the menu button to have less of a box shadow.
 //      Consider updating the border on menu items to look a bit nicer/fancier.
 //      Make the sidebar take up more of the screen width on mobile.
 //      Have the menu button follow the user when they scroll on mobile.
