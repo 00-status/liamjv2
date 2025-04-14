@@ -77,8 +77,26 @@ input[type=number] {
     flex-direction: column;
 }
 
-.page__nav-button {
+.page__nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 4px;
+    padding: 16px;
+
     background-color: #FCFEFF;
+    color: #2a2b30;
+}
+
+.page__nav-button {
+    display: flex;
+
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.page__nav-button:hover {
+    transform: scale(1.1);
 }
 
 .page-title-container {

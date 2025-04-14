@@ -38,7 +38,7 @@ export const VerticalNav = (props: Props) => {
         setIsOpen(false);
 
         if (newPath !== location.pathname) {
-            setTimeout(() => navigate(newPath), 200);
+            setTimeout(() => navigate(newPath), 150);
         }
     };
 
@@ -49,7 +49,9 @@ export const VerticalNav = (props: Props) => {
         />
         <div className={"vertical-nav" + (isOpen ? " vertical-nav--open" : "")}>
             <div className="vertical-nav__header">
-                <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
+                <div className="vertical-nav__header-button" onClick={() => setIsOpen(false)}>
+                    <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
+                </div>
                 <h3>Liam Johnson</h3>
             </div>
             <nav className="vertical-nav__list">

@@ -38,13 +38,11 @@ export const Page = (props: Props): ReactElement => {
 
     return <ToastMessageContext value={{ messageList, setMessageList }}>
         <div className="page">
-            <div className="page__nav-button">
-                <Button
-                    buttonTheme={ButtonTheme.Subtle}
-                    onClick={() => setIsNavOpen(!isNavOpen)}
-                >
+            <div className="page__nav-container">
+                <div className="page__nav-button" onClick={() => setIsNavOpen(!isNavOpen)}>
                     <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
-                </Button>
+                </div>
+                <h3>Liam Johnson</h3>
             </div>
             <div className="page-title-container">
                 <div className="page-title">

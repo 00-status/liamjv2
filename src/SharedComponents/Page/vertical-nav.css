@@ -13,7 +13,7 @@
     background-color: #FCFEFF;
     color: #2a2b30;
 
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.15s ease-in-out;
     transform: translateX(-100%);
 }
 
@@ -37,6 +37,15 @@
     gap: 4px;
 
     margin-bottom: 16px;
+}
+.vertical-nav__header-button {
+    display: flex;
+
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+.vertical-nav__header-button:hover {
+    transform: scale(1.1);
 }
 
 .vertical-nav__item {
