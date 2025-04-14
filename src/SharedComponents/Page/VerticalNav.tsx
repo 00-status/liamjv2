@@ -23,8 +23,9 @@ type Props = {
 //      Create terminal theme
 //      Ensure SigmaJS graph is behind vertical nav and overlay (div.react-sigma).
 //      Update page tests.
-//      Make the sidebar take up more of the screen width on mobile.
 //      Update the menu button to have less of a box shadow.
+//      Consider updating the border on menu items to look a bit nicer/fancier.
+//      Make the sidebar take up more of the screen width on mobile.
 //      Have the menu button follow the user when they scroll on mobile.
 
 export const VerticalNav = (props: Props) => {
@@ -47,6 +48,10 @@ export const VerticalNav = (props: Props) => {
             onClick={() => setIsOpen(false)}
         />
         <div className={"vertical-nav" + (isOpen ? " vertical-nav--open" : "")}>
+            <div className="vertical-nav__header">
+                <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
+                <h3>Liam Johnson</h3>
+            </div>
             <nav className="vertical-nav__list">
                 {routes.map((route) => {
                     const isCurrentRoute = location.pathname === route.route;
@@ -54,8 +59,8 @@ export const VerticalNav = (props: Props) => {
                     const classNames = "vertical-nav__item" + (isCurrentRoute ? " vertical-nav__item--current" : "");
 
                     return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                        {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
                         {route.label}
+                        {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
                     </a>;
                 })}
             </nav>
