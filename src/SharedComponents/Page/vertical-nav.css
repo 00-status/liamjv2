@@ -1,5 +1,6 @@
 .vertical-nav {
     position: fixed;
+    z-index: 2;
     top: 0;
     left: 0;
     height: 100%;
@@ -62,8 +63,6 @@
     cursor: pointer;
 }
 
-/* border-bottom: 1px solid #2a2b30; */
-
 .vertical-nav__item:hover {
     background-color: #f2f4f5;
 }
@@ -74,6 +73,7 @@
 
 .vertical-nav__overlay {
     position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
