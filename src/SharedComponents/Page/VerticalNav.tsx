@@ -3,30 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import './vertical-nav.css';
 import { IconTheme, IconType } from "../Icon/domain";
 import { Icon } from "../Icon/Icon";
-
-export type PageLink = {
-    label: string;
-    route: string;
-    isHomeLink?: boolean;
-};
+import { verticalNavRoutes } from "./domain";
 
 type Props = {
-    routes: Array<PageLink>;
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
 };
 
 // TODO:
-//      Consider adding full nav tree to the navbar
-//          // That is, consider doing an accordion type sitch for nav sub-items.
-//      Create terminal theme
+//      Add horizontal navigation for each specific app.
 //      Update page tests.
-//      Consider updating the border on menu items to look a bit nicer/fancier.
-//      Make the sidebar take up more of the screen width on mobile.
-//      Have the menu button follow the user when they scroll on mobile.
 
 export const VerticalNav = (props: Props) => {
-    const { routes, isOpen, setIsOpen } = props;
+    const { isOpen, setIsOpen } = props;
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -52,7 +41,7 @@ export const VerticalNav = (props: Props) => {
                 <h3>Liam Johnson</h3>
             </div>
             <nav className="vertical-nav__list">
-                {routes.map((route) => {
+                {verticalNavRoutes.map((route) => {
                     const isCurrentRoute = location.pathname === route.route;
 
                     const classNames = "vertical-nav__item" + (isCurrentRoute ? " vertical-nav__item--current" : "");

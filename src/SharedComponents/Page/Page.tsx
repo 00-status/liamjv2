@@ -6,10 +6,10 @@ import { ImageButton } from "../ImageButton/ImageButton";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
-import { PageLink, VerticalNav } from "./VerticalNav";
-import { Button, ButtonTheme } from "../Button/Button";
+import { VerticalNav } from "./VerticalNav";
 import { Icon } from "../Icon/Icon";
 import { IconTheme, IconType } from "../Icon/domain";
+import { PageLink } from "./domain";
 
 type Props = {
     title: string;
@@ -58,7 +58,7 @@ export const Page = (props: Props): ReactElement => {
                 <div className="page-title">
                     {title}
                 </div>
-                <VerticalNav routes={routes} isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
+                <VerticalNav isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
