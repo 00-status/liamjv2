@@ -1,24 +1,17 @@
 .image-button {
     display: flex;
 
-    height: 40px;
-    width: 40px;
+    height: 24px;
+    width: 24px;
 }
 
 .image-button__image {
-    height: 40px;
-    width: 40px;
-    padding: 8px;
+    height: 24px;
+    width: 24px;
+    transition: all .1s ease-in-out;
 }
 .image-button__image:hover {
     background-color: #f2f4f5;
 
-    box-shadow: 1px 1px 5px #f2f4f5;
-}
-
-@media only screen and (max-width: 600px) {
-    .image-button__image, .image-button {
-        height: 60px;
-        width: 60px;
-    }
+    transform: scale(1.10);
 }

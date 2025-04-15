@@ -4,7 +4,6 @@ import * as GTAG from "ga-gtag";
 
 import { Page } from "./Page";
 
-
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => {
     return {
@@ -18,6 +17,15 @@ describe('Page', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         jest.spyOn(GTAG, "gtag").mockImplementation(mockGtag);
+    });
+
+    it("should render vertical nav container", () => {
+        const { getByText } = render(<Page title="Test" routes={[]}>Banana</Page>);
+
+        getByText("Landing");
+        getByText("D&D Tools");
+        getByText("RPG Tools");
+        getByText("Terminal");
     });
 
     it('should render the contents', () => {        
@@ -46,6 +54,9 @@ describe('Page', () => {
     });
 
     it('should switch to new route when clicking nav item', async () => {
+        jest.useFakeTimers();
+        const user = userEvent.setup({ delay: null });
+
         const routes = [
             { label: 'Test Route', route: '/test_path' },
             { label: 'Test Route 2', route: '/test_path_2' },
@@ -53,11 +64,14 @@ describe('Page', () => {
         const { getByText } = render(<Page title="" routes={routes}>Test</Page>);
 
         expect(mockNavigate).toHaveBeenCalledTimes(0);
-        
-        await userEvent.click(getByText('Test Route 2'));
+
+        await user.click(getByText('Test Route 2'));
+        jest.runAllTimers();
 
         expect(mockNavigate).toHaveBeenCalledTimes(1);
         expect(mockNavigate).toHaveBeenCalledWith('/test_path_2');
+
+        jest.useRealTimers();
     });
 
     it('should render home icon when home flag is true', async () => {
@@ -70,14 +84,20 @@ describe('Page', () => {
     });
 
     it('should NOT navigate when clicking the current nav item', async () => {
+        jest.useFakeTimers();
+        const user = userEvent.setup({ delay: null });
+
         const routes = [
             { label: 'Test Route Root', route: '/' },
             { label: 'Test Route 2', route: '/test_path_2' },
         ];
         const { getByText } = render(<Page title="Title" routes={routes}>Test</Page>);
         
-        await userEvent.click(getByText('Test Route Root'));
+        await user.click(getByText('Test Route Root'));
+        jest.runAllTimers();
 
         expect(mockNavigate).toHaveBeenCalledTimes(0);
+
+        jest.useRealTimers();
     });
 });

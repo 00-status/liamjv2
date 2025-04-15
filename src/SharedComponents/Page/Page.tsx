@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { gtag } from "ga-gtag";
 
 import "./app.css";
@@ -7,36 +6,28 @@ import { ImageButton } from "../ImageButton/ImageButton";
 import { ToastMessage, ToastMessageContext } from "../Toast/ToastMessageContext";
 import { Toast } from "../Toast/Toast";
 import { PageErrorBoundary } from "./PageErrorBoundary";
+import { VerticalNav } from "./VerticalNav";
 import { Icon } from "../Icon/Icon";
-import { IconTheme } from '../Icon/domain';
-import { IconType } from '../Icon/domain';
-
-type Link = {
-    label: string;
-    route: string;
-    isHomeLink?: boolean;
-};
+import { IconTheme, IconType } from "../Icon/domain";
+import { PageLink } from "./domain";
+import { HorizontalNav } from "./HorizontalNav";
 
 type Props = {
     title: string;
-    routes: Array<Link>;
+    routes: Array<PageLink>;
     children: ReactNode;
     footer?: ReactElement;
 };
 
+// TODO:
+//      Update page tests.
+
 export const Page = (props: Props): ReactElement => {
     const { title, routes, children, footer } = props;
 
+    const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
+
     const [messageList, setMessageList] = useState<Array<ToastMessage>>([]);
-
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const goToRoute = (newPath: string) => {
-        if (newPath !== location.pathname) {
-            navigate(newPath);
-        }
-    };
 
     useEffect(() => {
         const currentRoute = routes.find((route) => route.route === location.pathname);
@@ -51,32 +42,28 @@ export const Page = (props: Props): ReactElement => {
 
     return <ToastMessageContext value={{ messageList, setMessageList }}>
         <div className="page">
+            <div className="page__nav-container">
+                <div className="page__nav-button" onClick={() => setIsNavOpen(!isNavOpen)}>
+                    <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
+                </div>
+                <h3>Liam Johnson</h3>
+                <div className="page__nav-icons">
+                    <ImageButton
+                        locationUrl={"https://github.com/00-status"}
+                        imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
+                    />
+                    <ImageButton
+                        locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
+                        imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
+                    />
+                </div>
+            </div>
             <div className="page-title-container">
                 <div className="page-title">
                     {title}
-                    <div className="icon-list">
-                        <ImageButton
-                            locationUrl={"https://github.com/00-status"}
-                            imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
-                        />
-                        <ImageButton
-                            locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
-                            imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
-                        />
-                    </div>
                 </div>
-                <nav className="nav-list" >
-                    {routes.map((route) => {
-                        const isCurrentRoute = location.pathname === route.route;
-
-                        const classNames = 'nav-item' + (isCurrentRoute ? ' nav-item__current' : '');
-
-                        return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
-                            {route.isHomeLink && <Icon iconType={IconType.HOME} iconTheme={IconTheme.DARK} />}
-                            {route.label}
-                        </a>;
-                    })}
-                </nav>
+                <VerticalNav isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
+                {routes.length > 0 ? <HorizontalNav routes={routes} /> : null}
             </div>
             <div className="page-content-container">
                 <PageErrorBoundary>
