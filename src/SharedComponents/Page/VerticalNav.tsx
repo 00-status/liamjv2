@@ -38,9 +38,8 @@ export const VerticalNav = (props: Props) => {
             </div>
             <nav className="vertical-nav__list">
                 {verticalNavRoutes.map((route) => {
-                    const isCurrentRoute = location.pathname === route.route;
-
-                    const classNames = "vertical-nav__item" + (isCurrentRoute ? " vertical-nav__item--current" : "");
+                    const isCurrent = isCurrentRoute(route.route, location.pathname);
+                    const classNames = "vertical-nav__item" + (isCurrent ? " vertical-nav__item--current" : "");
 
                     return <a key={route.route} className={classNames} onClick={() => goToRoute(route.route)}>
                         {route.label}
@@ -50,4 +49,11 @@ export const VerticalNav = (props: Props) => {
             </nav>
         </div>
     </>;
+};
+
+const isCurrentRoute = (navLinkRoute: string, locationPath: string): boolean => {
+    const basePath = locationPath.match(/^\/[^\/]*/)?.[0] || "";
+    return basePath === "/"
+        ? navLinkRoute === basePath
+        : navLinkRoute.includes(basePath);
 };

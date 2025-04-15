@@ -15,15 +15,16 @@ export const HorizontalNav = (props: Props) => {
 
     const goToRoute = (newPath: string) => {
         if (newPath !== location.pathname) {
-            console.log("PING!");
             setTimeout(() => navigate(newPath), 150);
-            console.log("PONG!");
         }
     };
 
     return <div className="horizontal-nav">
         {routes.map((route) => {
-            return <a key={route.route} className="horizontal-nav__item" onClick={() => goToRoute(route.route)}>
+            const isCurrentPath = location.pathname === route.route;
+            const classes = "horizontal-nav__item" + (isCurrentPath ? " horizontal-nav__item--current" : "");
+
+            return <a key={route.route} className={classes} onClick={() => goToRoute(route.route)}>
                 {route.label}
             </a>;
         })}
