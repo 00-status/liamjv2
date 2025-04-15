@@ -10,10 +10,6 @@ type Props = {
     setIsOpen: (isOpen: boolean) => void;
 };
 
-// TODO:
-//      Add horizontal navigation for each specific app.
-//      Update page tests.
-
 export const VerticalNav = (props: Props) => {
     const { isOpen, setIsOpen } = props;
 

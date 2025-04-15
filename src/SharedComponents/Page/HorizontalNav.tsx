@@ -1,4 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
+
+import './horizontal-nav.css';
 import { PageLink } from "./domain";
 
 type Props = {

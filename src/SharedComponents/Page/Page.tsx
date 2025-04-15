@@ -19,6 +19,10 @@ type Props = {
     footer?: ReactElement;
 };
 
+// TODO:
+//      Add horizontal navigation for each specific app.
+//      Update page tests.
+
 export const Page = (props: Props): ReactElement => {
     const { title, routes, children, footer } = props;
 
