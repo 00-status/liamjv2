@@ -15,7 +15,9 @@ export const HorizontalNav = (props: Props) => {
 
     const goToRoute = (newPath: string) => {
         if (newPath !== location.pathname) {
+            console.log("PING!");
             setTimeout(() => navigate(newPath), 150);
+            console.log("PONG!");
         }
     };
 
