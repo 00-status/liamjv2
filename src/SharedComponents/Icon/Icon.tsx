@@ -23,6 +23,10 @@ import { UploadIcon } from './Icons/UploadFile';
 import { VeryDissatisfiedIcon } from './Icons/VeryDissatisfiedIcon';
 import { IconSize, IconTheme, IconType } from './domain';
 import { MenuIcon } from './Icons/MenuIcon';
+import { StoreIcon } from './Icons/StoreIcon';
+import { Graph4Icon } from './Icons/Graph4';
+import { MenuBookIcon } from './Icons/MenuBookIcon';
+import { GroupIcon } from './Icons/GroupIcon';
 
 type Props = {
     iconType: IconType;
@@ -78,4 +82,8 @@ const iconComponents: Record<IconType, ReactNode> = {
     [IconType.UPLOAD_FILE]: <UploadIcon />,
     [IconType.VERY_DISSATISFIED]: <VeryDissatisfiedIcon />,
     [IconType.MENU]: <MenuIcon />,
+    [IconType.STORE]: <StoreIcon />,
+    [IconType.GRAPH4]: <Graph4Icon />,
+    [IconType.GROUP]: <GroupIcon />,
+    [IconType.MENU_BOOK]: <MenuBookIcon />,
 };

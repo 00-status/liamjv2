@@ -28,7 +28,9 @@ export const HorizontalNav = (props: Props) => {
 
             return <a key={route.route} className={classes} onClick={() => goToRoute(route.route)}>
                 <Icon iconType={IconType.PLUS} iconTheme={IconTheme.DARK} />
-                <div className="horizontal-nav__item--text">{route.label}</div>
+                <div className="horizontal-nav__item--text">
+                    {route.label}
+                </div>
             </a>;
         })}
     </div>;

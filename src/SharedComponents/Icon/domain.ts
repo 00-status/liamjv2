@@ -18,7 +18,11 @@ export enum IconType {
     TRASH,
     UPLOAD_FILE,
     VERY_DISSATISFIED,
-    MENU
+    MENU,
+    STORE,
+    GRAPH4,
+    GROUP,
+    MENU_BOOK
 };
 
 export enum IconTheme { LIGHT, DARK, GREEN };
