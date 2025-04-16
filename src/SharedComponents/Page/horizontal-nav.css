@@ -31,6 +31,10 @@
     background-color: #f2f4f5;
 }
 
+.horizontal-nav__item--icon {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     .horizontal-nav {
         position: fixed;
@@ -62,6 +66,10 @@
 
     .horizontal-nav__item--current {
         background-color: #FCFEFF;
+    }
+
+    .horizontal-nav__item--icon {
+        display: flex;
     }
 
     .horizontal-nav__item--text {
