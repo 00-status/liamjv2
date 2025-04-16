@@ -1,10 +1,10 @@
 .vertical-nav {
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     top: 0;
     left: 0;
     height: 100%;
-    width: 250px;
+    width: 300px;
     overflow-y: auto;
 
     padding: 16px;
@@ -49,6 +49,14 @@
     transform: scale(1.1);
 }
 
+.vertical-nav__header-links {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin: 8px 0 8px 12px;
+}
+
 .vertical-nav__item {
     display: flex;
     flex-direction: row;
@@ -73,7 +81,7 @@
 
 .vertical-nav__overlay {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;

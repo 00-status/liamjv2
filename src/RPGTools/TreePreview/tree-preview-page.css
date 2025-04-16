@@ -8,6 +8,7 @@
 .tree-preview-page__container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .tree-preview-page__active-conditions {
@@ -47,4 +48,13 @@
     flex-direction: column;
 
     gap: 8px;
+}
+@media only screen and (max-width: 600px) {
+    .tree-preview-page__container {
+        gap: 20px;
+    }
+
+    .tree-preview-page__content {
+        flex: 1 1 100%;
+    }
 }

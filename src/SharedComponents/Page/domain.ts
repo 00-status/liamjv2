@@ -1,3 +1,5 @@
+import { IconType } from "../Icon/domain";
+
 export const verticalNavRoutes = [
     { label: 'Landing', route: '/', isHomeLink: true },
     { label: 'D&D Tools', route: '/dnd_tools/dice_roller' },
@@ -8,5 +10,5 @@ export const verticalNavRoutes = [
 export type PageLink = {
     label: string;
     route: string;
-    isHomeLink?: boolean;
+    iconType?: IconType;
 };

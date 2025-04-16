@@ -31,13 +31,49 @@
     background-color: #f2f4f5;
 }
 
+.horizontal-nav__item--icon {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     .horizontal-nav {
+        position: fixed;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+
+        gap: 0;
+
         width: 100%;
-        justify-content: center;
+        justify-content: space-around;
+
+        margin: 0;
     }
 
     .horizontal-nav__item {
-        width: 90%;
+        flex: 1;
+        flex-direction: column;
+        width: 100%;
+        padding: 4px 0 0 0;
+
+        background-color: #FCFEFF;
+        border: none;
+        border-radius: 0;
+    }
+    .horizontal-nav__item:hover {
+        background-color: #FCFEFF;
+        transform: scale(1.0);
+    }
+
+    .horizontal-nav__item--current {
+        background-color: #FCFEFF;
+    }
+
+    .horizontal-nav__item--icon {
+        display: flex;
+    }
+
+    .horizontal-nav__item--text {
+        font-size: 12px;
     }
 }

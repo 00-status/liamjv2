@@ -14,7 +14,7 @@ const WeaponEffectList = () => {
         fetchWeaponEffects();
     }, []);
 
-    return <Page title="Weapon Effects" routes={[{label: "Landing", route: "/", isHomeLink: true}]}>
+    return <Page title="Weapon Effects" routes={[{label: "Landing", route: "/"}]}>
         <div className="weapon-effect-list">
             <h1>Weapon Effect List</h1>
             <div className="weapon-effect-list__container">

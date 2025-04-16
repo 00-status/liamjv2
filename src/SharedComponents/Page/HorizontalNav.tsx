@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import './horizontal-nav.css';
 import { PageLink } from "./domain";
+import { Icon } from "../Icon/Icon";
+import { IconTheme, IconType } from "../Icon/domain";
 
 type Props = {
     routes: Array<PageLink>;
@@ -24,8 +26,13 @@ export const HorizontalNav = (props: Props) => {
             const isCurrentPath = location.pathname === route.route;
             const classes = "horizontal-nav__item" + (isCurrentPath ? " horizontal-nav__item--current" : "");
 
-            return <a key={route.route} className={classes} onClick={() => goToRoute(route.route)}>
-                {route.label}
+            return <a key={"horizontal-nav-" + route.route} className={classes} onClick={() => goToRoute(route.route)}>
+                <div className="horizontal-nav__item--icon">
+                    {route.iconType ? <Icon iconType={route.iconType} iconTheme={IconTheme.DARK} /> : null }
+                </div>
+                <div className="horizontal-nav__item--text">
+                    {route.label}
+                </div>
             </a>;
         })}
     </div>;
