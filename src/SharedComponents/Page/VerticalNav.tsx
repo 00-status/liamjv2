@@ -36,7 +36,7 @@ export const VerticalNav = (props: Props) => {
                     <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
                 </div>
                 <h3>Liam Johnson</h3>
-                <div className="page__nav-icons">
+                <div className="vertical-nav__header-links">
                     <ImageButton
                         locationUrl={"https://github.com/00-status"}
                         imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
