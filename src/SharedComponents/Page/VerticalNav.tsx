@@ -4,6 +4,7 @@ import './vertical-nav.css';
 import { IconTheme, IconType } from "../Icon/domain";
 import { Icon } from "../Icon/Icon";
 import { verticalNavRoutes } from "./domain";
+import { ImageButton } from "../ImageButton/ImageButton";
 
 type Props = {
     isOpen: boolean;
@@ -35,6 +36,16 @@ export const VerticalNav = (props: Props) => {
                     <Icon iconType={IconType.MENU} iconTheme={IconTheme.DARK} />
                 </div>
                 <h3>Liam Johnson</h3>
+                <div className="page__nav-icons">
+                    <ImageButton
+                        locationUrl={"https://github.com/00-status"}
+                        imageUrl={"https://liamj.b-cdn.net/assets/images/github_cat_icon.svg"}
+                    />
+                    <ImageButton
+                        locationUrl={'https://linkedin.com/in/liam-johnson-36791915a'}
+                        imageUrl={'https://liamj.b-cdn.net/assets/images/linkedin_icon.png'}
+                    />
+                </div>
             </div>
             <nav className="vertical-nav__list">
                 {verticalNavRoutes.map((route) => {
