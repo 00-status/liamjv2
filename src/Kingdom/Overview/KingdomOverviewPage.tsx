@@ -1,3 +1,5 @@
+
+import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
 
 type Kingdom = { name: String, terrain: Terrain };
@@ -45,8 +47,10 @@ const KingdomOverviewPage = () => {
     }
 
     return <Page title="Kingdom" routes={[]}>
-        <div>
-            {orderedTiles.map(tile => <div key={tile.x + "-" + tile.y}>{tile.type}</div>)}
+        <div className='kingdom-overview-page'>
+            <div className='kingdom-overview-page__grid'>
+                {orderedTiles.map(tile => <div key={tile.x + "-" + tile.y}>{tile.type}</div>)}
+            </div>
         </div>
     </Page>;
 };
