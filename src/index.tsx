@@ -7,14 +7,15 @@ import "@react-sigma/core/lib/style.css";
 const AboutMe = lazy(() => import(/* webpackChunkName: "about-me" */ './AboutMe/AboutMe'));
 const DiceRoller = lazy(() => import(/* webpackChunkName: "dice-roller" */ './DNDTools/DiceRoller/DiceRoller'));
 const DndShop = lazy(() => import(/* webpackChunkName: "dnd-shop" */ './DNDTools/DnDShop/DnDShop'));
+const WeaponMaker = lazy(() => import(/* webpackChunkName: "weapon-maker" */ './DNDTools/WeaponMaker/WeaponMaker'));
 const DialogueTreeMaker = lazy(() => import(/* webpackChunkName: "dialogue-tree-maker" */ './RPGTools/DialogueTreeMaker/DialogueTreeMaker'));
 const CharacterMaker = lazy(() => import(/* webpackChunkName: "character-maker" */ './RPGTools/CharacterMaker/CharacterMaker'));
+const TreePreviewPage = lazy(() => import(/* webpackChunkName: "tree-preview-page" */ './RPGTools/TreePreview/TreePreviewPage'));
 const NotFoundPage = lazy(() => import(/* webpackChunkName: "not-found-page" */ './ErrorStates/NotFoundPage'));
 const TerminalPage = lazy(() => import(/* webpackChunkName: "terminal-page" */ './Terminal/TerminalPage'));
-const WeaponMaker = lazy(() => import(/* webpackChunkName: "weapon-maker" */ './DNDTools/WeaponMaker/WeaponMaker'));
+const KingdomOverviewPage = lazy(() => import(/* webpackChunkName: "kingdom-overview-page" */ './Kingdom/Overview/KingdomOverviewPage'));
 const WeaponEffectList = lazy(() => import(/* webpackChunkName: "weapon-effect-list" */ './HiddenPages/WeaponEffectEditor/WeaponEffectList'));
 const TerminalEditorPage = lazy(() => import(/* webpackChunkName: "terminal-editor-page" */ './HiddenPages/TerminalEditor/TerminalEditorPage'));
-const TreePreviewPage = lazy(() => import(/* webpackChunkName: "tree-preview-page" */ './RPGTools/TreePreview/TreePreviewPage'));
 const RouterErrorBoundary = lazy(() => import(/* webpackChunkName: "about-me" */ './ErrorStates/ErrorBoundary'));
 
 initDataLayer();
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
     { path: "/terminal", element: <TerminalPage />, ErrorBoundary: RouterErrorBoundary},
     { path: "/unlisted/weapon_effects", element: <WeaponEffectList />, ErrorBoundary: RouterErrorBoundary},
     { path: "/unlisted/terminal_editor", element: <TerminalEditorPage />, ErrorBoundary: RouterErrorBoundary},
+    { path: "/unlisted/kingdom_overview", element: <KingdomOverviewPage />, ErrorBoundary: RouterErrorBoundary},
     { path: '*', element: <NotFoundPage />, ErrorBoundary: RouterErrorBoundary }
 ]);
 
