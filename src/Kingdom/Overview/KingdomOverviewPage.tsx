@@ -3,9 +3,10 @@ import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useMemo, useState } from 'react';
 import { Tile } from './Tile';
+import { generateWeightedTerrain } from './utli';
 
 type Kingdom = { name: String, terrain: Terrain };
-type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
+export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
 export type Tile = { x: number, y: number, type: string };
 
 // TODO: Instead of expanding the kingdom's terrain when the kingdom grows
@@ -13,21 +14,7 @@ export type Tile = { x: number, y: number, type: string };
 
 const kingdom: Kingdom = {
     name: "Camelot",
-    terrain: {
-        rowSize: 3,
-        columnSize: 3,
-        tiles: [
-            { x: 1, y: 1, type: "Prairie" },
-            { x: 2, y: 1, type: "Prairie" },
-            { x: 3, y: 1, type: "Prairie" },
-            { x: 1, y: 2, type: "Forest" },
-            { x: 2, y: 2, type: "Forest" },
-            { x: 3, y: 2, type: "Forest" },
-            { x: 1, y: 3, type: "Mountain" },
-            { x: 2, y: 3, type: "Mountain" },
-            { x: 3, y: 3, type: "Mountain" },
-        ]
-    }
+    terrain: generateWeightedTerrain(3, 3)
 };
 
 const KingdomOverviewPage = () => {
@@ -42,8 +29,8 @@ const KingdomOverviewPage = () => {
         }, {} as {[key: string]: Tile} );
 
         const orderedTiles = [];
-        for (let y = 1; y <= kingdom.terrain.columnSize; y++) {
-            for (let x = 1; x <= kingdom.terrain.rowSize; x++) {
+        for (let y = 0; y < kingdom.terrain.columnSize; y++) {
+            for (let x = 0; x < kingdom.terrain.rowSize; x++) {
                 const tile = tilesByCoords[`${x}-${y}`];
                 if (tile) {
                     orderedTiles.push(tile);
