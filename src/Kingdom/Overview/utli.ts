@@ -60,3 +60,19 @@ function determineTerrain(neighboringTiles: Array<Tile>): string {
 
     return "Prairie";
 }
+
+export const extractCenterGrid = (originalTerrain: Terrain, newSize: number): Terrain => {
+    const centerStart = Math.floor((originalTerrain.rowSize - newSize) / 2);
+    const centerEnd = centerStart + newSize - 1;
+
+    const tiles = originalTerrain.tiles.filter(tile =>
+        tile.x >= centerStart && tile.x <= centerEnd &&
+        tile.y >= centerStart && tile.y <= centerEnd
+    );
+
+    const reIndexedTiles = tiles.map(tile => {
+        return {...tile, x: tile.x - centerStart, y: tile.y - centerStart }
+    });
+
+    return { rowSize: newSize, columnSize: newSize, tiles: reIndexedTiles };
+}

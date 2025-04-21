@@ -3,18 +3,18 @@ import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { useMemo, useState } from 'react';
 import { Tile } from './Tile';
-import { generateWeightedTerrain } from './utli';
+import { extractCenterGrid, generateWeightedTerrain } from './utli';
 
 type Kingdom = { name: String, terrain: Terrain };
 export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
 export type Tile = { x: number, y: number, type: string };
 
-// TODO: Instead of expanding the kingdom's terrain when the kingdom grows
-// we could instead generate a larger 7x7 grid and only display necessary tiles.
+const terrain = generateWeightedTerrain(7, 7);
+const centerTerrain = extractCenterGrid(terrain, 3);
 
 const kingdom: Kingdom = {
     name: "Camelot",
-    terrain: generateWeightedTerrain(3, 3)
+    terrain: centerTerrain
 };
 
 const KingdomOverviewPage = () => {
@@ -41,9 +41,11 @@ const KingdomOverviewPage = () => {
         setOrderedTiles(orderedTiles);
     }, [kingdom]);
 
+    const styles = { "gridTemplateColumns": Array(kingdom.terrain.columnSize).fill("1fr").join(" ") };
+
     return <Page title="Kingdom" routes={[]}>
         <div className='kingdom-overview-page'>
-            <div className='kingdom-overview-page__grid'>
+            <div className='kingdom-overview-page__grid' style={styles}>
                 {orderedTiles.map(tile => <Tile key={tile.x + "-" + tile.y} type={tile.type} />)}
             </div>
         </div>
