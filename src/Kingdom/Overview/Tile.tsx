@@ -10,6 +10,6 @@ export const Tile = (props: Props) => {
     const classNames = "tile " + "tile--" + type.toLowerCase();
 
     return <div className={classNames}>
-        {type}
+        {""}
     </div>
 };

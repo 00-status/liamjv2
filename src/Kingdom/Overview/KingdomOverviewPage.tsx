@@ -9,7 +9,7 @@ type Kingdom = { name: String, terrain: Terrain };
 export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
 export type Tile = { x: number, y: number, type: string };
 
-const terrain = generateWeightedTerrain(7, 7);
+const terrain = generateWeightedTerrain(11, 11);
 const centerTerrain = extractCenterGrid(terrain, 3);
 
 const kingdom: Kingdom = {
@@ -45,6 +45,7 @@ const KingdomOverviewPage = () => {
 
     return <Page title="Kingdom" routes={[]}>
         <div className='kingdom-overview-page'>
+            <h1>Overview</h1>
             <div className='kingdom-overview-page__grid' style={styles}>
                 {orderedTiles.map(tile => <Tile key={tile.x + "-" + tile.y} type={tile.type} />)}
             </div>
