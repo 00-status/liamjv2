@@ -1,9 +1,9 @@
+import { useMemo, useState } from 'react';
 
 import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
-import { useMemo, useState } from 'react';
 import { Tile } from './Tile';
-import { extractCenterGrid, generateWeightedTerrain } from './utli';
+import { extractCenterGrid, generateWeightedTerrain } from './util';
 
 type Kingdom = { name: String, terrain: Terrain };
 export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };

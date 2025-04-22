@@ -1,7 +1,7 @@
 import { Terrain, Tile } from "./KingdomOverviewPage";
 
-export function generateWeightedTerrain(rowSize: number, columnSize: number): Terrain {
-    const tiles: Array<Tile> = [];
+export function generateWeightedTerrain(rowSize: number, columnSize: number, tilez?: Array<Tile>): Terrain {
+    const tiles: Array<Tile> = tilez ?? [];
 
     for (let x = 0; x < rowSize; x++) {
         for (let y = 0; y < columnSize; y++) {
@@ -31,18 +31,18 @@ function determineTerrain(neighboringTiles: Array<Tile>): string {
         "Swamp": 1,
     };
 
-    neighboringTiles.forEach(tile => {
-        switch (tile.type) {
+    neighboringTiles.forEach(neighboringTile => {
+        switch (neighboringTile.type) {
             case "Prairie":
-                terrainWeights[tile.type] += 2;
+                terrainWeights[neighboringTile.type] += 2;
                 break;
             case "Mountain":
             case "Swamp":
-                terrainWeights[tile.type] += 0.5;
+                terrainWeights[neighboringTile.type] += 0.5;
                 break;
             case "Forest":
             default:
-                terrainWeights[tile.type] += 1;
+                terrainWeights[neighboringTile.type] += 1;
                 break;
         }
     });
