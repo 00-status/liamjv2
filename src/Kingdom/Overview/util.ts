@@ -14,7 +14,7 @@ export function generateWeightedTerrain(rowSize: number, columnSize: number, til
     return { rowSize, columnSize, tiles };
 }
 
-function getNeighboringTiles(x: number, y: number, tiles: Array<Tile>): Tile[] {
+export function getNeighboringTiles(x: number, y: number, tiles: Array<Tile>): Tile[] {
     return tiles.filter(tile =>
         (tile.x === x - 1 && tile.y === y)      // Left
         || (tile.x === x + 1 && tile.y === y)   // Right
