@@ -1,5 +1,5 @@
 import { Card } from "../../SharedComponents/Card/Card";
-import { Tile } from "./KingdomOverviewPage";
+import { Tile } from "./domain/types";
 
 type Props = {
     tile: Tile;

@@ -1,4 +1,4 @@
-import { Terrain, Tile } from "./KingdomOverviewPage";
+import { Terrain, Tile } from "./domain/types";
 
 export function generateWeightedTerrain(rowSize: number, columnSize: number, tilez?: Array<Tile>): Terrain {
     const tiles: Array<Tile> = tilez ?? [];

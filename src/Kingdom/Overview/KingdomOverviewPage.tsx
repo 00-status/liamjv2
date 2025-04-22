@@ -5,10 +5,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
-
-type Kingdom = { name: String, terrain: Terrain };
-export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
-export type Tile = { id: string, x: number, y: number, type: string };
+import { Kingdom, Tile as TileType } from './domain/types';
 
 const terrain = generateWeightedTerrain(11, 11);
 const centerTerrain = extractCenterGrid(terrain, 3);
@@ -19,8 +16,8 @@ const kingdom: Kingdom = {
 };
 
 const KingdomOverviewPage = () => {
-    const [orderedTiles, setOrderedTiles] = useState<Array<Tile>>([]);
-    const [currentTile, setCurrentTile] = useState<Tile|null>(null);
+    const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
+    const [currentTile, setCurrentTile] = useState<TileType|null>(null);
 
     useMemo(() => {
         const tilesByCoords = kingdom.terrain.tiles.reduce((carry, tile) => {
@@ -28,7 +25,7 @@ const KingdomOverviewPage = () => {
             carry[key] = tile;
     
             return carry;
-        }, {} as {[key: string]: Tile} );
+        }, {} as {[key: string]: TileType} );
 
         const orderedTiles = [];
         for (let y = 0; y < kingdom.terrain.columnSize; y++) {
