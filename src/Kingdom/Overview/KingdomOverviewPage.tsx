@@ -4,10 +4,11 @@ import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
+import { TileDetails } from './TileDetails';
 
 type Kingdom = { name: String, terrain: Terrain };
 export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
-export type Tile = { x: number, y: number, type: string };
+export type Tile = { id: string, x: number, y: number, type: string };
 
 const terrain = generateWeightedTerrain(11, 11);
 const centerTerrain = extractCenterGrid(terrain, 3);
@@ -19,6 +20,7 @@ const kingdom: Kingdom = {
 
 const KingdomOverviewPage = () => {
     const [orderedTiles, setOrderedTiles] = useState<Array<Tile>>([]);
+    const [currentTile, setCurrentTile] = useState<Tile|null>(null);
 
     useMemo(() => {
         const tilesByCoords = kingdom.terrain.tiles.reduce((carry, tile) => {
@@ -46,8 +48,18 @@ const KingdomOverviewPage = () => {
     return <Page title="Kingdom" routes={[]}>
         <div className='kingdom-overview-page'>
             <h1>Overview</h1>
-            <div className='kingdom-overview-page__grid' style={styles}>
-                {orderedTiles.map(tile => <Tile key={tile.x + "-" + tile.y} type={tile.type} />)}
+            <div className='kingdom-overview-page__content'>
+                <div className='kingdom-overview-page__grid' style={styles}>
+                    {orderedTiles.map(tile => {
+                        return <Tile
+                            key={tile.x + "-" + tile.y}
+                            type={tile.type}
+                            onClick={() => setCurrentTile({...tile})} />;
+                    })}
+                </div>
+                <div className='kingdom-overview-page__tile-details'>
+                    {currentTile && <TileDetails tile={currentTile} />}
+                </div>
             </div>
         </div>
     </Page>;

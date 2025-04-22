@@ -7,7 +7,7 @@ export function generateWeightedTerrain(rowSize: number, columnSize: number, til
         for (let y = 0; y < columnSize; y++) {
             const neighboringTiles = getNeighboringTiles(x, y, tiles);
             const terrainType = determineTerrain(neighboringTiles);
-            tiles.push({ x, y, type: terrainType });
+            tiles.push({ id: crypto.randomUUID(), x, y, type: terrainType });
         }
     }
 
