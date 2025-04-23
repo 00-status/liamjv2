@@ -6,13 +6,15 @@ import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
 import { Kingdom, Tile as TileType } from './domain/types';
+import { addTerrainFeatures } from './domain/addTerrainFeatures';
 
-const terrain = generateWeightedTerrain(11, 11);
+const terrain = generateWeightedTerrain(15, 15);
+const terrainWithFeatures = addTerrainFeatures(terrain);
 const centerTerrain = extractCenterGrid(terrain, 3);
 
 const kingdom: Kingdom = {
     name: "Camelot",
-    terrain: centerTerrain
+    terrain: terrainWithFeatures
 };
 
 const KingdomOverviewPage = () => {

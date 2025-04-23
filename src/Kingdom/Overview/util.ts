@@ -7,7 +7,7 @@ export function generateWeightedTerrain(rowSize: number, columnSize: number, til
         for (let y = 0; y < columnSize; y++) {
             const neighboringTiles = getNeighboringTiles(x, y, tiles);
             const terrainType = determineTerrain(neighboringTiles);
-            tiles.push({ id: crypto.randomUUID(), x, y, type: terrainType });
+            tiles.push({ id: crypto.randomUUID(), x, y, type: terrainType, traits: [] });
         }
     }
 
@@ -16,10 +16,10 @@ export function generateWeightedTerrain(rowSize: number, columnSize: number, til
 
 export function getNeighboringTiles(x: number, y: number, tiles: Array<Tile>): Tile[] {
     return tiles.filter(tile =>
-        (tile.x === x - 1 && tile.y === y)      // Left
-        || (tile.x === x + 1 && tile.y === y)   // Right
-        || (tile.x === x && tile.y === y - 1)   // Up
-        || (tile.x === x && tile.y === y + 1)   // Down
+        (tile.x === x - 1 && tile.y === y)              // Left
+        || (tile.x === x - 1 && tile.y === y - 1)       // Left-up
+        || (tile.x === x && tile.y === y - 1)           // Up
+        || (tile.x === x + 1 && tile.y === y - 1)       // Up-right
     );
 }
 
@@ -42,7 +42,7 @@ function determineTerrain(neighboringTiles: Array<Tile>): string {
                 break;
             case "Forest":
             default:
-                terrainWeights[neighboringTile.type] += 1;
+                terrainWeights[neighboringTile.type] += 2;
                 break;
         }
     });
