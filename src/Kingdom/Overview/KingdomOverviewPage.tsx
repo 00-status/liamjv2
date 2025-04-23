@@ -10,11 +10,11 @@ import { addTerrainFeatures } from './domain/addTerrainFeatures';
 
 const terrain = generateWeightedTerrain(15, 15);
 const terrainWithFeatures = addTerrainFeatures(terrain);
-const centerTerrain = extractCenterGrid(terrain, 3);
+const centerTerrain = extractCenterGrid(terrainWithFeatures, 3);
 
 const kingdom: Kingdom = {
     name: "Camelot",
-    terrain: terrainWithFeatures
+    terrain: centerTerrain
 };
 
 const KingdomOverviewPage = () => {

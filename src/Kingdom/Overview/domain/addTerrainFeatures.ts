@@ -19,7 +19,7 @@ export const addTerrainFeatures = (terrain: Terrain): Terrain => {
         const traitsToAssign = traits.filter((trait) => {
             const { criteria } = trait;
 
-            if (tile.type !== criteria.currentTileType) {
+            if (tile.type !== criteria.currentTileType && criteria.currentTileType !== null) {
                 return false;
             }
 
@@ -28,8 +28,8 @@ export const addTerrainFeatures = (terrain: Terrain): Terrain => {
             }
 
             const surroundingTileCriteria = trait.criteria.surroundingTileTypeCount;
-            if (!surroundingTileCriteria) {
-                return false;
+            if (surroundingTileCriteria === null) {
+                return true;
             }
 
             const total = neighboringTilesTotals[surroundingTileCriteria.type];
@@ -52,7 +52,7 @@ const traits: Array<Trait> = [
         traitName: "Rich Soil",
         criteria: {
             currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "prairie", threshold: 3 },
+            surroundingTileTypeCount: {type: "Prairie", threshold: 3 },
             percentChance: 50
         },
     },
@@ -76,7 +76,7 @@ const traits: Array<Trait> = [
         traitName: "Dense Woodland",
         criteria: {
             currentTileType: "Forest",
-            surroundingTileTypeCount: {type: "Forest", threshold: 3 },
+            surroundingTileTypeCount: {type: "Forest", threshold: 4 },
             percentChance: 50
         },
     },
