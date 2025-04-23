@@ -1,16 +1,16 @@
+import { useMemo, useState } from 'react';
 
 import './kingdom-overview-page.css';
 import { Page } from "../../SharedComponents/Page/Page";
-import { useMemo, useState } from 'react';
 import { Tile } from './Tile';
-import { extractCenterGrid, generateWeightedTerrain } from './utli';
+import { extractCenterGrid, generateWeightedTerrain } from './util';
+import { TileDetails } from './TileDetails';
+import { Kingdom, Tile as TileType } from './domain/types';
+import { addTerrainFeatures } from './domain/addTerrainFeatures';
 
-type Kingdom = { name: String, terrain: Terrain };
-export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
-export type Tile = { x: number, y: number, type: string };
-
-const terrain = generateWeightedTerrain(11, 11);
-const centerTerrain = extractCenterGrid(terrain, 3);
+const terrain = generateWeightedTerrain(15, 15);
+const terrainWithFeatures = addTerrainFeatures(terrain);
+const centerTerrain = extractCenterGrid(terrainWithFeatures, 3);
 
 const kingdom: Kingdom = {
     name: "Camelot",
@@ -18,7 +18,8 @@ const kingdom: Kingdom = {
 };
 
 const KingdomOverviewPage = () => {
-    const [orderedTiles, setOrderedTiles] = useState<Array<Tile>>([]);
+    const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
+    const [currentTile, setCurrentTile] = useState<TileType|null>(null);
 
     useMemo(() => {
         const tilesByCoords = kingdom.terrain.tiles.reduce((carry, tile) => {
@@ -26,7 +27,7 @@ const KingdomOverviewPage = () => {
             carry[key] = tile;
     
             return carry;
-        }, {} as {[key: string]: Tile} );
+        }, {} as {[key: string]: TileType} );
 
         const orderedTiles = [];
         for (let y = 0; y < kingdom.terrain.columnSize; y++) {
@@ -46,8 +47,18 @@ const KingdomOverviewPage = () => {
     return <Page title="Kingdom" routes={[]}>
         <div className='kingdom-overview-page'>
             <h1>Overview</h1>
-            <div className='kingdom-overview-page__grid' style={styles}>
-                {orderedTiles.map(tile => <Tile key={tile.x + "-" + tile.y} type={tile.type} />)}
+            <div className='kingdom-overview-page__content'>
+                <div className='kingdom-overview-page__grid' style={styles}>
+                    {orderedTiles.map(tile => {
+                        return <Tile
+                            key={tile.x + "-" + tile.y}
+                            type={tile.type}
+                            onClick={() => setCurrentTile({...tile})} />;
+                    })}
+                </div>
+                <div className='kingdom-overview-page__tile-details'>
+                    {currentTile && <TileDetails tile={currentTile} />}
+                </div>
             </div>
         </div>
     </Page>;
