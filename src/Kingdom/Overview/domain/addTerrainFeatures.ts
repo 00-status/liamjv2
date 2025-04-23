@@ -52,8 +52,24 @@ const traits: Array<Trait> = [
         traitName: "Rich Soil",
         criteria: {
             currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "Prairie", threshold: 3 },
+            surroundingTileTypeCount: {type: "Prairie", threshold: 4},
+            percentChance: 100
+        },
+    },
+    {
+        traitName: "Wild Horses",
+        criteria: {
+            currentTileType: "Prairie",
+            surroundingTileTypeCount: {type: "Prairie", threshold: 2},
             percentChance: 50
+        },
+    },
+    {
+        traitName: "Wild Buffalo",
+        criteria: {
+            currentTileType: "Prairie",
+            surroundingTileTypeCount: {type: "Prairie", threshold: 2},
+            percentChance: 25
         },
     },
     {
@@ -65,7 +81,7 @@ const traits: Array<Trait> = [
         },
     },
     {
-        traitName: "Resource Rich",
+        traitName: "Resource: Stone",
         criteria: {
             currentTileType: "Mountain",
             surroundingTileTypeCount: null,
@@ -73,11 +89,83 @@ const traits: Array<Trait> = [
         },
     },
     {
+        traitName: "Resource: Iron",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 25
+        },
+    },
+    {
+        traitName: "Resource: Copper",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 25
+        },
+    },
+    {
+        traitName: "Resource: Coal",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 25
+        },
+    },
+    {
+        traitName: "Resource: Tin",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 25
+        },
+    },
+    {
+        traitName: "Resource: Gold",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 10
+        },
+    },
+    {
+        traitName: "Resource: Mithril",
+        criteria: {
+            currentTileType: "Mountain",
+            surroundingTileTypeCount: null,
+            percentChance: 5
+        },
+    },
+    {
         traitName: "Dense Woodland",
         criteria: {
             currentTileType: "Forest",
-            surroundingTileTypeCount: {type: "Forest", threshold: 4 },
+            surroundingTileTypeCount: {type: "Forest", threshold: 6},
+            percentChance: 75
+        },
+    },
+    {
+        traitName: "Dangerous Wildlife",
+        criteria: {
+            currentTileType: "Forest",
+            surroundingTileTypeCount: {type: "Forest", threshold: 4},
+            percentChance: 75
+        },
+    },
+    {
+        traitName: "Faerie Grove",
+        criteria: {
+            currentTileType: "Forest",
+            surroundingTileTypeCount: {type: "Forest", threshold: 8},
             percentChance: 50
+        },
+    },
+    {
+        traitName: "Witch's Lair",
+        criteria: {
+            currentTileType: "Swamp",
+            surroundingTileTypeCount: {type: "Swamp", threshold: 2},
+            percentChance: 10
         },
     },
 ];
