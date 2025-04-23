@@ -10,7 +10,8 @@ export const TileDetails = (props: Props) => {
 
     return <Card title={tile.type}>
         <div>
-            Terrain features
+            Terrain Traits
+            {tile.traits.map(trait => <div key={trait}>{trait}</div>)}
         </div>
         <div>
             Buildings
