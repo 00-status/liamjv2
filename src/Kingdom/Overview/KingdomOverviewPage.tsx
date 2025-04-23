@@ -57,7 +57,7 @@ const KingdomOverviewPage = () => {
                     })}
                 </div>
                 <div className='kingdom-overview-page__tile-details'>
-                    {currentTile && <TileDetails tile={currentTile} />}
+                    {currentTile && <TileDetails tile={currentTile} buildings={[]} />}
                 </div>
             </div>
         </div>
