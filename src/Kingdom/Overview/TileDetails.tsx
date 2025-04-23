@@ -12,14 +12,18 @@ export const TileDetails = (props: Props) => {
     return <Card title={tile.type}>
         {tile.traits.length > 0 &&
             <div>
-                Terrain Traits
-                {tile.traits.map(trait => <div key={trait}>{trait}</div>)}
+                <h4>Terrain Traits</h4>
+                <ul>
+                    {tile.traits.map(trait => <li key={trait}>{trait}</li>)}
+                </ul>
             </div>
         }
         {buildings.length > 0 &&
             <div>
-                Buildings
-                {buildings.map(building => <div>{building}</div>)}
+                <h4>Buildings</h4>
+                <ul>
+                    {buildings.map(building => <li key={building}>{building}</li>)}
+                </ul>
             </div>
         }
     </Card>;
