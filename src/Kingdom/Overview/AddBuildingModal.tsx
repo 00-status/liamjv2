@@ -19,12 +19,12 @@ export const AddBuildingModal = (props: Props) => {
         onClose();
     };
 
-    const submitButton = <Button onClick={submitModal}>Submit</Button>;
+    const submitButton = <Button disabled={!Boolean(buildingName)} onClick={submitModal}>Submit</Button>;
     return <Modal isOpen={isOpen} title={"Add Building"} onClose={onClose} footer={submitButton}>
         <Dropdown
             id="modal-building-construct"
             label="Construct Buildings"
-            defaultValue="mine"
+            defaultValue={buildingName}
             options={buildingNames}
             onOptionSelect={(value) => setBuildingName(value)}
         />
@@ -32,6 +32,7 @@ export const AddBuildingModal = (props: Props) => {
 };
 
 const buildingNames = [
+    { label: "", value: "" },
     { label: "Farm", value: "farm" },
     { label: "Lumber Mill", value: "lumber_mill" },
     { label: "Mine", value: "mine" },
