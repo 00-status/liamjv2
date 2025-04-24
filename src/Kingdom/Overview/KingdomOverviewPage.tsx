@@ -20,6 +20,7 @@ const kingdom: Kingdom = {
 const KingdomOverviewPage = () => {
     const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
     const [currentTile, setCurrentTile] = useState<TileType|null>(null);
+    // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
     const [buildings, setBuildings] = useState<Array<Building>>([]);
 
     useMemo(() => {
@@ -58,7 +59,11 @@ const KingdomOverviewPage = () => {
                     })}
                 </div>
                 <div className='kingdom-overview-page__tile-details'>
-                    {currentTile && <TileDetails tile={currentTile} buildings={[]} />}
+                    {currentTile && <TileDetails
+                        tile={currentTile}
+                        buildings={buildings.filter(building => building.assignedTile === currentTile.id)}
+                        setBuildings={setBuildings}
+                    />}
                 </div>
             </div>
         </div>

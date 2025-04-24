@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Card } from "../../SharedComponents/Card/Card";
-import { Tile } from "./domain/types";
+import { Building, Tile } from "./domain/types";
 import { Button } from "../../SharedComponents/Button/Button";
 import { AddBuildingModal } from "./AddBuildingModal";
 
 type Props = {
     tile: Tile;
-    buildings: Array<string>;
+    buildings: Array<Building>;
+    setBuildings: Dispatch<SetStateAction<Array<Building>>>;
 };
 
 export const TileDetails = (props: Props) => {
-    const { tile, buildings } = props;
+    const { tile, buildings, setBuildings } = props;
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -29,7 +30,7 @@ export const TileDetails = (props: Props) => {
                 <div>
                     <h4>Buildings</h4>
                     <ul>
-                        {buildings.map(building => <li key={building}>{building}</li>)}
+                        {buildings.map(building => <li key={building.name}>{building.name}</li>)}
                     </ul>
                 </div>
             }
@@ -37,7 +38,9 @@ export const TileDetails = (props: Props) => {
         <AddBuildingModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-            onSubmit={(buildingName) => console.log(buildingName)}
+            onSubmit={(buildingName) => {
+                setBuildings(state => [...state, { name: buildingName, assignedTile: tile.id}]);
+            }}
         />
     </>;
 };
