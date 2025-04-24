@@ -18,3 +18,8 @@ export type Trait = {
     criteria: Criteria;
     traitName: string;
 }
+
+export type Building = {
+    name: string;
+    assignedTile: string;
+};
