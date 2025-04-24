@@ -14,7 +14,12 @@ export const AddBuildingModal = (props: Props) => {
 
     const [buildingName, setBuildingName] = useState<string>("");
 
-    const submitButton = <Button onClick={() => onSubmit(buildingName)}>Submit</Button>;
+    const submitModal = () => {
+        onSubmit(buildingName);
+        onClose();
+    };
+
+    const submitButton = <Button onClick={submitModal}>Submit</Button>;
     return <Modal isOpen={isOpen} title={"Add Building"} onClose={onClose} footer={submitButton}>
         <Dropdown
             id="modal-building-construct"
