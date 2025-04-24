@@ -5,7 +5,7 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
-import { Kingdom, Tile as TileType } from './domain/types';
+import { Building, Kingdom, Tile as TileType } from './domain/types';
 import { addTerrainFeatures } from './domain/addTerrainFeatures';
 
 const terrain = generateWeightedTerrain(15, 15);
@@ -20,6 +20,8 @@ const kingdom: Kingdom = {
 const KingdomOverviewPage = () => {
     const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
     const [currentTile, setCurrentTile] = useState<TileType|null>(null);
+    // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
+    const [buildings, setBuildings] = useState<Array<Building>>([]);
 
     useMemo(() => {
         const tilesByCoords = kingdom.terrain.tiles.reduce((carry, tile) => {
@@ -57,7 +59,11 @@ const KingdomOverviewPage = () => {
                     })}
                 </div>
                 <div className='kingdom-overview-page__tile-details'>
-                    {currentTile && <TileDetails tile={currentTile} />}
+                    {currentTile && <TileDetails
+                        tile={currentTile}
+                        buildings={buildings.filter(building => building.assignedTile === currentTile.id)}
+                        setBuildings={setBuildings}
+                    />}
                 </div>
             </div>
         </div>
