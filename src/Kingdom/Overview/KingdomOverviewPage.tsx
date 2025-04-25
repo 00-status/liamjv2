@@ -5,8 +5,9 @@ import { Page } from "../../SharedComponents/Page/Page";
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
-import { Building, Kingdom, Tile as TileType } from './domain/types';
+import { Building, Kingdom, Resource, Tile as TileType } from './domain/types';
 import { addTerrainFeatures } from './domain/addTerrainFeatures';
+import { ResourceListItem } from './ResourceListItem';
 
 const terrain = generateWeightedTerrain(15, 15);
 const terrainWithFeatures = addTerrainFeatures(terrain);
@@ -17,9 +18,16 @@ const kingdom: Kingdom = {
     terrain: centerTerrain
 };
 
+const startingResources = [
+    { id: "stone", label: "Stone", count: 0 },
+    { id: "lumber", label: "Lumber", count: 0 },
+    { id: "grain", label: "Grain", count: 0 },
+];
+
 const KingdomOverviewPage = () => {
     const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
     const [currentTile, setCurrentTile] = useState<TileType|null>(null);
+    const [resources, setResources] = useState<Array<Resource>>(startingResources);
     // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
     const [buildings, setBuildings] = useState<Array<Building>>([]);
 
@@ -49,6 +57,9 @@ const KingdomOverviewPage = () => {
     return <Page title="Kingdom" routes={[]}>
         <div className='kingdom-overview-page'>
             <h1>Overview</h1>
+            <div className='kingdom-overview-page__resource-list'>
+                {resources.map(resource => <ResourceListItem key={resource.id} resource={resource} />)}
+            </div>
             <div className='kingdom-overview-page__content'>
                 <div className='kingdom-overview-page__grid' style={styles}>
                     {orderedTiles.map(tile => {

@@ -23,3 +23,9 @@ export type Building = {
     name: string;
     assignedTile: string;
 };
+
+export type Resource = {
+    id: string;
+    label: string;
+    count: number;
+};
