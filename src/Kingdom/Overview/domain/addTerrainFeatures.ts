@@ -49,6 +49,14 @@ export const addTerrainFeatures = (terrain: Terrain): Terrain => {
 
 const traits: Array<Trait> = [
     {
+        traitName: "Resource: Grain",
+        criteria: {
+            currentTileType: "Prairie",
+            surroundingTileTypeCount: null,
+            percentChance: 100
+        },
+    },
+    {
         traitName: "Rich Soil",
         criteria: {
             currentTileType: "Prairie",
@@ -68,10 +76,11 @@ const traits: Array<Trait> = [
         traitName: "Wild Buffalo",
         criteria: {
             currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "Prairie", threshold: 2},
+            surroundingTileTypeCount: {type: "Prairie", threshold: 3},
             percentChance: 25
         },
     },
+    /// Mountain \\\
     {
         traitName: "Poor Soil",
         criteria: {
@@ -136,6 +145,15 @@ const traits: Array<Trait> = [
             percentChance: 5
         },
     },
+    /// Forest \\\
+    {
+        traitName: "Resource: Lumber",
+        criteria: {
+            currentTileType: "Forest",
+            surroundingTileTypeCount: null,
+            percentChance: 100
+        },
+    },
     {
         traitName: "Dense Woodland",
         criteria: {
@@ -158,6 +176,15 @@ const traits: Array<Trait> = [
             currentTileType: "Forest",
             surroundingTileTypeCount: {type: "Forest", threshold: 8},
             percentChance: 50
+        },
+    },
+    /// Swamp \\\
+    {
+        traitName: "Resource: Rice",
+        criteria: {
+            currentTileType: "Swamp",
+            surroundingTileTypeCount: null,
+            percentChance: 100
         },
     },
     {
