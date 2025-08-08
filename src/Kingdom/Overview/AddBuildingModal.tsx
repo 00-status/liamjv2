@@ -1,21 +1,39 @@
 import { useState } from "react";
+
 import { Button } from "../../SharedComponents/Button/Button";
 import { Dropdown } from "../../SharedComponents/Dropdown/Dropdown";
 import { Modal } from "../../SharedComponents/Modal/Modal";
+import { Building, Tile } from "./domain/types";
+import { canConstructBuilding } from "./domain/canConstructBuilding";
+import { buildings } from "./domain/constants";
 
 type Props = {
     isOpen: boolean;
+    tile: Tile;
+    alreadyConstructedBuildings: Array<Building>;
     onClose: () => void;
-    onSubmit: (buildingName: string) => void;
+    onSubmit: (building: Building) => void;
 };
 
 export const AddBuildingModal = (props: Props) => {
-    const {isOpen, onClose, onSubmit} = props;
+    const {isOpen, tile, alreadyConstructedBuildings, onClose, onSubmit} = props;
 
     const [buildingName, setBuildingName] = useState<string>("");
 
+    const buildingNames = buildings
+        .filter(building => canConstructBuilding(building, tile, alreadyConstructedBuildings))
+        .map(building => ({label: building.name, value: building.id}));
+    buildingNames.push({ label: "", value: "" });
+
     const submitModal = () => {
-        onSubmit(buildingName);
+        const buildingToConstruct = buildings.find((building) => building.id === buildingName);
+
+        if (!buildingToConstruct) {
+            throw new Error("Unable to find building!");
+        }
+
+        onSubmit(buildingToConstruct);
+        setBuildingName("");
         onClose();
     };
 
@@ -30,10 +48,3 @@ export const AddBuildingModal = (props: Props) => {
         />
     </Modal>
 };
-
-const buildingNames = [
-    { label: "", value: "" },
-    { label: "Farm", value: "farm" },
-    { label: "Lumber Mill", value: "lumber_mill" },
-    { label: "Mine", value: "mine" },
-];

@@ -6,12 +6,12 @@ import { AddBuildingModal } from "./AddBuildingModal";
 
 type Props = {
     tile: Tile;
-    buildings: Array<Building>;
+    constructedBuildings: Array<Building>;
     setBuildings: Dispatch<SetStateAction<Array<Building>>>;
 };
 
 export const TileDetails = (props: Props) => {
-    const { tile, buildings, setBuildings } = props;
+    const { tile, constructedBuildings, setBuildings } = props;
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -26,20 +26,22 @@ export const TileDetails = (props: Props) => {
                     </ul>
                 </div>
             }
-            {buildings.length > 0 &&
+            {constructedBuildings.length > 0 &&
                 <div>
                     <h4>Buildings</h4>
                     <ul>
-                        {buildings.map(building => <li key={building.name}>{building.name}</li>)}
+                        {constructedBuildings.map(building => <li key={building.name}>{building.name}</li>)}
                     </ul>
                 </div>
             }
         </Card>
         <AddBuildingModal
             isOpen={isModalOpen}
+            tile={tile}
+            alreadyConstructedBuildings={constructedBuildings}
             onClose={() => setIsModalOpen(false)}
-            onSubmit={(buildingName) => {
-                setBuildings(state => [...state, { name: buildingName, assignedTile: tile.id}]);
+            onSubmit={(building) => {
+                setBuildings(state => [...state, { ...building, assignedTile: tile.id}]);
             }}
         />
     </>;

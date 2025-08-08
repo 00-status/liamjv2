@@ -72,7 +72,7 @@ const KingdomOverviewPage = () => {
                 <div className='kingdom-overview-page__tile-details'>
                     {currentTile && <TileDetails
                         tile={currentTile}
-                        buildings={buildings.filter(building => building.assignedTile === currentTile.id)}
+                        constructedBuildings={buildings.filter(building => building.assignedTile === currentTile.id)}
                         setBuildings={setBuildings}
                     />}
                 </div>

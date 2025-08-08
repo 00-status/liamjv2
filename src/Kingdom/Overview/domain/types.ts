@@ -8,20 +8,26 @@ export type Tile = {
     traits: Array<string>;
 };
 
+export type Trait = {
+    criteria: Criteria;
+    traitName: string;
+}
 export type Criteria = {
     currentTileType: string|null;
     surroundingTileTypeCount: { type: string, threshold: number } | null;
     percentChance: number;
 };
 
-export type Trait = {
-    criteria: Criteria;
-    traitName: string;
-}
-
 export type Building = {
+    id: string;
     name: string;
-    assignedTile: string;
+    assignedTile?: string;
+    requirements: Array<BuildingRequirements>;
+};
+type BuildingRequirements = {
+    tileType: string | null;
+    traitID: string | null;
+    buildingName: string | null;
 };
 
 export type Resource = {
