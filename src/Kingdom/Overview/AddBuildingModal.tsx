@@ -23,7 +23,7 @@ export const AddBuildingModal = (props: Props) => {
     const buildingNames = buildings
         .filter(building => canConstructBuilding(building, tile, alreadyConstructedBuildings))
         .map(building => ({label: building.name, value: building.id}));
-    buildingNames.push({ label: "", value: "" });
+    buildingNames.unshift({ label: "", value: "" });
 
     const submitModal = () => {
         const buildingToConstruct = buildings.find((building) => building.id === buildingName);
