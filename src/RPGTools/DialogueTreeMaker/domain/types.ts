@@ -1,4 +1,4 @@
-import { Character } from "../../CharacterMaker";
+import { Character } from '../../CharacterMaker';
 
 export type DialogueTree = {
     id: string;
@@ -8,7 +8,7 @@ export type DialogueTree = {
     nodeCoordinates: NodeCoordinate;
 };
 
-export type NodeCoordinate = Map<number, {x: number, y: number}>;
+export type NodeCoordinate = Map<number, { x: number; y: number }>;
 
 export type Dialogue = {
     id: number;
@@ -40,11 +40,11 @@ export type Choice = {
 };
 
 export type SkillTest = {
-    id: number,
-    name: string,
+    id: number;
+    name: string;
     skillID: string;
     difficulties: Array<SkillTestDifficulty>;
-    nextDialogueID: number|null;
+    nextDialogueID: number | null;
 };
 
 export type SkillTestDifficulty = {

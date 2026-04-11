@@ -1,12 +1,8 @@
-import { navigateDirectories } from "../navigateDirectories";
-import { IHandler } from "../types";
+import { navigateDirectories } from '../navigateDirectories';
+import { IHandler } from '../types';
 
 export const ListHandler: IHandler = {
-    execute(
-        command,
-        terminal,
-        setTerminal
-    ): string {
+    execute(command, terminal): string {
         const { directories, currentDirectory } = terminal;
 
         if (!currentDirectory) {
@@ -17,22 +13,24 @@ export const ListHandler: IHandler = {
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
         const newDirectory = navigateDirectories(
-            directoryToMoveTo.split("/"),
+            directoryToMoveTo.split('/'),
             directories,
-            currentDirectory
+            currentDirectory,
         );
 
         if (!newDirectory) {
-            return "";
+            return '';
         }
 
         const childDirectories = directories.filter((directory) => {
-            return newDirectory.subDirectories.find(childDirectoryId => childDirectoryId === directory.id);
+            return newDirectory.subDirectories.find(
+                (childDirectoryId) => childDirectoryId === directory.id,
+            );
         });
 
-        const subDirectories = childDirectories.map(directory => '{dir}\t' + directory.name);
-        const files = newDirectory.files.map(file => '{file}\t' + file.name);
+        const subDirectories = childDirectories.map((directory) => '{dir}\t' + directory.name);
+        const files = newDirectory.files.map((file) => '{file}\t' + file.name);
 
-        return [...subDirectories, ...files].join("\n");
-    }
-}
+        return [...subDirectories, ...files].join('\n');
+    },
+};

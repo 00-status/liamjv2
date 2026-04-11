@@ -1,5 +1,5 @@
-export type Kingdom = { name: String, terrain: Terrain };
-export type Terrain = { rowSize: number, columnSize: number, tiles: Array<Tile> };
+export type Kingdom = { name: string; terrain: Terrain };
+export type Terrain = { rowSize: number; columnSize: number; tiles: Array<Tile> };
 export type Tile = {
     id: string;
     x: number;
@@ -9,15 +9,15 @@ export type Tile = {
 };
 
 export type Criteria = {
-    currentTileType: string|null;
-    surroundingTileTypeCount: { type: string, threshold: number } | null;
+    currentTileType: string | null;
+    surroundingTileTypeCount: { type: string; threshold: number } | null;
     percentChance: number;
 };
 
 export type Trait = {
     criteria: Criteria;
     traitName: string;
-}
+};
 
 export type Building = {
     name: string;

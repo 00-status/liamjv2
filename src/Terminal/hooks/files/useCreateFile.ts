@@ -1,6 +1,6 @@
+import { useCallback } from 'react';
 
-import { useCallback } from "react";
-import { File } from "./useFiles";
+import { File } from './useFiles';
 
 type UseCreateFile = {
     createFile: (file: File) => void;
@@ -21,15 +21,14 @@ export const useCreateFile = (fetchFiles: (directoryId: number) => void): UseCre
 
         const fileJson = JSON.stringify(newFile);
 
-        fetch("/api/1/terminal_files", {
-            method: "POST",
+        fetch('/api/1/terminal_files', {
+            method: 'POST',
             body: fileJson,
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        })
-            .then((response) => fetchFiles(file.directoryId));
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        }).then(() => fetchFiles(file.directoryId));
     }, []);
 
     return {
-        createFile
+        createFile,
     };
 };

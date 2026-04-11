@@ -1,171 +1,177 @@
-import { getNeighboringTiles } from "../util";
-import { Terrain, Tile, Trait } from "./types";
+import { getNeighboringTiles } from '../util';
+
+import { Terrain, Tile, Trait } from './types';
 
 export const addTerrainFeatures = (terrain: Terrain): Terrain => {
     const tilesWithFeatures: Array<Tile> = terrain.tiles.map((tile) => {
         const neighboringTiles = getNeighboringTiles(tile.x, tile.y, terrain.tiles);
 
-        const neighboringTilesTotals = neighboringTiles.reduce((carry, tile) => {
-            const currentTile = carry[tile.type];
-            if (currentTile) {
-                carry[tile.type] = currentTile + 1;
-            } else {
-                carry[tile.type] = 1;
-            }
+        const neighboringTilesTotals = neighboringTiles.reduce(
+            (carry, tile) => {
+                const currentTile = carry[tile.type];
+                if (currentTile) {
+                    carry[tile.type] = currentTile + 1;
+                } else {
+                    carry[tile.type] = 1;
+                }
 
-            return carry;
-        }, {} as {[key: string]: number|undefined});
+                return carry;
+            },
+            {} as { [key: string]: number | undefined },
+        );
 
-        const traitsToAssign = traits.filter((trait) => {
-            const { criteria } = trait;
+        const traitsToAssign = traits
+            .filter((trait) => {
+                const { criteria } = trait;
 
-            if (tile.type !== criteria.currentTileType && criteria.currentTileType !== null) {
-                return false;
-            }
+                if (tile.type !== criteria.currentTileType && criteria.currentTileType !== null) {
+                    return false;
+                }
 
-            if ((Math.random() * 100) > criteria.percentChance) {
-                return false;
-            }
+                if (Math.random() * 100 > criteria.percentChance) {
+                    return false;
+                }
 
-            const surroundingTileCriteria = trait.criteria.surroundingTileTypeCount;
-            if (surroundingTileCriteria === null) {
-                return true;
-            }
+                const surroundingTileCriteria = trait.criteria.surroundingTileTypeCount;
+                if (surroundingTileCriteria === null) {
+                    return true;
+                }
 
-            const total = neighboringTilesTotals[surroundingTileCriteria.type];
+                const total = neighboringTilesTotals[surroundingTileCriteria.type];
 
-            if (!total) {
-                return false;
-            }
+                if (!total) {
+                    return false;
+                }
 
-            return total >= surroundingTileCriteria.threshold;
-        }).map(trait => trait.traitName);
+                return total >= surroundingTileCriteria.threshold;
+            })
+            .map((trait) => trait.traitName);
 
         return { ...tile, traits: [...traitsToAssign] };
     });
 
-    return {...terrain, tiles: tilesWithFeatures};
+    return { ...terrain, tiles: tilesWithFeatures };
 };
 
 const traits: Array<Trait> = [
     {
-        traitName: "Rich Soil",
+        traitName: 'Rich Soil',
         criteria: {
-            currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "Prairie", threshold: 4},
-            percentChance: 100
+            currentTileType: 'Prairie',
+            surroundingTileTypeCount: { type: 'Prairie', threshold: 4 },
+            percentChance: 100,
         },
     },
     {
-        traitName: "Wild Horses",
+        traitName: 'Wild Horses',
         criteria: {
-            currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "Prairie", threshold: 2},
-            percentChance: 50
+            currentTileType: 'Prairie',
+            surroundingTileTypeCount: { type: 'Prairie', threshold: 2 },
+            percentChance: 50,
         },
     },
     {
-        traitName: "Wild Buffalo",
+        traitName: 'Wild Buffalo',
         criteria: {
-            currentTileType: "Prairie",
-            surroundingTileTypeCount: {type: "Prairie", threshold: 2},
-            percentChance: 25
+            currentTileType: 'Prairie',
+            surroundingTileTypeCount: { type: 'Prairie', threshold: 2 },
+            percentChance: 25,
         },
     },
     {
-        traitName: "Poor Soil",
+        traitName: 'Poor Soil',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 100
+            percentChance: 100,
         },
     },
     {
-        traitName: "Resource: Stone",
+        traitName: 'Resource: Stone',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 100
+            percentChance: 100,
         },
     },
     {
-        traitName: "Resource: Iron",
+        traitName: 'Resource: Iron',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 25
+            percentChance: 25,
         },
     },
     {
-        traitName: "Resource: Copper",
+        traitName: 'Resource: Copper',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 25
+            percentChance: 25,
         },
     },
     {
-        traitName: "Resource: Coal",
+        traitName: 'Resource: Coal',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 25
+            percentChance: 25,
         },
     },
     {
-        traitName: "Resource: Tin",
+        traitName: 'Resource: Tin',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 25
+            percentChance: 25,
         },
     },
     {
-        traitName: "Resource: Gold",
+        traitName: 'Resource: Gold',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 10
+            percentChance: 10,
         },
     },
     {
-        traitName: "Resource: Mithril",
+        traitName: 'Resource: Mithril',
         criteria: {
-            currentTileType: "Mountain",
+            currentTileType: 'Mountain',
             surroundingTileTypeCount: null,
-            percentChance: 5
+            percentChance: 5,
         },
     },
     {
-        traitName: "Dense Woodland",
+        traitName: 'Dense Woodland',
         criteria: {
-            currentTileType: "Forest",
-            surroundingTileTypeCount: {type: "Forest", threshold: 6},
-            percentChance: 75
+            currentTileType: 'Forest',
+            surroundingTileTypeCount: { type: 'Forest', threshold: 6 },
+            percentChance: 75,
         },
     },
     {
-        traitName: "Dangerous Wildlife",
+        traitName: 'Dangerous Wildlife',
         criteria: {
-            currentTileType: "Forest",
-            surroundingTileTypeCount: {type: "Forest", threshold: 4},
-            percentChance: 75
+            currentTileType: 'Forest',
+            surroundingTileTypeCount: { type: 'Forest', threshold: 4 },
+            percentChance: 75,
         },
     },
     {
-        traitName: "Faerie Grove",
+        traitName: 'Faerie Grove',
         criteria: {
-            currentTileType: "Forest",
-            surroundingTileTypeCount: {type: "Forest", threshold: 8},
-            percentChance: 50
+            currentTileType: 'Forest',
+            surroundingTileTypeCount: { type: 'Forest', threshold: 8 },
+            percentChance: 50,
         },
     },
     {
         traitName: "Witch's Lair",
         criteria: {
-            currentTileType: "Swamp",
-            surroundingTileTypeCount: {type: "Swamp", threshold: 2},
-            percentChance: 10
+            currentTileType: 'Swamp',
+            surroundingTileTypeCount: { type: 'Swamp', threshold: 2 },
+            percentChance: 10,
         },
     },
 ];

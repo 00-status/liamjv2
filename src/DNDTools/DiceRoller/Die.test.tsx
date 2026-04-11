@@ -1,6 +1,7 @@
-import { render } from "@testing-library/react";
-import { Die } from "./Die";
-import userEvent from "@testing-library/user-event";
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { Die } from './Die';
 
 describe('Die', () => {
     it('should generate a number when the button is clicked', async () => {

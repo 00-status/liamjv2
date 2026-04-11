@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 type UseDeleteDirectory = {
     isDeleting: boolean;
@@ -10,9 +10,9 @@ export const useDeleteDirectory = (fetchDirectories: (id: number) => void): UseD
 
     const deleteDirectory = useCallback((serverID: number, DirectoryID: number) => {
         setIsDeleting(true);
-        fetch("/api/1/terminal_directories/" + DirectoryID, {
-            method: "DELETE",
-            headers: { "Content-type": "application/json; charset=UTF-8" }
+        fetch('/api/1/terminal_directories/' + DirectoryID, {
+            method: 'DELETE',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
         })
             .then((response) => response.json())
             .then((json) => {

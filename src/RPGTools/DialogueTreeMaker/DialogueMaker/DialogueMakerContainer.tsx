@@ -1,5 +1,6 @@
-import { Dialogue } from "../domain/types";
-import { DialogueMaker } from "./DialogueMaker";
+import { Dialogue } from '../domain/types';
+
+import { DialogueMaker } from './DialogueMaker';
 
 type Props = {
     dialogues: Array<Dialogue>;
@@ -9,12 +10,14 @@ type Props = {
 };
 
 export const DialogueMakerContainer = (props: Props) => {
-    const {dialogues, currentDialogue, setCurrentDialogue, setDialogues} = props;
+    const { dialogues, currentDialogue, setCurrentDialogue, setDialogues } = props;
 
     const onSave = (updatedDialogue: Dialogue) => {
         const dialoguesCopy = [...dialogues];
 
-        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === updatedDialogue.id);
+        const currentDialogueIndex = dialogues.findIndex(
+            (dialogue) => dialogue.id === updatedDialogue.id,
+        );
 
         if (currentDialogueIndex === -1) {
             return;
@@ -31,7 +34,9 @@ export const DialogueMakerContainer = (props: Props) => {
             return;
         }
 
-        const currentDialogueIndex = dialogues.findIndex((dialogue) => dialogue.id === currentDialogue.id);
+        const currentDialogueIndex = dialogues.findIndex(
+            (dialogue) => dialogue.id === currentDialogue.id,
+        );
         if (currentDialogueIndex === -1) {
             return;
         }
@@ -43,7 +48,7 @@ export const DialogueMakerContainer = (props: Props) => {
         setDialogues(dialoguesCopy);
     };
 
-    return currentDialogue
-        ? <DialogueMaker dialogue={currentDialogue} onSave={onSave} onDelete={onDelete} />
-        : null;
+    return currentDialogue ? (
+        <DialogueMaker dialogue={currentDialogue} onSave={onSave} onDelete={onDelete} />
+    ) : null;
 };

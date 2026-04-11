@@ -1,12 +1,8 @@
-import { navigateDirectories } from "../navigateDirectories";
-import { IHandler } from "../types";
+import { navigateDirectories } from '../navigateDirectories';
+import { IHandler } from '../types';
 
 export const ChangeDirectoryHandler: IHandler = {
-    execute: function (
-        command,
-        terminal,
-        setTerminal
-    ): string {
+    execute: function (command, terminal, setTerminal): string {
         const { directories, currentDirectory } = terminal;
 
         if (!currentDirectory) {
@@ -17,17 +13,17 @@ export const ChangeDirectoryHandler: IHandler = {
         const directoryToMoveTo: string = commandChunks[1] ?? '.';
 
         const newDirectory = navigateDirectories(
-            directoryToMoveTo.split("/"),
+            directoryToMoveTo.split('/'),
             directories,
-            currentDirectory
+            currentDirectory,
         );
 
         if (!newDirectory) {
-            return "";
+            return '';
         }
 
-        setTerminal({...terminal, currentDirectory: newDirectory});
+        setTerminal({ ...terminal, currentDirectory: newDirectory });
 
         return '';
-    }
+    },
 };

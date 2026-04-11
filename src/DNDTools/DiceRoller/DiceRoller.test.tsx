@@ -1,20 +1,20 @@
-import { render } from "@testing-library/react";
-import { Children } from "react";
-import userEvent from "@testing-library/user-event";
-import * as GTAG from "ga-gtag";
+import { render } from '@testing-library/react';
+import { Children } from 'react';
+import userEvent from '@testing-library/user-event';
+import * as GTAG from 'ga-gtag';
 
-import DiceRoller from "./DiceRoller";
+import DiceRoller from './DiceRoller';
 
 jest.mock('../../SharedComponents/Page/Page', () => {
     return {
-        Page: ({ children }: {children: typeof Children}) => <>{children}</>
+        Page: ({ children }: { children: typeof Children }) => <>{children}</>,
     };
 });
 
 describe('DiceRoller.tsx', () => {
     const mockGtag = jest.fn();
     beforeEach(() => {
-        jest.spyOn(GTAG, "gtag").mockImplementation(mockGtag);
+        jest.spyOn(GTAG, 'gtag').mockImplementation(mockGtag);
     });
 
     it('should render each component', () => {
@@ -36,11 +36,11 @@ describe('DiceRoller.tsx', () => {
     it('should display a result when clicking a button', async () => {
         const { queryByText, getByTitle, getByText } = render(<DiceRoller />);
 
-        expect(queryByText('1d20')).toBeNull;
+        expect(queryByText('1d20')).toBeNull();
         await userEvent.click(getByTitle('dice 20'));
         getByText('1d20');
 
         expect(mockGtag).toHaveBeenCalledTimes(1);
-        expect(mockGtag).toHaveBeenCalledWith("event", "button_click_die_twenty");
+        expect(mockGtag).toHaveBeenCalledWith('event', 'button_click_die_twenty');
     });
 });

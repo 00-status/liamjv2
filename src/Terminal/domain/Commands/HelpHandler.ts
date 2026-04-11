@@ -1,14 +1,10 @@
-import { IHandler } from "../types";
+import { IHandler } from '../types';
 
 export const HelpHandler: IHandler = {
-    execute(
-        command,
-        terminal,
-        setTerminal
-    ): string {
+    execute(): string {
         return helpString;
-    }
-}
+    },
+};
 
 const helpString = `
 cd\t| Moves into a parent or child directory. | cd ./{directory_name} OR cd ../ OR cd ../{directory_name}

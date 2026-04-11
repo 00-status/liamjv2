@@ -1,6 +1,8 @@
-import { SerializedEdge } from "graphology-types";
-import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
-import { Choice, Dialogue, SkillTest } from "../domain/types";
+import { SerializedEdge } from 'graphology-types';
+
+import { Choice, Dialogue, SkillTest } from '../domain/types';
+
+import { convertDialoguesToEdges, convertDialoguesToNodes } from './graphUtil';
 
 describe('graphUtil', () => {
     describe('convertAreasToNodes', () => {
@@ -8,14 +10,14 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
-                    description: 'Description one'
+                    name: 'Area one',
+                    description: 'Description one',
                 } as Dialogue,
                 {
                     id: 2,
-                    name: "Area two",
-                    description: 'Description two'
-                } as Dialogue
+                    name: 'Area two',
+                    description: 'Description two',
+                } as Dialogue,
             ];
 
             const result = convertDialoguesToNodes(areas, [], new Map());
@@ -24,12 +26,12 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Area one", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: 'Area one', size: 20, color: '#d6a840' },
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: 'Area two', size: 20, color: '#d6a840' },
                 },
             ]);
         });
@@ -38,19 +40,17 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
-                    description: 'Description one'
+                    name: 'Area one',
+                    description: 'Description one',
                 } as Dialogue,
                 {
                     id: 2,
-                    name: "Area two",
-                    description: 'Description two'
-                } as Dialogue
+                    name: 'Area two',
+                    description: 'Description two',
+                } as Dialogue,
             ];
 
-            const coordsMap = new Map([
-                [1, { x: 1, y: 2 }]
-            ]);
+            const coordsMap = new Map([[1, { x: 1, y: 2 }]]);
 
             const result = convertDialoguesToNodes(areas, [], coordsMap);
 
@@ -58,12 +58,12 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 1, y: 2, label: "Area one", size: 20, color: '#d6a840' }
+                    attributes: { x: 1, y: 2, label: 'Area one', size: 20, color: '#d6a840' },
                 },
                 {
                     key: '2',
                     node: 2,
-                    attributes: { x: 0, y: 0, label: "Area two", size: 20, color: '#d6a840' }
+                    attributes: { x: 0, y: 0, label: 'Area two', size: 20, color: '#d6a840' },
                 },
             ]);
         });
@@ -73,11 +73,11 @@ describe('graphUtil', () => {
             expect(result).toHaveLength(0);
         });
 
-        it("should convert SkillTests to Nodes", () => {
+        it('should convert SkillTests to Nodes', () => {
             const skillTests: Array<SkillTest> = [
                 {
                     id: 1,
-                    name: "Skill Test 1",
+                    name: 'Skill Test 1',
                 } as SkillTest,
             ];
 
@@ -87,7 +87,14 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "Skill Test 1", size: 20, color: '#d6a840', type: "square" }
+                    attributes: {
+                        x: 0,
+                        y: 0,
+                        label: 'Skill Test 1',
+                        size: 20,
+                        color: '#d6a840',
+                        type: 'square',
+                    },
                 },
             ]);
         });
@@ -96,9 +103,9 @@ describe('graphUtil', () => {
             const dialogues: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "node one",
+                    name: 'node one',
                     description: 'Description one',
-                    character: { nameColor: "#FFFFFF" }
+                    character: { nameColor: '#FFFFFF' },
                 } as Dialogue,
             ];
 
@@ -108,7 +115,7 @@ describe('graphUtil', () => {
                 {
                     key: '1',
                     node: 1,
-                    attributes: { x: 0, y: 0, label: "node one", size: 20, color: '#FFFFFF' }
+                    attributes: { x: 0, y: 0, label: 'node one', size: 20, color: '#FFFFFF' },
                 },
             ]);
         });
@@ -119,7 +126,7 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
                     choices: [
                         {
@@ -134,19 +141,19 @@ describe('graphUtil', () => {
                             nextDialogueID: '3',
                             shortDescription: 'description 2',
                         },
-                    ]
+                    ],
                 } as Dialogue,
                 {
                     id: 2,
-                    name: "Area two",
+                    name: 'Area two',
                     description: 'Description two',
-                    choices: [] as Array<Choice>
+                    choices: [] as Array<Choice>,
                 } as Dialogue,
                 {
                     id: 3,
-                    name: "Area three",
+                    name: 'Area three',
                     description: 'Description three',
-                    choices: [] as Array<Choice>
+                    choices: [] as Array<Choice>,
                 } as Dialogue,
             ];
 
@@ -157,13 +164,13 @@ describe('graphUtil', () => {
                     key: '1-2',
                     source: '1',
                     target: '2',
-                    attributes: { size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false },
                 },
                 {
                     key: '1-3',
                     source: '1',
                     target: '3',
-                    attributes: { size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false },
                 },
             ];
             expect(result).toEqual(expected);
@@ -173,7 +180,7 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
                     choices: [
                         {
@@ -181,9 +188,9 @@ describe('graphUtil', () => {
                             conditionID: '',
                             nextDialogueID: '45',
                             shortDescription: 'description 1',
-                        }
-                    ]
-                } as Dialogue
+                        },
+                    ],
+                } as Dialogue,
             ];
 
             const result = convertDialoguesToEdges(areas, []);
@@ -195,7 +202,7 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Dialogue 1",
+                    name: 'Dialogue 1',
                     description: 'Description one',
                     choices: [
                         {
@@ -209,15 +216,15 @@ describe('graphUtil', () => {
                             conditionID: '',
                             nextDialogueID: '2',
                             shortDescription: 'description 1',
-                        }
-                    ]
+                        },
+                    ],
                 } as Dialogue,
                 {
                     id: 2,
-                    name: "Area two",
+                    name: 'Area two',
                     description: 'Description two',
-                    choices: [] as Array<Choice>
-                } as Dialogue
+                    choices: [] as Array<Choice>,
+                } as Dialogue,
             ];
 
             const result = convertDialoguesToEdges(areas, []);
@@ -234,10 +241,10 @@ describe('graphUtil', () => {
             const areas: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
-                    choices: [] as Array<Choice>
-                } as Dialogue
+                    choices: [] as Array<Choice>,
+                } as Dialogue,
             ];
 
             const result = convertDialoguesToEdges(areas, []);
@@ -249,7 +256,7 @@ describe('graphUtil', () => {
             const dialogues: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
                     choices: [
                         {
@@ -257,11 +264,13 @@ describe('graphUtil', () => {
                             conditionID: '',
                             nextDialogueID: '2',
                             shortDescription: 'description 1',
-                        }
-                    ]
-                } as Dialogue
+                        },
+                    ],
+                } as Dialogue,
             ];
-            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 7 } as SkillTest];
+            const skillTests: Array<SkillTest> = [
+                { id: 2, name: 'banana', nextDialogueID: 7 } as SkillTest,
+            ];
 
             const result = convertDialoguesToEdges(dialogues, skillTests);
 
@@ -270,7 +279,7 @@ describe('graphUtil', () => {
                     key: '1-2',
                     source: '1',
                     target: '2',
-                    attributes: { size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false },
                 },
             ];
             expect(result).toEqual(expected);
@@ -280,12 +289,14 @@ describe('graphUtil', () => {
             const dialogues: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
-                    choices: [] as Array<Choice>
-                } as Dialogue
+                    choices: [] as Array<Choice>,
+                } as Dialogue,
             ];
-            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 1 } as SkillTest];
+            const skillTests: Array<SkillTest> = [
+                { id: 2, name: 'banana', nextDialogueID: 1 } as SkillTest,
+            ];
 
             const result = convertDialoguesToEdges(dialogues, skillTests);
 
@@ -294,7 +305,7 @@ describe('graphUtil', () => {
                     key: '2-1',
                     source: '2',
                     target: '1',
-                    attributes: { size: 4, type: 'arrow', undirected: false }
+                    attributes: { size: 4, type: 'arrow', undirected: false },
                 },
             ];
             expect(result).toEqual(expected);
@@ -304,12 +315,14 @@ describe('graphUtil', () => {
             const dialogues: Array<Dialogue> = [
                 {
                     id: 1,
-                    name: "Area one",
+                    name: 'Area one',
                     description: 'Description one',
-                    choices: [] as Array<Choice>
-                } as Dialogue
+                    choices: [] as Array<Choice>,
+                } as Dialogue,
             ];
-            const skillTests: Array<SkillTest> = [{ id: 2, name: "banana", nextDialogueID: 7 } as SkillTest];
+            const skillTests: Array<SkillTest> = [
+                { id: 2, name: 'banana', nextDialogueID: 7 } as SkillTest,
+            ];
 
             const result = convertDialoguesToEdges(dialogues, skillTests);
 

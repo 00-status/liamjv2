@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
 
-import "./toast.css";
-import { ToastMessage, ToastMessageContext } from "./ToastMessageContext";
+import './toast.css';
+import { ToastMessage, ToastMessageContext } from './ToastMessageContext';
 
 export const Toast = () => {
     const { messageList, setMessageList } = useContext(ToastMessageContext);
@@ -20,7 +20,7 @@ export const Toast = () => {
 
         const messageListCopy = [...messageList];
         messageListCopy.shift();
-        
+
         setMessageList(messageListCopy);
     }, [currentMessage, messageList, setMessageList]);
 
@@ -38,7 +38,9 @@ export const Toast = () => {
         return null;
     }
 
-    return <div className={"toast " + (currentMessage ? "toast__visible" : "")}>
-        {currentMessage?.message}
-    </div>;
+    return (
+        <div className={'toast ' + (currentMessage ? 'toast__visible' : '')}>
+            {currentMessage?.message}
+        </div>
+    );
 };

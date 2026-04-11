@@ -1,12 +1,14 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { Directory } from "./useDirectories";
+import { Directory } from './useDirectories';
 
 type UseUpdateDirectory = {
     updateDirectory: (directory: Directory) => void;
 };
 
-export const useUpdateDirectory = (fetchDirectories: (serverId: number) => void): UseUpdateDirectory => {
+export const useUpdateDirectory = (
+    fetchDirectories: (serverId: number) => void,
+): UseUpdateDirectory => {
     const updateDirectory = useCallback((directory: Directory) => {
         const newDirectory = {
             id: directory.id,
@@ -20,15 +22,14 @@ export const useUpdateDirectory = (fetchDirectories: (serverId: number) => void)
 
         const directoryJson = JSON.stringify(newDirectory);
 
-        fetch("/api/1/terminal_directories", {
-            method: "PUT",
+        fetch('/api/1/terminal_directories', {
+            method: 'PUT',
             body: directoryJson,
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        })
-            .then((response) => fetchDirectories(directory.serverId));
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+        }).then(() => fetchDirectories(directory.serverId));
     }, []);
 
     return {
-        updateDirectory
+        updateDirectory,
     };
 };

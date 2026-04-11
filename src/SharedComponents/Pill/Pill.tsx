@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import './pill.css';
 
@@ -8,7 +8,9 @@ type Props = {
 };
 
 export const Pill = (props: Props) => {
-    return <div onClick={props.onClick} className="pill">
-        {props.children}
-    </div>;
+    return (
+        <div onClick={props.onClick} className="pill">
+            {props.children}
+        </div>
+    );
 };

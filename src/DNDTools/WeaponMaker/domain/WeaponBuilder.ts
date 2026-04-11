@@ -1,5 +1,5 @@
-import { Weapon } from "./Weapon";
-import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from "./constants";
+import { Weapon } from './Weapon';
+import { Rarity, WeaponDamage, WeaponProperties, WeaponRange, baseWeapons } from './constants';
 
 export class WeaponBuilder {
     private name: string | null = null;
@@ -73,7 +73,7 @@ export class WeaponBuilder {
             this.additionalDamage,
             this.weaponProperties,
             this.weaponRange,
-            this.actions
+            this.actions,
         );
     }
 }
