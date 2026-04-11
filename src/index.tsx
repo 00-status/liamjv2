@@ -2,7 +2,9 @@ import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
+
 import '@react-sigma/core/lib/style.css';
+import { StoneTowerPage } from './StoneTower/StoneTowerPage';
 
 const AboutMe = lazy(() => import(/* webpackChunkName: "about-me" */ './AboutMe/AboutMe'));
 const DiceRoller = lazy(
@@ -109,6 +111,11 @@ const router = createBrowserRouter([
     {
         path: '/unlisted/kingdom_overview',
         element: <KingdomOverviewPage />,
+        ErrorBoundary: RouterErrorBoundary,
+    },
+    {
+        path: '/unlisted/stone_tower',
+        element: <StoneTowerPage />,
         ErrorBoundary: RouterErrorBoundary,
     },
     { path: '*', element: <NotFoundPage />, ErrorBoundary: RouterErrorBoundary },
