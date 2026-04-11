@@ -7,11 +7,18 @@ import { Button } from '../SharedComponents/Button/Button';
 
 export const StoneTowerPage = () => {
     const [inkStory] = useState<Story>(new Story(RawStory));
+    const [playerIsPrepared, setPlayerIsPrepared] = useState();
     const [log, setLog] = useState<string>('');
 
     useEffect(() => {
+        inkStory.ObserveVariable('player_is_prepared', (name, newValue) => {
+            setPlayerIsPrepared(newValue);
+        });
+
+        console.log(inkStory.variablesState['player_is_prepared']);
+
         setLog((state) => state + inkStory.ContinueMaximally());
-    }, [setLog]);
+    }, []);
 
     const makeChoice = (choiceIndex: number) => {
         inkStory.ChooseChoiceIndex(choiceIndex);
@@ -21,6 +28,10 @@ export const StoneTowerPage = () => {
     return (
         <div className="stone-tower-page">
             <h1>Stone Tower</h1>
+            <div>
+                <h2>Variables</h2>
+                <div>Player Is Prepared: {playerIsPrepared ? 'Yes' : 'No'}</div>
+            </div>
             <div>
                 <h2>Log</h2>
                 <div className="stone-tower-page__log">{log}</div>
