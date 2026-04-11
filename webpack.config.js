@@ -5,9 +5,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = (env) => {
   const shouldOpenAnalyzer = env.analyze;
+  const isProd = process.env.NODE_ENV === "production";
 
   return {
     entry: "./src/index.tsx",
+    devtool: isProd ? "source-map" : "eval-cheap-module-source-map",
     output: {
       path: path.resolve(__dirname, "../server_php/public/"),
       publicPath: '/public/',
@@ -16,9 +18,16 @@ module.exports = (env) => {
       clean: true
     },
     optimization: {
+      minimize: isProd,
+      runtimeChunk: "single",
       splitChunks: {
         chunks: "all",
         cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all"
+          },
           sharedComponents: {
             test: /[\\/]src[\\/]SharedComponents[\\/]/,
             name: 'shared-components',
@@ -74,7 +83,10 @@ module.exports = (env) => {
         }
       ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] }
+    resolve: {
+      alias: { "@components": path.resolve(__dirname, "src/SharedComponents") },
+      extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
+    }
   };
 }
 

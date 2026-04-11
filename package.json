@@ -4,9 +4,9 @@
   "description": "portfolio website",
   "main": "index.tsx",
   "scripts": {
-    "build": "NODE_ENV=production webpack build --mode production",
-    "start": "NODE_ENV=development webpack build --watch --mode development",
-    "analyze": "NODE_ENV=production webpack build --mode production --env analyze=true",
+    "build": "NODE_ENV=production webpack build",
+    "start": "NODE_ENV=development webpack build --watch",
+    "analyze": "NODE_ENV=production webpack build --env analyze=true",
     "test": "jest"
   },
   "author": "00-status",
