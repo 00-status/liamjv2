@@ -1,0 +1,8 @@
+.stone-tower-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.stone-tower-page__log {
+    white-space: pre-wrap;
+}
