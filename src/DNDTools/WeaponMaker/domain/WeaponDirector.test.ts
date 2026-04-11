@@ -3,7 +3,7 @@ import { DamageType, DiceType, Rarity, baseWeapons } from './constants';
 
 describe('WeaponDirector', () => {
     beforeEach(() => {
-        jest.spyOn(global.Math, 'random').mockReturnValue(0.0);
+        jest.spyOn(globalThis.Math, 'random').mockReturnValue(0.0);
     });
 
     it('should generate a weapon completely randomly', () => {
