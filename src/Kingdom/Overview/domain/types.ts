@@ -18,6 +18,9 @@ export type Criteria = {
     percentChance: number;
 };
 
+// TODO: Add resource production cadence.
+// For example, a Stone Mine produces 2 Stone every 1 turn. We'll have to keep track of turns since the Stone Mine was created somehow.
+// Tiles have Traits; Buildings produce Resources.
 export type Building = {
     id: string;
     name: string;
