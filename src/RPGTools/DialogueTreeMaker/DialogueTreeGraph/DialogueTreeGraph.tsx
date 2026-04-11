@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { useLoadGraph, useRegisterEvents, useSigma } from "@react-sigma/core";
-import { SerializedGraph } from "graphology-types";
-import { DirectedGraph } from "graphology";
+import { useEffect, useState } from 'react';
+import { useLoadGraph, useRegisterEvents, useSigma } from '@react-sigma/core';
+import { SerializedGraph } from 'graphology-types';
+import { DirectedGraph } from 'graphology';
 
-import { convertDialoguesToEdges, convertDialoguesToNodes } from "./graphUtil";
-import { Dialogue, NodeCoordinate, SkillTest } from "../domain/types";
+import { Dialogue, NodeCoordinate, SkillTest } from '../domain/types';
+
+import { convertDialoguesToEdges, convertDialoguesToNodes } from './graphUtil';
 
 type Props = {
     dialogues: Array<Dialogue>;
@@ -15,13 +16,7 @@ type Props = {
 };
 
 export const DialogueTreeGraph = (props: Props) => {
-    const {
-        dialogues,
-        skillTests,
-        nodeCoordinates,
-        onDialogueClick,
-        onDialogueMoveFinish
-    } = props;
+    const { dialogues, skillTests, nodeCoordinates, onDialogueClick, onDialogueMoveFinish } = props;
 
     const [draggedNode, setDraggedNode] = useState<string | null>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -60,9 +55,9 @@ export const DialogueTreeGraph = (props: Props) => {
                 if (draggedNode) {
                     if (isDragging) {
                         const position = sigma.viewportToGraph(event);
-                        sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
-                        sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
-    
+                        sigma.getGraph().setNodeAttribute(draggedNode, 'x', position.x);
+                        sigma.getGraph().setNodeAttribute(draggedNode, 'y', position.y);
+
                         onDialogueMoveFinish(Number(draggedNode), position.x, position.y);
                         setIsDragging(false);
                     }
@@ -83,15 +78,15 @@ export const DialogueTreeGraph = (props: Props) => {
                     setIsDragging(true);
 
                     const position = sigma.viewportToGraph(event);
-                    sigma.getGraph().setNodeAttribute(draggedNode, "x", position.x);
-                    sigma.getGraph().setNodeAttribute(draggedNode, "y", position.y);
+                    sigma.getGraph().setNodeAttribute(draggedNode, 'x', position.x);
+                    sigma.getGraph().setNodeAttribute(draggedNode, 'y', position.y);
 
                     // Prevent sigma from moving the camera
                     event.preventSigmaDefault();
                     event.original.preventDefault();
                     event.original.stopPropagation();
                 }
-            }
+            },
         });
     }, [registerEvents, sigma, draggedNode, isDragging, setDraggedNode, setIsDragging]);
 

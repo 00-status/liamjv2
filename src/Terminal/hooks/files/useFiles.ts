@@ -1,7 +1,8 @@
-import { useCallback, useState } from "react";
-import { useCreateFile } from "./useCreateFile";
-import { usedeleteFile } from "./useDeleteFile";
-import { useUpdateFile } from "./useUpdateFile";
+import { useCallback, useState } from 'react';
+
+import { useCreateFile } from './useCreateFile';
+import { usedeleteFile } from './useDeleteFile';
+import { useUpdateFile } from './useUpdateFile';
 
 export type File = {
     id: number;
@@ -27,13 +28,16 @@ export const useFiles = (): UseFiles => {
     const [files, setFiles] = useState<Array<File>>([]);
     const [isLoadingFiles, setIsLoadingFiles] = useState<boolean>(false);
 
-    const fetchFiles = useCallback((directoryId: number) => {
-        setIsLoadingFiles(true);
-        fetch("/api/1/terminal_files?directory_id=" + directoryId)
-            .then(response => response.json())
-            .then(json => setFiles(json))
-            .finally(() => setIsLoadingFiles(false));
-    }, [setFiles, setIsLoadingFiles]);
+    const fetchFiles = useCallback(
+        (directoryId: number) => {
+            setIsLoadingFiles(true);
+            fetch('/api/1/terminal_files?directory_id=' + directoryId)
+                .then((response) => response.json())
+                .then((json) => setFiles(json))
+                .finally(() => setIsLoadingFiles(false));
+        },
+        [setFiles, setIsLoadingFiles],
+    );
 
     const { createFile } = useCreateFile(fetchFiles);
     const { deleteFile } = usedeleteFile(fetchFiles);
@@ -45,6 +49,6 @@ export const useFiles = (): UseFiles => {
         fetchFiles,
         createFile,
         updateFile,
-        deleteFile
+        deleteFile,
     };
 };

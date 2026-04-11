@@ -1,6 +1,9 @@
-import { PlainObject } from "sigma/types";
+import { PlainObject } from 'sigma/types';
 
-export const defaultCircleDrawHover = function (context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
+export const defaultCircleDrawHover = function (
+    context: CanvasRenderingContext2D,
+    data: PlainObject,
+) {
     const { x, y, size: nodeSize, color } = data;
 
     const hoverSize = nodeSize * 1.1;

@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './code-block-generator.css';
 
 export const CodeBlockGenerator = () => {
     const [uniqueID] = useState<string>(crypto.randomUUID());
     const [snippet] = useState(getSnippet());
 
-    const result = snippet.split("").map((character, index) => {
-        const style = { "animationDelay": (0.2 + index / 10) + "s" };
-        return <span className='character-span' aria-hidden key={uniqueID + "|" + index} style={style}>
-            {character}
-        </span>;
+    const result = snippet.split('').map((character, index) => {
+        const style = { animationDelay: 0.2 + index / 10 + 's' };
+        return (
+            <span className="character-span" aria-hidden key={uniqueID + '|' + index} style={style}>
+                {character}
+            </span>
+        );
     });
 
-    return <div className="code-block-generator">
-        <div>
-            {result}
+    return (
+        <div className="code-block-generator">
+            <div>{result}</div>
         </div>
-    </div>;
+    );
 };
 
 const getSnippet = (): string => {

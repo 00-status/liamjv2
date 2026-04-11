@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 type Props = {
     prefixText: string;
@@ -17,30 +17,30 @@ export const TerminalInput = (props: Props) => {
         inputRef.current?.focus();
     };
 
-    return <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
-        <div>
-            {prefixText}
-        </div>
-        <input
-            ref={inputRef}
-            autoFocus
-            className="terminal__input"
-            value={currentCommandText}
-            onChange={event => onChange(event.target.value ?? '')}
-            onKeyUp={(event) => {
-                if (event.key === 'Enter' && currentCommandText) {
-                    onEnter();
-                }
+    return (
+        <div onClick={onInputWrapperClick} className="terminal__input-wrapper">
+            <div>{prefixText}</div>
+            <input
+                ref={inputRef}
+                autoFocus
+                className="terminal__input"
+                value={currentCommandText}
+                onChange={(event) => onChange(event.target.value ?? '')}
+                onKeyUp={(event) => {
+                    if (event.key === 'Enter' && currentCommandText) {
+                        onEnter();
+                    }
 
-                if (event.key === 'Tab' && currentCommandText) {
-                    onTab();
-                }
-            }}
-            onKeyDown={(event) => {
-                if (event.key === "Tab") {
-                    event.preventDefault();
-                }
-            }}
-        />
-    </div>;
+                    if (event.key === 'Tab' && currentCommandText) {
+                        onTab();
+                    }
+                }}
+                onKeyDown={(event) => {
+                    if (event.key === 'Tab') {
+                        event.preventDefault();
+                    }
+                }}
+            />
+        </div>
+    );
 };

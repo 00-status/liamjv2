@@ -1,4 +1,4 @@
-import { IconType } from "../SharedComponents/Icon/domain";
+import { IconType } from '../SharedComponents/Icon/domain';
 
 export const dndRoutes = [
     { label: 'Dice Roller', route: '/dnd_tools/dice_roller', iconType: IconType.DICE20 },

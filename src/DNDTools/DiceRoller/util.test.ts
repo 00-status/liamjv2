@@ -1,4 +1,4 @@
-import { rollDie } from "./util";
+import { rollDie } from './util';
 
 describe('rollDie', () => {
     it('should return a number', () => {

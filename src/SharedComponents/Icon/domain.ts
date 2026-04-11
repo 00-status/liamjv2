@@ -22,16 +22,19 @@ export enum IconType {
     STORE,
     GRAPH4,
     GROUP,
-    MENU_BOOK
-};
+    MENU_BOOK,
+}
 
-export enum IconTheme { LIGHT, DARK, GREEN };
+export enum IconTheme {
+    LIGHT,
+    DARK,
+    GREEN,
+}
 
 export enum IconSize {
-    SMALL = "24px",
-    MEDIUM = "32px",
-    LARGE = "40px",
-    EXTRA_LARGE = "80px",
-    RESPONSIVE = "70%"
-};
-
+    SMALL = '24px',
+    MEDIUM = '32px',
+    LARGE = '40px',
+    EXTRA_LARGE = '80px',
+    RESPONSIVE = '70%',
+}

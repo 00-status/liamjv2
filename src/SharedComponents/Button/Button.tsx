@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import './button.css';
 
@@ -13,42 +13,39 @@ type Props = {
 export enum ButtonTheme {
     Default = 'default-button',
     Delete = 'delete-button',
-    Subtle = 'subtle-button'
-};
+    Subtle = 'subtle-button',
+}
 
 export const Button = (props: Props) => {
-    const {buttonTheme, hasSheen, children, onClick, disabled} = props;
+    const { buttonTheme, hasSheen, children, onClick, disabled } = props;
 
     const theme = getTheme(disabled, buttonTheme);
     const classes = getClasses(disabled, hasSheen);
 
-    return <button
-        data-theme={theme}
-        className={classes}
-        disabled={disabled}
-        onClick={onClick}
-    >
-        {children}
-    </button>;
+    return (
+        <button data-theme={theme} className={classes} disabled={disabled} onClick={onClick}>
+            {children}
+        </button>
+    );
 };
 
 const getTheme = (disabled?: boolean, theme?: ButtonTheme): string => {
     if (disabled) {
-        return "disabled-button"
+        return 'disabled-button';
     } else {
         return theme ?? ButtonTheme.Default;
     }
 };
 
 const getClasses = (disabled?: boolean, hasSheen?: boolean): string => {
-    let classes = "custom-button"
+    let classes = 'custom-button';
 
     if (disabled) {
-        classes += " disabled-button";
+        classes += ' disabled-button';
     }
 
     if (hasSheen && !disabled) {
-        classes += " button-sheen";
+        classes += ' button-sheen';
     }
 
     return classes;

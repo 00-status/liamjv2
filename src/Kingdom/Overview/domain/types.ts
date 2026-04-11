@@ -1,4 +1,4 @@
-export type Kingdom = { name: String; terrain: Terrain };
+export type Kingdom = { name: string; terrain: Terrain };
 export type Terrain = { rowSize: number; columnSize: number; tiles: Array<Tile> };
 export type Tile = {
     id: string;

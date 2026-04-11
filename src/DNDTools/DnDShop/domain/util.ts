@@ -1,6 +1,9 @@
-import { CartSlot } from "../DnDShop";
+import { CartSlot } from '../DnDShop';
 
-export const generateEmptyCartSlots = (startingIdNumber: number, slotsToGenerate: number): CartSlot[] => {
+export const generateEmptyCartSlots = (
+    startingIdNumber: number,
+    slotsToGenerate: number,
+): CartSlot[] => {
     if (slotsToGenerate <= 0) {
         throw new Error('Invalid count!');
     }
@@ -8,7 +11,10 @@ export const generateEmptyCartSlots = (startingIdNumber: number, slotsToGenerate
     const emptyCartSlots = [];
 
     for (let count = 0; count < slotsToGenerate; count++) {
-        const emptyCartSlot = { droppableID: 'droppable|' + (count + startingIdNumber), item: null };
+        const emptyCartSlot = {
+            droppableID: 'droppable|' + (count + startingIdNumber),
+            item: null,
+        };
         emptyCartSlots.push(emptyCartSlot);
     }
 

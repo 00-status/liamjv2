@@ -1,4 +1,3 @@
-
 import { ReactNode } from 'react';
 
 import './icon.css';
@@ -32,32 +31,40 @@ type Props = {
     iconType: IconType;
     iconTheme?: IconTheme;
     iconSize?: IconSize;
-}
+};
 
 export const Icon = (props: Props) => {
     const { iconType, iconTheme, iconSize } = props;
 
     const styles = {
-        width: (iconSize ?? "24px"),
-        height: (iconSize ?? "24px")
+        width: iconSize ?? '24px',
+        height: iconSize ?? '24px',
     };
 
-    const className = "icon " + getTheme(iconTheme);
+    const className = 'icon ' + getTheme(iconTheme);
 
-    return <svg className={className} style={styles} role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-        {iconComponents[iconType]}
-    </svg>;
+    return (
+        <svg
+            className={className}
+            style={styles}
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+        >
+            {iconComponents[iconType]}
+        </svg>
+    );
 };
 
 const getTheme = (theme?: IconTheme): string => {
     switch (theme) {
         case IconTheme.DARK:
-            return"icon-dark";
+            return 'icon-dark';
         case IconTheme.GREEN:
-            return "icon-green";
+            return 'icon-green';
         case IconTheme.LIGHT:
         default:
-            return "icon-light";
+            return 'icon-light';
     }
 };
 

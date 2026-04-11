@@ -1,8 +1,10 @@
-import { useCallback, useState } from "react";
-import { useCreateDirectory } from "./useCreateDirectory";
-import { useDeleteDirectory } from "./useDeleteDirectory";
-import { useUpdateDirectory } from "./useUpdateDirectory";
-import { File } from "../files/useFiles";
+import { useCallback, useState } from 'react';
+
+import { File } from '../files/useFiles';
+
+import { useCreateDirectory } from './useCreateDirectory';
+import { useDeleteDirectory } from './useDeleteDirectory';
+import { useUpdateDirectory } from './useUpdateDirectory';
 
 export type Directory = {
     id: number;
@@ -28,13 +30,16 @@ export const useDirectories = (): UseDirectories => {
     const [isLoadingDirectories, setIsLoadingDirectories] = useState(false);
     const [directories, setDirectories] = useState<Array<Directory>>([]);
 
-    const fetchDirectories = useCallback((serverId: number) => {
-        setIsLoadingDirectories(true);
-        fetch("/api/1/terminal_directories?server_id=" + serverId)
-            .then(response => response.json())
-            .then(json => setDirectories(json))
-            .finally(() => setIsLoadingDirectories(false));
-    }, [setDirectories]);
+    const fetchDirectories = useCallback(
+        (serverId: number) => {
+            setIsLoadingDirectories(true);
+            fetch('/api/1/terminal_directories?server_id=' + serverId)
+                .then((response) => response.json())
+                .then((json) => setDirectories(json))
+                .finally(() => setIsLoadingDirectories(false));
+        },
+        [setDirectories],
+    );
 
     const { createDirectory } = useCreateDirectory(fetchDirectories);
     const { updateDirectory } = useUpdateDirectory(fetchDirectories);
@@ -47,6 +52,6 @@ export const useDirectories = (): UseDirectories => {
         fetchDirectories,
         createDirectory,
         updateDirectory,
-        deleteDirectory
+        deleteDirectory,
     };
 };

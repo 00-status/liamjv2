@@ -1,10 +1,11 @@
-import { render } from "@testing-library/react";
-import { CustomDiceRoller } from "./CustomDiceRoller";
-import userEvent from "@testing-library/user-event";
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { CustomDiceRoller } from './CustomDiceRoller';
 
 describe('CustomDiceRoller', () => {
     it('should render the custom dice roller', () => {
-        const { getByText, getByDisplayValue } = render(<CustomDiceRoller callback={jest.fn()} />)
+        const { getByText, getByDisplayValue } = render(<CustomDiceRoller callback={jest.fn()} />);
 
         getByDisplayValue('2');
         getByText('d');
@@ -14,7 +15,7 @@ describe('CustomDiceRoller', () => {
 
     it('should render the custom dice roller', async () => {
         const callbackMock = jest.fn();
-        const { getByText } = render(<CustomDiceRoller callback={callbackMock} />)
+        const { getByText } = render(<CustomDiceRoller callback={callbackMock} />);
 
         expect(callbackMock).toHaveBeenCalledTimes(0);
 
