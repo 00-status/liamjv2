@@ -1,11 +1,16 @@
-import { Rarity } from "./constants";
-
+import { Rarity } from './constants';
 
 export const getRarities = (weaponRarity: Rarity): Rarity[] => {
     switch (weaponRarity) {
         default:
         case Rarity.Uncommon:
-            return [Rarity.Uncommon, Rarity.Uncommon, Rarity.Uncommon, Rarity.Uncommon, Rarity.Rare];
+            return [
+                Rarity.Uncommon,
+                Rarity.Uncommon,
+                Rarity.Uncommon,
+                Rarity.Uncommon,
+                Rarity.Rare,
+            ];
         case Rarity.Rare:
             return [Rarity.Uncommon, Rarity.Uncommon, Rarity.Rare, Rarity.Rare, Rarity.VeryRare];
         case Rarity.VeryRare:

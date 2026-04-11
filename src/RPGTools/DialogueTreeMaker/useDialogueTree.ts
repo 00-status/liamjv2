@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from "./domain/types";
-import { validateDialogueTree } from "./domain/validateDialogueTree";
+import { Dialogue, NodeCoordinate, DialogueTree, SkillTest } from './domain/types';
+import { validateDialogueTree } from './domain/validateDialogueTree';
 
 type UseDialogueTree = {
     dialogueTreeID: string;
@@ -50,10 +50,10 @@ export const useDialogueTree = (): UseDialogueTree => {
             name: dialogueTreeName,
             dialogues,
             skillTests,
-            nodeCoordinates: Array.from(nodeCoordinates.entries())
+            nodeCoordinates: Array.from(nodeCoordinates.entries()),
         };
         const serializedDialogueTree = JSON.stringify(dialogueTree);
-        
+
         localStorage.setItem('dialogueTree', serializedDialogueTree);
     }, [dialogueTreeID, dialogueTreeName, dialogues, skillTests, nodeCoordinates]);
 
@@ -67,6 +67,6 @@ export const useDialogueTree = (): UseDialogueTree => {
         setSkillTests,
         setDialogueTreeID,
         setDialogueTreeName,
-        setDialogueCoordinates
+        setDialogueCoordinates,
     };
 };

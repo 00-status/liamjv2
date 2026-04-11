@@ -1,8 +1,8 @@
 import './die.css';
-import { rollDie } from './util';
 import { Icon } from '../../SharedComponents/Icon/Icon';
-import { IconSize } from '../../SharedComponents/Icon/domain';
-import { IconType } from '../../SharedComponents/Icon/domain';
+import { IconSize, IconType } from '../../SharedComponents/Icon/domain';
+
+import { rollDie } from './util';
 
 type Props = {
     diceType: number;
@@ -16,9 +16,11 @@ export const Die = (props: Props) => {
         props.callback(result, '1d' + props.diceType, ['1d' + props.diceType + '=' + result]);
     };
 
-    return <button className='die' onClick={generateNumber}>
-        <Icon iconType={getDieType(props.diceType)} iconSize={IconSize.RESPONSIVE} />
-    </button>;
+    return (
+        <button className="die" onClick={generateNumber}>
+            <Icon iconType={getDieType(props.diceType)} iconSize={IconSize.RESPONSIVE} />
+        </button>
+    );
 };
 
 const getDieType = (diceType: number): IconType => {

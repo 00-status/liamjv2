@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import './description-card.css';
 
@@ -7,7 +7,5 @@ type Props = {
 };
 
 export const DescriptionCard = (props: Props) => {
-    return <div className="description-card">
-        {props.children}
-    </div>
+    return <div className="description-card">{props.children}</div>;
 };

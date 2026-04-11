@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 
 import './kingdom-overview-page.css';
-import { Page } from "../../SharedComponents/Page/Page";
+import { Page } from '../../SharedComponents/Page/Page';
+
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
@@ -13,23 +14,26 @@ const terrainWithFeatures = addTerrainFeatures(terrain);
 const centerTerrain = extractCenterGrid(terrainWithFeatures, 3);
 
 const kingdom: Kingdom = {
-    name: "Camelot",
-    terrain: centerTerrain
+    name: 'Camelot',
+    terrain: centerTerrain,
 };
 
 const KingdomOverviewPage = () => {
     const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
-    const [currentTile, setCurrentTile] = useState<TileType|null>(null);
+    const [currentTile, setCurrentTile] = useState<TileType | null>(null);
     // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
     const [buildings, setBuildings] = useState<Array<Building>>([]);
 
     useMemo(() => {
-        const tilesByCoords = kingdom.terrain.tiles.reduce((carry, tile) => {
-            const key = `${tile.x}-${tile.y}`;
-            carry[key] = tile;
-    
-            return carry;
-        }, {} as {[key: string]: TileType} );
+        const tilesByCoords = kingdom.terrain.tiles.reduce(
+            (carry, tile) => {
+                const key = `${tile.x}-${tile.y}`;
+                carry[key] = tile;
+
+                return carry;
+            },
+            {} as { [key: string]: TileType },
+        );
 
         const orderedTiles = [];
         for (let y = 0; y < kingdom.terrain.columnSize; y++) {
@@ -44,30 +48,39 @@ const KingdomOverviewPage = () => {
         setOrderedTiles(orderedTiles);
     }, [kingdom]);
 
-    const styles = { "gridTemplateColumns": Array(kingdom.terrain.columnSize).fill("1fr").join(" ") };
+    const styles = { gridTemplateColumns: Array(kingdom.terrain.columnSize).fill('1fr').join(' ') };
 
-    return <Page title="Kingdom" routes={[]}>
-        <div className='kingdom-overview-page'>
-            <h1>Overview</h1>
-            <div className='kingdom-overview-page__content'>
-                <div className='kingdom-overview-page__grid' style={styles}>
-                    {orderedTiles.map(tile => {
-                        return <Tile
-                            key={tile.x + "-" + tile.y}
-                            type={tile.type}
-                            onClick={() => setCurrentTile({...tile})} />;
-                    })}
-                </div>
-                <div className='kingdom-overview-page__tile-details'>
-                    {currentTile && <TileDetails
-                        tile={currentTile}
-                        buildings={buildings.filter(building => building.assignedTile === currentTile.id)}
-                        setBuildings={setBuildings}
-                    />}
+    return (
+        <Page title="Kingdom" routes={[]}>
+            <div className="kingdom-overview-page">
+                <h1>Overview</h1>
+                <div className="kingdom-overview-page__content">
+                    <div className="kingdom-overview-page__grid" style={styles}>
+                        {orderedTiles.map((tile) => {
+                            return (
+                                <Tile
+                                    key={tile.x + '-' + tile.y}
+                                    type={tile.type}
+                                    onClick={() => setCurrentTile({ ...tile })}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className="kingdom-overview-page__tile-details">
+                        {currentTile && (
+                            <TileDetails
+                                tile={currentTile}
+                                buildings={buildings.filter(
+                                    (building) => building.assignedTile === currentTile.id,
+                                )}
+                                setBuildings={setBuildings}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
-    </Page>;
+        </Page>
+    );
 };
 
 export default KingdomOverviewPage;

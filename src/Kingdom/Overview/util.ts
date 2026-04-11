@@ -1,6 +1,10 @@
-import { Terrain, Tile } from "./domain/types";
+import { Terrain, Tile } from './domain/types';
 
-export function generateWeightedTerrain(rowSize: number, columnSize: number, tilez?: Array<Tile>): Terrain {
+export function generateWeightedTerrain(
+    rowSize: number,
+    columnSize: number,
+    tilez?: Array<Tile>,
+): Terrain {
     const tiles: Array<Tile> = tilez ?? [];
 
     for (let x = 0; x < rowSize; x++) {
@@ -15,36 +19,37 @@ export function generateWeightedTerrain(rowSize: number, columnSize: number, til
 }
 
 export function getNeighboringTiles(x: number, y: number, tiles: Array<Tile>): Tile[] {
-    return tiles.filter(tile =>
-        (tile.x === x && tile.y === y - 1)              // Up
-        || (tile.x === x + 1 && tile.y === y - 1)       // Up-right
-        || (tile.x === x + 1 && tile.y === y)           // Right
-        || (tile.x === x + 1 && tile.y === y + 1)       // Down-right
-        || (tile.x === x && tile.y === y + 1)           // Down
-        || (tile.x === x - 1 && tile.y === y + 1)       // Down
-        || (tile.x === x - 1 && tile.y === y)           // Left
-        || (tile.x === x - 1 && tile.y === y - 1)       // Left-up
+    return tiles.filter(
+        (tile) =>
+            (tile.x === x && tile.y === y - 1) || // Up
+            (tile.x === x + 1 && tile.y === y - 1) || // Up-right
+            (tile.x === x + 1 && tile.y === y) || // Right
+            (tile.x === x + 1 && tile.y === y + 1) || // Down-right
+            (tile.x === x && tile.y === y + 1) || // Down
+            (tile.x === x - 1 && tile.y === y + 1) || // Down
+            (tile.x === x - 1 && tile.y === y) || // Left
+            (tile.x === x - 1 && tile.y === y - 1), // Left-up
     );
 }
 
 function determineTerrain(neighboringTiles: Array<Tile>): string {
     const terrainWeights: { [key: string]: number } = {
-        "Prairie": 1,
-        "Forest": 1,
-        "Mountain": 1,
-        "Swamp": 1,
+        Prairie: 1,
+        Forest: 1,
+        Mountain: 1,
+        Swamp: 1,
     };
 
-    neighboringTiles.forEach(neighboringTile => {
+    neighboringTiles.forEach((neighboringTile) => {
         switch (neighboringTile.type) {
-            case "Prairie":
+            case 'Prairie':
                 terrainWeights[neighboringTile.type] += 2;
                 break;
-            case "Mountain":
-            case "Swamp":
+            case 'Mountain':
+            case 'Swamp':
                 terrainWeights[neighboringTile.type] += 0.5;
                 break;
-            case "Forest":
+            case 'Forest':
             default:
                 terrainWeights[neighboringTile.type] += 2;
                 break;
@@ -62,21 +67,24 @@ function determineTerrain(neighboringTiles: Array<Tile>): string {
         }
     }
 
-    return "Prairie";
+    return 'Prairie';
 }
 
 export const extractCenterGrid = (originalTerrain: Terrain, newSize: number): Terrain => {
     const centerStart = Math.floor((originalTerrain.rowSize - newSize) / 2);
     const centerEnd = centerStart + newSize - 1;
 
-    const tiles = originalTerrain.tiles.filter(tile =>
-        tile.x >= centerStart && tile.x <= centerEnd &&
-        tile.y >= centerStart && tile.y <= centerEnd
+    const tiles = originalTerrain.tiles.filter(
+        (tile) =>
+            tile.x >= centerStart &&
+            tile.x <= centerEnd &&
+            tile.y >= centerStart &&
+            tile.y <= centerEnd,
     );
 
-    const reIndexedTiles = tiles.map(tile => {
-        return {...tile, x: tile.x - centerStart, y: tile.y - centerStart }
+    const reIndexedTiles = tiles.map((tile) => {
+        return { ...tile, x: tile.x - centerStart, y: tile.y - centerStart };
     });
 
     return { rowSize: newSize, columnSize: newSize, tiles: reIndexedTiles };
-}
+};

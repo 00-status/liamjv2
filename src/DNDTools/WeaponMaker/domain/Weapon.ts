@@ -1,4 +1,4 @@
-import { Rarity, WeaponDamage, WeaponProperties, WeaponRange } from "./constants";
+import { Rarity, WeaponDamage, WeaponProperties, WeaponRange } from './constants';
 
 export class Weapon {
     private name: string;
@@ -16,7 +16,7 @@ export class Weapon {
         additionalDamage: WeaponDamage | null,
         weaponProperties: WeaponProperties[],
         weaponRange: WeaponRange | null,
-        actions: string[]
+        actions: string[],
     ) {
         this.name = name;
         this.rarity = rarity;

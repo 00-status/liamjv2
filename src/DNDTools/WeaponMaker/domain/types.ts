@@ -9,13 +9,13 @@ export type Weapon = {
     weaponEffect: WeaponEffect;
     effectiveRange: number;
     ineffectiveRange: number;
-}
+};
 
 export type WeaponDamage = {
     diceCount: number;
     diceType: number;
     damageType: string;
-}
+};
 
 export type WeaponEffect = {
     id: number;
@@ -23,4 +23,4 @@ export type WeaponEffect = {
     description: string;
     rarities: string[];
     tags: string[];
-}
+};

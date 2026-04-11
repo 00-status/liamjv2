@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
 type UseCreateServer = {
     deleteServer: (id: number) => void;
@@ -6,9 +6,9 @@ type UseCreateServer = {
 
 export const useDeleteServer = (fetchServers: () => void): UseCreateServer => {
     const deleteServer = useCallback((serverID: number) => {
-        fetch("/api/1/terminal_servers/" + serverID, {
-            method: "DELETE",
-            headers: { "Content-type": "application/json; charset=UTF-8" }
+        fetch('/api/1/terminal_servers/' + serverID, {
+            method: 'DELETE',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
         })
             .then((response) => response.json())
             .then((json) => {

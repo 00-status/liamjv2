@@ -1,4 +1,4 @@
-import { SkillLevel } from "./SkillCard";
+import { SkillLevel } from './SkillCard';
 
 export type Skill = {
     name: string;

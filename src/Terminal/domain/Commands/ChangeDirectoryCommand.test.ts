@@ -1,7 +1,7 @@
-import { Directory } from "../../hooks/directories/useDirectories";
-import { TerminalState } from "../../Terminal";
-import { ChangeDirectoryHandler } from "./ChangeDirectoryHandler";
+import { Directory } from '../../hooks/directories/useDirectories';
+import { TerminalState } from '../../Terminal';
 
+import { ChangeDirectoryHandler } from './ChangeDirectoryHandler';
 
 const rootDirectory = {
     id: 1,
@@ -33,60 +33,56 @@ const photosDirectory = {
 } as Directory;
 
 const terminalState: TerminalState = {
-        servers: [],
-        currentServer: { id: 115, name: "test_server_name"},
-        directories: [
-            rootDirectory,
-            documentsDirectory,
-            picturesDirectory,
-            photosDirectory
-        ],
-        currentDirectory: rootDirectory,
-        commandHistory: [],
-        outputs: [],
+    servers: [],
+    currentServer: { id: 115, name: 'test_server_name' },
+    directories: [rootDirectory, documentsDirectory, picturesDirectory, photosDirectory],
+    currentDirectory: rootDirectory,
+    commandHistory: [],
+    outputs: [],
 };
 
 describe('ChangeDirectoryCommand', () => {
     const setTerminal = jest.fn();
 
     it('should enter a subdirectory', () => {
-        ChangeDirectoryHandler.execute(
-            'cd ./documents',
-            terminalState,
-            setTerminal
-        );
+        ChangeDirectoryHandler.execute('cd ./documents', terminalState, setTerminal);
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
-        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
+        expect(setTerminal).toHaveBeenCalledWith({
+            ...terminalState,
+            currentDirectory: documentsDirectory,
+        });
     });
 
     it('should enter a subdirectory using an absolute path', () => {
         ChangeDirectoryHandler.execute(
             'cd /documents',
-            {...terminalState, currentDirectory: picturesDirectory },
-            setTerminal
+            { ...terminalState, currentDirectory: picturesDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
-        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
+        expect(setTerminal).toHaveBeenCalledWith({
+            ...terminalState,
+            currentDirectory: documentsDirectory,
+        });
     });
 
     it('should enter multiple sub-directories', () => {
-        ChangeDirectoryHandler.execute(
-            'cd ./pictures/photos',
-            terminalState,
-            setTerminal
-        );
+        ChangeDirectoryHandler.execute('cd ./pictures/photos', terminalState, setTerminal);
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
-        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: photosDirectory});
+        expect(setTerminal).toHaveBeenCalledWith({
+            ...terminalState,
+            currentDirectory: photosDirectory,
+        });
     });
 
     it('should enter a parent directory', () => {
         ChangeDirectoryHandler.execute(
             'cd ../',
-            {...terminalState, currentDirectory: documentsDirectory},
-            setTerminal
+            { ...terminalState, currentDirectory: documentsDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
@@ -96,8 +92,8 @@ describe('ChangeDirectoryCommand', () => {
     it('should enter multiple parent directories', () => {
         ChangeDirectoryHandler.execute(
             'cd ../../',
-            {...terminalState, currentDirectory: photosDirectory},
-            setTerminal
+            { ...terminalState, currentDirectory: photosDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
@@ -107,30 +103,36 @@ describe('ChangeDirectoryCommand', () => {
     it('should move up multiple parent directories and enter a child directory', () => {
         ChangeDirectoryHandler.execute(
             'cd ../../documents',
-            {...terminalState, currentDirectory: photosDirectory},
-            setTerminal
+            { ...terminalState, currentDirectory: photosDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
-        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
+        expect(setTerminal).toHaveBeenCalledWith({
+            ...terminalState,
+            currentDirectory: documentsDirectory,
+        });
     });
 
     it('should enter a sub-directory, move up two directories, and then enter a sub-directory.', () => {
         ChangeDirectoryHandler.execute(
             'cd ./photos/../../documents',
-            {...terminalState, currentDirectory: picturesDirectory},
-            setTerminal
+            { ...terminalState, currentDirectory: picturesDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);
-        expect(setTerminal).toHaveBeenCalledWith({...terminalState, currentDirectory: documentsDirectory});
+        expect(setTerminal).toHaveBeenCalledWith({
+            ...terminalState,
+            currentDirectory: documentsDirectory,
+        });
     });
 
     it('should enter the root directory.', () => {
         ChangeDirectoryHandler.execute(
             'cd /',
-            {...terminalState, currentDirectory: picturesDirectory},
-            setTerminal
+            { ...terminalState, currentDirectory: picturesDirectory },
+            setTerminal,
         );
 
         expect(setTerminal).toHaveBeenCalledTimes(1);

@@ -1,11 +1,11 @@
-import { Directory } from "../hooks/directories/useDirectories";
+import { Directory } from '../hooks/directories/useDirectories';
 
 // TODO: Surface errors related to unknown directories
 export const navigateDirectories = (
     directoryGroups: Array<string>,
     directories: Array<Directory>,
-    currentDirectory: Directory
-): Directory|null => {
+    currentDirectory: Directory,
+): Directory | null => {
     var chainBrokenAt: string | null = null;
 
     var carry: Directory = currentDirectory;
@@ -14,24 +14,27 @@ export const navigateDirectories = (
             case '.':
                 // Current directory, no change
                 break;
-            case '..':
+            case '..': {
                 const newDirectory = moveUpDirectory(directories, carry);
                 if (newDirectory) {
                     carry = newDirectory;
                 }
                 break;
+            }
             case '':
                 if (index === 0) {
-                    const rootDirectory = directories.find(directory => directory.parentDirectory === null);
+                    const rootDirectory = directories.find(
+                        (directory) => directory.parentDirectory === null,
+                    );
 
                     if (!rootDirectory) {
-                        throw new Error("Cannot find rootDirectory!");
+                        throw new Error('Cannot find rootDirectory!');
                     }
 
                     carry = rootDirectory;
                 }
                 break;
-            default:
+            default: {
                 const newSubDirectory = moveDownDirectory(directories, carry, group);
 
                 if (!newSubDirectory) {
@@ -41,6 +44,7 @@ export const navigateDirectories = (
 
                 carry = newSubDirectory;
                 break;
+            }
         }
     });
 
@@ -49,7 +53,7 @@ export const navigateDirectories = (
 
 const moveUpDirectory = (
     directories: Array<Directory>,
-    currentDirectory: Directory
+    currentDirectory: Directory,
 ): Directory | null => {
     const parentDirectory = directories.find((directory) => {
         return currentDirectory.parentDirectory === directory.id;
@@ -61,10 +65,12 @@ const moveUpDirectory = (
 const moveDownDirectory = (
     directories: Array<Directory>,
     currentDirectory: Directory,
-    desiredDirectoryName: string
+    desiredDirectoryName: string,
 ): Directory | null => {
     const childDirectories = directories.filter((directory) => {
-        return currentDirectory.subDirectories.find((subDirectoryId) => subDirectoryId === directory.id);
+        return currentDirectory.subDirectories.find(
+            (subDirectoryId) => subDirectoryId === directory.id,
+        );
     });
 
     const newDirectory = childDirectories.find((childDirectory) => {

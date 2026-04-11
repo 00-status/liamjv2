@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { Button, ButtonTheme } from "../../SharedComponents/Button/Button";
-import { Card } from "../../SharedComponents/Card/Card";
-import { Weapon, WeaponDamage } from "./domain/types";
-import { ToastMessage, ToastMessageContext } from "../../SharedComponents/Toast/ToastMessageContext";
-import { Icon } from "../../SharedComponents/Icon/Icon";
+import { Button, ButtonTheme } from '../../SharedComponents/Button/Button';
+import { Card } from '../../SharedComponents/Card/Card';
+import {
+    ToastMessage,
+    ToastMessageContext,
+} from '../../SharedComponents/Toast/ToastMessageContext';
+import { Icon } from '../../SharedComponents/Icon/Icon';
 import { IconType } from '../../SharedComponents/Icon/domain';
+
+import { Weapon, WeaponDamage } from './domain/types';
 
 type Props = {
     weapon: Weapon;
@@ -22,38 +26,53 @@ export const WeaponCard = (props: Props) => {
     const copyText = () => {
         navigator.clipboard.writeText(formatWeaponForCopy(weapon));
 
-        messageContext.setMessageList((state: Array<ToastMessage>) => [...state, { message: "Copied to clipboard!" } ]);
+        messageContext.setMessageList((state: Array<ToastMessage>) => [
+            ...state,
+            { message: 'Copied to clipboard!' },
+        ]);
     };
 
-    const copyButton = <Button buttonTheme={ButtonTheme.Subtle} onClick={copyText}>
-        <Icon iconType={IconType.COPY} />
-    </Button>;
+    const copyButton = (
+        <Button buttonTheme={ButtonTheme.Subtle} onClick={copyText}>
+            <Icon iconType={IconType.COPY} />
+        </Button>
+    );
 
-    return <Card title={weapon.name || weapon.defaultName} button={copyButton}>
-        <div>
+    return (
+        <Card title={weapon.name || weapon.defaultName} button={copyButton}>
             <div>
                 <div>
-                    <b>Type: </b>{weapon.defaultName}
+                    <div>
+                        <b>Type: </b>
+                        {weapon.defaultName}
+                    </div>
+                    <div>
+                        <b>Rarity: </b>
+                        {weapon.rarity}
+                    </div>
+                    {formattedWeaponProperties && (
+                        <div>
+                            <b>Properties: </b> {formattedWeaponProperties}
+                        </div>
+                    )}
+                    <div>
+                        <b>Damage: </b> {formatDamage(weapon.baseDamage, weapon.extraDamage)}
+                    </div>
+                    {hasRange && (
+                        <div>
+                            <b>Range (feet): </b>{' '}
+                            {weapon.effectiveRange + '/' + weapon.ineffectiveRange}
+                        </div>
+                    )}
                 </div>
+                <hr className="divider" />
                 <div>
-                    <b>Rarity: </b>{weapon.rarity}
+                    <b>{weapon.weaponEffect.name}: </b>
+                    {weapon.weaponEffect.description}
                 </div>
-                {formattedWeaponProperties && <div>
-                    <b>Properties: </b> {formattedWeaponProperties}
-                </div>}
-                <div>
-                    <b>Damage: </b> {formatDamage(weapon.baseDamage, weapon.extraDamage)}
-                </div>
-                {hasRange && <div>
-                    <b>Range (feet): </b> {weapon.effectiveRange + "/" + weapon.ineffectiveRange}
-                </div>}
             </div>
-            <hr className="divider" />
-            <div>
-                <b>{weapon.weaponEffect.name}: </b>{weapon.weaponEffect.description}
-            </div>
-        </div>
-    </Card>
+        </Card>
+    );
 };
 
 const formatWeaponProperties = (weaponProperties: string[]): string => {
@@ -72,9 +91,10 @@ const formatDamage = (damage: WeaponDamage, extraDamage: WeaponDamage): string =
     }
 
     const regularDamageString = damage.diceCount + 'd' + damage.diceType + ' ' + damage.damageType;
-    const extraDamageString = extraDamage.diceCount + 'd' + extraDamage.diceType + ' ' + extraDamage.damageType;
+    const extraDamageString =
+        extraDamage.diceCount + 'd' + extraDamage.diceType + ' ' + extraDamage.damageType;
 
-    return regularDamageString + " + " + extraDamageString;
+    return regularDamageString + ' + ' + extraDamageString;
 };
 
 const formatWeaponForCopy = (weapon: Weapon) => {
@@ -95,5 +115,5 @@ Damage: ${formattedDamage}
 `;
     }
 
-    return weaponCopy += `${weapon.weaponEffect.name}: ${weapon.weaponEffect.description}`;
+    return (weaponCopy += `${weapon.weaponEffect.name}: ${weapon.weaponEffect.description}`);
 };

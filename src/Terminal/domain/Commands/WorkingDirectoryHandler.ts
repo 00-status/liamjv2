@@ -1,12 +1,8 @@
-import { Directory } from "../../hooks/directories/useDirectories";
-import { IHandler } from "../types";
+import { Directory } from '../../hooks/directories/useDirectories';
+import { IHandler } from '../types';
 
 export const WorkingDirectoryHandler: IHandler = {
-    execute(
-        command,
-        terminal,
-        setTerminal
-    ): string {
+    execute(command, terminal): string {
         const { directories, currentDirectory } = terminal;
 
         if (!currentDirectory) {
@@ -14,17 +10,20 @@ export const WorkingDirectoryHandler: IHandler = {
         }
 
         return assembleFullPathString(currentDirectory.id, directories);
-    }
-}
+    },
+};
 
-const assembleFullPathString = (workingDirectoryId: number, directories: Array<Directory>): string => {
-    const directory = directories.find(directory => directory.id === workingDirectoryId);
+const assembleFullPathString = (
+    workingDirectoryId: number,
+    directories: Array<Directory>,
+): string => {
+    const directory = directories.find((directory) => directory.id === workingDirectoryId);
 
     if (!directory) {
-        return "";
+        return '';
     }
 
-    const pathString: string = "/" + directory.name;
+    const pathString: string = '/' + directory.name;
 
     const parentDirectoryId = directory.parentDirectory;
 

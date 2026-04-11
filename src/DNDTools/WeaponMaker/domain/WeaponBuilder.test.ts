@@ -1,5 +1,5 @@
-import { WeaponBuilder } from "./WeaponBuilder";
-import { DamageType, DiceType, Rarity, WeaponProperties } from "./constants";
+import { WeaponBuilder } from './WeaponBuilder';
+import { DamageType, DiceType, Rarity, WeaponProperties } from './constants';
 
 describe('WeapobBuilder', () => {
     it('should return a weapon class', () => {
@@ -12,7 +12,7 @@ describe('WeapobBuilder', () => {
             .addAdditionalDamage({
                 diceCount: 2,
                 diceType: DiceType.eight,
-                damageType: DamageType.Lightning
+                damageType: DamageType.Lightning,
             })
             .addActions(['Test Action']);
 
@@ -23,12 +23,12 @@ describe('WeapobBuilder', () => {
         expect(weapon.getBaseDamage()).toEqual({
             diceCount: 2,
             diceType: DiceType.six,
-            damageType: DamageType.Slashing
+            damageType: DamageType.Slashing,
         });
         expect(weapon.getAdditionalDamage()).toEqual({
             diceCount: 2,
             diceType: DiceType.eight,
-            damageType: DamageType.Lightning
+            damageType: DamageType.Lightning,
         });
         expect(weapon.getWeaponProperties()).toEqual([WeaponProperties.Twohanded]);
         expect(weapon.getRange()).toEqual(null);
@@ -51,7 +51,7 @@ describe('WeapobBuilder', () => {
         expect(weapon.getBaseDamage()).toEqual({
             diceCount: 2,
             diceType: DiceType.six,
-            damageType: DamageType.Slashing
+            damageType: DamageType.Slashing,
         });
         expect(weapon.getAdditionalDamage()).toEqual(null);
         expect(weapon.getWeaponProperties()).toEqual([WeaponProperties.Twohanded]);
@@ -69,7 +69,7 @@ describe('WeapobBuilder', () => {
             .addAdditionalDamage({
                 diceCount: 2,
                 diceType: DiceType.eight,
-                damageType: DamageType.Lightning
+                damageType: DamageType.Lightning,
             })
             .addActions([]);
 
@@ -80,12 +80,12 @@ describe('WeapobBuilder', () => {
         expect(weapon.getBaseDamage()).toEqual({
             diceCount: 2,
             diceType: DiceType.six,
-            damageType: DamageType.Slashing
+            damageType: DamageType.Slashing,
         });
         expect(weapon.getAdditionalDamage()).toEqual({
             diceCount: 2,
             diceType: DiceType.eight,
-            damageType: DamageType.Lightning
+            damageType: DamageType.Lightning,
         });
         expect(weapon.getWeaponProperties()).toEqual([WeaponProperties.Twohanded]);
         expect(weapon.getRange()).toEqual(null);
@@ -109,11 +109,11 @@ describe('WeapobBuilder', () => {
     it('should throw a TypeError when baseWeaponDamage is null', () => {
         const weaponBuilder = new WeaponBuilder();
 
-        weaponBuilder
-            .addName('Test Weapon Name')
-            .addRarity(Rarity.Uncommon);
+        weaponBuilder.addName('Test Weapon Name').addRarity(Rarity.Uncommon);
 
-        expect(() => weaponBuilder.buildWeapon()).toThrow('The base weapon damage must be defined!');
+        expect(() => weaponBuilder.buildWeapon()).toThrow(
+            'The base weapon damage must be defined!',
+        );
     });
 
     it('should throw a TypeError when Actions is null', () => {
@@ -130,6 +130,8 @@ describe('WeapobBuilder', () => {
     it('should throw an Error when adding an invalid base weapon', () => {
         const weaponBuilder = new WeaponBuilder();
 
-        expect(() => weaponBuilder.addBaseWeaponProperties('Banana!')).toThrow('Cannot find specified weapon!');
+        expect(() => weaponBuilder.addBaseWeaponProperties('Banana!')).toThrow(
+            'Cannot find specified weapon!',
+        );
     });
 });

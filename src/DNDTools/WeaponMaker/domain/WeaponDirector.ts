@@ -1,7 +1,16 @@
-import { Weapon } from "./Weapon";
-import { WeaponBuilder } from "./WeaponBuilder";
-import { DamageType, DiceType, Rarity, baseWeapons, damageTypes, diceCounts, diceTypes, weaponActions } from "./constants";
-import { getRarities } from "./domain";
+import { Weapon } from './Weapon';
+import { WeaponBuilder } from './WeaponBuilder';
+import {
+    DamageType,
+    DiceType,
+    Rarity,
+    baseWeapons,
+    damageTypes,
+    diceCounts,
+    diceTypes,
+    weaponActions,
+} from './constants';
+import { getRarities } from './domain';
 
 export const createWeapon = (selectedRarity: Rarity): Weapon => {
     // TODO: Randomly select a couple actions based on rarity.
@@ -21,13 +30,11 @@ export const createWeapon = (selectedRarity: Rarity): Weapon => {
     const diceType = getDiceType(rarities);
     const damageType = getDamageType(rarities);
 
-    weaponBuilder.addAdditionalDamage(
-        {
-            diceCount: diceCount,
-            diceType: diceType,
-            damageType: damageType
-        }
-    );
+    weaponBuilder.addAdditionalDamage({
+        diceCount: diceCount,
+        diceType: diceType,
+        damageType: damageType,
+    });
 
     const action = weaponActions[Math.floor(Math.random() * weaponActions.length)];
     weaponBuilder.addActions([action.effect]);
@@ -52,7 +59,7 @@ const getDiceCount = (rarities: Rarity[]): number => {
     });
 
     return filteredDiceCounts[Math.floor(Math.random() * filteredDiceCounts.length)].diceCount;
-}
+};
 
 const getDiceType = (rarities: Rarity[]): number => {
     const rarity = getRarity(rarities);
@@ -66,7 +73,7 @@ const getDiceType = (rarities: Rarity[]): number => {
     }
 
     return filteredDiceTypes[Math.floor(Math.random() * filteredDiceTypes.length)].diceType;
-}
+};
 
 const getDamageType = (rarities: Rarity[]): DamageType => {
     const rarity = getRarity(rarities);
@@ -76,5 +83,4 @@ const getDamageType = (rarities: Rarity[]): DamageType => {
     });
 
     return filteredDamageTypes[Math.floor(Math.random() * filteredDamageTypes.length)].damageType;
-}
-
+};

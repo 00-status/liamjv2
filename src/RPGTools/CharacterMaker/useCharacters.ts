@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Character } from "./domain/types";
+import { Character } from './domain/types';
 
 type UseCharacters = {
     characters: Array<Character>;
@@ -9,7 +9,7 @@ type UseCharacters = {
 
 export const useCharacters = (): UseCharacters => {
     const [characters, setCharacters] = useState<Array<Character>>([]);
-  
+
     useEffect(() => {
         const charactersString = localStorage.getItem('characters');
 
@@ -28,6 +28,6 @@ export const useCharacters = (): UseCharacters => {
 
     return {
         characters,
-        setCharacters
+        setCharacters,
     };
 };

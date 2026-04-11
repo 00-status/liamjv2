@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import './button-link.css';
 
@@ -9,7 +9,9 @@ type Props = {
 };
 
 export const ButtonLink = (props: Props) => {
-    return <a className="button-link" download={props.download} href={props.href}>
-        {props.children}
-    </a>;
+    return (
+        <a className="button-link" download={props.download} href={props.href}>
+            {props.children}
+        </a>
+    );
 };

@@ -1,6 +1,7 @@
-import { useCallback, useState } from "react";
-import { useCreateServer } from "./useCreateServer";
-import { useDeleteServer } from "./useDeleteServer";
+import { useCallback, useState } from 'react';
+
+import { useCreateServer } from './useCreateServer';
+import { useDeleteServer } from './useDeleteServer';
 
 export type Server = {
     id: number;
@@ -19,13 +20,13 @@ export const useServers = (): UseServers => {
     const [servers, setServers] = useState<Array<Server>>([]);
 
     const fetchServers = useCallback(() => {
-        fetch("/api/1/terminal_servers")
-            .then(response => response.json())
-            .then(json => setServers(json));
+        fetch('/api/1/terminal_servers')
+            .then((response) => response.json())
+            .then((json) => setServers(json));
     }, [setServers]);
 
     const { createServer } = useCreateServer(fetchServers);
-    const { deleteServer} = useDeleteServer(fetchServers);
+    const { deleteServer } = useDeleteServer(fetchServers);
 
     return { servers, fetchServers, createServer, deleteServer };
 };

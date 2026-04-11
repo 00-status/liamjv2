@@ -1,11 +1,12 @@
-import { SkillTest } from "../domain/types";
-import { SkillTestMaker } from "./SkillTestMaker";
+import { SkillTest } from '../domain/types';
+
+import { SkillTestMaker } from './SkillTestMaker';
 
 type Props = {
     skillTests: Array<SkillTest>;
-    currentSkillTest: SkillTest|null;
+    currentSkillTest: SkillTest | null;
     setSkillTests: (skillTest: Array<SkillTest>) => void;
-    setCurrentSkillTest: (skillTest: SkillTest|null) => void;
+    setCurrentSkillTest: (skillTest: SkillTest | null) => void;
 };
 
 export const SkillTestMakerContainer = (props: Props) => {
@@ -15,7 +16,9 @@ export const SkillTestMakerContainer = (props: Props) => {
     const onSave = (updatedSkillTest: SkillTest) => {
         const skillTestsCopy = [...skillTests];
 
-        const currentSkillTestIndex = skillTests.findIndex((skillTest) => skillTest.id === updatedSkillTest.id);
+        const currentSkillTestIndex = skillTests.findIndex(
+            (skillTest) => skillTest.id === updatedSkillTest.id,
+        );
 
         if (currentSkillTestIndex === -1) {
             return;
@@ -32,7 +35,9 @@ export const SkillTestMakerContainer = (props: Props) => {
             return;
         }
 
-        const currentSkillTestIndex = skillTests.findIndex((dialogue) => dialogue.id === currentSkillTest.id);
+        const currentSkillTestIndex = skillTests.findIndex(
+            (dialogue) => dialogue.id === currentSkillTest.id,
+        );
         if (currentSkillTestIndex === -1) {
             return;
         }
@@ -44,11 +49,7 @@ export const SkillTestMakerContainer = (props: Props) => {
         setSkillTests(dialoguesCopy);
     };
 
-    return currentSkillTest
-        ? <SkillTestMaker
-            currentSkillTest={currentSkillTest}
-            onSave={onSave}
-            onDelete={onDelete}
-        />
-        : null;
+    return currentSkillTest ? (
+        <SkillTestMaker currentSkillTest={currentSkillTest} onSave={onSave} onDelete={onDelete} />
+    ) : null;
 };

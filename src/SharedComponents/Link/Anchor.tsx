@@ -6,7 +6,9 @@ type Props = {
 };
 
 export const Anchor = (props: Props) => {
-    return <a className="anchor" target="_blank" rel="noopener noreferrer" href={props.link}>
-        {props.displayText}
-    </a>
+    return (
+        <a className="anchor" target="_blank" rel="noopener noreferrer" href={props.link}>
+            {props.displayText}
+        </a>
+    );
 };

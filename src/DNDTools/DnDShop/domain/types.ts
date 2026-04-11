@@ -1,9 +1,8 @@
-
 export type Item = {
-    name: string,
-    cost: number,
-    currency: CurrencyEnum,
-    weight: number | null
+    name: string;
+    cost: number;
+    currency: CurrencyEnum;
+    weight: number | null;
 };
 
 export type Currency = {
@@ -13,7 +12,7 @@ export type Currency = {
 };
 
 export enum CurrencyEnum {
-    Gold = "gold",
-    Silver = "silver",
-    Copper = "copper" 
-};
+    Gold = 'gold',
+    Silver = 'silver',
+    Copper = 'copper',
+}

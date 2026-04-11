@@ -1,4 +1,4 @@
-import { IconType } from "../SharedComponents/Icon/domain";
+import { IconType } from '../SharedComponents/Icon/domain';
 
 export const RPGRoutes = [
     { label: 'Dialogue Tree', route: '/rpg_tools/dialogue_tree', iconType: IconType.GRAPH4 },

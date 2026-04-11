@@ -1,7 +1,10 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
 import './skill-card.css';
-export enum SkillLevel { "working", "expert" };
+export enum SkillLevel {
+    'working',
+    'expert',
+}
 
 type Props = {
     name: string;
@@ -12,27 +15,27 @@ type Props = {
 export const SkillCard = (props: Props): ReactElement => {
     const cardTheme = getCardTheme(props.type);
 
-    return <div className="skill-card">
-        <div data-theme={cardTheme} className="skill-card__gradient">
-            <div className="skill-card__title">
-                {props.name}
+    return (
+        <div className="skill-card">
+            <div data-theme={cardTheme} className="skill-card__gradient">
+                <div className="skill-card__title">{props.name}</div>
+            </div>
+            <div className="skill-card__container">
+                <div>{props.type}</div>
             </div>
         </div>
-        <div className="skill-card__container">
-            <div>{props.type}</div>
-        </div>
-    </div>;
+    );
 };
 
 const getCardTheme = (type: string) => {
     switch (type) {
-        case "Front-end":
-            return "red-card"
-        case "Back-end":
-            return "blue-card";
-        case "Database":
-            return "green-card";
+        case 'Front-end':
+            return 'red-card';
+        case 'Back-end':
+            return 'blue-card';
+        case 'Database':
+            return 'green-card';
         default:
-            return "default-card";
+            return 'default-card';
     }
-}
+};
