@@ -1,15 +1,18 @@
 import { Story } from 'inkjs';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
 import { Button } from '../SharedComponents/Button/Button';
 
 import { useFetchStoryJSON } from './hooks/useFetchStoryJSON';
+import { StoneTowerGameState } from './StoneTowerPage';
 
 type Props = {
     storyFileName: string;
+    variablesNamesToObserve: Array<string>;
+    setGameState: (gameState: SetStateAction<StoneTowerGameState>) => void;
 };
 
-export const StoryBook = ({ storyFileName }: Props) => {
+export const StoryBook = ({ storyFileName, variablesNamesToObserve, setGameState }: Props) => {
     const rawStory = useFetchStoryJSON(storyFileName);
 
     const [inkStory, setInkStory] = useState<null | Story>(null);
@@ -23,10 +26,35 @@ export const StoryBook = ({ storyFileName }: Props) => {
         const newInkStory = new Story(rawStory);
         newInkStory.ContinueMaximally();
 
-        // TODO: Register observable variables.
-
         setInkStory(newInkStory);
     }, [rawStory]);
+
+    useEffect(() => {
+        if (!inkStory) {
+            return;
+        }
+
+        const observerFunction = (
+            observerVariableName: string,
+            newValue: Story.VariableObserver,
+        ) => {
+            queueMicrotask(() => {
+                setGameState((state) => ({
+                    ...state,
+                    [observerVariableName]: newValue,
+                }));
+            });
+        };
+        variablesNamesToObserve.map((name) => {
+            return inkStory.ObserveVariable(name, observerFunction);
+        });
+
+        return () => {
+            variablesNamesToObserve.forEach((name) => {
+                inkStory.RemoveVariableObserver(observerFunction, name);
+            });
+        };
+    }, [inkStory, variablesNamesToObserve]);
 
     if (!inkStory) {
         return;
