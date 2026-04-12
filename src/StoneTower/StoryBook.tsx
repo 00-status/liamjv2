@@ -1,10 +1,9 @@
 import { Story } from 'inkjs';
 import { useEffect, useState } from 'react';
 
-import RawStory from '../assets/stone_tower.ink.json';
 import { Button } from '../SharedComponents/Button/Button';
 
-import { useFetchStoryJSON } from './hooks/useFetchJSON';
+import { useFetchStoryJSON } from './hooks/useFetchStoryJSON';
 
 type Props = {
     storyFileName: string;
@@ -13,17 +12,25 @@ type Props = {
 export const StoryBook = ({ storyFileName }: Props) => {
     const rawStory = useFetchStoryJSON(storyFileName);
 
-    const [inkStory] = useState<Story>(new Story(rawStory));
-    const [playerIsPrepared, setPlayerIsPrepared] = useState();
+    const [inkStory, setInkStory] = useState<null | Story>(null);
     const [log, setLog] = useState<string>('');
 
     useEffect(() => {
-        inkStory.ObserveVariable('player_is_prepared', (name, newValue) => {
-            setPlayerIsPrepared(newValue);
-        });
+        if (!rawStory) {
+            return;
+        }
 
-        setLog((state) => state + inkStory.ContinueMaximally());
-    }, []);
+        const newInkStory = new Story(rawStory);
+        newInkStory.ContinueMaximally();
+
+        // TODO: Register observable variables.
+
+        setInkStory(newInkStory);
+    }, [rawStory]);
+
+    if (!inkStory) {
+        return;
+    }
 
     const makeChoice = (choiceIndex: number) => {
         inkStory.ChooseChoiceIndex(choiceIndex);
