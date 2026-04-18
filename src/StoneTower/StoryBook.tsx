@@ -40,10 +40,8 @@ export const StoryBook = ({
             return;
         }
 
-        const observerFunction = (
-            observerVariableName: string,
-            newValue: Story.VariableObserver,
-        ) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const observerFunction = (observerVariableName: string, newValue: any) => {
             queueMicrotask(() => {
                 setGameState((state) => ({
                     ...state,
@@ -51,8 +49,15 @@ export const StoryBook = ({
                 }));
             });
         };
-        variablesNamesToObserve.map((name) => {
-            return inkStory.ObserveVariable(name, observerFunction);
+
+        Object.keys(inkStory.variablesState).forEach((storyVariableKey) => {
+            const shouldObserveVarable = variablesNamesToObserve.find(
+                (name) => name === storyVariableKey,
+            );
+
+            if (shouldObserveVarable) {
+                return inkStory.ObserveVariable(storyVariableKey, observerFunction);
+            }
         });
 
         return () => {

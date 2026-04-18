@@ -6,10 +6,14 @@ import { StoryCatalogue } from './StoryCatalogue';
 
 export type StoneTowerGameState = {
     isPlayerPrepared: boolean;
+    commanderAstel: boolean;
 };
 
 export const StoneTowerPage = () => {
-    const [gameState, setGameState] = useState<StoneTowerGameState>({ isPlayerPrepared: false });
+    const [gameState, setGameState] = useState<StoneTowerGameState>({
+        isPlayerPrepared: false,
+        commanderAstel: false,
+    });
     const [currentStory, setCurrentStory] = useState<string | null>(null);
 
     const gameStateList = useMemo(() => Object.keys(gameState), [gameState]);
@@ -19,7 +23,11 @@ export const StoneTowerPage = () => {
             <h1>Stone Tower</h1>
             <div>
                 <h2>Variables</h2>
-                <div>Player Is Prepared: {gameState.isPlayerPrepared ? 'Yes' : 'No'}</div>
+                {Object.entries(gameState).map(([key, value]) => (
+                    <div key={key}>
+                        {key}: {value ? 'Yes' : 'No'}
+                    </div>
+                ))}
             </div>
             {currentStory && (
                 <StoryBook
