@@ -15,6 +15,7 @@ export const StoneTowerPage = () => {
         commanderAstel: false,
     });
     const [currentStory, setCurrentStory] = useState<string | null>(null);
+    const [traversedStories, setTraversedStories] = useState<Array<string>>([]);
 
     const gameStateList = useMemo(() => Object.keys(gameState), [gameState]);
 
@@ -37,7 +38,15 @@ export const StoneTowerPage = () => {
                     exitStory={() => setCurrentStory(null)}
                 />
             )}
-            {!currentStory ? <StoryCatalogue updateCurrentStory={setCurrentStory} /> : null}
+            {!currentStory ? (
+                <StoryCatalogue
+                    traversedStories={traversedStories}
+                    updateCurrentStory={(newStory) => {
+                        setCurrentStory(newStory);
+                        setTraversedStories((state) => [...state, newStory]);
+                    }}
+                />
+            ) : null}
         </div>
     );
 };
