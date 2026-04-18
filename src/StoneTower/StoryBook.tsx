@@ -10,9 +10,15 @@ type Props = {
     storyFileName: string;
     variablesNamesToObserve: Array<string>;
     setGameState: (gameState: SetStateAction<StoneTowerGameState>) => void;
+    exitStory: () => void;
 };
 
-export const StoryBook = ({ storyFileName, variablesNamesToObserve, setGameState }: Props) => {
+export const StoryBook = ({
+    storyFileName,
+    variablesNamesToObserve,
+    setGameState,
+    exitStory,
+}: Props) => {
     const rawStory = useFetchStoryJSON(storyFileName);
 
     const [inkStory, setInkStory] = useState<null | Story>(null);
@@ -62,7 +68,12 @@ export const StoryBook = ({ storyFileName, variablesNamesToObserve, setGameState
 
     const makeChoice = (choiceIndex: number) => {
         inkStory.ChooseChoiceIndex(choiceIndex);
-        setLog((state) => state + inkStory.ContinueMaximally());
+        const text = inkStory.ContinueMaximally();
+        setLog((state) => state + text);
+
+        if (inkStory.currentChoices.length <= 0) {
+            exitStory();
+        }
     };
 
     return (

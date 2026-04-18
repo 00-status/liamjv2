@@ -26,6 +26,7 @@ export const StoneTowerPage = () => {
                     storyFileName={currentStory}
                     variablesNamesToObserve={gameStateList}
                     setGameState={setGameState}
+                    exitStory={() => setCurrentStory(null)}
                 />
             )}
             {!currentStory ? <StoryCatalogue updateCurrentStory={setCurrentStory} /> : null}
