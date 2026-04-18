@@ -1,46 +1,52 @@
-import './stone-tower-page.css';
-import { Story } from 'inkjs';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import RawStory from '../assets/stone_tower.ink.json';
-import { Button } from '../SharedComponents/Button/Button';
+import './stone-tower-page.css';
+import { StoryBook } from './StoryBook';
+import { StoryCatalogue } from './StoryCatalogue';
+
+export type StoneTowerGameState = {
+    isPlayerPrepared: boolean;
+    commanderAstel: boolean;
+};
 
 export const StoneTowerPage = () => {
-    const [inkStory] = useState<Story>(new Story(RawStory));
-    const [playerIsPrepared, setPlayerIsPrepared] = useState();
-    const [log, setLog] = useState<string>('');
+    const [gameState, setGameState] = useState<StoneTowerGameState>({
+        isPlayerPrepared: false,
+        commanderAstel: false,
+    });
+    const [currentStory, setCurrentStory] = useState<string | null>(null);
+    const [traversedStories, setTraversedStories] = useState<Array<string>>([]);
 
-    useEffect(() => {
-        inkStory.ObserveVariable('player_is_prepared', (name, newValue) => {
-            setPlayerIsPrepared(newValue);
-        });
-
-        console.log(inkStory.variablesState['player_is_prepared']);
-
-        setLog((state) => state + inkStory.ContinueMaximally());
-    }, []);
-
-    const makeChoice = (choiceIndex: number) => {
-        inkStory.ChooseChoiceIndex(choiceIndex);
-        setLog((state) => state + inkStory.ContinueMaximally());
-    };
+    const gameStateList = useMemo(() => Object.keys(gameState), [gameState]);
 
     return (
         <div className="stone-tower-page">
             <h1>Stone Tower</h1>
             <div>
                 <h2>Variables</h2>
-                <div>Player Is Prepared: {playerIsPrepared ? 'Yes' : 'No'}</div>
+                {Object.entries(gameState).map(([key, value]) => (
+                    <div key={key}>
+                        {key}: {value ? 'Yes' : 'No'}
+                    </div>
+                ))}
             </div>
-            <div>
-                <h2>Log</h2>
-                <div className="stone-tower-page__log">{log}</div>
-            </div>
-            {inkStory.currentChoices.map((choice) => (
-                <Button key={choice.pathStringOnChoice} onClick={() => makeChoice(choice.index)}>
-                    {choice.text}
-                </Button>
-            ))}
+            {currentStory && (
+                <StoryBook
+                    storyFileName={currentStory}
+                    variablesNamesToObserve={gameStateList}
+                    setGameState={setGameState}
+                    exitStory={() => setCurrentStory(null)}
+                />
+            )}
+            {!currentStory ? (
+                <StoryCatalogue
+                    traversedStories={traversedStories}
+                    updateCurrentStory={(newStory) => {
+                        setCurrentStory(newStory);
+                        setTraversedStories((state) => [...state, newStory]);
+                    }}
+                />
+            ) : null}
         </div>
     );
 };
