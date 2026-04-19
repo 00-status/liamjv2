@@ -1,6 +1,8 @@
 import { StoryCard } from './components/StoryCard';
 import { storyNames } from './domain/constants';
 
+import './story-catalogue.css';
+
 type Props = { traversedStories: Array<string>; updateCurrentStory: (storyName: string) => void };
 
 export const StoryCatalogue = ({ traversedStories, updateCurrentStory }: Props) => {
@@ -9,7 +11,7 @@ export const StoryCatalogue = ({ traversedStories, updateCurrentStory }: Props) 
     });
 
     return (
-        <div>
+        <div className="story-catalogue">
             {storiesToDisplay.map((story) => (
                 <StoryCard
                     key={story}

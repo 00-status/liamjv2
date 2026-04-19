@@ -21,14 +21,16 @@ export const StoneTowerPage = () => {
 
     return (
         <div className="stone-tower-page">
-            <h1>Stone Tower</h1>
-            <div>
-                <h2>Variables</h2>
-                {Object.entries(gameState).map(([key, value]) => (
-                    <div key={key}>
-                        {key}: {value ? 'Yes' : 'No'}
-                    </div>
-                ))}
+            <div className="stone-tower-page__header">
+                <h1 className="stone-tower-page__title">Stone Tower</h1>
+                <div>
+                    <h2>Variables</h2>
+                    {Object.entries(gameState).map(([key, value]) => (
+                        <div key={key}>
+                            {key}: {value ? 'Yes' : 'No'}
+                        </div>
+                    ))}
+                </div>
             </div>
             {currentStory && (
                 <StoryBook
