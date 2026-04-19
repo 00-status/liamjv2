@@ -30,7 +30,7 @@ export const StoryBook = ({
         }
 
         const newInkStory = new Story(rawStory);
-        newInkStory.ContinueMaximally();
+        setLog((state) => state + newInkStory.ContinueMaximally());
 
         setInkStory(newInkStory);
     }, [rawStory]);
