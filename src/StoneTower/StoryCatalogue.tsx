@@ -1,5 +1,4 @@
-import { Button } from '../SharedComponents/Button/Button';
-
+import { StoryCard } from './components/StoryCard';
 import { storyNames } from './domain/constants';
 
 type Props = { traversedStories: Array<string>; updateCurrentStory: (storyName: string) => void };
@@ -12,9 +11,12 @@ export const StoryCatalogue = ({ traversedStories, updateCurrentStory }: Props) 
     return (
         <div>
             {storiesToDisplay.map((story) => (
-                <Button key={story} onClick={() => updateCurrentStory(story)}>
-                    {story}
-                </Button>
+                <StoryCard
+                    key={story}
+                    label={story}
+                    description={story}
+                    onStorySelect={() => updateCurrentStory(story)}
+                />
             ))}
         </div>
     );

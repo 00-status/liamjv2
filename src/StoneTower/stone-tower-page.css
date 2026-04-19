@@ -1,6 +1,24 @@
+/* Colour Palette:
+Background Page Colour: #f7e8d5
+Background Page Organizer Colour: #fcf6ee
+Background Page Organizer Colour 2: #fcf8f8
+Green Primary: #84894a
+Green Highlighted: #a6a15e
+Blue Primary: #0471a6
+Blue Highlighted: #3685b5
+Red Primary: #c44536
+Red Highlighted: #cf5c4f
+Brown Primary: #432818
+Brown Highlighted: #693e26
+Black Primary: #272d2d
+Black Highlighted: #394141
+*/
+
 .stone-tower-page {
     display: flex;
     flex-direction: column;
+
+    background-color: #f7e8d5;
 }
 
 .stone-tower-page__log {

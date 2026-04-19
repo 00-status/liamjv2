@@ -1,0 +1,16 @@
+.story-card {
+    width: 600px;
+    height: 100px;
+    padding: 12px;
+    margin: 20px 0;
+
+    background-color: #fcf6ee;
+    border-radius: 4px;
+    border: 1px dashed #84894a;
+}
+
+.story-card__contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
