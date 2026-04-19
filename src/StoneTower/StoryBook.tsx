@@ -1,10 +1,10 @@
 import { Story } from 'inkjs';
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { Button } from '../SharedComponents/Button/Button';
-
+import './story-book.css';
 import { useFetchStoryJSON } from './hooks/useFetchStoryJSON';
 import { StoneTowerGameState } from './StoneTowerPage';
+import { StoryBookButton } from './components/StoryBookButton';
 
 type Props = {
     storyFileName: string;
@@ -82,16 +82,19 @@ export const StoryBook = ({
     };
 
     return (
-        <div>
-            <div>
-                <h2>Log</h2>
-                <div className="stone-tower-page__log">{log}</div>
+        <div className="story-book">
+            <h2>{storyFileName}</h2>
+            <div className="story-book__log">{log}</div>
+            <div className="story-book__choices">
+                {inkStory.currentChoices.map((choice) => (
+                    <StoryBookButton
+                        key={choice.pathStringOnChoice}
+                        onClick={() => makeChoice(choice.index)}
+                    >
+                        {choice.text}
+                    </StoryBookButton>
+                ))}
             </div>
-            {inkStory.currentChoices.map((choice) => (
-                <Button key={choice.pathStringOnChoice} onClick={() => makeChoice(choice.index)}>
-                    {choice.text}
-                </Button>
-            ))}
         </div>
     );
 };
