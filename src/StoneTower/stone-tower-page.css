@@ -17,6 +17,9 @@ Black Highlighted: #394141
 .stone-tower-page {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+    color: #272d2d;
 
     background-color: #f7e8d5;
 }
