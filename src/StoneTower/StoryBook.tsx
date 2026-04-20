@@ -1,5 +1,5 @@
 import { Story } from 'inkjs';
-import { SetStateAction, useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 
 import './story-book.css';
 import { useFetchStoryJSON } from './hooks/useFetchStoryJSON';
@@ -23,6 +23,7 @@ export const StoryBook = ({
 
     const [inkStory, setInkStory] = useState<null | Story>(null);
     const [log, setLog] = useState<string>('');
+    const logReference = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!rawStory) {
@@ -67,6 +68,12 @@ export const StoryBook = ({
         };
     }, [inkStory, variablesNamesToObserve]);
 
+    useEffect(() => {
+        if (logReference.current) {
+            logReference.current.scrollTop = logReference.current.scrollHeight;
+        }
+    }, [logReference, log]);
+
     if (!inkStory) {
         return;
     }
@@ -84,7 +91,9 @@ export const StoryBook = ({
     return (
         <div className="story-book">
             <h2>{storyFileName}</h2>
-            <div className="story-book__log">{log}</div>
+            <div ref={logReference} className="story-book__log">
+                {log}
+            </div>
             <div className="story-book__choices">
                 {inkStory.currentChoices.map((choice) => (
                     <StoryBookButton

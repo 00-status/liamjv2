@@ -8,13 +8,24 @@
 }
 
 .story-book__log {
+    max-height: 500px;
     padding: 20px;
 
     background-color: #fcf6ee;
     border-radius: 4px;
-    border: 1px dashed #84894a;
+    border: 1px dashed #83b482;
     box-shadow: 4px 4px 12px #39414185;
+
     white-space: pre-wrap;
+    overflow-y: scroll;
+    /* Chrome, Safari, Edge **/
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* Firefox **/
+    scrollbar-width: none;
+    /* MS Explorer **/
+    -ms-overflow-style: none;
 }
 
 .story-book__choices {

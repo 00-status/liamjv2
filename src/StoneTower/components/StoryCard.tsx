@@ -1,5 +1,6 @@
 import './story-card.css';
-import { Button } from '../../SharedComponents/Button/Button';
+
+import { StoryBookButton } from './StoryBookButton';
 
 type Props = {
     label: string;
@@ -13,7 +14,7 @@ export const StoryCard = ({ label, description, onStorySelect }: Props) => {
             <h3>{label}</h3>
             <div className="story-card__contents">
                 <div>{description}</div>
-                <Button onClick={onStorySelect}>Venture Forth!</Button>
+                <StoryBookButton onClick={onStorySelect}>Venture Forth!</StoryBookButton>
             </div>
         </div>
     );
