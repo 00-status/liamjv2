@@ -5,12 +5,22 @@ import { StoryBook } from './StoryBook';
 import { StoryCatalogue } from './StoryCatalogue';
 
 export type StoneTowerGameState = {
+    currentDay: number;
+    defences: number;
+    armies: number;
+    supply: number;
+    alliesAndBoons: Array<string>;
     isPlayerPrepared: boolean;
     commanderAstel: boolean;
 };
 
 export const StoneTowerPage = () => {
     const [gameState, setGameState] = useState<StoneTowerGameState>({
+        currentDay: 1,
+        defences: 25,
+        armies: 1,
+        supply: 100,
+        alliesAndBoons: [],
         isPlayerPrepared: false,
         commanderAstel: false,
     });
@@ -23,11 +33,21 @@ export const StoneTowerPage = () => {
         <div className="stone-tower-page">
             <div className="stone-tower-page__header">
                 <h1 className="stone-tower-page__title">Stone Tower</h1>
+            </div>
+            <div className="stone-tower-page__stats">
                 <div>
-                    <h2>Variables</h2>
-                    {Object.entries(gameState).map(([key, value]) => (
-                        <div key={key}>
-                            {key}: {value ? 'Yes' : 'No'}
+                    <h2>Day {gameState.currentDay}</h2>
+                    <div>
+                        <p>Defences: {gameState.defences} / 100</p>
+                        <p>Armies: {gameState.armies}</p>
+                        <p>Supply: {gameState.supply}</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Allies and Boons</h3>
+                    {gameState.alliesAndBoons.map((ally) => (
+                        <div key={ally}>
+                            {ally}: {ally}
                         </div>
                     ))}
                 </div>

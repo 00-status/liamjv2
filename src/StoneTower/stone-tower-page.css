@@ -41,6 +41,17 @@ Black Highlighted: #394141
     font-weight: 700;
 }
 
-.stone-tower-page__log {
-    white-space: pre-wrap;
+.stone-tower-page__stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 800px;
+    margin: 28px auto;
+    padding: 12px;
+
+    background-color: #fcf6ee;
+    border-radius: 4px;
+    border: 1px dashed #84894a;
+    box-shadow: 4px 4px 12px #39414185;
 }

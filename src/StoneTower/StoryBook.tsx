@@ -90,8 +90,8 @@ export const StoryBook = ({
 
     return (
         <div className="story-book">
-            <h2>{storyFileName}</h2>
             <div ref={logReference} className="story-book__log">
+                <h2>{storyFileName}</h2>
                 {log}
             </div>
             <div className="story-book__choices">
