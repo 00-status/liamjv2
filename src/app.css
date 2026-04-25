@@ -10,15 +10,10 @@
         format('truetype');
 }
 
-html,
-body,
-#app {
-    height: 100%;
-}
-
 /* Base styles */
 body {
     margin: 0;
+    height: auto;
 
     background-color: #2a2b30;
     background-image: url('https://liamj.b-cdn.net/assets/images/egg-shell.png');
@@ -72,6 +67,10 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
     -moz-appearance: textfield; /* Firefox */
     appearance: textfield;
+}
+
+#app {
+    height: 100%;
 }
 
 .divider {

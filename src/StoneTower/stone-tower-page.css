@@ -15,6 +15,11 @@ Black Highlighted: #394141
 Grey: #bfbebe
 */
 
+body {
+    background-color: #fcf8f8;
+    background-image: none;
+}
+
 .stone-tower-page {
     display: flex;
     flex-direction: column;
@@ -55,4 +60,12 @@ Grey: #bfbebe
     border-radius: 4px;
     border: 1px dashed #83b482;
     box-shadow: 4px 4px 12px #39414185;
+}
+
+@media only screen and (max-width: 600px) {
+    .stone-tower-page__stats {
+        width: 90%;
+
+        flex-wrap: wrap;
+    }
 }
