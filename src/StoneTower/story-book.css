@@ -39,4 +39,8 @@
     .story-book {
         width: 90%;
     }
+
+    .story-book__log {
+        height: 350px;
+    }
 }

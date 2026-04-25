@@ -16,7 +16,7 @@ Grey: #bfbebe
 */
 
 body {
-    background-color: #fcf8f8;
+    background-color: #f7e8d5;
     background-image: none;
 }
 
@@ -25,8 +25,9 @@ body {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    color: #272d2d;
+    margin-bottom: 20px;
 
+    color: #272d2d;
     background-color: #f7e8d5;
 }
 
@@ -40,6 +41,7 @@ body {
 
     background-color: #fcf8f8;
     border-bottom: 1px dashed #84894a;
+    text-align: center;
 }
 
 .stone-tower-page__title {
