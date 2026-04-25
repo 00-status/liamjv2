@@ -1,13 +1,17 @@
 import { useMemo, useState } from 'react';
 
 import './stone-tower-page.css';
+
 import { StoryBook } from './StoryBook';
 import { StoryCatalogue } from './StoryCatalogue';
 import { HealthBar } from './components/HealthBar';
+import { Armies } from './components/Armies';
 
 export type StoneTowerGameState = {
     currentDay: number;
+    maximumDefences: number;
     defences: number;
+    maximumArmies: number;
     armies: number;
     supply: number;
     alliesAndBoons: Array<string>;
@@ -18,7 +22,9 @@ export type StoneTowerGameState = {
 export const StoneTowerPage = () => {
     const [gameState, setGameState] = useState<StoneTowerGameState>({
         currentDay: 1,
-        defences: 25,
+        maximumDefences: 12,
+        defences: 4,
+        maximumArmies: 5,
         armies: 1,
         supply: 100,
         alliesAndBoons: [],
@@ -38,10 +44,9 @@ export const StoneTowerPage = () => {
             <div className="stone-tower-page__stats">
                 <div>
                     <h2>Day {gameState.currentDay}</h2>
-                    <HealthBar health={10} maxHealth={20} />
+                    <HealthBar health={gameState.defences} maxHealth={gameState.maximumDefences} />
+                    <Armies armyCount={gameState.armies} maxArmyCount={gameState.maximumArmies} />
                     <div>
-                        <p>Defences: {gameState.defences} / 100</p>
-                        <p>Armies: {gameState.armies}</p>
                         <p>Supply: {gameState.supply}</p>
                     </div>
                 </div>
