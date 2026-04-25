@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import './stone-tower-page.css';
 import { StoryBook } from './StoryBook';
 import { StoryCatalogue } from './StoryCatalogue';
+import { HealthBar } from './components/HealthBar';
 
 export type StoneTowerGameState = {
     currentDay: number;
@@ -37,6 +38,7 @@ export const StoneTowerPage = () => {
             <div className="stone-tower-page__stats">
                 <div>
                     <h2>Day {gameState.currentDay}</h2>
+                    <HealthBar health={10} maxHealth={20} />
                     <div>
                         <p>Defences: {gameState.defences} / 100</p>
                         <p>Armies: {gameState.armies}</p>

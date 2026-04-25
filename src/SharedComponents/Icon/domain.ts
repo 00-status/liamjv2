@@ -20,6 +20,7 @@ export enum IconType {
     VERY_DISSATISFIED,
     MENU,
     STORE,
+    SWORDS,
     GRAPH4,
     GROUP,
     MENU_BOOK,

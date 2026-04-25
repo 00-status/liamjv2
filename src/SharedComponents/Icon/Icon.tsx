@@ -26,6 +26,7 @@ import { StoreIcon } from './Icons/StoreIcon';
 import { Graph4Icon } from './Icons/Graph4';
 import { MenuBookIcon } from './Icons/MenuBookIcon';
 import { GroupIcon } from './Icons/GroupIcon';
+import { SwordsIcon } from './Icons/SwordsIcon';
 
 type Props = {
     iconType: IconType;
@@ -90,6 +91,7 @@ const iconComponents: Record<IconType, ReactNode> = {
     [IconType.VERY_DISSATISFIED]: <VeryDissatisfiedIcon />,
     [IconType.MENU]: <MenuIcon />,
     [IconType.STORE]: <StoreIcon />,
+    [IconType.SWORDS]: <SwordsIcon />,
     [IconType.GRAPH4]: <Graph4Icon />,
     [IconType.GROUP]: <GroupIcon />,
     [IconType.MENU_BOOK]: <MenuBookIcon />,
