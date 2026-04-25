@@ -12,10 +12,14 @@ export const Armies = ({ armyCount, maxArmyCount }: Props) => {
     return (
         <div className="armies">
             {armyArray.map((value, index) => (
-                <ArmyToken key={`army-token-${index}`} />
+                <div key={`army-token-${index}`} className="armies__item">
+                    <ArmyToken key={`army-token-${index}`} />
+                </div>
             ))}
             {missingArmyArray.map((value, index) => (
-                <ArmyToken key={`disabled-army-token-${index}`} isDisabled={true} />
+                <div key={`disabled-army-token-${index}`} className="armies__item">
+                    <ArmyToken isDisabled={true} />
+                </div>
             ))}
         </div>
     );
