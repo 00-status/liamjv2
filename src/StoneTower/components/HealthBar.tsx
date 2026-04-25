@@ -6,8 +6,6 @@ export const HealthBar = ({ health, maxHealth }: Props) => {
 
     const healthArray = Array(health).fill(0);
     const missingHealthArray = Array(missingHealth).fill(0);
-    console.log(healthArray);
-    console.log(missingHealthArray);
     return (
         <div className="health-bar">
             {healthArray.map((value, index) => (
