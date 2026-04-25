@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { gtag, initDataLayer, install } from 'ga-gtag';
 
+import './app.css';
 import '@react-sigma/core/lib/style.css';
 import { StoneTowerPage } from './StoneTower/StoneTowerPage';
 

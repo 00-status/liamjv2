@@ -1,16 +1,33 @@
 import { useMemo, useState } from 'react';
 
 import './stone-tower-page.css';
+
 import { StoryBook } from './StoryBook';
 import { StoryCatalogue } from './StoryCatalogue';
+import { HealthBar } from './components/HealthBar';
+import { Armies } from './components/Armies';
 
 export type StoneTowerGameState = {
+    currentDay: number;
+    maximumDefences: number;
+    defences: number;
+    maximumArmies: number;
+    armies: number;
+    supply: number;
+    alliesAndBoons: Array<string>;
     isPlayerPrepared: boolean;
     commanderAstel: boolean;
 };
 
 export const StoneTowerPage = () => {
     const [gameState, setGameState] = useState<StoneTowerGameState>({
+        currentDay: 1,
+        maximumDefences: 12,
+        defences: 4,
+        maximumArmies: 5,
+        armies: 1,
+        supply: 100,
+        alliesAndBoons: [],
         isPlayerPrepared: false,
         commanderAstel: false,
     });
@@ -21,14 +38,39 @@ export const StoneTowerPage = () => {
 
     return (
         <div className="stone-tower-page">
-            <h1>Stone Tower</h1>
-            <div>
-                <h2>Variables</h2>
-                {Object.entries(gameState).map(([key, value]) => (
-                    <div key={key}>
-                        {key}: {value ? 'Yes' : 'No'}
+            <div className="stone-tower-page__header">
+                <h1 className="stone-tower-page__title">Stone Tower</h1>
+            </div>
+            <div className="stone-tower-page__stats">
+                <div>
+                    <h2>Day {gameState.currentDay}</h2>
+                    <div>
+                        <h3>Defences</h3>
+                        <HealthBar
+                            health={gameState.defences}
+                            maxHealth={gameState.maximumDefences}
+                        />
                     </div>
-                ))}
+                    <div>
+                        <h3>Armies</h3>
+                        <Armies
+                            armyCount={gameState.armies}
+                            maxArmyCount={gameState.maximumArmies}
+                        />
+                    </div>
+                    <div>
+                        <h3>Supply</h3>
+                        {gameState.supply}
+                    </div>
+                </div>
+                <div>
+                    <h3>Allies and Boons</h3>
+                    {gameState.alliesAndBoons.map((ally) => (
+                        <div key={ally}>
+                            {ally}: {ally}
+                        </div>
+                    ))}
+                </div>
             </div>
             {currentStory && (
                 <StoryBook

@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { gtag } from 'ga-gtag';
 
-import './app.css';
+import './page.css';
 import { ImageButton } from '../ImageButton/ImageButton';
 import { ToastMessage, ToastMessageContext } from '../Toast/ToastMessageContext';
 import { Toast } from '../Toast/Toast';
