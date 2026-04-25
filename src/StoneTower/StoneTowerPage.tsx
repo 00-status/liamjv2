@@ -44,10 +44,23 @@ export const StoneTowerPage = () => {
             <div className="stone-tower-page__stats">
                 <div>
                     <h2>Day {gameState.currentDay}</h2>
-                    <HealthBar health={gameState.defences} maxHealth={gameState.maximumDefences} />
-                    <Armies armyCount={gameState.armies} maxArmyCount={gameState.maximumArmies} />
                     <div>
-                        <p>Supply: {gameState.supply}</p>
+                        <h3>Defences</h3>
+                        <HealthBar
+                            health={gameState.defences}
+                            maxHealth={gameState.maximumDefences}
+                        />
+                    </div>
+                    <div>
+                        <h3>Armies</h3>
+                        <Armies
+                            armyCount={gameState.armies}
+                            maxArmyCount={gameState.maximumArmies}
+                        />
+                    </div>
+                    <div>
+                        <h3>Supply</h3>
+                        {gameState.supply}
                     </div>
                 </div>
                 <div>
