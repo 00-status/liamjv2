@@ -19,6 +19,9 @@ export type StoneTowerGameState = {
     commanderAstel: boolean;
 };
 
+// IDEA: A mechanic where the player can pin certain adventures if they want to tackle them at a later day.
+// IDEA: The Empire's army has a slightly different composition each run.
+// IDEA: The player can pick a Preparation Perk at the Start of each day. A card that adds a bonus to their stats in some way.
 export const StoneTowerPage = () => {
     const [gameState, setGameState] = useState<StoneTowerGameState>({
         currentDay: 1,

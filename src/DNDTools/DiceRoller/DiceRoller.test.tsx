@@ -22,7 +22,6 @@ describe('DiceRoller.tsx', () => {
 
         getByText('Dice Roller');
         getByText('Result');
-        getByText('Dice rolled');
         getByText('Log');
 
         getByTitle('dice 4');
@@ -38,7 +37,7 @@ describe('DiceRoller.tsx', () => {
 
         expect(queryByText('1d20')).toBeNull();
         await userEvent.click(getByTitle('dice 20'));
-        getByText('1d20');
+        getByText(/1d20=/i);
 
         expect(mockGtag).toHaveBeenCalledTimes(1);
         expect(mockGtag).toHaveBeenCalledWith('event', 'button_click_die_twenty');

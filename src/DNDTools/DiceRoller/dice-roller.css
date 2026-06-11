@@ -53,7 +53,7 @@
     scrollbar-width: none; /* FireFox */
 
     background-color: #3b3b40;
-    color: #FCFEFF;
+    color: #fcfeff;
     line-height: 24px;
     border-radius: 4px;
     box-shadow: 1px 1px 4px #1f2028;
@@ -76,12 +76,8 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .dice-roller--summary {
-        justify-content: center;
-    }
-
     .dice-roller--results-container {
-        width: 90%;
+        width: 100%;
     }
 
     .dice-roller--log {
@@ -89,6 +85,6 @@
     }
 
     .dice-container {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
