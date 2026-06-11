@@ -49,7 +49,6 @@
 }
 
 .dice-roller--log {
-    flex-grow: 1;
     min-height: 200px;
 
     resize: none;

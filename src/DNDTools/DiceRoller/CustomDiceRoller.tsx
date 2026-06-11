@@ -17,9 +17,15 @@ type DiceRollResults = {
 
 export const CustomDiceRoller = (props: Props): ReactElement => {
     const [diceCount, setDiceCount] = useState<number | null>(2);
-    const [diceType, setDiceType] = useState<number>(6);
+    const [diceType, setDiceType] = useState<number | null>(6);
+
+    const missingRequiredValues = !diceCount || !diceType;
 
     const rollDice = () => {
+        if (missingRequiredValues) {
+            return;
+        }
+
         const diceTotals = [...Array(diceCount)].reduce<DiceRollResults>(
             (acc) => {
                 const rollResult = rollDie(diceType);
@@ -45,7 +51,7 @@ export const CustomDiceRoller = (props: Props): ReactElement => {
                 <div className="custom-dice-roller__input">
                     <TextInput
                         numbersOnly
-                        value={diceCount ? diceCount : ''}
+                        value={diceCount ?? ''}
                         onChange={(value) => setDiceCount(value ? Number(value) : null)}
                     />
                 </div>
@@ -53,11 +59,15 @@ export const CustomDiceRoller = (props: Props): ReactElement => {
                 <div className="custom-dice-roller__input">
                     <TextInput
                         numbersOnly
-                        value={diceType}
-                        onChange={(value) => setDiceType(Number(value))}
+                        value={diceType ?? ''}
+                        onChange={(value) => setDiceType(value ? Number(value) : null)}
                     />
                 </div>
-                <Button buttonTheme={ButtonTheme.Delete} onClick={rollDice}>
+                <Button
+                    disabled={missingRequiredValues}
+                    buttonTheme={ButtonTheme.Delete}
+                    onClick={rollDice}
+                >
                     Roll
                 </Button>
             </div>
