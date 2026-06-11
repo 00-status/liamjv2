@@ -23,11 +23,6 @@ module.exports = (env) => {
             splitChunks: {
                 chunks: 'all',
                 cacheGroups: {
-                    vendor: {
-                        test: /[\\/]node_modules[\\/]/,
-                        name: 'vendors',
-                        chunks: 'all',
-                    },
                     sharedComponents: {
                         test: /[\\/]src[\\/]SharedComponents[\\/]/,
                         name: 'shared-components',
