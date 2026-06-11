@@ -1,6 +1,9 @@
 import { ReactElement, useState } from 'react';
 
 import './custom-dice-roller.css';
+import { TextInput } from '../../SharedComponents/TextInput/TextInput';
+import { Button, ButtonTheme } from '../../SharedComponents/Button/Button';
+
 import { rollDie } from './util';
 
 type Props = {
@@ -14,9 +17,15 @@ type DiceRollResults = {
 
 export const CustomDiceRoller = (props: Props): ReactElement => {
     const [diceCount, setDiceCount] = useState<number | null>(2);
-    const [diceType, setDiceType] = useState<number>(6);
+    const [diceType, setDiceType] = useState<number | null>(6);
+
+    const missingRequiredValues = !diceCount || !diceType;
 
     const rollDice = () => {
+        if (missingRequiredValues) {
+            return;
+        }
+
         const diceTotals = [...Array(diceCount)].reduce<DiceRollResults>(
             (acc) => {
                 const rollResult = rollDie(diceType);
@@ -38,25 +47,29 @@ export const CustomDiceRoller = (props: Props): ReactElement => {
 
     return (
         <div className="custom-dice-roller">
-            <div className="custom-dice-roller--form">
-                <input
-                    className="custom-dice-roller--input"
-                    type="number"
-                    value={diceCount ? diceCount : ''}
-                    onChange={(event) =>
-                        setDiceCount(event.target.value ? Number(event.target.value) : null)
-                    }
-                />
+            <div className="custom-dice-roller__form">
+                <div className="custom-dice-roller__input">
+                    <TextInput
+                        numbersOnly
+                        value={diceCount ?? ''}
+                        onChange={(value) => setDiceCount(value ? Number(value) : null)}
+                    />
+                </div>
                 <div>d</div>
-                <input
-                    className="custom-dice-roller--input"
-                    value={diceType}
-                    onChange={(event) => setDiceType(Number(event.target.value))}
-                    type="number"
-                />
-                <button className="custom-dice-roller--button" onClick={rollDice}>
+                <div className="custom-dice-roller__input">
+                    <TextInput
+                        numbersOnly
+                        value={diceType ?? ''}
+                        onChange={(value) => setDiceType(value ? Number(value) : null)}
+                    />
+                </div>
+                <Button
+                    disabled={missingRequiredValues}
+                    buttonTheme={ButtonTheme.Delete}
+                    onClick={rollDice}
+                >
                     Roll
-                </button>
+                </Button>
             </div>
         </div>
     );
