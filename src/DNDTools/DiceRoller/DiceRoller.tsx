@@ -39,23 +39,19 @@ const DiceRoller = (): ReactElement => {
         <Page title="D&D Tools" routes={dndRoutes} footer={footer}>
             <div className="dice-roller">
                 <h1>Dice Roller</h1>
-                <div className="dice-roller--results-container">
-                    <div className="dice-roller--result">
-                        <h1 key={animationKey} className="dice-roller__result--value">
-                            {generatedNumber ? generatedNumber : '--'}
-                        </h1>
-                        <hr className="divider" />
-                        <div>Result</div>
-                    </div>
+                <div className="dice-roller--result">
+                    <h1 key={animationKey} className="dice-roller__result--value">
+                        {generatedNumber ? generatedNumber : '--'}
+                    </h1>
+                    <hr className="divider" />
+                    <div>Result</div>
                 </div>
                 <div className="dice-container">
                     {dice.map((die: number) => (
                         <Die key={die} diceType={die} callback={onDieClick} />
                     ))}
                 </div>
-                <div>
-                    <CustomDiceRoller callback={onDieClick} />
-                </div>
+                <CustomDiceRoller callback={onDieClick} />
                 <hr className="divider" />
                 <div className="dice-roller--log-container">
                     <h2>Log</h2>

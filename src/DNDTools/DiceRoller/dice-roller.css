@@ -6,13 +6,6 @@
     gap: 20px;
 }
 
-.dice-roller--summary {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    gap: 24px;
-}
-
 .dice-roller--result {
     display: flex;
     flex-direction: column;
