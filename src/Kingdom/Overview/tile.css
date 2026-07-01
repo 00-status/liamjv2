@@ -5,11 +5,15 @@
 }
 .tile:hover {
     transform: scale(1.1);
-    border: 1px dashed #FCFEFF;
+    border: 1px dashed #fcfeff;
 }
 .tile:active {
     transform: translateY(-1px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tile--is-active {
+    border: 1px solid #fcfeff;
 }
 
 .tile--prairie {

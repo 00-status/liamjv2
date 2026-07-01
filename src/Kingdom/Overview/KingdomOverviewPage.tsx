@@ -24,6 +24,8 @@ const KingdomOverviewPage = () => {
     // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
     const [buildings, setBuildings] = useState<Array<Building>>([]);
 
+    const [activeTileKey, setActiveTileKey] = useState<string | null>(null);
+
     useMemo(() => {
         const tilesByCoords = kingdom.terrain.tiles.reduce(
             (carry, tile) => {
@@ -57,11 +59,16 @@ const KingdomOverviewPage = () => {
                 <div className="kingdom-overview-page__content">
                     <div className="kingdom-overview-page__grid" style={styles}>
                         {orderedTiles.map((tile) => {
+                            const tileKey = tile.x + '-' + tile.y;
                             return (
                                 <Tile
-                                    key={tile.x + '-' + tile.y}
+                                    key={tileKey}
                                     type={tile.type}
-                                    onClick={() => setCurrentTile({ ...tile })}
+                                    onClick={() => {
+                                        setCurrentTile({ ...tile });
+                                        setActiveTileKey(tileKey);
+                                    }}
+                                    isActive={activeTileKey === tileKey}
                                 />
                             );
                         })}
