@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
+import './tile-details.css';
 import { Card } from '../../SharedComponents/Card/Card';
 import { Button } from '../../SharedComponents/Button/Button';
+import { Dropdown } from '../../SharedComponents/Dropdown/Dropdown';
 
 import { Building, Tile } from './domain/types';
-import { AddBuildingModal } from './AddBuildingModal';
 
 type Props = {
     tile: Tile;
@@ -15,45 +16,63 @@ type Props = {
 export const TileDetails = (props: Props) => {
     const { tile, buildings, setBuildings } = props;
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    const openModalButton = (
-        <Button onClick={() => setIsModalOpen(true)}>Construct buildings</Button>
-    );
+    const [buildingName, setBuildingName] = useState<string>('');
     return (
-        <>
-            <Card title={tile.type} button={openModalButton}>
-                {tile.traits.length > 0 && (
-                    <div>
-                        <h4>Terrain Traits</h4>
-                        <ul>
-                            {tile.traits.map((trait) => (
-                                <li key={trait}>{trait}</li>
-                            ))}
-                        </ul>
+        <Card title={tile.type}>
+            <div className="tile-details">
+                <div>
+                    {tile.traits.length > 0 && (
+                        <div>
+                            <h3>Terrain Traits</h3>
+                            <ul>
+                                {tile.traits.map((trait) => (
+                                    <li key={trait}>{trait}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <div>
+                    <h3>Buildings</h3>
+                    <div className="tile-details__buildings-form">
+                        <Dropdown
+                            id="modal-building-construct"
+                            defaultValue={buildingName}
+                            options={buildingNames}
+                            onOptionSelect={(value) => setBuildingName(value)}
+                            isDisabled={buildings.length > 0}
+                        />
+                        <Button
+                            disabled={!buildingName}
+                            onClick={() => {
+                                setBuildings((state) => [
+                                    ...state,
+                                    { name: buildingName, assignedTile: tile.id },
+                                ]);
+                                setBuildingName('');
+                            }}
+                        >
+                            Add Building
+                        </Button>
                     </div>
-                )}
-                {buildings.length > 0 && (
-                    <div>
-                        <h4>Buildings</h4>
-                        <ul>
-                            {buildings.map((building) => (
-                                <li key={building.name}>{building.name}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </Card>
-            <AddBuildingModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={(buildingName) => {
-                    setBuildings((state) => [
-                        ...state,
-                        { name: buildingName, assignedTile: tile.id },
-                    ]);
-                }}
-            />
-        </>
+                    {buildings.length > 0 && (
+                        <div>
+                            <ul>
+                                {buildings.map((building) => (
+                                    <li key={building.name}>{building.name}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </Card>
     );
 };
+
+const buildingNames = [
+    { label: '', value: '' },
+    { label: 'Farm', value: 'farm' },
+    { label: 'Lumber Mill', value: 'lumber_mill' },
+    { label: 'Mine', value: 'mine' },
+];
