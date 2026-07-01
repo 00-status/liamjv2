@@ -7,10 +7,11 @@ type Props = {
     defaultValue: string;
     options: Array<{ label: string; value: string }>;
     onOptionSelect: (optionValue: string) => void;
+    isDisabled?: boolean;
 };
 
 export const Dropdown = (props: Props) => {
-    const { id, label, defaultValue, options, onOptionSelect } = props;
+    const { id, label, defaultValue, options, onOptionSelect, isDisabled } = props;
     const [selectedValue, setSelectedValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -30,6 +31,7 @@ export const Dropdown = (props: Props) => {
                     setSelectedValue(dropdownValue);
                     onOptionSelect(dropdownValue);
                 }}
+                disabled={isDisabled}
             >
                 {options.map((option) => {
                     return (

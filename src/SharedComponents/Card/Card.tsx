@@ -12,7 +12,7 @@ export const Card = (props: Props) => {
     return (
         <div className="card">
             <div className="card__title">
-                <h3>{props.title}</h3>
+                <h2>{props.title}</h2>
                 {props.button}
             </div>
             {props.children}
