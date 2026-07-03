@@ -1,3 +1,10 @@
+import { Building } from './buildings';
+
+export type GameContext = {
+    selectedTile: Tile | null;
+    resources: { [key: string]: number };
+    constructedBuildings: Array<Building>;
+};
 export type Kingdom = { name: string; terrain: Terrain };
 export type Terrain = { rowSize: number; columnSize: number; tiles: Array<Tile> };
 export type Tile = {
@@ -17,9 +24,4 @@ export type Criteria = {
 export type Trait = {
     criteria: Criteria;
     traitName: string;
-};
-
-export type Building = {
-    name: string;
-    assignedTile: string;
 };
