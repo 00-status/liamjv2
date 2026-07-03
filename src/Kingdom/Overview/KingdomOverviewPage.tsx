@@ -101,6 +101,7 @@ const KingdomOverviewPage = () => {
                                         ],
                                     }));
                                 }}
+                                gameContext={gameContext}
                             />
                         )}
                     </div>
