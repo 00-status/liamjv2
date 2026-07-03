@@ -6,8 +6,9 @@ import { Page } from '../../SharedComponents/Page/Page';
 import { Tile } from './Tile';
 import { extractCenterGrid, generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
-import { Building, Kingdom, Tile as TileType } from './domain/types';
+import { GameContext, Kingdom, Tile as TileType } from './domain/types';
 import { addTerrainFeatures } from './domain/addTerrainFeatures';
+import { Building } from './domain/buildings';
 
 const terrain = generateWeightedTerrain(15, 15);
 const terrainWithFeatures = addTerrainFeatures(terrain);
@@ -19,10 +20,14 @@ const kingdom: Kingdom = {
 };
 
 const KingdomOverviewPage = () => {
+    const [gameContext, setGameContext] = useState<GameContext>({
+        selectedTile: null,
+        resources: {},
+        constructedBuildings: [],
+    });
+
     const [orderedTiles, setOrderedTiles] = useState<Array<TileType>>([]);
     const [currentTile, setCurrentTile] = useState<TileType | null>(null);
-    // TODO: Key these buildings by tileId. That would make accessing them in the Tile Details pane faster.
-    const [buildings, setBuildings] = useState<Array<Building>>([]);
 
     const [activeTileKey, setActiveTileKey] = useState<string | null>(null);
 
@@ -50,6 +55,14 @@ const KingdomOverviewPage = () => {
         setOrderedTiles(orderedTiles);
     }, [kingdom]);
 
+    const onSelectTile = (tile: TileType, tileKey: string) => {
+        setCurrentTile({ ...tile });
+        setActiveTileKey(tileKey);
+        setGameContext((state) => {
+            return { ...state, selectedTile: tile };
+        });
+    };
+
     const styles = { gridTemplateColumns: Array(kingdom.terrain.columnSize).fill('1fr').join(' ') };
 
     return (
@@ -65,8 +78,7 @@ const KingdomOverviewPage = () => {
                                     key={tileKey}
                                     type={tile.type}
                                     onClick={() => {
-                                        setCurrentTile({ ...tile });
-                                        setActiveTileKey(tileKey);
+                                        onSelectTile(tile, tileKey);
                                     }}
                                     isActive={activeTileKey === tileKey}
                                 />
@@ -77,10 +89,18 @@ const KingdomOverviewPage = () => {
                         {currentTile && (
                             <TileDetails
                                 tile={currentTile}
-                                buildings={buildings.filter(
+                                buildings={gameContext.constructedBuildings.filter(
                                     (building) => building.assignedTile === currentTile.id,
                                 )}
-                                setBuildings={setBuildings}
+                                setBuildings={(newBuilding: Building) => {
+                                    setGameContext((state) => ({
+                                        ...state,
+                                        constructedBuildings: [
+                                            ...state.constructedBuildings,
+                                            newBuilding,
+                                        ],
+                                    }));
+                                }}
                             />
                         )}
                     </div>
