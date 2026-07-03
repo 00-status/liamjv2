@@ -33,3 +33,14 @@ export class TileRequirement implements Requirement {
         return this.tileType === context?.selectedTile?.type;
     }
 }
+
+export class TileTraitRequirement implements Requirement {
+    constructor(
+        public traitName: string,
+        public description = `Requires Tile Type of: ${traitName}`,
+    ) {}
+
+    check(context: GameContext): boolean {
+        return !!context?.selectedTile?.traits.find((trait) => trait === this.traitName);
+    }
+}

@@ -4,19 +4,19 @@ import './kingdom-overview-page.css';
 import { Page } from '../../SharedComponents/Page/Page';
 
 import { Tile } from './Tile';
-import { extractCenterGrid, generateWeightedTerrain } from './util';
+import { generateWeightedTerrain } from './util';
 import { TileDetails } from './TileDetails';
 import { GameContext, Kingdom, Tile as TileType } from './domain/types';
 import { addTerrainFeatures } from './domain/addTerrainFeatures';
 import { Building } from './domain/buildings';
 
-const terrain = generateWeightedTerrain(15, 15);
+const terrain = generateWeightedTerrain(30, 30);
 const terrainWithFeatures = addTerrainFeatures(terrain);
-const centerTerrain = extractCenterGrid(terrainWithFeatures, 3);
+// const centerTerrain = extractCenterGrid(terrainWithFeatures, 3);
 
 const kingdom: Kingdom = {
     name: 'Camelot',
-    terrain: centerTerrain,
+    terrain: terrainWithFeatures,
 };
 
 const KingdomOverviewPage = () => {
