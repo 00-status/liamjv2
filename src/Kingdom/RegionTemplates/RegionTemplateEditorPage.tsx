@@ -8,7 +8,6 @@ import { Button, ButtonTheme } from '../../SharedComponents/Button/Button';
 
 import { useRegionTemplates, TileTemplate } from './hooks/useRegionTemplates';
 
-// Valid TileTypes matching the backend
 const PALETTE_OPTIONS = [
     { label: 'Prairie', type: 'Prairie' },
     { label: 'Woodland', type: 'Woodland' },
@@ -35,33 +34,34 @@ export const RegionTemplateEditorPage = () => {
     const [selectedTileType, setSelectedTileType] = useState<string>('Prairie');
     const [isPainting, setIsPainting] = useState<boolean>(false);
 
-    // 1. Fetch templates if not loaded
     useEffect(() => {
         fetchTemplates();
     }, [fetchTemplates]);
 
-    // 2. Populate states if editing
     useEffect(() => {
         if (editingId !== null && templates.length > 0) {
-            const template = templates.find((t) => t.id === editingId);
-            if (template) {
-                setTemplateName(template.name);
+            const template = templates.find((template) => template.id === editingId);
 
-                // Determine maximum coordinates to auto-resize canvas
-                let maxX = 9; // default 10 columns
-                let maxY = 9; // default 10 rows
-                const loadedTiles: { [key: string]: string } = {};
-
-                template.tile_templates.forEach((tile) => {
-                    loadedTiles[`${tile.x}-${tile.y}`] = tile.type;
-                    if (tile.x > maxX) maxX = tile.x;
-                    if (tile.y > maxY) maxY = tile.y;
-                });
-
-                setGridWidth(maxX + 1);
-                setGridHeight(maxY + 1);
-                setPaintedTiles(loadedTiles);
+            if (!template) {
+                return;
             }
+
+            setTemplateName(template.name);
+
+            // Determine maximum coordinates to auto-resize canvas
+            let maxX = 9; // default 10 columns
+            let maxY = 9; // default 10 rows
+            const loadedTiles: { [key: string]: string } = {};
+
+            template.tile_templates.forEach((tile) => {
+                loadedTiles[`${tile.x}-${tile.y}`] = tile.type;
+                if (tile.x > maxX) maxX = tile.x;
+                if (tile.y > maxY) maxY = tile.y;
+            });
+
+            setGridWidth(maxX + 1);
+            setGridHeight(maxY + 1);
+            setPaintedTiles(loadedTiles);
         }
     }, [editingId, templates]);
 
@@ -70,11 +70,13 @@ export const RegionTemplateEditorPage = () => {
             setPaintedTiles((prev) => {
                 const updated = { ...prev };
                 const key = `${x}-${y}`;
+
                 if (selectedTileType === 'Empty') {
                     delete updated[key];
                 } else {
                     updated[key] = selectedTileType;
                 }
+
                 return updated;
             });
         },
@@ -97,7 +99,6 @@ export const RegionTemplateEditorPage = () => {
         setIsPainting(false);
     };
 
-    // Submits the template to backend
     const handleSubmit = () => {
         if (!templateName.trim()) {
             alert('Please provide a name for the Region Template!');
@@ -111,6 +112,7 @@ export const RegionTemplateEditorPage = () => {
             for (let x = 0; x < gridWidth; x++) {
                 const key = `${x}-${y}`;
                 const type = paintedTiles[key];
+
                 if (type && type !== 'Empty') {
                     finalTileTemplates.push({
                         x,
@@ -175,7 +177,7 @@ export const RegionTemplateEditorPage = () => {
             >
                 <div className="region-template-editor__header">
                     <h1>Canvas Editor</h1>
-                    <div style={{ display: 'flex', gap: '12px' }}>
+                    <div>
                         <Button buttonTheme={ButtonTheme.Subtle} onClick={handleCancel}>
                             Back to Directory
                         </Button>
@@ -309,11 +311,8 @@ export const RegionTemplateEditorPage = () => {
 
                     {/* Editor interactive canvas */}
                     <div className="region-template-editor__canvas-section">
-                        <h3
-                            className="region-template-editor__sidebar-title"
-                            style={{ width: '100%', textAlign: 'center' }}
-                        >
-                            Interactive Painter Canvas (Click and drag to paint)
+                        <h3 className="region-template-editor__sidebar-title">
+                            Interactive Painter Canvas
                         </h3>
                         <div className="region-template-editor__canvas-scroll">
                             <div className="region-template-editor__grid" style={gridStyles}>
