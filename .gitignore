@@ -4,3 +4,5 @@
 /dist/bundle.js
 /dist/bundle.js.LICENSE.txt
 .DS_Store
+
+.gemini/
