@@ -76,7 +76,7 @@ export const RegionTemplateEditorSidebar: React.FC<RegionTemplateEditorSidebarPr
                             <Button
                                 buttonTheme={ButtonTheme.Subtle}
                                 disabled={gridWidth >= 30}
-                                onClick={() => setGridWidth((w) => Math.min(30, w + 1))}
+                                onClick={() => setGridWidth((width) => Math.min(30, width + 1))}
                             >
                                 +
                             </Button>
@@ -89,7 +89,7 @@ export const RegionTemplateEditorSidebar: React.FC<RegionTemplateEditorSidebarPr
                             <Button
                                 buttonTheme={ButtonTheme.Subtle}
                                 disabled={gridHeight <= 3}
-                                onClick={() => setGridHeight((h) => Math.max(3, h - 1))}
+                                onClick={() => setGridHeight((height) => Math.max(3, height - 1))}
                             >
                                 -
                             </Button>
@@ -99,7 +99,7 @@ export const RegionTemplateEditorSidebar: React.FC<RegionTemplateEditorSidebarPr
                             <Button
                                 buttonTheme={ButtonTheme.Subtle}
                                 disabled={gridHeight >= 30}
-                                onClick={() => setGridHeight((h) => Math.min(30, h + 1))}
+                                onClick={() => setGridHeight((height) => Math.min(30, height + 1))}
                             >
                                 +
                             </Button>
@@ -111,21 +111,21 @@ export const RegionTemplateEditorSidebar: React.FC<RegionTemplateEditorSidebarPr
             <div>
                 <h3 className="region-template-editor-sidebar__title">Terrain Brush</h3>
                 <div className="region-template-editor-sidebar__palette">
-                    {PALETTE_OPTIONS.map((opt) => (
+                    {PALETTE_OPTIONS.map((option) => (
                         <div
-                            key={opt.type}
+                            key={option.type}
                             className={`region-template-editor-sidebar__palette-item ${
-                                selectedTileType === opt.type
+                                selectedTileType === option.type
                                     ? 'region-template-editor-sidebar__palette-item--active'
                                     : ''
                             }`}
-                            onClick={() => setSelectedTileType(opt.type)}
+                            onClick={() => setSelectedTileType(option.type)}
                         >
                             <div
-                                className={`region-template-editor-sidebar__tile-preview tile--${opt.type.toLowerCase()}`}
+                                className={`region-template-editor-sidebar__tile-preview tile--${option.type.toLowerCase()}`}
                             />
                             <span className="region-template-editor-sidebar__palette-label">
-                                {opt.label}
+                                {option.label}
                             </span>
                         </div>
                     ))}
