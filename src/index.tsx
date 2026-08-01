@@ -45,6 +45,18 @@ const KingdomOverviewPage = lazy(
             /* webpackChunkName: "kingdom-overview-page" */ './Kingdom/Overview/KingdomOverviewPage'
         ),
 );
+const RegionTemplatesPage = lazy(
+    () =>
+        import(
+            /* webpackChunkName: "region-templates-page" */ './Kingdom/RegionTemplates/RegionTemplatesPage'
+        ),
+);
+const RegionTemplateEditorPage = lazy(
+    () =>
+        import(
+            /* webpackChunkName: "region-template-editor-page" */ './Kingdom/RegionTemplates/RegionTemplateEditorPage'
+        ),
+);
 const WeaponEffectList = lazy(
     () =>
         import(
@@ -112,6 +124,16 @@ const router = createBrowserRouter([
     {
         path: '/unlisted/kingdom_overview',
         element: <KingdomOverviewPage />,
+        ErrorBoundary: RouterErrorBoundary,
+    },
+    {
+        path: '/unlisted/region_templates',
+        element: <RegionTemplatesPage />,
+        ErrorBoundary: RouterErrorBoundary,
+    },
+    {
+        path: '/unlisted/region_template_editor',
+        element: <RegionTemplateEditorPage />,
         ErrorBoundary: RouterErrorBoundary,
     },
     {
