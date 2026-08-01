@@ -41,10 +41,7 @@ export const RegionTemplatesPage = () => {
                         {templates.length === 0 ? (
                             <div className="region-templates__empty">
                                 <h3>No region templates found.</h3>
-                                <p>
-                                    Click "Create New Template" above to paint your first region
-                                    shape blueprint.
-                                </p>
+                                <p>Click "Create New Template" to paint your first region.</p>
                             </div>
                         ) : (
                             templates.map((template) => (
